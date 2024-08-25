@@ -18,7 +18,7 @@ import Html.Events exposing (onInput)
 
 
 main =
-  Browser.sandbox { init = init, update = update, view = view }
+    Browser.sandbox { init = init, update = update, view = view }
 
 
 
@@ -26,15 +26,15 @@ main =
 
 
 type alias Model =
-  { name : String
-  , password : String
-  , passwordAgain : String
-  }
+    { name : String
+    , password : String
+    , passwordAgain : String
+    }
 
 
 init : Model
 init =
-  Model "" "" ""
+    Model "" "" ""
 
 
 
@@ -42,22 +42,22 @@ init =
 
 
 type Msg
-  = Name String
-  | Password String
-  | PasswordAgain String
+    = Name String
+    | Password String
+    | PasswordAgain String
 
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Name name ->
-      { model | name = name }
+    case msg of
+        Name name ->
+            { model | name = name }
 
-    Password password ->
-      { model | password = password }
+        Password password ->
+            { model | password = password }
 
-    PasswordAgain password ->
-      { model | passwordAgain = password }
+        PasswordAgain password ->
+            { model | passwordAgain = password }
 
 
 
@@ -66,25 +66,26 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ viewInput "text" "Name" model.name Name
-    , viewInput "password" "Password" model.password Password
-    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
-    , viewValidation model
-    ]
+    div []
+        [ viewInput "text" "Name" model.name Name
+        , viewInput "password" "Password" model.password Password
+        , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
+        , viewValidation model
+        ]
 
 
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+    input [ type_ t, placeholder p, value v, onInput toMsg ] []
 
 
 viewValidation : Model -> Html msg
 viewValidation model =
-  if model.password == model.passwordAgain then
-    div [ style "color" "green" ] [ text "OK" ]
-  else
-    div [ style "color" "red" ] [ text "Passwords do not match!" ]
+    if model.password == model.passwordAgain then
+        div [ style "color" "green" ] [ text "OK" ]
+
+    else
+        div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
 This is pretty similar to our [text field example](text_fields.md) but with more fields.
@@ -95,10 +96,10 @@ I always start out by guessing at the `Model`. We know there are going to be thr
 
 ```elm
 type alias Model =
-  { name : String
-  , password : String
-  , passwordAgain : String
-  }
+    { name : String
+    , password : String
+    , passwordAgain : String
+    }
 ```
 
 I usually try to start with a minimal model, maybe with just one field. I then attempt to write the `view` and `update` functions. That often reveals that I need to add more to my `Model`. Building the model gradually like this means I can have a working program through the development process. It may not have all the features yet, but it is getting there!
@@ -109,9 +110,9 @@ Sometimes you have a pretty good idea of what the basic update code will look li
 
 ```elm
 type Msg
-  = Name String
-  | Password String
-  | PasswordAgain String
+    = Name String
+    | Password String
+    | PasswordAgain String
 ```
 
 This means our `update` needs a case for all three variations:
@@ -119,15 +120,15 @@ This means our `update` needs a case for all three variations:
 ```elm
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Name name ->
-      { model | name = name }
+    case msg of
+        Name name ->
+            { model | name = name }
 
-    Password password ->
-      { model | password = password }
+        Password password ->
+            { model | password = password }
 
-    PasswordAgain password ->
-      { model | passwordAgain = password }
+        PasswordAgain password ->
+            { model | passwordAgain = password }
 ```
 
 Each case uses the record update syntax to make sure the appropriate field is transformed. This is similar to the previous example, except with more cases.
@@ -141,12 +142,12 @@ This `view` function is using **helper functions** to make things a bit more org
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ viewInput "text" "Name" model.name Name
-    , viewInput "password" "Password" model.password Password
-    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
-    , viewValidation model
-    ]
+    div []
+        [ viewInput "text" "Name" model.name Name
+        , viewInput "password" "Password" model.password Password
+        , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
+        , viewValidation model
+        ]
 ```
 
 In previous examples we were using `input` and `div` directly. Why did we stop?
@@ -158,7 +159,7 @@ So our `view` function has three calls to `viewInput`:
 ```elm
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+    input [ type_ t, placeholder p, value v, onInput toMsg ] []
 ```
 
 This means that writing `viewInput "text" "Name" "Bill" Name` in Elm would turn into an HTML value like `<input type="text" placeholder="Name" value="Bill">` when shown on screen.
@@ -168,10 +169,11 @@ The fourth entry is more interesting. It is a call to `viewValidation`:
 ```elm
 viewValidation : Model -> Html msg
 viewValidation model =
-  if model.password == model.passwordAgain then
-    div [ style "color" "green" ] [ text "OK" ]
-  else
-    div [ style "color" "red" ] [ text "Passwords do not match!" ]
+    if model.password == model.passwordAgain then
+        div [ style "color" "green" ] [ text "OK" ]
+
+    else
+        div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
 This function first compares the two passwords. If they match, you get green text and a positive message. If they do not match, you get red text and a helpful message.

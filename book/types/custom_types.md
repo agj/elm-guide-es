@@ -9,23 +9,31 @@ Say we are making a chat room. Everyone needs a name, but maybe some users do no
 We can describe this situation by defining a `UserStatus` type, listing all the possible variations:
 
 ```elm
-type UserStatus = Regular | Visitor
+type UserStatus
+    = Regular
+    | Visitor
 ```
 
 The `UserStatus` type has two **variants**. Someone can be a `Regular` or a `Visitor`. So we could represent a user as a record like this:
 
 ```elm
 type UserStatus
-  = Regular
-  | Visitor
+    = Regular
+    | Visitor
+
 
 type alias User =
-  { status : UserStatus
-  , name : String
-  }
+    { status : UserStatus
+    , name : String
+    }
 
-thomas = { status = Regular, name = "Thomas" }
-kate95 = { status = Visitor, name = "kate95" }
+
+thomas =
+    { status = Regular, name = "Thomas" }
+
+
+kate95 =
+    { status = Visitor, name = "kate95" }
 ```
 
 So now we can track if someone is a `Regular` with an account or a `Visitor` who is just passing through. It is not too tough, but we can make it simpler!
@@ -34,11 +42,16 @@ Rather than creating a custom type and a type alias, we can represent all this w
 
 ```elm
 type User
-  = Regular String
-  | Visitor String
+    = Regular String
+    | Visitor String
 
-thomas = Regular "Thomas"
-kate95 = Visitor "kate95"
+
+thomas =
+    Regular "Thomas"
+
+
+kate95 =
+    Visitor "kate95"
 ```
 
 The data is attached directly to the variant, so there is no need for the record anymore.
@@ -82,9 +95,9 @@ We only added an age, but variants of a type can diverge quite dramatically. For
 
 ```elm
 type User
-  = Regular String Int Location
-  | Visitor String
-  | Anonymous
+    = Regular String Int Location
+    | Visitor String
+    | Anonymous
 ```
 
 No problem! Let’s see some other examples now.
@@ -95,10 +108,10 @@ In the architecture section, we saw a couple of examples of defining a `Msg` typ
 
 ```elm
 type Msg
-  = PressedEnter
-  | ChangedDraft String
-  | ReceivedMessage { user : User, message : String }
-  | ClickedExit
+    = PressedEnter
+    | ChangedDraft String
+    | ReceivedMessage { user : User, message : String }
+    | ClickedExit
 ```
 
 We have four variants. Some variants have no associated data, others have a bunch. Notice that `ReceivedMessage` actually has a record as associated data. That is totally fine. Any type can be associated data! This allows you to describe interactions in your application very precisely.
@@ -109,9 +122,9 @@ Custom types become extremely powerful when you start modeling situations very p
 
 ```elm
 type Profile
-  = Failure
-  | Loading
-  | Success { name : String, description : String }
+    = Failure
+    | Loading
+    | Success { name : String, description : String }
 ```
 
 So you can start in the `Loading` state and then transition to `Failure` or `Success` depending on what happens. This makes it really simple to write a `view` function that always shows something reasonable when data is loading.

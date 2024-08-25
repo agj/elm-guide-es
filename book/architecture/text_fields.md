@@ -8,7 +8,7 @@ Click the blue button to look at this program in the online editor. Try to check
 
 ```elm
 import Browser
-import Html exposing (Html, Attribute, div, input, text)
+import Html exposing (Attribute, Html, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
@@ -18,7 +18,7 @@ import Html.Events exposing (onInput)
 
 
 main =
-  Browser.sandbox { init = init, update = update, view = view }
+    Browser.sandbox { init = init, update = update, view = view }
 
 
 
@@ -26,13 +26,13 @@ main =
 
 
 type alias Model =
-  { content : String
-  }
+    { content : String
+    }
 
 
 init : Model
 init =
-  { content = "" }
+    { content = "" }
 
 
 
@@ -40,14 +40,14 @@ init =
 
 
 type Msg
-  = Change String
+    = Change String
 
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Change newContent ->
-      { model | content = newContent }
+    case msg of
+        Change newContent ->
+            { model | content = newContent }
 
 
 
@@ -56,10 +56,10 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
-    , div [] [ text (String.reverse model.content) ]
-    ]
+    div []
+        [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
+        , div [] [ text (String.reverse model.content) ]
+        ]
 ```
 
 This code is a slight variant of the previous example. You set up a model. You define some messages. You say how to `update`. You make your `view`. The difference is just in how we filled this skeleton in. Let's walk through that!
@@ -70,8 +70,8 @@ I always start by guessing at what my `Model` should be. We know we have to keep
 
 ```elm
 type alias Model =
-  { content : String
-  }
+    { content : String
+    }
 ```
 
 This time I chose to represent the model as a record. The record stores the user input in the `content` field.
@@ -85,10 +85,10 @@ We have our model, so I usually proceed by creating a `view` function:
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
-    , div [] [ text (String.reverse model.content) ]
-    ]
+    div []
+        [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
+        , div [] [ text (String.reverse model.content) ]
+        ]
 ```
 
 We create a `<div>` with two children. The interesting child is the `<input>` node which has three attributes:
@@ -112,13 +112,14 @@ There is only one kind of message in this program, so our `update` only has to h
 
 ```elm
 type Msg
-  = Change String
+    = Change String
+
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Change newContent ->
-      { model | content = newContent }
+    case msg of
+        Change newContent ->
+            { model | content = newContent }
 ```
 
 When we receive a message that the `<input>` node has changed, we update the `content` of our model. So if you typed in "bard" the resulting messages would produce the following models:

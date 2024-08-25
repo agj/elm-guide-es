@@ -4,8 +4,8 @@ On the previous page, we learned how to create [custom types](/types/custom_type
 
 ```elm
 type User
-  = Regular String Int
-  | Visitor String
+    = Regular String Int
+    | Visitor String
 ```
 
 Regulars have a name and age, whereas visitors only have a name. So we have our custom type, but how do we actually use it?
@@ -17,12 +17,14 @@ Say we want a `toName` function that decides on a name to show for each `User`. 
 ```elm
 toName : User -> String
 toName user =
-  case user of
-    Regular name age ->
-      name
+    case user of
+        Regular name age ->
+            name
 
-    Visitor name ->
-      name
+        Visitor name ->
+            name
+
+
 
 -- toName (Regular "Thomas" 44) == "Thomas"
 -- toName (Visitor "kate95")    == "kate95"
@@ -39,12 +41,12 @@ The `toName` function we just defined works great, but notice that the `age` is 
 ```elm
 toName : User -> String
 toName user =
-  case user of
-    Regular name _ ->
-      name
+    case user of
+        Regular name _ ->
+            name
 
-    Visitor name ->
-      name
+        Visitor name ->
+            name
 ```
 
 The `_` acknowledges the data there, but also saying explicitly that nobody is using it.

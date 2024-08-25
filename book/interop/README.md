@@ -34,20 +34,20 @@ Here is the minimal HTML needed to make your `main.js` appear in a browser:
 
 ```html
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Main</title>
-  <script src="main.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main</title>
+    <script src="main.js"></script>
+  </head>
 
-<body>
-  <div id="myapp"></div>
-  <script>
-  var app = Elm.Main.init({
-    node: document.getElementById('myapp')
-  });
-  </script>
-</body>
+  <body>
+    <div id="myapp"></div>
+    <script>
+      var app = Elm.Main.init({
+        node: document.getElementById("myapp"),
+      });
+    </script>
+  </body>
 </html>
 ```
 

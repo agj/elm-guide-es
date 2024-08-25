@@ -4,9 +4,9 @@ Type annotations can start to get long. This might be a real problem if you have
 
 ```elm
 type alias User =
-  { name : String
-  , age : Int
-  }
+    { name : String
+    , age : Int
+    }
 ```
 
 Rather than writing the whole record type all the time, we can just say `User` instead. This helps us write type annotations that are easier to read:
@@ -14,16 +14,19 @@ Rather than writing the whole record type all the time, we can just say `User` i
 ```elm
 -- WITH ALIAS
 
+
 isOldEnoughToVote : User -> Bool
 isOldEnoughToVote user =
-  user.age >= 18
+    user.age >= 18
+
 
 
 -- WITHOUT ALIAS
 
+
 isOldEnoughToVote : { name : String, age : Int } -> Bool
 isOldEnoughToVote user =
-  user.age >= 18
+    user.age >= 18
 ```
 
 These two definitions are equivalent, but the one with a type alias is shorter and easier to read. So all we are doing is making an **alias** for a long type.

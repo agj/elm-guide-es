@@ -29,14 +29,15 @@ If you are creating an Elm file, you would use `elm/html` to write something lik
 ```elm
 viewChairAlts : List String -> Html msg
 viewChairAlts chairAlts =
-  div []
-    [ p [] [ text "Chair alternatives include:" ]
-    , ul [] (List.map viewAlt chairAlts)
-    ]
+    div []
+        [ p [] [ text "Chair alternatives include:" ]
+        , ul [] (List.map viewAlt chairAlts)
+        ]
+
 
 viewAlt : String -> Html msg
 viewAlt chairAlt =
-  li [] [ text chairAlt ]
+    li [] [ text chairAlt ]
 ```
 
 You can think of `viewChairAlts ["seiza","chabudai"]` as producing some “Virtual DOM” data structure behind the scenes:
@@ -106,18 +107,18 @@ For example, in [my TodoMVC implementation](https://github.com/evancz/elm-todomv
 ```elm
 view : Model -> Html Msg
 view model =
-  div
-    [ class "todomvc-wrapper"
-    , style "visibility" "hidden"
-    ]
-    [ section
-        [ class "todoapp" ]
-        [ lazy viewInput model.field
-        , lazy2 viewEntries model.visibility model.entries
-        , lazy2 viewControls model.visibility model.entries
+    div
+        [ class "todomvc-wrapper"
+        , style "visibility" "hidden"
         ]
-    , infoFooter
-    ]
+        [ section
+            [ class "todoapp" ]
+            [ lazy viewInput model.field
+            , lazy2 viewEntries model.visibility model.entries
+            , lazy2 viewControls model.visibility model.entries
+            ]
+        , infoFooter
+        ]
 ```
 
 Notice that the text input, entries, and controls are all in separate lazy nodes. So I can type however many characters I want in the input without ever building virtual nodes for the entries or controls. They are not changing! So the first tip is **try to use lazy nodes at the root of your application.**

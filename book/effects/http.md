@@ -12,7 +12,7 @@ Click the blue "Edit" button to look through this program in the online editor. 
 
 ```elm
 import Browser
-import Html exposing (Html, text, pre)
+import Html exposing (Html, pre, text)
 import Http
 
 
@@ -21,12 +21,12 @@ import Http
 
 
 main =
-  Browser.element
-    { init = init
-    , update = update
-    , subscriptions = subscriptions
-    , view = view
-    }
+    Browser.element
+        { init = init
+        , update = update
+        , subscriptions = subscriptions
+        , view = view
+        }
 
 
 
@@ -34,19 +34,19 @@ main =
 
 
 type Model
-  = Failure
-  | Loading
-  | Success String
+    = Failure
+    | Loading
+    | Success String
 
 
-init : () -> (Model, Cmd Msg)
+init : () -> ( Model, Cmd Msg )
 init _ =
-  ( Loading
-  , Http.get
-      { url = "https://elm-lang.org/assets/public-opinion.txt"
-      , expect = Http.expectString GotText
-      }
-  )
+    ( Loading
+    , Http.get
+        { url = "https://elm-lang.org/assets/public-opinion.txt"
+        , expect = Http.expectString GotText
+        }
+    )
 
 
 
@@ -54,19 +54,19 @@ init _ =
 
 
 type Msg
-  = GotText (Result Http.Error String)
+    = GotText (Result Http.Error String)
 
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    GotText result ->
-      case result of
-        Ok fullText ->
-          (Success fullText, Cmd.none)
+    case msg of
+        GotText result ->
+            case result of
+                Ok fullText ->
+                    ( Success fullText, Cmd.none )
 
-        Err _ ->
-          (Failure, Cmd.none)
+                Err _ ->
+                    ( Failure, Cmd.none )
 
 
 
@@ -75,7 +75,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+    Sub.none
 
 
 
@@ -84,15 +84,15 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  case model of
-    Failure ->
-      text "I was unable to load your book."
+    case model of
+        Failure ->
+            text "I was unable to load your book."
 
-    Loading ->
-      text "Loading..."
+        Loading ->
+            text "Loading..."
 
-    Success fullText ->
-      pre [] [ text fullText ]
+        Success fullText ->
+            pre [] [ text fullText ]
 ```
 
 Some parts of this should be familiar from previous examples of The Elm Architecture. We still have a `Model` of our application. We still have an `update` that reacts to messages. We still have a `view` function that shows everything on screen.
@@ -104,14 +104,14 @@ The new parts extend the core pattern we saw before with some changes in `init` 
 The `init` function describes how to initialize our program:
 
 ```elm
-init : () -> (Model, Cmd Msg)
+init : () -> ( Model, Cmd Msg )
 init _ =
-  ( Loading
-  , Http.get
-      { url = "https://elm-lang.org/assets/public-opinion.txt"
-      , expect = Http.expectString GotText
-      }
-  )
+    ( Loading
+    , Http.get
+        { url = "https://elm-lang.org/assets/public-opinion.txt"
+        , expect = Http.expectString GotText
+        }
+    )
 ```
 
 Like always, we have to produce the initial `Model`, but now we are also producing some **command** of what we want to do immediately. That command will eventually produce a `Msg` that gets fed into the `update` function.
@@ -122,7 +122,9 @@ The `Http.expectString GotText` line is saying a bit more than that we `expect` 
 
 ```elm
 type Msg
-  = GotText (Result Http.Error String)
+    = GotText (Result Http.Error String)
+
+
 
 -- GotText (Ok "The Project Gutenberg EBook of ...")
 -- GotText (Err Http.NetworkError)
@@ -140,16 +142,16 @@ Notice that we are using the `Result` type from a couple sections back. This all
 Our `update` function is returning a bit more information as well:
 
 ```elm
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    GotText result ->
-      case result of
-        Ok fullText ->
-          (Success fullText, Cmd.none)
+    case msg of
+        GotText result ->
+            case result of
+                Ok fullText ->
+                    ( Success fullText, Cmd.none )
 
-        Err _ ->
-          (Failure, Cmd.none)
+                Err _ ->
+                    ( Failure, Cmd.none )
 ```
 
 Looking at the type signature, we see that we are not just returning an updated model. We are _also_ producing a **command** of what we want Elm to do.

@@ -20,12 +20,12 @@ import Time
 
 
 main =
-  Browser.element
-    { init = init
-    , view = view
-    , update = update
-    , subscriptions = subscriptions
-    }
+    Browser.element
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
 
@@ -33,16 +33,16 @@ main =
 
 
 type alias Model =
-  { zone : Time.Zone
-  , time : Time.Posix
-  }
+    { zone : Time.Zone
+    , time : Time.Posix
+    }
 
 
-init : () -> (Model, Cmd Msg)
+init : () -> ( Model, Cmd Msg )
 init _ =
-  ( Model Time.utc (Time.millisToPosix 0)
-  , Task.perform AdjustTimeZone Time.here
-  )
+    ( Model Time.utc (Time.millisToPosix 0)
+    , Task.perform AdjustTimeZone Time.here
+    )
 
 
 
@@ -50,23 +50,22 @@ init _ =
 
 
 type Msg
-  = Tick Time.Posix
-  | AdjustTimeZone Time.Zone
+    = Tick Time.Posix
+    | AdjustTimeZone Time.Zone
 
 
-
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    Tick newTime ->
-      ( { model | time = newTime }
-      , Cmd.none
-      )
+    case msg of
+        Tick newTime ->
+            ( { model | time = newTime }
+            , Cmd.none
+            )
 
-    AdjustTimeZone newZone ->
-      ( { model | zone = newZone }
-      , Cmd.none
-      )
+        AdjustTimeZone newZone ->
+            ( { model | zone = newZone }
+            , Cmd.none
+            )
 
 
 
@@ -75,7 +74,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Time.every 1000 Tick
+    Time.every 1000 Tick
 
 
 
@@ -84,12 +83,17 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  let
-    hour   = String.fromInt (Time.toHour   model.zone model.time)
-    minute = String.fromInt (Time.toMinute model.zone model.time)
-    second = String.fromInt (Time.toSecond model.zone model.time)
-  in
-  h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
+    let
+        hour =
+            String.fromInt (Time.toHour model.zone model.time)
+
+        minute =
+            String.fromInt (Time.toMinute model.zone model.time)
+
+        second =
+            String.fromInt (Time.toSecond model.zone model.time)
+    in
+    h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
 ```
 
 The new stuff is all coming from the [`elm/time`][time] package. Let&rsquo;s go through these parts!
@@ -111,12 +115,17 @@ So to show a human being a time, you must always know `Time.Posix` and `Time.Zon
 ```elm
 view : Model -> Html Msg
 view model =
-  let
-    hour   = String.fromInt (Time.toHour   model.zone model.time)
-    minute = String.fromInt (Time.toMinute model.zone model.time)
-    second = String.fromInt (Time.toSecond model.zone model.time)
-  in
-  h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
+    let
+        hour =
+            String.fromInt (Time.toHour model.zone model.time)
+
+        minute =
+            String.fromInt (Time.toMinute model.zone model.time)
+
+        second =
+            String.fromInt (Time.toSecond model.zone model.time)
+    in
+    h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
 ```
 
 The [`Time.toHour`][toHour] function takes `Time.Zone` and `Time.Posix` gives us back an `Int` from `0` to `23` indicating what hour it is in _your_ time zone.
@@ -137,7 +146,7 @@ Okay, well how should we get our `Time.Posix` though? With a **subscription**!
 ```elm
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Time.every 1000 Tick
+    Time.every 1000 Tick
 ```
 
 We are using the [`Time.every`][every] function:

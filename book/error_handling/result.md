@@ -6,8 +6,8 @@ This is where the [`Result`][Result] type becomes helpful. It is defined like th
 
 ```elm
 type Result error value
-  = Ok value
-  | Err error
+    = Ok value
+    | Err error
 ```
 
 The point of this type is to give additional information when things go wrong. It is really helpful for error reporting and error recovery!
@@ -21,19 +21,21 @@ Perhaps we have a website where people input their age. We could check that the 
 ```elm
 isReasonableAge : String -> Result String Int
 isReasonableAge input =
-  case String.toInt input of
-    Nothing ->
-      Err "That is not a number!"
+    case String.toInt input of
+        Nothing ->
+            Err "That is not a number!"
 
-    Just age ->
-      if age < 0 then
-        Err "Please try again after you are born."
+        Just age ->
+            if age < 0 then
+                Err "Please try again after you are born."
 
-      else if age > 135 then
-        Err "Are you some kind of turtle?"
+            else if age > 135 then
+                Err "Are you some kind of turtle?"
 
-      else
-        Ok age
+            else
+                Ok age
+
+
 
 -- isReasonableAge "abc" == Err ...
 -- isReasonableAge "-13" == Err ...
@@ -49,11 +51,13 @@ The `Result` type can also help you recover from errors. One place you see this 
 
 ```elm
 type Error
-  = BadUrl String
-  | Timeout
-  | NetworkError
-  | BadStatus Int
-  | BadBody String
+    = BadUrl String
+    | Timeout
+    | NetworkError
+    | BadStatus Int
+    | BadBody String
+
+
 
 -- Ok "All happy ..." : Result Error String
 -- Err Timeout        : Result Error String

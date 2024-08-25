@@ -72,7 +72,10 @@ What about tuples? Well, `(Int, Int)` is two `Int` values, and each one is a seq
 A custom type is all about combining different types. Those different types may have all sorts of different shapes. We will start with the `Color` type:
 
 ```elm
-type Color = Red | Yellow | Green
+type Color
+    = Red
+    | Yellow
+    | Green
 ```
 
 We can assign each case a number: `Red = 0`, `Yellow = 1`, and `Green = 2`. Now we can use the `Int` representation. Here we only need two bits to cover all the possible cases, so `00` is red, `01` is yellow, `10` is green, and `11` is unused.

@@ -4,8 +4,10 @@ As you work more with Elm, you will start seeing the [`Maybe`][Maybe] type quite
 
 ```elm
 type Maybe a
-  = Just a
-  | Nothing
+    = Just a
+    | Nothing
+
+
 
 -- Just 3.14 : Maybe Float
 -- Just "hi" : Maybe String
@@ -63,9 +65,9 @@ So let's start with a simple model of a user. They must have a name, but we are 
 
 ```elm
 type alias User =
-  { name : String
-  , age : Maybe Int
-  }
+    { name : String
+    , age : Maybe Int
+    }
 ```
 
 Now say Sue creates an account, but decides not to provide her birthday:
@@ -73,7 +75,7 @@ Now say Sue creates an account, but decides not to provide her birthday:
 ```elm
 sue : User
 sue =
-  { name = "Sue", age = Nothing }
+    { name = "Sue", age = Nothing }
 ```
 
 Sue’s friends cannot wish her a happy birthday though. I wonder if they _really_ care about her... Later Tom creates a profile and _does_ give his age:
@@ -81,7 +83,7 @@ Sue’s friends cannot wish her a happy birthday though. I wonder if they _reall
 ```elm
 tom : User
 tom =
-  { name = "Tom", age = Just 24 }
+    { name = "Tom", age = Just 24 }
 ```
 
 Great, that will be nice on his birthday. But more importantly, Tom is part of a valuable demographic! The advertisers will be pleased.
@@ -91,12 +93,12 @@ Alright, so now that we have some users, how can we market alcohol to them witho
 ```elm
 canBuyAlcohol : User -> Bool
 canBuyAlcohol user =
-  case user.age of
-    Nothing ->
-      False
+    case user.age of
+        Nothing ->
+            False
 
-    Just age ->
-      age >= 21
+        Just age ->
+            age >= 21
 ```
 
 Notice that the `Maybe` type forces us to pattern match on the user's age. It is actually impossible to write code where you forget that users may not have an age. Elm makes sure of it! Now we can advertise alcohol confident that we are not influencing minors directly! Only their older peers.
@@ -109,25 +111,26 @@ For example, say we have an exercise app where we compete against our friends. Y
 
 ```elm
 type alias Friend =
-  { name : String
-  , age : Maybe Int
-  , height : Maybe Float
-  , weight : Maybe Float
-  }
+    { name : String
+    , age : Maybe Int
+    , height : Maybe Float
+    , weight : Maybe Float
+    }
 ```
 
 All the information is there, but you are not really modeling the way your particular application works. It would be much more precise to model it like this instead:
 
 ```elm
 type Friend
-  = Less String
-  | More String Info
+    = Less String
+    | More String Info
+
 
 type alias Info =
-  { age : Int
-  , height : Float
-  , weight : Float
-  }
+    { age : Int
+    , height : Float
+    , weight : Float
+    }
 ```
 
 This new model is capturing much more about your application. There are only two real situations. Either you have just the name, or you have the name and a bunch of information. In your view code, you just think about whether you are showing a `Less` or `More` view of the friend. You do not have to answer questions like &ldquo;what if I have an `age` but not a `weight`?&rdquo; That is not possible with our more precise type!
@@ -138,7 +141,7 @@ Point is, if you find yourself using `Maybe` everywhere, it is worth examining y
 >
 > The inventor of `null` references, Tony Hoare, described them like this:
 >
->> I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
+> > I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
 >
 > That design makes failure **implicit**. Any time you think you have a `String` you just might have a `null` instead. Should you check? Did the person giving you the value check? Maybe it will be fine? Maybe it will crash your server? I guess we will find out later!
 >

@@ -1,16 +1,18 @@
 # Radio Buttons
 
 ---
+
 #### Follow along in the [online editor](https://elm-lang.org/examples/radio-buttons).
+
 ---
 
 Say you have a website that is primarily about reading, like this guide! You may want to have a way to choose between small, medium, and large fonts so your readers can customize it for their preferences. In that case, you will want some HTML like this:
 
 ```html
 <fieldset>
-  <label><input type="radio">Small</label>
-  <label><input type="radio">Medium</label>
-  <label><input type="radio">Large</label>
+  <label><input type="radio" />Small</label>
+  <label><input type="radio" />Medium</label>
+  <label><input type="radio" />Large</label>
 </fieldset>
 ```
 
@@ -18,11 +20,15 @@ Just like in the checkbox example from the previous page, this will let people c
 
 ```elm
 type alias Model =
-  { fontSize : FontSize
-  , content : String
-  }
+    { fontSize : FontSize
+    , content : String
+    }
 
-type FontSize = Small | Medium | Large
+
+type FontSize
+    = Small
+    | Medium
+    | Large
 ```
 
 This means there are exactly three possible font sizes: `Small`, `Medium`, and `Large`. It is impossible to have any other value in our `fontSize` field. If you are coming from JavaScript, you know their alternative is to use strings or numbers and just hope that there is never a typo or mistake. You _could_ use values like that in Elm, but why open yourself up to bugs for no reason?!
@@ -33,13 +39,14 @@ Alright, now we need to `update` our model. In this case we just want to switch 
 
 ```elm
 type Msg
-  = SwitchTo FontSize
+    = SwitchTo FontSize
+
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    SwitchTo newFontSize ->
-      { model | fontSize = newFontSize }
+    case msg of
+        SwitchTo newFontSize ->
+            { model | fontSize = newFontSize }
 ```
 
 Now we need to describe how to show our `Model` on screen. First let&rsquo;s see the one where we put all our code in one function and repeat ourselves a bunch of times:
@@ -47,23 +54,23 @@ Now we need to describe how to show our `Model` on screen. First let&rsquo;s see
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ fieldset []
-        [ label []
-            [ input [ type_ "radio", onClick (SwitchTo Small) ] []
-            , text "Small"
+    div []
+        [ fieldset []
+            [ label []
+                [ input [ type_ "radio", onClick (SwitchTo Small) ] []
+                , text "Small"
+                ]
+            , label []
+                [ input [ type_ "radio", onClick (SwitchTo Medium) ] []
+                , text "Medium"
+                ]
+            , label []
+                [ input [ type_ "radio", onClick (SwitchTo Large) ] []
+                , text "Large"
+                ]
             ]
-        , label []
-            [ input [ type_ "radio", onClick (SwitchTo Medium) ] []
-            , text "Medium"
-            ]
-        , label []
-            [ input [ type_ "radio", onClick (SwitchTo Large) ] []
-            , text "Large"
-            ]
+        , section [] [ text model.content ]
         ]
-    , section [] [ text model.content ]
-    ]
 ```
 
 That is kind of a mess! The best thing to do is to start making helper functions (not components!). We see some repetition in the radio buttons, so we will start there.
@@ -71,21 +78,22 @@ That is kind of a mess! The best thing to do is to start making helper functions
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ fieldset []
-        [ radio (SwitchTo Small) "Small"
-        , radio (SwitchTo Medium) "Medium"
-        , radio (SwitchTo Large) "Large"
+    div []
+        [ fieldset []
+            [ radio (SwitchTo Small) "Small"
+            , radio (SwitchTo Medium) "Medium"
+            , radio (SwitchTo Large) "Large"
+            ]
+        , section [] [ text model.content ]
         ]
-    , section [] [ text model.content ]
-    ]
+
 
 radio : msg -> String -> Html msg
 radio msg name =
-  label []
-    [ input [ type_ "radio", onClick msg ] []
-    , text name
-    ]
+    label []
+        [ input [ type_ "radio", onClick msg ] []
+        , text name
+        ]
 ```
 
 Our `view` function is quite a bit easier to read now. Great!
@@ -95,41 +103,43 @@ If that is the only chunk of radio buttons on your page, you are done. But perha
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ viewPicker
-        [ ("Small", SwitchTo Small)
-        , ("Medium", SwitchTo Medium)
-        , ("Large", SwitchTo Large)
+    div []
+        [ viewPicker
+            [ ( "Small", SwitchTo Small )
+            , ( "Medium", SwitchTo Medium )
+            , ( "Large", SwitchTo Large )
+            ]
+        , section [] [ text model.content ]
         ]
-    , section [] [ text model.content ]
-    ]
 
-viewPicker : List (String, msg) -> Html msg
+
+viewPicker : List ( String, msg ) -> Html msg
 viewPicker options =
-  fieldset [] (List.map radio options)
+    fieldset [] (List.map radio options)
 
-radio : (String, msg) -> Html msg
-radio (name, msg) =
-  label []
-    [ input [ type_ "radio", onClick msg ] []
-    , text name
-    ]
+
+radio : ( String, msg ) -> Html msg
+radio ( name, msg ) =
+    label []
+        [ input [ type_ "radio", onClick msg ] []
+        , text name
+        ]
 ```
 
 So if we want to let users choose a color scheme or toggle serifs, the `view` can reuse `viewPicker` for each case. If we do that, we may want to add additional arguments to the `viewPicker` function. If we want to be able to set a class on each `<fieldset>`, we could add an argument like this:
 
 ```elm
-viewPicker : String -> List (String, msg) -> Html msg
+viewPicker : String -> List ( String, msg ) -> Html msg
 viewPicker pickerClass options =
-  fieldset [ class pickerClass ] (List.map radio options)
+    fieldset [ class pickerClass ] (List.map radio options)
 ```
 
 Or if we wanted even more flexibility, we could let people pass in whatever attributes they please, like this:
 
 ```elm
-viewPicker : List (Attribute msg) -> List (String, msg) -> Html msg
+viewPicker : List (Attribute msg) -> List ( String, msg ) -> Html msg
 viewPicker attributes options =
-  fieldset attributes (List.map radio options)
+    fieldset attributes (List.map radio options)
 ```
 
 And if we wanted even MORE flexibility, we could let people pass in attributes for each radio button too! There is really no end to what can be configured. You just add a bit more information to an argument.

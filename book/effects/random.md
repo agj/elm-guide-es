@@ -18,12 +18,12 @@ import Random
 
 
 main =
-  Browser.element
-    { init = init
-    , update = update
-    , subscriptions = subscriptions
-    , view = view
-    }
+    Browser.element
+        { init = init
+        , update = update
+        , subscriptions = subscriptions
+        , view = view
+        }
 
 
 
@@ -31,15 +31,15 @@ main =
 
 
 type alias Model =
-  { dieFace : Int
-  }
+    { dieFace : Int
+    }
 
 
-init : () -> (Model, Cmd Msg)
+init : () -> ( Model, Cmd Msg )
 init _ =
-  ( Model 1
-  , Cmd.none
-  )
+    ( Model 1
+    , Cmd.none
+    )
 
 
 
@@ -47,22 +47,22 @@ init _ =
 
 
 type Msg
-  = Roll
-  | NewFace Int
+    = Roll
+    | NewFace Int
 
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    Roll ->
-      ( model
-      , Random.generate NewFace (Random.int 1 6)
-      )
+    case msg of
+        Roll ->
+            ( model
+            , Random.generate NewFace (Random.int 1 6)
+            )
 
-    NewFace newFace ->
-      ( Model newFace
-      , Cmd.none
-      )
+        NewFace newFace ->
+            ( Model newFace
+            , Cmd.none
+            )
 
 
 
@@ -71,7 +71,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+    Sub.none
 
 
 
@@ -80,10 +80,10 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ h1 [] [ text (String.fromInt model.dieFace) ]
-    , button [ onClick Roll ] [ text "Roll" ]
-    ]
+    div []
+        [ h1 [] [ text (String.fromInt model.dieFace) ]
+        , button [ onClick Roll ] [ text "Roll" ]
+        ]
 ```
 
 The new thing here is command issued in the `update` function:
@@ -106,17 +106,20 @@ The core idea is that we have random `Generator` that describes _how_ to generat
 ```elm
 import Random
 
+
 probability : Random.Generator Float
 probability =
-  Random.float 0 1
+    Random.float 0 1
+
 
 roll : Random.Generator Int
 roll =
-  Random.int 1 6
+    Random.int 1 6
+
 
 usuallyTrue : Random.Generator Bool
 usuallyTrue =
-  Random.weighted (80, True) [ (20, False) ]
+    Random.weighted ( 80, True ) [ ( 20, False ) ]
 ```
 
 So here we have three random generators. The `roll` generator is saying it will produce an `Int`, and more specifically, it will produce an integer between `1` and `6` inclusive. Likewise, the `usuallyTrue` generator is saying it will produce a `Bool`, and more specifically, it will be true 80% of the time.
@@ -138,21 +141,29 @@ Once we have some simple generators like `probability` and `usuallyTrue`, we can
 ```elm
 import Random
 
-type Symbol = Cherry | Seven | Bar | Grapes
+
+type Symbol
+    = Cherry
+    | Seven
+    | Bar
+    | Grapes
+
 
 symbol : Random.Generator Symbol
 symbol =
-  Random.uniform Cherry [ Seven, Bar, Grapes ]
+    Random.uniform Cherry [ Seven, Bar, Grapes ]
+
 
 type alias Spin =
-  { one : Symbol
-  , two : Symbol
-  , three : Symbol
-  }
+    { one : Symbol
+    , two : Symbol
+    , three : Symbol
+    }
+
 
 spin : Random.Generator Spin
 spin =
-  Random.map3 Spin symbol symbol symbol
+    Random.map3 Spin symbol symbol symbol
 ```
 
 We first create `Symbol` to describe the pictures that can appear on the slot machine. We then create a random generator that generates each symbol with equal probability.

@@ -3,7 +3,10 @@
 We have seen primitive types like `Bool` and `String`. We have made our own custom types like this:
 
 ```elm
-type Color = Red | Yellow | Green
+type Color
+    = Red
+    | Yellow
+    | Green
 ```
 
 One of the most important techniques in Elm programming is to make **the possible values in code** exactly match **the valid values in real life**. This leaves no room for invalid data, and this is why I always encourage folks to focus on custom types and data structures.
@@ -73,8 +76,10 @@ Here are some other examples:
 
 ```elm
 type Height
-  = Inches Int
-  | Meters Float
+    = Inches Int
+    | Meters Float
+
+
 
 -- cardinality(Height)
 -- = cardinality(Int) + cardinality(Float)
@@ -82,8 +87,10 @@ type Height
 
 
 type Location
-  = Nowhere
-  | Somewhere Float Float
+    = Nowhere
+    | Somewhere Float Float
+
+
 
 -- cardinality(Location)
 -- = 1 + cardinality((Float, Float))

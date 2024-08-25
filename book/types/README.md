@@ -8,10 +8,11 @@ The following code defines a `toFullName` function which extracts a person’s f
 
 ```elm
 toFullName person =
-  person.firstName ++ " " ++ person.lastName
+    person.firstName ++ " " ++ person.lastName
+
 
 fullName =
-  toFullName { fistName = "Hermann", lastName = "Hesse" }
+    toFullName { fistName = "Hermann", lastName = "Hesse" }
 ```
 
 Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?

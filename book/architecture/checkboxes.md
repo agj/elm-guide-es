@@ -1,7 +1,9 @@
 # Checkboxes
 
 ---
+
 #### Follow along in the [online editor](https://elm-lang.org/examples/checkboxes).
+
 ---
 
 If you are coming from JavaScript, you may be wondering **&ldquo;where are my components?&rdquo;** and &ldquo;how do I do parent-child communication between them?&rdquo; A great deal of time and effort is spent on these questions in JavaScript, but it just works different in Elm. **We do not think in terms of components. Instead, we focus on functions.** It is a functional language after all!
@@ -12,9 +14,9 @@ Your app will probably have some options people can mess with. If something happ
 
 ```html
 <fieldset>
-  <label><input type="checkbox">Email Notifications</label>
-  <label><input type="checkbox">Video Autoplay</label>
-  <label><input type="checkbox">Use Location</label>
+  <label><input type="checkbox" />Email Notifications</label>
+  <label><input type="checkbox" />Video Autoplay</label>
+  <label><input type="checkbox" />Use Location</label>
 </fieldset>
 ```
 
@@ -22,31 +24,32 @@ That will let people toggle the checkboxes, and using `<label>` means they get a
 
 ```elm
 type alias Model =
-  { notifications : Bool
-  , autoplay : Bool
-  , location : Bool
-  }
+    { notifications : Bool
+    , autoplay : Bool
+    , location : Bool
+    }
 ```
 
 From there, we will want to figure out our messages and update function. Maybe something like this:
 
 ```elm
 type Msg
-  = ToggleNotifications
-  | ToggleAutoplay
-  | ToggleLocation
+    = ToggleNotifications
+    | ToggleAutoplay
+    | ToggleLocation
+
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    ToggleNotifications ->
-      { model | notifications = not model.notifications }
+    case msg of
+        ToggleNotifications ->
+            { model | notifications = not model.notifications }
 
-    ToggleAutoplay ->
-      { model | autoplay = not model.autoplay }
+        ToggleAutoplay ->
+            { model | autoplay = not model.autoplay }
 
-    ToggleLocation ->
-      { model | location = not model.location }
+        ToggleLocation ->
+            { model | location = not model.location }
 ```
 
 That seems fine. Now to create our view!
@@ -54,20 +57,20 @@ That seems fine. Now to create our view!
 ```elm
 view : Model -> Html Msg
 view model =
-  fieldset []
-    [ label []
-        [ input [ type_ "checkbox", onClick ToggleNotifications ] []
-        , text "Email Notifications"
+    fieldset []
+        [ label []
+            [ input [ type_ "checkbox", onClick ToggleNotifications ] []
+            , text "Email Notifications"
+            ]
+        , label []
+            [ input [ type_ "checkbox", onClick ToggleAutoplay ] []
+            , text "Video Autoplay"
+            ]
+        , label []
+            [ input [ type_ "checkbox", onClick ToggleLocation ] []
+            , text "Use Location"
+            ]
         ]
-    , label []
-        [ input [ type_ "checkbox", onClick ToggleAutoplay ] []
-        , text "Video Autoplay"
-        ]
-    , label []
-        [ input [ type_ "checkbox", onClick ToggleLocation ] []
-        , text "Use Location"
-        ]
-    ]
 ```
 
 This is not too crazy, but we are repeating ourselves a bit. How can we make our `view` function nicer? If you are coming from JavaScript, your first instinct is probably that we should make a &ldquo;labeled checkbox component&rdquo; but it is easier to just create a helper function! Here is the `view` function with a `checkbox` helper function:
@@ -75,18 +78,19 @@ This is not too crazy, but we are repeating ourselves a bit. How can we make our
 ```elm
 view : Model -> Html Msg
 view model =
-  fieldset []
-    [ checkbox ToggleNotifications "Email Notifications"
-    , checkbox ToggleAutoplay "Video Autoplay"
-    , checkbox ToggleLocation "Use Location"
-    ]
+    fieldset []
+        [ checkbox ToggleNotifications "Email Notifications"
+        , checkbox ToggleAutoplay "Video Autoplay"
+        , checkbox ToggleLocation "Use Location"
+        ]
+
 
 checkbox : msg -> String -> Html msg
 checkbox msg name =
-  label []
-    [ input [ type_ "checkbox", onClick msg ] []
-    , text name
-    ]
+    label []
+        [ input [ type_ "checkbox", onClick msg ] []
+        , text name
+        ]
 ```
 
 Now we have a highly configurable `checkbox` function. It takes two arguments to configure how it works: the message it produces on clicks and some text to show next to the checkbox. Now if we decide we want all checkboxes to have a certain `class`, we just add it in the `checkbox` function and it shows up everywhere! This is the essence of **reusable views** in Elm. Create helper functions!
