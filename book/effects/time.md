@@ -96,7 +96,6 @@ The new stuff is all coming from the [`elm/time`][time] package. Let&rsquo;s go 
 
 [time]: https://package.elm-lang.org/packages/elm/time/latest/
 
-
 ## `Time.Posix` and `Time.Zone`
 
 To work with time successfully in programming, we need three different concepts:
@@ -131,7 +130,6 @@ There is a lot more info about handling times in the README of [`elm/time`][time
 [florida]: https://www.npr.org/sections/thetwo-way/2018/03/08/591925587/
 [toHour]: https://package.elm-lang.org/packages/elm/time/latest/Time#toHour
 
-
 ## `subscriptions`
 
 Okay, well how should we get our `Time.Posix` though? With a **subscription**!
@@ -157,7 +155,6 @@ It takes two arguments:
 
 That is the basic pattern of any subscription. You give some configuration, and you describe how to produce `Msg` values. Not too bad!
 
-
 ## `Task.perform`
 
 Getting `Time.Zone` is a bit trickier. Our program created a **command** with:
@@ -170,7 +167,6 @@ Reading through the [`Task`][task] docs is the best way to understand that line.
 
 [utc]: https://package.elm-lang.org/packages/elm/time/latest/Time#utc
 [task]: https://package.elm-lang.org/packages/elm/core/latest/Task
-
 
 > **Exercises:**
 >

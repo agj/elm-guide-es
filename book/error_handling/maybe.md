@@ -19,7 +19,6 @@ This can be handy in two main scenarios: partial functions and optional fields.
 
 [Maybe]: https://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#Maybe
 
-
 ## Partial Functions
 
 Sometimes you want a function that gives an answer for some inputs, but not others. Many people run into this with [`String.toFloat`][toFloat] when trying to convert user input into numbers. Let's see it in action:
@@ -54,12 +53,11 @@ Not all strings make sense as numbers, so this function models that explicitly. 
 
 [toFloat]: https://package.elm-lang.org/packages/elm-lang/core/latest/String#toFloat
 
-
 ## Optional Fields
 
 Another place you commonly see `Maybe` values is in records with optional fields.
 
-For example, say we are running a social networking website. Connecting people, friendship, etc. You know the spiel. The Onion outlined our real goals best back in 2011: [mine as much data as possible for the CIA](https://www.theonion.com/cias-facebook-program-dramatically-cut-agencys-costs-1819594988). And if we want *all* the data, we need to ease people into it. Let them add it later. Add features that encourage them to share more and more information over time.
+For example, say we are running a social networking website. Connecting people, friendship, etc. You know the spiel. The Onion outlined our real goals best back in 2011: [mine as much data as possible for the CIA](https://www.theonion.com/cias-facebook-program-dramatically-cut-agencys-costs-1819594988). And if we want _all_ the data, we need to ease people into it. Let them add it later. Add features that encourage them to share more and more information over time.
 
 So let's start with a simple model of a user. They must have a name, but we are going to make the age optional.
 
@@ -78,7 +76,7 @@ sue =
   { name = "Sue", age = Nothing }
 ```
 
-Sue’s friends cannot wish her a happy birthday though. I wonder if they _really_ care about her... Later Tom creates a profile and *does* give his age:
+Sue’s friends cannot wish her a happy birthday though. I wonder if they _really_ care about her... Later Tom creates a profile and _does_ give his age:
 
 ```elm
 tom : User
@@ -102,7 +100,6 @@ canBuyAlcohol user =
 ```
 
 Notice that the `Maybe` type forces us to pattern match on the user's age. It is actually impossible to write code where you forget that users may not have an age. Elm makes sure of it! Now we can advertise alcohol confident that we are not influencing minors directly! Only their older peers.
-
 
 ## Avoiding Overuse
 
@@ -137,12 +134,11 @@ This new model is capturing much more about your application. There are only two
 
 Point is, if you find yourself using `Maybe` everywhere, it is worth examining your `type` and `type alias` definitions to see if you can find a more precise representation. This often leads to a lot of nice refactors in your update and view code!
 
-
 > ## Aside: Connection to `null` references
 >
 > The inventor of `null` references, Tony Hoare, described them like this:
 >
-> > I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
+>> I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
 >
 > That design makes failure **implicit**. Any time you think you have a `String` you just might have a `null` instead. Should you check? Did the person giving you the value check? Maybe it will be fine? Maybe it will crash your server? I guess we will find out later!
 >

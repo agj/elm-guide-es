@@ -89,7 +89,6 @@ viewValidation model =
 
 This is pretty similar to our [text field example](text_fields.md) but with more fields.
 
-
 # Model
 
 I always start out by guessing at the `Model`. We know there are going to be three text fields, so let's just go with that:
@@ -103,7 +102,6 @@ type alias Model =
 ```
 
 I usually try to start with a minimal model, maybe with just one field. I then attempt to write the `view` and `update` functions. That often reveals that I need to add more to my `Model`. Building the model gradually like this means I can have a working program through the development process. It may not have all the features yet, but it is getting there!
-
 
 ## Update
 
@@ -135,7 +133,6 @@ update msg model =
 Each case uses the record update syntax to make sure the appropriate field is transformed. This is similar to the previous example, except with more cases.
 
 We get a little bit fancier than normal in our `view` though.
-
 
 ## View
 
@@ -183,8 +180,8 @@ These helper functions begin to show the benefits of having our HTML library be 
 
 > **Exercises:** Go look at this example in the online editor [here](https://elm-lang.org/examples/forms). Try to add the following features to the `viewValidation` helper function:
 >
->  - Check that the password is longer than 8 characters.
->  - Make sure the password contains upper case, lower case, and numeric characters.
+> - Check that the password is longer than 8 characters.
+> - Make sure the password contains upper case, lower case, and numeric characters.
 >
 > Use the functions from the [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) module for these exercises!
 >

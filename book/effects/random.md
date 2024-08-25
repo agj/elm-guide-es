@@ -94,7 +94,6 @@ Random.generate NewFace (Random.int 1 6)
 
 Generating random values works a bit different than in languages like JavaScript, Python, Java, etc. So let&rsquo;s see how it works in Elm!
 
-
 ## Random Generators
 
 We are using the [`elm/random`][readme] package for this. The [`Random`][random] module in particular.
@@ -132,7 +131,6 @@ When the command is performed, the `Generator` produces some value, and then tha
 
 [gen]: https://package.elm-lang.org/packages/elm/random/latest/Random#generate
 
-
 ## Combining Generators
 
 Once we have some simple generators like `probability` and `usuallyTrue`, we can start snapping them together with functions like [`map3`](https://package.elm-lang.org/packages/elm/random/latest/Random#map3). Imagine we want to make a simple slot machine. We could create a generator like this:
@@ -163,14 +161,13 @@ From there we use `map3` to combine them into a new `spin` generator. It says to
 
 The point here is that from small building blocks, we can create a `Generator` that describes pretty complex behavior. And then from our application, we just have to say something like `Random.generate NewSpin spin` to get the next random value.
 
-
 > **Exercises:** Here are a few ideas to make the example code on this page a bit more interesting!
 >
->   - Instead of showing a number, show the die face as an image.
->   - Instead of showing an image of a die face, use [`elm/svg`][svg] to draw it yourself.
->   - Create a weighted die with [`Random.weighted`][weighted].
->   - Add a second die and have them both roll at the same time.
->   - Have the dice flip around randomly before they settle on a final value.
+> - Instead of showing a number, show the die face as an image.
+> - Instead of showing an image of a die face, use [`elm/svg`][svg] to draw it yourself.
+> - Create a weighted die with [`Random.weighted`][weighted].
+> - Add a second die and have them both roll at the same time.
+> - Have the dice flip around randomly before they settle on a final value.
 
 [svg]: https://package.elm-lang.org/packages/elm/svg/latest/
 [weighted]: https://package.elm-lang.org/packages/elm/random/latest/Random#weighted

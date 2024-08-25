@@ -1,6 +1,6 @@
 # Types
 
-One of Elm's major benefits is that **users do not see runtime errors in practice**. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called *type inference*. The compiler figures out what *type* of values flow in and out of all your functions.
+One of Elm's major benefits is that **users do not see runtime errors in practice**. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called _type inference_. The compiler figures out what _type_ of values flow in and out of all your functions.
 
 ## An Example of Type Inference
 
@@ -38,8 +38,8 @@ Hint: I compared the record fields and found some potential typos.
     firstName <-> fistName
 ```
 
-It sees that `toFullName` is getting the wrong *type* of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
+It sees that `toFullName` is getting the wrong _type_ of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
 
-It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that *everything* fits together properly just based on the source code.
+It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that _everything_ fits together properly just based on the source code.
 
 The better you understand types, the more the compiler feels like a friendly assistant. So let's start learning more!

@@ -8,7 +8,6 @@ In a realistic web app, we want to show different content for different URLs:
 
 How do we do that? We use the [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) to parse the raw strings into nice Elm data structures. This package makes the most sense when you just look at examples, so that is what we will do!
 
-
 ## Example 1
 
 Say we have an art website where the following addresses should be valid:
@@ -62,7 +61,6 @@ routeParser =
 
 The `Url.Parser` module makes it quite concise to fully turn valid URLs into nice Elm data!
 
-
 ## Example 2
 
 Now say we have a personal blog where addresses like this are valid:
@@ -103,7 +101,6 @@ routeParser =
 
 The `</>` and `<?>` operators let us write parsers that look quite like the actual URLs we want to parse. And adding `Url.Parser.Query` allowed us to handle query parameters like `?q=seiza`.
 
-
 ## Example 3
 
 Okay, now we have a documentation website with addresses like this:
@@ -135,7 +132,6 @@ docsParser =
 ```
 
 So now we can handle URL fragments as well!
-
 
 ## Synthesis
 

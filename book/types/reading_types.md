@@ -2,7 +2,6 @@
 
 In the [Core Language](/core_language.html) section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but with a new question in mind. What **type** of value is that?
 
-
 ## Primitives and Lists
 
 Let's enter some simple expressions and see what happens:
@@ -64,7 +63,6 @@ You can read these types as:
 
 The **type** is a rough description of the particular value we are looking at.
 
-
 ## Functions
 
 Let's see the type of some functions:
@@ -83,7 +81,7 @@ Let's see the type of some functions:
 
 Try entering `round` or `sqrt` to see some other function types ⬆️
 
-The `String.length` function has type `String -> Int`. This means it *must* take in a `String` argument, and it will definitely return an `Int` value. So let's try giving it an argument:
+The `String.length` function has type `String -> Int`. This means it _must_ take in a `String` argument, and it will definitely return an `Int` value. So let's try giving it an argument:
 
 <!-- dprint-ignore-start -->
 {% replWithTypes %}
@@ -101,7 +99,7 @@ So we start with a `String -> Int` function and give it a `String` argument. Thi
 
 What happens when you do not give a `String` though? Try entering `String.length [1,2,3]` or `String.length True` to see what happens ⬆️
 
-You will find that a `String -> Int` function *must* get a `String` argument!
+You will find that a `String -> Int` function _must_ get a `String` argument!
 
 <!-- dprint-ignore-start -->
 > **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
@@ -152,7 +150,6 @@ Adding type annotations is not required, but it is definitely recommended! Benef
 2. **Documentation** &mdash; When you revisit code later (or when a colleague visits it for the first time) it can be really helpful to see exactly what is going in and out of the function without having to read the implementation super carefully.
 
 People can make mistakes in type annotations though, so what happens if the annotation does not match the implementation? The compiler figures out all the types on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct. So you get better error messages _and_ documentation always stays up to date!
-
 
 ## Type Variables
 
@@ -224,7 +221,6 @@ Again, the type variable `a` can vary depending on how [`List.reverse`][reverse]
 
 [length]: https://package.elm-lang.org/packages/elm/core/latest/List#length
 [reverse]: https://package.elm-lang.org/packages/elm/core/latest/List#reverse
-
 
 ## Constrained Type Variables
 

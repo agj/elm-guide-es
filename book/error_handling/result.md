@@ -14,7 +14,6 @@ The point of this type is to give additional information when things go wrong. I
 
 [Result]: https://package.elm-lang.org/packages/elm-lang/core/latest/Result#Result
 
-
 ## Error Reporting
 
 Perhaps we have a website where people input their age. We could check that the age is reasonable with a function like this:
@@ -43,7 +42,6 @@ isReasonableAge input =
 ```
 
 Not only can we check the age, but we can also show people error messages depending on the particulars of their input. This kind of feedback is much better than `Nothing`!
-
 
 ## Error Recovery
 

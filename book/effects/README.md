@@ -4,7 +4,6 @@ Earlier in this book we saw The Elm Architecture handle mouse and keyboard inter
 
 To answer these questions, it helps to learn more about how The Elm Architecture works behind the scenes. This will explain why things work a bit differently than in languages like JavaScript, Python, etc.
 
-
 ## `sandbox`
 
 I have not made a big deal about it, but so far all of our programs were created with [`Browser.sandbox`][sandbox]. We gave an initial `Model` and describe how to `update` and `view` it.
@@ -20,7 +19,6 @@ By cleanly separating out all the DOM manipulation, it becomes possible to use e
 [sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
 [benchmark]: https://elm-lang.org/blog/blazing-fast-html-round-two
 
-
 ## `element`
 
 In the next few examples, we are going to use [`Browser.element`][element] to create programs. This will introduce the ideas of **commands** and **subscriptions** which allow us to interact with the outside world.
@@ -34,7 +32,6 @@ In addition to producing `Html` values, our programs will also send `Cmd` and `S
 I think commands and subscriptions make more sense when you start seeing examples, so let&rsquo;s do that!
 
 [element]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#element
-
 
 > **Note 1:** Some readers may be worrying about asset size. &ldquo;A runtime system? That sounds big!&rdquo; It is not! In fact, Elm assets are [exceptionally small](https://elm-lang.org/blog/small-assets-without-the-headache) when compared to popular alternatives.
 >
@@ -52,11 +49,11 @@ I think commands and subscriptions make more sense when you start seeing example
 >
 > There are tons of other packages on `package.elm-lang.org` though! So when you are making your own Elm programs locally, it will probably involve running some commands like this in the terminal:
 >
->```bash
-elm init
-elm install elm/http
-elm install elm/random
-```
+> ```bash
+> elm init
+> elm install elm/http
+> elm install elm/random
+> ```
 >
 > That would set up an `elm.json` file with `elm/http` and `elm/random` as dependencies.
 >

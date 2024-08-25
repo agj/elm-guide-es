@@ -6,7 +6,6 @@ Browsers seem to be supporting [custom elements](https://developer.mozilla.org/e
 
 Here is a [minimal example](https://github.com/elm-community/js-integration-examples/tree/master/internationalization) of how to use custom elements to do some localization and internationalization.
 
-
 ## Creating Custom Elements
 
 Say we want to localize dates, but that is not accessible in Elm core packages yet. Maybe you want to write a function that localizes dates:
@@ -79,7 +78,6 @@ viewDate lang year month =
 Now you can call `viewDate` when you want access to that kind of localized information in your `view`.
 
 You can check out the full version of this example [here](https://github.com/elm-community/js-integration-examples/tree/master/internationalization).
-
 
 ## More Info
 

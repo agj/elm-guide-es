@@ -1,10 +1,8 @@
-
 # Lo esencial del lenguaje
 
 Intentemos primero construir una intuición sobre cómo funciona Elm.
 
 El objetivo es familiarizarnos con **valores** y **funciones**, y tomar confianza para cuando nos enfrentemos a ejemplos más largos de código.
-
 
 ## Valores
 
@@ -130,7 +128,6 @@ Observa que usamos paréntesis para agrupar `"butter" ++ "fly"` en el segundo ej
 >
 > Te puede parecer raro al principio, pero para este estilo necesitamos usar menos paréntesis y comas. Cuando te acostumbres vas a ver que el lenguaje se siente más simple y limpio.
 
-
 ## Expresiones `if`
 
 Cuando necesitas comportamiento condicional en Elm, puedes usar una expresión `if`.
@@ -161,7 +158,6 @@ Creemos una nueva función `greet` que es adecuadamente respetuosa con el expres
 <!-- dprint-ignore-end -->
 
 Probablemente hay más casos que podríamos cubrir, pero por ahora, con esto basta.
-
 
 ## Listas
 
@@ -225,7 +221,6 @@ Prueba construir tu propia lista, y usa funciones como `List.length` ⬆️
 
 ¡Recuerda que todos los elementos de la lista deben siempre tener el mismo tipo!
 
-
 ## Tuplas
 
 Las tuplas son otra estructura de datos muy útil. Una tupla puede contener dos o tres valores, y cada valor puede tener cualquier tipo. Un uso común es para devolver más de un valor desde una función. La siguiente función recibe un nombre y devuelve un mensaje al usuario:
@@ -249,7 +244,6 @@ Las tuplas son otra estructura de datos muy útil. Una tupla puede contener dos 
 <!-- dprint-ignore-end -->
 
 Es una estructura muy útil, pero cuando las cosas se ponen más complicadas, es mejor usar registros en vez de tuplas.
-
 
 ## Registros
 

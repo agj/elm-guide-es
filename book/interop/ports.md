@@ -4,7 +4,6 @@ Ports allow communication between Elm and JavaScript.
 
 Ports are probably most commonly used for [`WebSockets`](https://github.com/elm-community/js-integration-examples/tree/master/websockets) and [`localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage). Let's focus on the `WebSockets` example.
 
-
 ## Ports in JavaScript
 
 Here we have pretty much the same HTML we have been using on the previous pages, but with a bit of extra JavaScript code in there. We create a connection to `wss://echo.websocket.org` that just repeats back whatever you send it. You can see in the [live example](https://ellie-app.com/8yYgw7y7sM2a1) that this lets us make the skeleton of a chat room:
@@ -55,7 +54,6 @@ socket.addEventListener("message", function(event) {
 We call `Elm.Main.init()` like in all of our interop examples, but this time we are actually using the resulting `app` object. We are subscribing to the `sendMessage` port and we are sending to the `messageReceiver` port.
 
 Those correspond to code written on the Elm side.
-
 
 ## Ports in Elm
 
@@ -193,7 +191,6 @@ Notice that the first line says `port module` rather than just `module`. This ma
 
 Okay, but what is going on with the `port` declarations for `sendMessage` and `messageReceiver`?
 
-
 ## Outgoing Messages (`Cmd`)
 
 The `sendMessage` declaration lets us send messages out of Elm.
@@ -216,7 +213,6 @@ This JavaScript code is subscribed to all of the outgoing messages. You can `sub
 
 We also recommend sending out richer messages, rather than making lots of individual ports. Maybe that means having a custom type in Elm that represents everything you might need to tell JS, and then using [`Json.Encode`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode) to send it out to a single JS subscription. Many people find that this creates a cleaner separation of concerns. The Elm code clearly owns some state, and the JS clearly owns other state.
 
-
 ## Incoming Messages (`Sub`)
 
 The `messageReceiver` declaration lets us listen for messages coming in to Elm.
@@ -238,7 +234,6 @@ socket.addEventListener("message", function(event) {
 ```
 
 We happen to be sending whenever the websocket gets a message, but you could send at other times as well. Maybe we are getting messages from another data source as well. That is fine, and Elm does not need to know anything about it! Just send the strings through the relevant port.
-
 
 ## Notes
 

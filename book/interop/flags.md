@@ -4,7 +4,6 @@ Flags are a way to pass values into Elm on initialization.
 
 Common uses are passing in API keys, environment variables, and user data. This can be handy if you generate the HTML dynamically. They can also help us load cached information in [this `localStorage` example](https://github.com/elm-community/js-integration-examples/tree/master/localStorage).
 
-
 ## Flags in HTML
 
 The HTML is basically the same as before, but with an additional `flags` argument to the `Elm.Main.init()` function
@@ -32,7 +31,6 @@ The HTML is basically the same as before, but with an additional `flags` argumen
 In this example we are passing in the current time in milliseconds, but any JS value that can be JSON decoded can be given as a flag.
 
 > **Note:** This additional data is called “flags” because it is kind of like command line flags. You can call `elm make src/Main.elm`, but you can add some flags like `--optimize` and `--output=main.js` to customize its behavior. Same sort of thing.
-
 
 ## Flags in Elm
 
@@ -94,7 +92,6 @@ subscriptions _ =
 The only important here is the `init` function says it takes an `Int` argument. This is how Elm code gets immediate access to the flags you pass in from JavaScript. From there, you can put things in your model or run some commands. Whatever you need to do.
 
 I recommend checking out [this `localStorage` example](https://github.com/elm-community/js-integration-examples/tree/master/localStorage) for a more interesting use of flags!
-
 
 ## Verifying Flags
 

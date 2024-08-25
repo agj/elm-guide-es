@@ -1,4 +1,3 @@
-
 # Install Elm
 
 The previous page described how to install a code editor for Elm, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
@@ -23,7 +22,6 @@ cd C:\Users\<username>\Desktop
 
 The next step is to get familiar with `elm` command. I personally had a really hard time learning terminal commands, so I worked hard to make the `elm` command nice to use. Let's go through a couple common scenarios.
 
-
 <br>
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm init</span>
@@ -41,7 +39,6 @@ Try running this command to create an `elm.json` file and a `src/` directory:
 
 Now try creating a file called `src/Main.elm` in your editor, and copying in the code from [the buttons example](https://elm-lang.org/examples/buttons).
 
-
 <br>
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm reactor</span>
@@ -53,7 +50,6 @@ elm reactor
 ```
 
 This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Run `elm reactor`, follow the localhost link, and try to check out your `src/Main.elm` file!
-
 
 <br>
 
@@ -75,7 +71,6 @@ This is the most general way to compile Elm code. It is extremely useful once yo
 
 This command produces the same messages you have been seeing in the online editor and with `elm reactor`. Years of work has gone into them so far, but please report any unhelpful messages [here](https://github.com/elm/error-message-catalog/issues). I am sure there are ways to improve!
 
-
 <br>
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm install</span>
@@ -94,7 +89,6 @@ This adds these dependencies into your `elm.json` file, making these packages av
 [http]: https://package.elm-lang.org/packages/elm/http/latest
 [json]: https://package.elm-lang.org/packages/elm/json/latest
 
-
 <br>
 
 ## Tips and Tricks
@@ -109,6 +103,6 @@ You can also run commands like `elm make --help` and `elm repl --help` to get hi
 
 I have been using it for over a decade now, and I still cannot remember how to compress files, find all Elm files in a directory, etc. I still look a lot of things up!
 
-* * *
+---
 
 Now that we have our editor set up and `elm` available in the terminal, let's get back to learning Elm!

@@ -28,7 +28,6 @@ isOldEnoughToVote user =
 
 These two definitions are equivalent, but the one with a type alias is shorter and easier to read. So all we are doing is making an **alias** for a long type.
 
-
 ## Models
 
 It is extremely common to use type aliases when designing a model. When we were learning about The Elm Architecture, we saw a model like this:
@@ -42,7 +41,6 @@ type alias Model =
 ```
 
 The main benefit of using a type alias for this is when we write the type annotations for the `update` and `view` functions. Writing `Msg -> Model -> Model` is so much nicer than the fully expanded version! It has the added benefit that we can add fields to our model without needing to change any type annotations.
-
 
 ## Record Constructors
 

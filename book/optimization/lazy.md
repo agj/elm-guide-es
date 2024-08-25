@@ -2,7 +2,6 @@
 
 The [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/) package is used to show things on screen. To understand how to optimize it, we need to learn how it works in the first place!
 
-
 ## What is the DOM?
 
 If you are creating an HTML file, you would write HTML directly like this:
@@ -22,7 +21,6 @@ You can think of this as producing some DOM data structure behind the scenes:
 ![](diagrams/dom.svg)
 
 The black boxes represent heavy-weight DOM objects with hundreds of attributes. And when any of them change, it can trigger expensive renders and reflows of page content.
-
 
 ## What is Virtual DOM?
 
@@ -47,7 +45,6 @@ You can think of `viewChairAlts ["seiza","chabudai"]` as producing some “Virtu
 
 The white boxes represent light-weight JavaScript objects. They only have the attributes you specify. Their creation can never cause renders or reflows. Point is, compared to DOM nodes, these are much cheaper to allocate!
 
-
 ## Render
 
 If we are always working with these virtual nodes in Elm, how does it get converted to the DOM we see on screen? When an Elm program starts, it goes like this:
@@ -60,7 +57,6 @@ Now that we have virtual nodes, we make an exact replica in the real DOM:
 ![](diagrams/render.svg)
 
 Great! But what about when things change? Redoing the whole DOM on every frame does not work, so what do we do instead?
-
 
 ## Diffing
 
@@ -77,7 +73,6 @@ It noticed that a third `li` was added. I marked it in green. Elm now knows exac
 This diffing process makes it possible to touch the DOM as little as possible. And if no differences are found, we do not need to touch the DOM at all! So this process helps minimize the renders and reflows that need to happen.
 
 But can we do even less work?
-
 
 ## `Html.Lazy`
 
@@ -101,7 +96,6 @@ One of the cool things about Elm is the “same input, same output” guarantee 
 > - Reference equality is used for records, lists, custom types, dictionaries, etc.
 >
 > Structural equality means that `4` is the same as `4` no matter how you produced those values. Reference equality means the actual pointer in memory has to be the same. Using reference equality is always cheap `O(1)`, even when the data structure has thousands or millions of entries. So this is mostly about making sure that using `lazy` will never slow your code down a bunch by accident. All the checks are super cheap!
-
 
 ## Usage
 
@@ -130,10 +124,8 @@ Notice that the text input, entries, and controls are all in separate lazy nodes
 
 It can also be useful to use lazy in long lists of items. In the TodoMVC app, it is all about adding entries to your todo list. You could conceivably have hundreds of entries, but they change very infrequently. This is a great candidate for laziness! By switching `viewEntry entry` to `lazy viewEntry entry` we can skip a bunch of allocation that is very rarely useful. So the second tip is **try to use lazy nodes on repeated structures where each individual item changes infrequently.**
 
-
 ## Summary
 
 Touching the DOM is way more expensive than anything that happens in a normal user interface. Based on my benchmarking, you can do whatever you want with fancy data structures, but in the end it only matters how much you successfully use `lazy`.
 
 On the next page, we will learn a technique to use `lazy` even more!
-

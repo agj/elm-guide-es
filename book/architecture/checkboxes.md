@@ -91,13 +91,12 @@ checkbox msg name =
 
 Now we have a highly configurable `checkbox` function. It takes two arguments to configure how it works: the message it produces on clicks and some text to show next to the checkbox. Now if we decide we want all checkboxes to have a certain `class`, we just add it in the `checkbox` function and it shows up everywhere! This is the essence of **reusable views** in Elm. Create helper functions!
 
-
 ## Comparing Reusable Views to Reusable Components
 
 We now have enough information to do a simple comparison of these approaches. Reusable views have a few major advantages over components:
 
-  - **It is just functions.** We are not doing anything special here. Functions have all the power we need, and they are very simple to create. It is the most basic building block of Elm!
+- **It is just functions.** We are not doing anything special here. Functions have all the power we need, and they are very simple to create. It is the most basic building block of Elm!
 
-  - **No parent-child communication.** If we had made a &ldquo;checkbox component&rdquo; we would have to figure out how to synchronize the state in the checkbox component with our overall model. &ldquo;That checkbox says notifications are on, but the model says they are off!&rdquo; Maybe we need a Flux store now? By using functions instead, we are able to have reuse in our view *without* disrupting our `Model` or `update`. They work exactly the same as before, no need to touch them!
+- **No parent-child communication.** If we had made a &ldquo;checkbox component&rdquo; we would have to figure out how to synchronize the state in the checkbox component with our overall model. &ldquo;That checkbox says notifications are on, but the model says they are off!&rdquo; Maybe we need a Flux store now? By using functions instead, we are able to have reuse in our view _without_ disrupting our `Model` or `update`. They work exactly the same as before, no need to touch them!
 
 This means we can always create reusable `view` code without changing our overall architecture or introducing any fancy ideas. Just write smaller functions. That sounds nice, but let’s see some more examples to make sure it is true!

@@ -4,7 +4,6 @@ So far we have been creating Elm programs with `Browser.element`, allowing us to
 
 In this chapter, we will learn how to create a “web app” with a bunch of different pages that all integrate nicely with each other, but we must start by controlling a single page.
 
-
 ## Control the Document
 
 The first step is to switch to starting programs with [`Browser.document`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#document):
@@ -29,7 +28,6 @@ type alias Document msg =
 ```
 
 This gives you control over the `<title>` and the `<body>` of the document. Perhaps your program downloads some data and that helps you determine a more specific title. Now you can just change it in your `view` function!
-
 
 ## Serve the Page
 

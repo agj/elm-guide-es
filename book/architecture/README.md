@@ -6,7 +6,6 @@ This architecture seems to emerge naturally in Elm. Rather than someone inventin
 
 So The Elm Architecture is easy in Elm, but it is useful in any front-end project. In fact, projects like Redux have been inspired by The Elm Architecture, so you may have already seen derivatives of this pattern. Point is, even if you ultimately cannot use Elm at work yet, you will get a lot out of using Elm and internalizing this pattern.
 
-
 ## The Basic Pattern
 
 Elm programs always look something like this:
@@ -17,14 +16,13 @@ The Elm program produces HTML to show on screen, and then the computer sends bac
 
 What happens within the Elm program though? It always breaks into three parts:
 
-  * **Model** &mdash; the state of your application
-  * **View** &mdash; a way to turn your state into HTML
-  * **Update** &mdash; a way to update your state based on messages
+- **Model** &mdash; the state of your application
+- **View** &mdash; a way to turn your state into HTML
+- **Update** &mdash; a way to update your state based on messages
 
 These three concepts are the core of **The Elm Architecture**.
 
 The next few examples are going to show how to use this pattern for user input, like buttons and text fields. It will make this much more concrete!
-
 
 ## Follow Along
 

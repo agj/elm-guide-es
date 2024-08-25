@@ -11,7 +11,6 @@ I would have a module for each page, centered around the `Model` type. Those mod
 
 Before we see some examples, I want to emphasize an important strategy.
 
-
 ## Do Not Plan Ahead
 
 Notice that my `Page` modules do not make any guesses about the future. I do not try to define modules that can be used in multiple places. I do not try to share any functions. This is on purpose!
@@ -22,7 +21,6 @@ By just starting with pages, it becomes much easier to see when things are **sim
 
 This works because the compiler makes it really easy to do huge refactors. If I realize I got something majorly wrong across 20 files, I just fix it.
 
-
 ## Examples
 
 You can see examples of this structure in the following open-source projects:
@@ -30,11 +28,9 @@ You can see examples of this structure in the following open-source projects:
 - [`elm-spa-example`](https://github.com/rtfeldman/elm-spa-example)
 - [`package.elm-lang.org`](https://github.com/elm/package.elm-lang.org)
 
-
 > ## Culture Shock
 >
 > Folks coming from JavaScript tend to bring habits, expectations, and anxieties that are specific to JavaScript. They are legitimately important in that context, but they can cause some pretty severe troubles when transferred to Elm.
->
 >
 > ### Defensive Instincts
 >
@@ -45,7 +41,6 @@ You can see examples of this structure in the following open-source projects:
 >
 > These defensive instincts are protecting you from problems that do not exist in Elm. Knowing this in your mind is different than knowing it in your gut though, and I have observed that JS folks often feel deeply uncomfortable when they see files pass the 400 or 600 or 800 line mark. **So I encourage you to push your limit on number of lines!** See how far you can go. Try using comment headers, try making helper functions, but keep it all in one file. Having this experience yourself is extremely valuable!
 >
->
 > ### MVC
 >
 > Some folks see The Elm Architecture and have the intuition to divide their code into separate modules for `Model`, `Update`, and `View`. Do not do this!
@@ -53,7 +48,6 @@ You can see examples of this structure in the following open-source projects:
 > It leads to unclear and debatable boundaries. What happens when `Post.estimatedReadTime` is used in both the `update` and `view` functions? Totally reasonable, but it does not clearly _belong_ to one or the other. Maybe you need a `Utils` module? Maybe it actually is a controller kind of thing? The resulting code tends to be hard to navigate because placing each function is now an [ontological](https://en.wikipedia.org/wiki/Ontology) question, and all of your colleagues have different theories. What is an `estimatedReadTime` really? What is its essence? Estimation? What would Richard think is its essence? Time?
 >
 > **If you build each module around a type, you rarely run into these kinds of questions.** You have a `Page.Home` module that contains your `Model`, `update`, and `view`. You write helper functions. You add a `Post` type eventually. You add an `estimatedReadTime` function. Maybe someday there are a bunch of helpers about that `Post` type, and maybe it is worth splitting into its own module. With this convention, you end up spending a lot less time considering and reconsidering module boundaries. I find that the code also comes out much clearer.
->
 >
 > ### Components
 >

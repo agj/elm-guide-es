@@ -25,7 +25,7 @@ type alias Model =
 type FontSize = Small | Medium | Large
 ```
 
-This means there are exactly three possible font sizes: `Small`, `Medium`, and `Large`. It is impossible to have any other value in our `fontSize` field. If you are coming from JavaScript, you know their alternative is to use strings or numbers and just hope that there is never a typo or mistake. You *could* use values like that in Elm, but why open yourself up to bugs for no reason?!
+This means there are exactly three possible font sizes: `Small`, `Medium`, and `Large`. It is impossible to have any other value in our `fontSize` field. If you are coming from JavaScript, you know their alternative is to use strings or numbers and just hope that there is never a typo or mistake. You _could_ use values like that in Elm, but why open yourself up to bugs for no reason?!
 
 > **Note:** You should always be looking for opportunities to use union types in your data. The best way to avoid invalid states is to make them impossible to represent in the first place!
 
@@ -134,15 +134,14 @@ viewPicker attributes options =
 
 And if we wanted even MORE flexibility, we could let people pass in attributes for each radio button too! There is really no end to what can be configured. You just add a bit more information to an argument.
 
-
 ## Too Much Reuse?
 
-In this case, we saw quite a few ways to write the same code. But which way is the *right* way to do it? A good rule to pick an API is **choose the absolute simplest thing that does everything you need**. Here are some scenarios that test this rule:
+In this case, we saw quite a few ways to write the same code. But which way is the _right_ way to do it? A good rule to pick an API is **choose the absolute simplest thing that does everything you need**. Here are some scenarios that test this rule:
 
-  1. There is the only radio button thing on your page. In that case, just make them! Do not worry about making a highly configurable and reusable function for radio buttons. Refactoring is easy in Elm, so wait for a legitimate need before doing that work!
+1. There is the only radio button thing on your page. In that case, just make them! Do not worry about making a highly configurable and reusable function for radio buttons. Refactoring is easy in Elm, so wait for a legitimate need before doing that work!
 
-  2. There are a couple radio button things on your page, all with the same styling. That is how the options on this guide look. This is a great case for sharing a view function. You may not even need to change any classes or add any custom attributes. If you do not need that, do not design for it! It is easy to add later.
+2. There are a couple radio button things on your page, all with the same styling. That is how the options on this guide look. This is a great case for sharing a view function. You may not even need to change any classes or add any custom attributes. If you do not need that, do not design for it! It is easy to add later.
 
-  3. There are a couple radio button things on your page, but they are very different. You could do an extremely flexible picker that lets you configure everything, but at some point, things that *look* similar are not actually similar enough for this to be worth it. So if you ever find yourself with tons of complex arguments configuring a view function, you may have overdone it on the reuse. I personally would prefer to have two chunks of *similar* view code that are both simple and easy to change than one chunk of view code that is complex and hard to understand.
+3. There are a couple radio button things on your page, but they are very different. You could do an extremely flexible picker that lets you configure everything, but at some point, things that _look_ similar are not actually similar enough for this to be worth it. So if you ever find yourself with tons of complex arguments configuring a view function, you may have overdone it on the reuse. I personally would prefer to have two chunks of _similar_ view code that are both simple and easy to change than one chunk of view code that is complex and hard to understand.
 
-Point is, there is no magic recipe here. The answer will depend on the particulars of your application, and you should always try to find the simplest approach. Sometimes that means sharing code. Sometimes it means writing *similar* code. It takes practice and experience to get good at this, so do not be afraid to experiment to find simpler ways!
+Point is, there is no magic recipe here. The answer will depend on the particulars of your application, and you should always try to find the simplest approach. Sometimes that means sharing code. Sometimes it means writing _similar_ code. It takes practice and experience to get good at this, so do not be afraid to experiment to find simpler ways!

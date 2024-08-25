@@ -2,7 +2,6 @@
 
 Elm has **modules** to help you grow your codebase in a nice way. On the most basic level, modules let you break your code into multiple files.
 
-
 ## Defining Modules
 
 Elm modules work best when you define them around a central type. Like how the `List` module is all about the `List` type. So say we want to build a module around a `Post` type for a blogging website. We can create something like this:
@@ -56,12 +55,11 @@ The only new syntax here is that `module Post exposing (..)` line at the very to
 
 > **Note:** If you forget to add a module declaration, Elm will use this one instead:
 >
->```elm
-module Main exposing (..)
-```
+> ```elm
+> module Main exposing (..)
+> ```
 >
 > This makes things easier for beginners working in just one file. They should not be confronted with the module system on their first day!
-
 
 ## Growing Modules
 
@@ -78,7 +76,6 @@ These heuristics are all about making helper functions within a single file. You
 To summarize, assume **similar** code is **unique** by default. (It usually is in user interfaces in the end!) If you see logic that is **the same** in different definitions, make some helper functions with appropriate comment headers. When you have a bunch of helper functions about a specific type, _consider_ making a new module. If a new module makes your code clearer, great! If not, go back. More files is not inherently simpler or clearer.
 
 > **Note:** One of the most common ways to get tripped up with modules is when something that was once **the same** becomes **similar** later on. Very common, especially in user interfaces! Folks will often try to create a Frankenstein function that handles all the different cases. Adding more arguments. Adding more _complex_ arguments. The better path is to accept that you now have two **unique** situations and copy the code into both places. Customize it exactly how you need. Then see if any of the resulting logic is **the same**. If so, move it out into helpers. **Your long functions should split into multiple smaller functions, not grow longer and more complex!**
-
 
 ## Using Modules
 

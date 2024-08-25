@@ -10,7 +10,6 @@ type User
 
 Regulars have a name and age, whereas visitors only have a name. So we have our custom type, but how do we actually use it?
 
-
 ## `case`
 
 Say we want a `toName` function that decides on a name to show for each `User`. We need to use a `case` expression:
@@ -32,7 +31,6 @@ toName user =
 The `case` expression allows us to branch based on which variant we happen to see, so whether we see Thomas or Kate, we always know how to show their name.
 
 And if we try invalid arguments like `toName (Visitar "kate95")` or `toName Anonymous`, the compiler tells us about it immediately. This means many simple mistakes can be fixed in seconds, rather than making it to users and costing a lot more time overall.
-
 
 ## Wild Cards
 

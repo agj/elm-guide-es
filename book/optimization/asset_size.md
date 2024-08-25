@@ -10,7 +10,6 @@ A great way to improve is to send fewer bits. For example, if a 122kb asset can 
 
 Elm makes it pretty easy to get all this set up for your project. No need for some complex build system. It is just two terminal commands!
 
-
 ## Instructions
 
 Step one is to compile with the `--optimize` flag. This does things like shortening record field names.
@@ -29,7 +28,6 @@ After this you will have an `elm.js` and a smaller `elm.min.js` file!
 > **Note 1:** `uglifyjs` is called twice there. First to `--compress` and second to `--mangle`. This is necessary! Otherwise `uglifyjs` will ignore our `pure_funcs` flag.
 >
 > **Note 2:** If the `uglifyjs` command is not available in your terminal, you can run the command `npm install uglify-js --global` to download it. If you do not have `npm` either, you can get it with [nodejs](https://nodejs.org/).
-
 
 ## Scripts
 
@@ -65,7 +63,6 @@ Gzipped size:     9148 bytes
 Pretty neat! We only need to send about 9kb to get this program to people!
 
 The important commands here are `elm` and `uglifyjs` which work on any platform, so it should not be too tough to do something similar on Windows.
-
 
 ## Advice
 

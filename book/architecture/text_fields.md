@@ -64,7 +64,6 @@ view model =
 
 This code is a slight variant of the previous example. You set up a model. You define some messages. You say how to `update`. You make your `view`. The difference is just in how we filled this skeleton in. Let's walk through that!
 
-
 ## Model
 
 I always start by guessing at what my `Model` should be. We know we have to keep track of whatever the user has typed into the text field. We need that information to know how to render the reversed text. So we go with this:
@@ -77,8 +76,7 @@ type alias Model =
 
 This time I chose to represent the model as a record. The record stores the user input in the `content` field.
 
-> **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Sure! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
-
+> **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Sure! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want _two_ text inputs, we will have to do much less fiddling around.
 
 ## View
 
@@ -108,7 +106,6 @@ Typing in "bard" this would produce four messages:
 
 These would be fed into our `update` function.
 
-
 ## Update
 
 There is only one kind of message in this program, so our `update` only has to handle one case:
@@ -136,5 +133,3 @@ We need to track this information explicitly in our model, otherwise there is no
 > **Exercise:** Go to the example in the online editor [here](https://elm-lang.org/examples/text-fields) and show the length of the `content` in your `view` function. Use the [`String.length`](https://package.elm-lang.org/packages/elm/core/latest/String#length) function!
 >
 > **Note:** If you want more info on exactly how the `Change` values are working in this program, jump ahead to the sections on [custom types](/types/custom_types.html) and [pattern matching](/types/pattern_matching.html).
-
-

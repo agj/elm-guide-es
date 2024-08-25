@@ -10,7 +10,6 @@ One of the most important techniques in Elm programming is to make **the possibl
 
 In pursuit of this goal, I have found it helpful to understand the relationship between types and sets. It sounds like a stretch, but it really helps develop your mindset!
 
-
 ## Sets
 
 You can think of types as a set of values.
@@ -22,7 +21,6 @@ You can think of types as a set of values.
 - `String` is the set `{ "", "a", "aa", "aaa" ... "hello" ... }`
 
 So when you say `x : Bool` it is like saying `x` is in the `{ True, False }` set.
-
 
 ## Cardinality
 
@@ -37,7 +35,6 @@ Some interesting things happen when you start figuring out how many values are i
 This gets more interesting when we start thinking about types like `(Bool, Bool)` that combine sets together.
 
 > **Note:** The cardinality for `Int` and `Float` are actually smaller than infinity. Computers need to fit the numbers into a fixed amount of bits (as described [here](/appendix/types_as_bits.html)) so it is more like cardinality(`Int32`) = 2^32 and cardinality(`Float32`) = 2^32. The point is just that it is a lot.
-
 
 ## Multiplication (Tuples and Records)
 
@@ -61,7 +58,6 @@ I personally really like the idea of having two infinities. One wasn’t enough?
 > - cardinality(`(Bool, Color)`) = cardinality(`{ active : Bool, color : Color }`)
 >
 > And if you define `type Point = Point Float Float` then cardinality(`Point`) is equivalent to cardinality(`(Float, Float)`). It is all multiplication!
-
 
 ## Addition (Custom Types)
 
@@ -102,7 +98,6 @@ Looking at custom types this way helps us see when two types are equivalent. For
 
 In other words, I write a couple lines of code that are _similar_ to other code, but it gives me a level of clarity and control that is extremely valuable for large code bases and teams.
 
-
 ## Who Cares?
 
 Thinking of “types as sets” helps explain an important class of bugs: **invalid data**. For example, say we want to represent the color of a traffic light. The set of valid values are { red, yellow, green } but how do we represent that in code? Here are three different approaches:
@@ -119,13 +114,11 @@ As your program changes, the set of possible values in code may start to diverge
 
 **When you start thinking this way, you end up needing fewer tests, yet having more reliable code.** You start using fewer dependencies, yet accomplishing things more quickly. Similarly, someone skilled with a knife probably will not buy a [SlapChop](https://www.slapchop.com/). There is definitely a place for blenders and food processors, but it is smaller than you might think. No one runs ads about how you can be independent and self-sufficient without any serious downsides. No money in that!
 
-
 > ## Aside on Language Design
 >
 > Thinking of types as sets like this can also be helpful in explaining why a language would feel “easy” or “restrictive” or “error-prone” to some people. For example:
 >
 > - **Java** &mdash; There are primitive values like `Bool` and `String`. From there, you can create classes with a fixed set of fields of different types. This is much like records in Elm, allowing you to multiply cardinalities. But it is quite difficult to do addition. You can do it with subtyping, but it is quite an elaborate process. So where `Result Bool Color` is easy in Elm, it is pretty tough in Java. I think some people find Java “restrictive” because designing a type with cardinality 5 is quite difficult, often seeming like it is not worth the trouble.
->
 > - **JavaScript** &mdash; Again, there are primitive values like `Bool` and `String`. From there you can create objects with a dynamic set of fields, allowing you to multiply cardinalities. This is much more lightweight than creating classes. But like Java, doing addition is not particularly easy. For example, you can simulate `Maybe Int` with objects like `{ tag: "just", value: 42 }` and `{ tag: "nothing" }`, but this is really still multiplication of cardinality. This makes it quite difficult to exactly match the set of valid values in real life. So I think people find JavaScript “easy” because designing a type with cardinality (∞ × ∞ × ∞) is super easy and that can cover pretty much anything, but other people find it “error-prone” because designing a type with cardinality 5 is not really possible, leaving lots of space for invalid data.
 >
 > Interestingly, some imperative languages have custom types! Rust is a great example. They call them [enums](https://doc.rust-lang.org/book/second-edition/ch06-01-defining-an-enum.html) to build on the intuition folks may have from C and Java. So in Rust, addition of cardinalities is just as easy as in Elm, and it brings all the same benefits!

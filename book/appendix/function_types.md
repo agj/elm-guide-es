@@ -12,7 +12,6 @@ Why so many arrows? What is going on here?!
 [core]: https://package.elm-lang.org/packages/elm/core/latest/
 [html]: https://package.elm-lang.org/packages/elm/html/latest/
 
-
 ## Hidden Parentheses
 
 It starts to become clearer when you see all the parentheses. For example, it is also valid to write the type of `String.repeat` like this:
@@ -66,7 +65,6 @@ We _could_ always put the parentheses to indicate that this is what is really ha
 
 Fine, but what is the point of this feature in the first place? Why not do `(Int, String) -> String` and give all the arguments at once?
 
-
 ## Partial Application
 
 It is quite common to use the `List.map` function in Elm programs:
@@ -104,7 +102,6 @@ In other words, **if your partial application is getting long, make it a helper 
 
 > **Note:** If you are ending up with “too many” functions when you use this advice, I recommend using comments like `-- REDUPLICATION` to give an overview of the next five or ten functions. Old school! I have shown this with `-- UPDATE` and `-- VIEW` comments in previous examples, but it is a generic technique that I use in all my code. And if you are worried about files getting too long with this advice, I recommend watching [The Life of a File](https://youtu.be/XpDsk374LDE)!
 
-
 ## Pipelines
 
 Elm also has a [pipe operator][pipe] that relies on partial application. For example, say we have a `sanitize` function for turning user input into integers:
@@ -134,4 +131,3 @@ This is neat because it allows a “left-to-right” reading that many people li
 > **Note:** I personally prefer the `BEFORE`, but perhaps that is just because I learned functional programming in languages without pipes!
 
 [pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|&gt;
-
