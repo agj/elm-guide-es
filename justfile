@@ -11,6 +11,10 @@ build: install build-repl
     pnpm exec honkit build
     cp favicon.ico _book/gitbook/images/favicon.ico
 
+# Da formato estándar a los archivos.
+format:
+    dprint fmt
+
 [private]
 install:
     pnpm install
