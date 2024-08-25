@@ -7,48 +7,56 @@ Elm has **modules** to help you grow your codebase in a nice way. On the most ba
 Elm modules work best when you define them around a central type. Like how the `List` module is all about the `List` type. So say we want to build a module around a `Post` type for a blogging website. We can create something like this:
 
 ```elm
-module Post exposing (Post, estimatedReadTime, encode, decoder)
+module Post exposing (Post, decoder, encode, estimatedReadTime)
 
 import Json.Decode as D
 import Json.Encode as E
 
 
+
 -- POST
 
+
 type alias Post =
-  { title : String
-  , author : String
-  , content : String
-  }
+    { title : String
+    , author : String
+    , content : String
+    }
+
 
 
 -- READ TIME
 
+
 estimatedReadTime : Post -> Float
 estimatedReadTime post =
-  toFloat (wordCount post) / 220
+    toFloat (wordCount post) / 220
+
 
 wordCount : Post -> Int
 wordCount post =
-  List.length (String.words post.content)
+    List.length (String.words post.content)
+
 
 
 -- JSON
 
+
 encode : Post -> E.Value
 encode post =
-  E.object
-    [ ("title", E.string post.title)
-    , ("author", E.string post.author)
-    , ("content", E.string post.content)
-    ]
+    E.object
+        [ ( "title", E.string post.title )
+        , ( "author", E.string post.author )
+        , ( "content", E.string post.content )
+        ]
+
 
 decoder : D.Decoder Post
 decoder =
-  D.map3 Post
-    (D.field "title" D.string)
-    (D.field "author" D.string)
-    (D.field "content" D.string)
+    D.map3 Post
+        (D.field "title" D.string)
+        (D.field "author" D.string)
+        (D.field "content" D.string)
 ```
 
 The only new syntax here is that `module Post exposing (..)` line at the very top. That means the module is known as `Post` and only certain values are available to outsiders. As written, the `wordCount` function is only available _within_ the `Post` module. Hiding functions like this is one of the most important techniques in Elm!
@@ -81,6 +89,7 @@ To summarize, assume **similar** code is **unique** by default. (It usually is i
 
 It is customary in Elm for all of your code to live in the `src/` directory. That is the default for [`elm.json`](https://github.com/elm/compiler/blob/0.19.0/docs/elm.json/application.md) even. So our `Post` module would need to live in a file named `src/Post.elm`. From there, we can `import` a module and use its exposed values. There are four ways to do that:
 
+<!-- prettier-ignore-start -->
 ```elm
 import Post
 -- Post.Post, Post.estimatedReadTime, Post.encode, Post.decoder
@@ -96,5 +105,6 @@ import Post as P exposing (Post, estimatedReadTime)
 -- Post, estimatedReadTime
 -- P.Post, P.estimatedReadTime, P.encode, P.decoder
 ```
+<!-- prettier-ignore-end -->
 
 I recommend using `exposing` pretty rarely. Ideally on zero or one of your imports. Otherwise, it can start getting hard to figure out where things came from when reading though. “Wait, where is `filterPostBy` from again? What arguments does it take?” It gets harder and harder to read through code as you add more `exposing`. I tend to use it for `import Html exposing (..)` but not on anything else. For everything else, I recommend using the standard `import` and maybe using `as` if you have a particularly long module name!

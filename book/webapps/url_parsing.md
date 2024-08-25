@@ -26,31 +26,33 @@ Say we have an art website where the following addresses should be valid:
 So we have topic pages, blog posts, user information, and a way to look up individual user comments. We would use the [`Url.Parser`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser) module to write a URL parser like this:
 
 ```elm
-import Url.Parser exposing (Parser, (</>), int, map, oneOf, s, string)
+import Url.Parser exposing ((</>), Parser, int, map, oneOf, s, string)
+
 
 type Route
-  = Topic String
-  | Blog Int
-  | User String
-  | Comment String Int
+    = Topic String
+    | Blog Int
+    | User String
+    | Comment String Int
+
 
 routeParser : Parser (Route -> a) a
 routeParser =
-  oneOf
-    [ map Topic   (s "topic" </> string)
-    , map Blog    (s "blog" </> int)
-    , map User    (s "user" </> string)
-    , map Comment (s "user" </> string </> s "comment" </> int)
-    ]
+    oneOf
+        [ map Topic (s "topic" </> string)
+        , map Blog (s "blog" </> int)
+        , map User (s "user" </> string)
+        , map Comment (s "user" </> string </> s "comment" </> int)
+        ]
+
+
 
 -- /topic/pottery        ==>  Just (Topic "pottery")
 -- /topic/collage        ==>  Just (Topic "collage")
 -- /topic/               ==>  Nothing
-
 -- /blog/42              ==>  Just (Blog 42)
 -- /blog/123             ==>  Just (Blog 123)
 -- /blog/mosaic          ==>  Nothing
-
 -- /user/tom/            ==>  Just (User "tom")
 -- /user/sue/            ==>  Just (User "sue")
 -- /user/bob/comment/42  ==>  Just (Comment "bob" 42)
@@ -75,19 +77,23 @@ Now say we have a personal blog where addresses like this are valid:
 In this case we have individual blog posts and a blog overview with an optional query parameter. We need to add the [`Url.Parser.Query`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser-Query) module to write our URL parser this time:
 
 ```elm
-import Url.Parser exposing (Parser, (</>), (<?>), int, map, oneOf, s, string)
+import Url.Parser exposing ((</>), (<?>), Parser, int, map, oneOf, s, string)
 import Url.Parser.Query as Query
 
+
 type Route
-  = BlogPost Int String
-  | BlogQuery (Maybe String)
+    = BlogPost Int String
+    | BlogQuery (Maybe String)
+
 
 routeParser : Parser (Route -> a) a
 routeParser =
-  oneOf
-    [ map BlogPost  (s "blog" </> int </> string)
-    , map BlogQuery (s "blog" <?> Query.string "q")
-    ]
+    oneOf
+        [ map BlogPost (s "blog" </> int </> string)
+        , map BlogQuery (s "blog" <?> Query.string "q")
+        ]
+
+
 
 -- /blog/14/whale-facts  ==>  Just (BlogPost 14 "whale-facts")
 -- /blog/14              ==>  Nothing
@@ -116,11 +122,14 @@ We can use the [`fragment`](https://package.elm-lang.org/packages/elm/url/latest
 
 ```elm
 type alias Docs =
-  (String, Maybe String)
+    ( String, Maybe String )
+
 
 docsParser : Parser (Docs -> a) a
 docsParser =
-  map Tuple.pair (string </> fragment identity)
+    map Tuple.pair (string </> fragment identity)
+
+
 
 -- /Basics     ==>  Just ("Basics", Nothing)
 -- /Maybe      ==>  Just ("Maybe", Nothing)

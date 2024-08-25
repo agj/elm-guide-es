@@ -91,9 +91,10 @@ Now it is important to remember that **this can be overused!** It is convenient 
 ```elm
 -- List.map reduplicate ["ha","choo"]
 
+
 reduplicate : String -> String
 reduplicate string =
-  String.repeat 2 string
+    String.repeat 2 string
 ```
 
 This case is really simple, but (1) it is now clearer that I am interested in the linguistic phenomenon known as [reduplication](https://en.wikipedia.org/wiki/Reduplication) and (2) it will be quite easy to add new logic to `reduplicate` as my program evolves. Maybe I want [shm-reduplication](https://en.wikipedia.org/wiki/Shm-reduplication) support at some point?
@@ -108,20 +109,24 @@ Elm also has a [pipe operator][pipe] that relies on partial application. For exa
 
 ```elm
 -- BEFORE
+
+
 sanitize : String -> Maybe Int
 sanitize input =
-  String.toInt (String.trim input)
+    String.toInt (String.trim input)
 ```
 
 We can rewrite it like this:
 
 ```elm
 -- AFTER
+
+
 sanitize : String -> Maybe Int
 sanitize input =
-  input
-    |> String.trim
-    |> String.toInt
+    input
+        |> String.trim
+        |> String.toInt
 ```
 
 So in this “pipeline” we pass the input to `String.trim` and then that gets passed along to `String.toInt`.
@@ -130,4 +135,4 @@ This is neat because it allows a “left-to-right” reading that many people li
 
 > **Note:** I personally prefer the `BEFORE`, but perhaps that is just because I learned functional programming in languages without pipes!
 
-[pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|&gt;
+[pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|>
