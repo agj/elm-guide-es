@@ -4,3 +4,5 @@
 node_modules
 elm-stuff
 .direnv
+.vscode
+.helix
