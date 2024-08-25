@@ -1,4 +1,6 @@
+/_book
+/repl/assets/repl.js
+
 node_modules
 elm-stuff
 .direnv
-_book

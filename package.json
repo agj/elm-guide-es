@@ -1,6 +1,8 @@
 {
 	"dependencies": {
-		"gitbook-cli": "2.3.2",
-		"gitbook-plugin-elm-repl": "link:repl"
+		"gitbook-plugin-bulk-redirect": "^0.2.1",
+		"gitbook-plugin-elm-repl": "link:repl",
+		"honkit": "^5.1.4",
+		"honkit-plugin-youtube": "^0.0.14"
 	}
 }

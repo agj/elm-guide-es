@@ -19,6 +19,7 @@
             nodePackages.pnpm
             nodePackages.uglify-js
             nodejs-slim_22
+            just
           ];
         };
       }
