@@ -46,7 +46,7 @@ elm make src/Main.elm --output=main.js
 This will produce `main.js` which you can load from a custom HTML file like this:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
