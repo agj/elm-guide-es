@@ -24,6 +24,7 @@ This can be handy in two main scenarios: partial functions and optional fields.
 
 Sometimes you want a function that gives an answer for some inputs, but not others. Many people run into this with [`String.toFloat`][toFloat] when trying to convert user input into numbers. Let's see it in action:
 
+<!-- dprint-ignore-start -->
 {% replWithTypes %}
 [
   {
@@ -43,6 +44,7 @@ Sometimes you want a function that gives an answer for some inputs, but not othe
   }
 ]
 {% endreplWithTypes %}
+<!-- dprint-ignore-end -->
 
 Try calling `String.toFloat` with other strings to see what happens ⬆️
 

@@ -45,6 +45,7 @@ The data is attached directly to the variant, so there is no need for the record
 
 Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own custom type it is no problem. Let's add some associated data to the `Regular` variant in an interactive example:
 
+<!-- dprint-ignore-start -->
 {% replWithTypes %}
 [
   {
@@ -73,6 +74,7 @@ Another benefit of this approach is that each variant can have different associa
   }
 ]
 {% endreplWithTypes %}
+<!-- dprint-ignore-end -->
 
 Try defining a `Regular` visitor with a name and age ⬆️
 

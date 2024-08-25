@@ -48,6 +48,7 @@ The main benefit of using a type alias for this is when we write the type annota
 
 When you create a type alias specifically for a record, it also generates a **record constructor**. So if we define a `User` type alias, we can start building records like this:
 
+<!-- dprint-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -71,6 +72,7 @@ When you create a type alias specifically for a record, it also generates a **re
 	}
 ]
 {% endreplWithTypes %}
+<!-- dprint-ignore-end -->
 
 Try creating another user or creating a type alias of your own ⬆️
 

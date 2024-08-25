@@ -12,6 +12,7 @@ La unidad más básica en Elm se llama un **valor**. Todos estos son valores: `4
 
 Veamos primero los números.
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -21,6 +22,7 @@ Veamos primero los números.
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Todos los ejemplos en esta página son interactivos. Si apretas sobre esta caja negra ⬆️ vas a ver que el cursor de texto va a empezar a pestañear. Escribe `2 + 2` y apreta ENTER. Deberías ver que aparece `4` como resultado. Recuerda que puedes interactuar de la misma forma con todos los demás ejemplos en este documento.
 
@@ -28,6 +30,7 @@ Prueba escribir algo como `30 * 60 * 1000` o `2 ^ 4`. Verás que funciona igual 
 
 Está bien hacer aritmética, pero es algo sorprendentemente poco común en la mayoría de programas que uno escribe. Es mucho más frecuente manipular textos, lo que en informática se llama técnicamente **string**. Algo así:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -42,6 +45,7 @@ Está bien hacer aritmética, pero es algo sorprendentemente poco común en la m
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Prueba unir varios strings con el operador `(++)` ⬆️
 
@@ -60,6 +64,7 @@ Una **función** es una forma de transformar valores. Éstas toman algunos valor
 
 Por ejemplo, esta es una función `greet` que recibe un nombre y dice “hola”:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -80,6 +85,7 @@ Por ejemplo, esta es una función `greet` que recibe un nombre y dice “hola”
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Trata saludar a alguna otra persona, como a `"Stokely"` o a `"Kwame"` ⬆️
 
@@ -87,6 +93,7 @@ Los valores que le pasas a la función se suelen llamar **argumentos**, así que
 
 Bien, ahora que terminamos las formalidades, ¿qué te parece si probamos una función `madlib` que recibe _dos_ argumentos?
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -107,6 +114,7 @@ Bien, ahora que terminamos las formalidades, ¿qué te parece si probamos una fu
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Intenta darle dos argumentos a la función `madlib` ⬆️
 
@@ -129,6 +137,7 @@ Cuando necesitas comportamiento condicional en Elm, puedes usar una expresión `
 
 Creemos una nueva función `greet` que es adecuadamente respetuosa con el expresidente Abraham Lincoln.
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -149,6 +158,7 @@ Creemos una nueva función `greet` que es adecuadamente respetuosa con el expres
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Probablemente hay más casos que podríamos cubrir, pero por ahora, con esto basta.
 
@@ -161,6 +171,7 @@ Una lista puede contener muchos valores. Dichos valores deben tener todos el mis
 
 [list]: https://package.elm-lang.org/packages/elm/core/latest/List
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -208,6 +219,7 @@ Una lista puede contener muchos valores. Dichos valores deben tener todos el mis
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Prueba construir tu propia lista, y usa funciones como `List.length` ⬆️
 
@@ -218,6 +230,7 @@ Prueba construir tu propia lista, y usa funciones como `List.length` ⬆️
 
 Las tuplas son otra estructura de datos muy útil. Una tupla puede contener dos o tres valores, y cada valor puede tener cualquier tipo. Un uso común es para devolver más de un valor desde una función. La siguiente función recibe un nombre y devuelve un mensaje al usuario:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -233,6 +246,7 @@ Las tuplas son otra estructura de datos muy útil. Una tupla puede contener dos 
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Es una estructura muy útil, pero cuando las cosas se ponen más complicadas, es mejor usar registros en vez de tuplas.
 
@@ -243,6 +257,7 @@ Un **registro** puede contener muchos valores, y cada valor lleva un nombre asoc
 
 Este es un registro que representa al economista inglés John A. Hobson:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -258,6 +273,7 @@ Este es un registro que representa al economista inglés John A. Hobson:
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Definimos un registro con tres **campos** que contienen información sobre John, específicamente su nombre y edad.
 
@@ -265,6 +281,7 @@ Prueba recuperar otros campos del registro, como `john.age` ⬆️
 
 También puedes recuperar campos de un registro usando funciones de acceso:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -285,9 +302,11 @@ También puedes recuperar campos de un registro usando funciones de acceso:
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 También es útil **actualizar** valores en un registro:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -308,6 +327,7 @@ También es útil **actualizar** valores en un registro:
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Si intentamos leer en voz alta las expresiones de arriba, diríamos algo como “Quiero una versión de John cuyo apellido es Adams”, o “cuya edad es 22”.
 
@@ -315,6 +335,7 @@ Nótese que al actualizar los campos de `john`, estamos creando un registro comp
 
 Dicho esto, una función que actualiza la edad quedaría así:
 
+<!-- dprint-ignore-start -->
 {% repl %}
 [
 	{
@@ -336,5 +357,6 @@ Dicho esto, una función que actualiza la edad quedaría así:
 	}
 ]
 {% endrepl %}
+<!-- dprint-ignore-end -->
 
 Actualizar campos en registros es algo muy común, así que vamos a ver muchos más ejemplos en la próxima sección.
