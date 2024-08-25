@@ -6,7 +6,7 @@ In the [Core Language](/core_language.html) section of this book, we went throug
 
 Let's enter some simple expressions and see what happens:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -26,7 +26,7 @@ Let's enter some simple expressions and see what happens:
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 Click on this black box ⬆️ and the cursor should start blinking. Type in `3.1415` and press the ENTER key. It should print out `3.1415` followed by the type `Float`.
 
@@ -39,7 +39,7 @@ Okay, but what is going on here exactly? Each entry shows value along with what 
 
 Elm is able to figure out the type of any value you enter! Let's see what happens with lists:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -54,7 +54,7 @@ Elm is able to figure out the type of any value you enter! Let's see what happen
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 You can read these types as:
 
@@ -67,7 +67,7 @@ The **type** is a rough description of the particular value we are looking at.
 
 Let's see the type of some functions:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -77,13 +77,13 @@ Let's see the type of some functions:
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 Try entering `round` or `sqrt` to see some other function types ⬆️
 
 The `String.length` function has type `String -> Int`. This means it _must_ take in a `String` argument, and it will definitely return an `Int` value. So let's try giving it an argument:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -93,7 +93,7 @@ The `String.length` function has type `String -> Int`. This means it _must_ take
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 So we start with a `String -> Int` function and give it a `String` argument. This results in an `Int`.
 
@@ -101,7 +101,7 @@ What happens when you do not give a `String` though? Try entering `String.length
 
 You will find that a `String -> Int` function _must_ get a `String` argument!
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 > **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
 >
 > {% replWithTypes %}
@@ -115,7 +115,7 @@ You will find that a `String -> Int` function _must_ get a `String` argument!
 {% endreplWithTypes %}
 >
 > Giving two arguments like `String.repeat 3 "ha"` will produce `"hahaha"`. It works to think of `->` as a weird way to separate arguments, but I explain the real reasoning [here](/appendix/function_types.md). It is pretty neat!
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 ## Type Annotations
 
@@ -155,7 +155,7 @@ People can make mistakes in type annotations though, so what happens if the anno
 
 As you look through more Elm code, you will start to see type annotations with lower-case letters in them. A common example is the `List.length` function:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -165,11 +165,11 @@ As you look through more Elm code, you will start to see type annotations with l
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 Notice that lower-case `a` in the type? That is called a **type variable**. It can vary depending on how [`List.length`][length] is used:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -189,11 +189,11 @@ Notice that lower-case `a` in the type? That is called a **type variable**. It c
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 We just want the length, so it does not matter what is in the list. So the type variable `a` is saying that we can match any type. Let&rsquo;s look at another common example:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -213,7 +213,7 @@ We just want the length, so it does not matter what is in the list. So the type 
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 Again, the type variable `a` can vary depending on how [`List.reverse`][reverse] is used. But in this case, we have an `a` in the argument and in the result. This means that if you give a `List Int` you must get a `List Int` as well. Once we decide what `a` is, that’s what it is everywhere.
 
@@ -226,7 +226,7 @@ Again, the type variable `a` can vary depending on how [`List.reverse`][reverse]
 
 There is a special variant of type variables in Elm called **constrained** type variables. The most common example is the `number` type. The [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) function uses it:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -236,7 +236,7 @@ There is a special variant of type variables in Elm called **constrained** type 
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 Try expressions like `negate 3.1415` and `negate (round 3.1415)` and `negate "hi"` ⬆️
 

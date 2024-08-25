@@ -22,7 +22,7 @@ String.repeat : Int -> (String -> String)
 
 It is a function that takes an `Int` and then produces _another_ function. Let's see this in action:
 
-<!-- dprint-ignore-start -->
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -57,7 +57,7 @@ It is a function that takes an `Int` and then produces _another_ function. Let's
 	}
 ]
 {% endreplWithTypes %}
-<!-- dprint-ignore-end -->
+<!-- prettier-ignore-end -->
 
 So conceptually, **every function accepts one argument.** It may return another function that accepts one argument. Etc. At some point it will stop returning functions.
 

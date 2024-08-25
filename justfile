@@ -13,7 +13,7 @@ build: install build-repl
 
 # Da formato estándar a los archivos.
 format:
-    dprint fmt
+    prettier '**/*.{md,json}' --write
 
 [private]
 install:

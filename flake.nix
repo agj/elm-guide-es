@@ -15,10 +15,10 @@
       in {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            dprint
             elmPackages.elm
             just
             nodePackages.pnpm
+            nodePackages.prettier
             nodePackages.uglify-js
             nodejs-slim_22
           ];
