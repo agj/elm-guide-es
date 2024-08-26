@@ -15,6 +15,11 @@ build: install build-repl
 format:
     prettier '**/*.{md,json}' --write
 
+# Verifica que todo funcione y que los archivos estén formateados.
+check:
+    pnpm exec honkit build
+    prettier '**/*.{md,json}' --check
+
 # Publica en Github Pages.
 deploy: build
     pnpm exec gh-pages --dist ./_book
