@@ -15,6 +15,10 @@ build: install build-repl
 format:
     prettier '**/*.{md,json}' --write
 
+# Publica en Github Pages.
+deploy: build
+    pnpm exec gh-pages --dist ./_book
+
 [private]
 install:
     pnpm install
