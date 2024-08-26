@@ -1,0 +1,924 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Custom Elements · An Introduction to Elm</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 5.1.4">
+        <meta name="author" content="Evan Czaplicki">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="limits.html" />
+    
+    
+    <link rel="prev" href="ports.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../core_language.html">
+            
+                <a href="../core_language.html">
+            
+                    
+                    Core Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../architecture/">
+            
+                <a href="../architecture/">
+            
+                    
+                    The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../architecture/buttons.html">
+            
+                <a href="../architecture/buttons.html">
+            
+                    
+                    Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../architecture/text_fields.html">
+            
+                <a href="../architecture/text_fields.html">
+            
+                    
+                    Text Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../architecture/forms.html">
+            
+                <a href="../architecture/forms.html">
+            
+                    
+                    Forms
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../types/">
+            
+                <a href="../types/">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../types/reading_types.html">
+            
+                <a href="../types/reading_types.html">
+            
+                    
+                    Reading Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../types/type_aliases.html">
+            
+                <a href="../types/type_aliases.html">
+            
+                    
+                    Type Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../types/custom_types.html">
+            
+                <a href="../types/custom_types.html">
+            
+                    
+                    Custom Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../types/pattern_matching.html">
+            
+                <a href="../types/pattern_matching.html">
+            
+                    
+                    Pattern Matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../error_handling/">
+            
+                <a href="../error_handling/">
+            
+                    
+                    Error Handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../error_handling/maybe.html">
+            
+                <a href="../error_handling/maybe.html">
+            
+                    
+                    Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../error_handling/result.html">
+            
+                <a href="../error_handling/result.html">
+            
+                    
+                    Result
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../effects/">
+            
+                <a href="../effects/">
+            
+                    
+                    Commands and Subscriptions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../effects/http.html">
+            
+                <a href="../effects/http.html">
+            
+                    
+                    HTTP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../effects/json.html">
+            
+                <a href="../effects/json.html">
+            
+                    
+                    JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../effects/random.html">
+            
+                <a href="../effects/random.html">
+            
+                    
+                    Random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../effects/time.html">
+            
+                <a href="../effects/time.html">
+            
+                    
+                    Time
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../install/">
+            
+                <a href="../install/">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../install/editor.html">
+            
+                <a href="../install/editor.html">
+            
+                    
+                    Code Editor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../install/elm.html">
+            
+                <a href="../install/elm.html">
+            
+                    
+                    Elm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    JavaScript Interop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="flags.html">
+            
+                <a href="flags.html">
+            
+                    
+                    Flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="ports.html">
+            
+                <a href="ports.html">
+            
+                    
+                    Ports
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8.3" data-path="custom_elements.html">
+            
+                <a href="custom_elements.html">
+            
+                    
+                    Custom Elements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="limits.html">
+            
+                <a href="limits.html">
+            
+                    
+                    Limits
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../webapps/">
+            
+                <a href="../webapps/">
+            
+                    
+                    Web Apps
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../webapps/navigation.html">
+            
+                <a href="../webapps/navigation.html">
+            
+                    
+                    Navigation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../webapps/url_parsing.html">
+            
+                <a href="../webapps/url_parsing.html">
+            
+                    
+                    URL Parsing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../webapps/modules.html">
+            
+                <a href="../webapps/modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../webapps/structure.html">
+            
+                <a href="../webapps/structure.html">
+            
+                    
+                    Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../optimization/">
+            
+                <a href="../optimization/">
+            
+                    
+                    Optimization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../optimization/lazy.html">
+            
+                <a href="../optimization/lazy.html">
+            
+                    
+                    Html.lazy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../optimization/keyed.html">
+            
+                <a href="../optimization/keyed.html">
+            
+                    
+                    Html.keyed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../optimization/asset_size.html">
+            
+                <a href="../optimization/asset_size.html">
+            
+                    
+                    Minification
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../next_steps.html">
+            
+                <a href="../next_steps.html">
+            
+                    
+                    Next Steps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    Appendix
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../appendix/types_as_sets.html">
+            
+                <a href="../appendix/types_as_sets.html">
+            
+                    
+                    Types as Sets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../appendix/types_as_bits.html">
+            
+                <a href="../appendix/types_as_bits.html">
+            
+                    
+                    Types as Bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../appendix/function_types.html">
+            
+                <a href="../appendix/function_types.html">
+            
+                    
+                    Function Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Custom Elements</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="custom-elements">Custom Elements</h1>
+<p>On the last few pages, we have seen (1) how to start Elm programs from JavaScript, (2) how to pass data in as flags on initialization, and (3) how to send messages between Elm and JS with ports. But guess what people? There is another way to do interop!</p>
+<p>Browsers seem to be supporting <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements" target="_blank">custom elements</a> more and more, and that turns out to be quite helpful for embedding JS into Elm programs.</p>
+<p>Here is a <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">minimal example</a> of how to use custom elements to do some localization and internationalization.</p>
+<h2 id="creating-custom-elements">Creating Custom Elements</h2>
+<p>Say we want to localize dates, but that is not accessible in Elm core packages yet. Maybe you want to write a function that localizes dates:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">//</span>
+<span class="hljs-comment">//   localizeDate('sr-RS', 12, 5) === "петак, 1. јун 2012."</span>
+<span class="hljs-comment">//   localizeDate('en-GB', 12, 5) === "Friday, 1 June 2012"</span>
+<span class="hljs-comment">//   localizeDate('en-US', 12, 5) === "Friday, June 1, 2012"</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">localizeDate</span>(<span class="hljs-params">lang, year, month</span>) {
+  <span class="hljs-keyword">const</span> dateTimeFormat = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intl</span>.<span class="hljs-title class_">DateTimeFormat</span>(lang, {
+    <span class="hljs-attr">weekday</span>: <span class="hljs-string">"long"</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-string">"numeric"</span>,
+    <span class="hljs-attr">month</span>: <span class="hljs-string">"long"</span>,
+    <span class="hljs-attr">day</span>: <span class="hljs-string">"numeric"</span>,
+  });
+
+  <span class="hljs-keyword">return</span> dateTimeFormat.<span class="hljs-title function_">format</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(year, month));
+}
+</code></pre>
+<p>But how do we use that in Elm?! Newer browsers allow you to create new types of DOM nodes like this:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">//</span>
+<span class="hljs-comment">//   &lt;intl-date lang="sr-RS" year="2012" month="5"&gt;</span>
+<span class="hljs-comment">//   &lt;intl-date lang="en-GB" year="2012" month="5"&gt;</span>
+<span class="hljs-comment">//   &lt;intl-date lang="en-US" year="2012" month="5"&gt;</span>
+<span class="hljs-comment">//</span>
+customElements.<span class="hljs-title function_">define</span>(
+  <span class="hljs-string">"intl-date"</span>,
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">extends</span> <span class="hljs-title class_">HTMLElement</span> {
+    <span class="hljs-comment">// things required by Custom Elements</span>
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-variable language_">super</span>();
+    }
+    <span class="hljs-title function_">connectedCallback</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setTextContent</span>();
+    }
+    <span class="hljs-title function_">attributeChangedCallback</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setTextContent</span>();
+    }
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> <span class="hljs-title function_">observedAttributes</span>() {
+      <span class="hljs-keyword">return</span> [<span class="hljs-string">"lang"</span>, <span class="hljs-string">"year"</span>, <span class="hljs-string">"month"</span>];
+    }
+
+    <span class="hljs-comment">// Our function to set the textContent based on attributes.</span>
+    <span class="hljs-title function_">setTextContent</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">const</span> lang = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">"lang"</span>);
+      <span class="hljs-keyword">const</span> year = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">"year"</span>);
+      <span class="hljs-keyword">const</span> month = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">"month"</span>);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">textContent</span> = <span class="hljs-title function_">localizeDate</span>(lang, year, month);
+    }
+  },
+);
+</code></pre>
+<p>The most important parts here are <code>attributeChangedCallback</code> and <code>observedAttributes</code>. You need some logic like that to detect changes to the attributes you care about.</p>
+<p>Load that before you initialize your Elm code, and you will be able to write code like this in Elm:</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, node)
+<span class="hljs-keyword">import</span> Html.Attributes <span class="hljs-keyword">exposing</span> (attribute)
+
+
+<span class="hljs-title">viewDate</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Html</span> msg
+<span class="hljs-title">viewDate</span> lang year month =
+    node <span class="hljs-string">"intl-date"</span>
+        [ attribute <span class="hljs-string">"lang"</span> lang
+        , attribute <span class="hljs-string">"year"</span> (<span class="hljs-type">String</span>.fromInt year)
+        , attribute <span class="hljs-string">"month"</span> (<span class="hljs-type">String</span>.fromInt month)
+        ]
+        []
+</code></pre>
+<p>Now you can call <code>viewDate</code> when you want access to that kind of localized information in your <code>view</code>.</p>
+<p>You can check out the full version of this example <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">here</a>.</p>
+<h2 id="more-info">More Info</h2>
+<p>Luke has a lot more experience with custom elements, and I think his Elm Europe talk is an excellent introduction!</p>
+<p><a href="http://www.youtube.com/watch?v=undefined" target="_blank">undefined</a><br></br><a href="http://www.youtube.com/watch?v=undefined" title="undefined" target="_blank"><img src="http://img.youtube.com/vi/undefined/0.jpg" alt="undefined"></img></a></p>
+<p>Docs on custom elements can be kind of confusing, but I hope this is enough for people to get started embedding simple logic for <code>Intl</code> or even large React widgets if that seems like the right choice for your project.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ports.html" class="navigation navigation-prev " aria-label="Previous page: Ports">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="limits.html" class="navigation navigation-next " aria-label="Next page: Limits">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Custom Elements","level":"1.8.3","depth":2,"next":{"title":"Limits","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"previous":{"title":"Ports","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"interop/custom_elements.md","mtime":"2024-08-25T16:41:13.996Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-elm-repl/repl.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

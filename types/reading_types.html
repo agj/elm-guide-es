@@ -1,0 +1,1074 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Reading Types · An Introduction to Elm</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 5.1.4">
+        <meta name="author" content="Evan Czaplicki">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="type_aliases.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../core_language.html">
+            
+                <a href="../core_language.html">
+            
+                    
+                    Core Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../architecture/">
+            
+                <a href="../architecture/">
+            
+                    
+                    The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../architecture/buttons.html">
+            
+                <a href="../architecture/buttons.html">
+            
+                    
+                    Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../architecture/text_fields.html">
+            
+                <a href="../architecture/text_fields.html">
+            
+                    
+                    Text Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../architecture/forms.html">
+            
+                <a href="../architecture/forms.html">
+            
+                    
+                    Forms
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="reading_types.html">
+            
+                <a href="reading_types.html">
+            
+                    
+                    Reading Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="type_aliases.html">
+            
+                <a href="type_aliases.html">
+            
+                    
+                    Type Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="custom_types.html">
+            
+                <a href="custom_types.html">
+            
+                    
+                    Custom Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="pattern_matching.html">
+            
+                <a href="pattern_matching.html">
+            
+                    
+                    Pattern Matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../error_handling/">
+            
+                <a href="../error_handling/">
+            
+                    
+                    Error Handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../error_handling/maybe.html">
+            
+                <a href="../error_handling/maybe.html">
+            
+                    
+                    Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../error_handling/result.html">
+            
+                <a href="../error_handling/result.html">
+            
+                    
+                    Result
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../effects/">
+            
+                <a href="../effects/">
+            
+                    
+                    Commands and Subscriptions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../effects/http.html">
+            
+                <a href="../effects/http.html">
+            
+                    
+                    HTTP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../effects/json.html">
+            
+                <a href="../effects/json.html">
+            
+                    
+                    JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../effects/random.html">
+            
+                <a href="../effects/random.html">
+            
+                    
+                    Random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../effects/time.html">
+            
+                <a href="../effects/time.html">
+            
+                    
+                    Time
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../install/">
+            
+                <a href="../install/">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../install/editor.html">
+            
+                <a href="../install/editor.html">
+            
+                    
+                    Code Editor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../install/elm.html">
+            
+                <a href="../install/elm.html">
+            
+                    
+                    Elm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../interop/">
+            
+                <a href="../interop/">
+            
+                    
+                    JavaScript Interop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../interop/flags.html">
+            
+                <a href="../interop/flags.html">
+            
+                    
+                    Flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../interop/ports.html">
+            
+                <a href="../interop/ports.html">
+            
+                    
+                    Ports
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../interop/custom_elements.html">
+            
+                <a href="../interop/custom_elements.html">
+            
+                    
+                    Custom Elements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../interop/limits.html">
+            
+                <a href="../interop/limits.html">
+            
+                    
+                    Limits
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../webapps/">
+            
+                <a href="../webapps/">
+            
+                    
+                    Web Apps
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../webapps/navigation.html">
+            
+                <a href="../webapps/navigation.html">
+            
+                    
+                    Navigation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../webapps/url_parsing.html">
+            
+                <a href="../webapps/url_parsing.html">
+            
+                    
+                    URL Parsing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../webapps/modules.html">
+            
+                <a href="../webapps/modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../webapps/structure.html">
+            
+                <a href="../webapps/structure.html">
+            
+                    
+                    Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../optimization/">
+            
+                <a href="../optimization/">
+            
+                    
+                    Optimization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../optimization/lazy.html">
+            
+                <a href="../optimization/lazy.html">
+            
+                    
+                    Html.lazy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../optimization/keyed.html">
+            
+                <a href="../optimization/keyed.html">
+            
+                    
+                    Html.keyed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../optimization/asset_size.html">
+            
+                <a href="../optimization/asset_size.html">
+            
+                    
+                    Minification
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../next_steps.html">
+            
+                <a href="../next_steps.html">
+            
+                    
+                    Next Steps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    Appendix
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../appendix/types_as_sets.html">
+            
+                <a href="../appendix/types_as_sets.html">
+            
+                    
+                    Types as Sets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../appendix/types_as_bits.html">
+            
+                <a href="../appendix/types_as_bits.html">
+            
+                    
+                    Types as Bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../appendix/function_types.html">
+            
+                <a href="../appendix/function_types.html">
+            
+                    
+                    Function Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Reading Types</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="reading-types">Reading Types</h1>
+<p>In the <a href="../core_language.html">Core Language</a> section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but with a new question in mind. What <strong>type</strong> of value is that?</p>
+<h2 id="primitives-and-lists">Primitives and Lists</h2>
+<p>Let's enter some simple expressions and see what happens:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "\"hello\"",
+        "value": "\u001b[93m\"hello\"\u001b[0m",
+        "type_": "String"
+    },
+    {
+        "input": "not True",
+        "value": "\u001b[96mFalse\u001b[0m",
+        "type_": "Bool"
+    },
+    {
+        "input": "round 3.1415",
+        "value": "\u001b[95m3\u001b[0m",
+        "type_": "Int"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>Click on this black box ⬆️ and the cursor should start blinking. Type in <code>3.1415</code> and press the ENTER key. It should print out <code>3.1415</code> followed by the type <code>Float</code>.</p>
+<p>Okay, but what is going on here exactly? Each entry shows value along with what <strong>type</strong> of value it happens to be. You can read these examples out loud like this:</p>
+<ul>
+<li>The value <code>"hello"</code> is a <code>String</code>.</li>
+<li>The value <code>False</code> is a <code>Bool</code>.</li>
+<li>The value <code>3</code> is an <code>Int</code>.</li>
+<li>The value <code>3.1415</code> is a <code>Float</code>.</li>
+</ul>
+<p>Elm is able to figure out the type of any value you enter! Let's see what happens with lists:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "[ \"Alice\", \"Bob\" ]",
+        "value": "[\u001b[93m\"Alice\"\u001b[0m,\u001b[93m\"Bob\"\u001b[0m]",
+        "type_": "List String"
+    },
+    {
+        "input": "[ 1.0, 8.6, 42.1 ]",
+        "value": "[\u001b[95m1.0\u001b[0m,\u001b[95m8.6\u001b[0m,\u001b[95m42.1\u001b[0m]",
+        "type_": "List Float"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>You can read these types as:</p>
+<ol>
+<li>We have a <code>List</code> filled with <code>String</code> values.</li>
+<li>We have a <code>List</code> filled with <code>Float</code> values.</li>
+</ol>
+<p>The <strong>type</strong> is a rough description of the particular value we are looking at.</p>
+<h2 id="functions">Functions</h2>
+<p>Let's see the type of some functions:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "String.length",
+        "value": "\u001b[36m&lt;function&gt;\u001b[0m",
+        "type_": "String -&gt; Int"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>Try entering <code>round</code> or <code>sqrt</code> to see some other function types ⬆️</p>
+<p>The <code>String.length</code> function has type <code>String -&gt; Int</code>. This means it <em>must</em> take in a <code>String</code> argument, and it will definitely return an <code>Int</code> value. So let's try giving it an argument:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "String.length \"Supercalifragilisticexpialidocious\"",
+        "value": "\u001b[95m34\u001b[0m",
+        "type_": "Int"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>So we start with a <code>String -&gt; Int</code> function and give it a <code>String</code> argument. This results in an <code>Int</code>.</p>
+<p>What happens when you do not give a <code>String</code> though? Try entering <code>String.length [1,2,3]</code> or <code>String.length True</code> to see what happens ⬆️</p>
+<p>You will find that a <code>String -&gt; Int</code> function <em>must</em> get a <code>String</code> argument!</p>
+<!-- prettier-ignore-start -->
+<blockquote>
+<p><strong>Note:</strong> Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:</p>
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "String.repeat",
+        "value": "\u001b[36m&lt;function&gt;\u001b[0m",
+        "type_": "Int -&gt; String -&gt; String"
+    }
+]
+</div><p></p>
+<p>Giving two arguments like <code>String.repeat 3 "ha"</code> will produce <code>"hahaha"</code>. It works to think of <code>-&gt;</code> as a weird way to separate arguments, but I explain the real reasoning <a href="../appendix/function_types.html">here</a>. It is pretty neat!
+<!-- prettier-ignore-end --></p>
+</blockquote>
+<h2 id="type-annotations">Type Annotations</h2>
+<p>So far we have just let Elm figure out the types, but it also lets you write a <strong>type annotation</strong> on the line above a definition. So when you are writing code, you can say things like this:</p>
+<pre><code class="lang-elm"><span class="hljs-title">half</span> : <span class="hljs-type">Float</span> -&gt; <span class="hljs-type">Float</span>
+<span class="hljs-title">half</span> n =
+    n / <span class="hljs-number">2</span>
+
+
+
+<span class="hljs-comment">-- half 256 == 128</span>
+<span class="hljs-comment">-- half "3" -- error!</span>
+
+
+<span class="hljs-title">hypotenuse</span> : <span class="hljs-type">Float</span> -&gt; <span class="hljs-type">Float</span> -&gt; <span class="hljs-type">Float</span>
+<span class="hljs-title">hypotenuse</span> a b =
+    sqrt (a ^ <span class="hljs-number">2</span> + b ^ <span class="hljs-number">2</span>)
+
+
+
+<span class="hljs-comment">-- hypotenuse 3 4  == 5</span>
+<span class="hljs-comment">-- hypotenuse 5 12 == 13</span>
+
+
+<span class="hljs-title">checkPower</span> : <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">String</span>
+<span class="hljs-title">checkPower</span> powerLevel =
+    <span class="hljs-keyword">if</span> powerLevel &gt; <span class="hljs-number">9000</span> <span class="hljs-keyword">then</span>
+        <span class="hljs-string">"It's over 9000!!!"</span>
+
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-string">"Meh"</span>
+
+
+
+<span class="hljs-comment">-- checkPower 9001 == "It's over 9000!!!"</span>
+<span class="hljs-comment">-- checkPower True -- error!</span>
+</code></pre>
+<p>Adding type annotations is not required, but it is definitely recommended! Benefits include:</p>
+<ol>
+<li><strong>Error Message Quality</strong> — When you add a type annotation, it tells the compiler what you are <em>trying</em> to do. Your implementation may have mistakes, and now the compiler can compare against your stated intent. “You said argument <code>powerLevel</code> was an <code>Int</code>, but it is getting used as a <code>String</code>!”</li>
+<li><strong>Documentation</strong> — When you revisit code later (or when a colleague visits it for the first time) it can be really helpful to see exactly what is going in and out of the function without having to read the implementation super carefully.</li>
+</ol>
+<p>People can make mistakes in type annotations though, so what happens if the annotation does not match the implementation? The compiler figures out all the types on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct. So you get better error messages <em>and</em> documentation always stays up to date!</p>
+<h2 id="type-variables">Type Variables</h2>
+<p>As you look through more Elm code, you will start to see type annotations with lower-case letters in them. A common example is the <code>List.length</code> function:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "List.length",
+        "value": "\u001b[36m&lt;function&gt;\u001b[0m",
+        "type_": "List a -&gt; Int"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>Notice that lower-case <code>a</code> in the type? That is called a <strong>type variable</strong>. It can vary depending on how <a href="https://package.elm-lang.org/packages/elm/core/latest/List#length" target="_blank"><code>List.length</code></a> is used:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "List.length [1,1,2,3,5,8]",
+        "value": "\u001b[95m6\u001b[0m",
+        "type_": "Int"
+    },
+    {
+        "input": "List.length [ \"a\", \"b\", \"c\" ]",
+        "value": "\u001b[95m3\u001b[0m",
+        "type_": "Int"
+    },
+    {
+        "input": "List.length [ True, False ]",
+        "value": "\u001b[95m2\u001b[0m",
+        "type_": "Int"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>We just want the length, so it does not matter what is in the list. So the type variable <code>a</code> is saying that we can match any type. Let’s look at another common example:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "List.reverse",
+        "value": "\u001b[36m&lt;function&gt;\u001b[0m",
+        "type_": "List a -&gt; List a"
+    },
+    {
+        "input": "List.reverse [ \"a\", \"b\", \"c\" ]",
+        "value": "[\u001b[93m\"c\"\u001b[0m,\u001b[93m\"b\"\u001b[0m,\u001b[93m\"a\"\u001b[0m]",
+        "type_": "List String"
+    },
+    {
+        "input": "List.reverse [ True, False ]",
+        "value": "[\u001b[96mFalse\u001b[0m,\u001b[96mTrue\u001b[0m]",
+        "type_": "List Bool"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>Again, the type variable <code>a</code> can vary depending on how <a href="https://package.elm-lang.org/packages/elm/core/latest/List#reverse" target="_blank"><code>List.reverse</code></a> is used. But in this case, we have an <code>a</code> in the argument and in the result. This means that if you give a <code>List Int</code> you must get a <code>List Int</code> as well. Once we decide what <code>a</code> is, that’s what it is everywhere.</p>
+<blockquote>
+<p><strong>Note:</strong> Type variables must start with a lower-case letter, but they can be full words. We could write the type of <code>List.length</code> as <code>List value -&gt; Int</code> and we could write the type of <code>List.reverse</code> as <code>List element -&gt; List element</code>. It is fine as long as they start with a lower-case letter. Type variables <code>a</code> and <code>b</code> are used by convention in many places, but some type annotations benefit from more specific names.</p>
+</blockquote>
+<h2 id="constrained-type-variables">Constrained Type Variables</h2>
+<p>There is a special variant of type variables in Elm called <strong>constrained</strong> type variables. The most common example is the <code>number</code> type. The <a href="https://package.elm-lang.org/packages/elm/core/latest/Basics#negate" target="_blank"><code>negate</code></a> function uses it:</p>
+<!-- prettier-ignore-start -->
+<p></p><div class="elm-repl show-types">
+[
+    {
+        "input": "negate",
+        "value": "\u001b[36m&lt;function&gt;\u001b[0m",
+        "type_": "number -&gt; number"
+    }
+]
+</div>
+<!-- prettier-ignore-end --><p></p>
+<p>Try expressions like <code>negate 3.1415</code> and <code>negate (round 3.1415)</code> and <code>negate "hi"</code> ⬆️</p>
+<p>Normally type variables can get filled in with anything, but <code>number</code> can only be filled in by <code>Int</code> and <code>Float</code> values. It <em>constrains</em> the possibilities.</p>
+<p>The full list of constrained type variables is:</p>
+<ul>
+<li><code>number</code> permits <code>Int</code> and <code>Float</code></li>
+<li><code>appendable</code> permits <code>String</code> and <code>List a</code></li>
+<li><code>comparable</code> permits <code>Int</code>, <code>Float</code>, <code>Char</code>, <code>String</code>, and lists/tuples of <code>comparable</code> values</li>
+<li><code>compappend</code> permits <code>String</code> and <code>List comparable</code></li>
+</ul>
+<p>These constrained type variables exist to make operators like <code>(+)</code> and <code>(&lt;)</code> a bit more flexible.</p>
+<p>By now we have covered types for values and functions pretty well, but what does this look like when we start wanting more complex data structures?</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Types">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="type_aliases.html" class="navigation navigation-next " aria-label="Next page: Type Aliases">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Reading Types","level":"1.4.1","depth":2,"next":{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},"previous":{"title":"Types","level":"1.4","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Reading Types","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Custom Types","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"types/reading_types.md","mtime":"2024-08-25T16:41:14.565Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-elm-repl/repl.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

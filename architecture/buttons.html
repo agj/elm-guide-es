@@ -1,0 +1,982 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Buttons · An Introduction to Elm</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 5.1.4">
+        <meta name="author" content="Evan Czaplicki">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="text_fields.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../core_language.html">
+            
+                <a href="../core_language.html">
+            
+                    
+                    Core Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="buttons.html">
+            
+                <a href="buttons.html">
+            
+                    
+                    Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="text_fields.html">
+            
+                <a href="text_fields.html">
+            
+                    
+                    Text Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="forms.html">
+            
+                <a href="forms.html">
+            
+                    
+                    Forms
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../types/">
+            
+                <a href="../types/">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../types/reading_types.html">
+            
+                <a href="../types/reading_types.html">
+            
+                    
+                    Reading Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../types/type_aliases.html">
+            
+                <a href="../types/type_aliases.html">
+            
+                    
+                    Type Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../types/custom_types.html">
+            
+                <a href="../types/custom_types.html">
+            
+                    
+                    Custom Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../types/pattern_matching.html">
+            
+                <a href="../types/pattern_matching.html">
+            
+                    
+                    Pattern Matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../error_handling/">
+            
+                <a href="../error_handling/">
+            
+                    
+                    Error Handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../error_handling/maybe.html">
+            
+                <a href="../error_handling/maybe.html">
+            
+                    
+                    Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../error_handling/result.html">
+            
+                <a href="../error_handling/result.html">
+            
+                    
+                    Result
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../effects/">
+            
+                <a href="../effects/">
+            
+                    
+                    Commands and Subscriptions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../effects/http.html">
+            
+                <a href="../effects/http.html">
+            
+                    
+                    HTTP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../effects/json.html">
+            
+                <a href="../effects/json.html">
+            
+                    
+                    JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../effects/random.html">
+            
+                <a href="../effects/random.html">
+            
+                    
+                    Random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../effects/time.html">
+            
+                <a href="../effects/time.html">
+            
+                    
+                    Time
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../install/">
+            
+                <a href="../install/">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../install/editor.html">
+            
+                <a href="../install/editor.html">
+            
+                    
+                    Code Editor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../install/elm.html">
+            
+                <a href="../install/elm.html">
+            
+                    
+                    Elm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../interop/">
+            
+                <a href="../interop/">
+            
+                    
+                    JavaScript Interop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../interop/flags.html">
+            
+                <a href="../interop/flags.html">
+            
+                    
+                    Flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../interop/ports.html">
+            
+                <a href="../interop/ports.html">
+            
+                    
+                    Ports
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../interop/custom_elements.html">
+            
+                <a href="../interop/custom_elements.html">
+            
+                    
+                    Custom Elements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../interop/limits.html">
+            
+                <a href="../interop/limits.html">
+            
+                    
+                    Limits
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../webapps/">
+            
+                <a href="../webapps/">
+            
+                    
+                    Web Apps
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../webapps/navigation.html">
+            
+                <a href="../webapps/navigation.html">
+            
+                    
+                    Navigation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../webapps/url_parsing.html">
+            
+                <a href="../webapps/url_parsing.html">
+            
+                    
+                    URL Parsing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../webapps/modules.html">
+            
+                <a href="../webapps/modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../webapps/structure.html">
+            
+                <a href="../webapps/structure.html">
+            
+                    
+                    Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../optimization/">
+            
+                <a href="../optimization/">
+            
+                    
+                    Optimization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../optimization/lazy.html">
+            
+                <a href="../optimization/lazy.html">
+            
+                    
+                    Html.lazy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../optimization/keyed.html">
+            
+                <a href="../optimization/keyed.html">
+            
+                    
+                    Html.keyed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../optimization/asset_size.html">
+            
+                <a href="../optimization/asset_size.html">
+            
+                    
+                    Minification
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../next_steps.html">
+            
+                <a href="../next_steps.html">
+            
+                    
+                    Next Steps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    Appendix
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../appendix/types_as_sets.html">
+            
+                <a href="../appendix/types_as_sets.html">
+            
+                    
+                    Types as Sets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../appendix/types_as_bits.html">
+            
+                <a href="../appendix/types_as_bits.html">
+            
+                    
+                    Types as Bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../appendix/function_types.html">
+            
+                <a href="../appendix/function_types.html">
+            
+                    
+                    Function Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Buttons</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="buttons">Buttons</h1>
+<p>Our first example is a counter that can be incremented or decremented.</p>
+<p>I included the full program below. Click the blue "Edit" button to mess with it in the online editor. Try changing text on one of the buttons. <strong>Click the blue button now!</strong></p>
+<div class="edit-link"><a href="https://elm-lang.org/examples/buttons" target="_blank">Edit</a></div>
+
+<pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
+<span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, button, div, text)
+<span class="hljs-keyword">import</span> Html.Events <span class="hljs-keyword">exposing</span> (onClick)
+
+
+
+<span class="hljs-comment">-- MAIN</span>
+
+
+<span class="hljs-title">main</span> =
+    <span class="hljs-type">Browser</span>.sandbox { init = init, update = update, view = view }
+
+
+
+<span class="hljs-comment">-- MODEL</span>
+
+
+<span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Model</span> =
+    <span class="hljs-type">Int</span>
+
+
+<span class="hljs-title">init</span> : <span class="hljs-type">Model</span>
+<span class="hljs-title">init</span> =
+    <span class="hljs-number">0</span>
+
+
+
+<span class="hljs-comment">-- UPDATE</span>
+
+
+<span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
+    = <span class="hljs-type">Increment</span>
+    | <span class="hljs-type">Decrement</span>
+
+
+<span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Model</span>
+<span class="hljs-title">update</span> msg model =
+    <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
+        <span class="hljs-type">Increment</span> -&gt;
+            model + <span class="hljs-number">1</span>
+
+        <span class="hljs-type">Decrement</span> -&gt;
+            model - <span class="hljs-number">1</span>
+
+
+
+<span class="hljs-comment">-- VIEW</span>
+
+
+<span class="hljs-title">view</span> : <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Html</span> <span class="hljs-type">Msg</span>
+<span class="hljs-title">view</span> model =
+    div []
+        [ button [ onClick <span class="hljs-type">Decrement</span> ] [ text <span class="hljs-string">"-"</span> ]
+        , div [] [ text (<span class="hljs-type">String</span>.fromInt model) ]
+        , button [ onClick <span class="hljs-type">Increment</span> ] [ text <span class="hljs-string">"+"</span> ]
+        ]
+</code></pre>
+<p>Now that you have poked around the code a little bit, you may have some questions. What is the <code>main</code> value doing? How do the different parts fit together? Let's go through the code and talk about it.</p>
+<blockquote>
+<p><strong>Note:</strong> The code here uses <a href="../types/reading_types.html">type annotations</a>, <a href="../types/type_aliases.html">type aliases</a>, and <a href="../types/custom_types.html">custom types</a>. The point of this section is to get a feeling for The Elm Architecture though, so we will not cover them until a bit later. I encourage you to peek ahead if you are getting stuck on these aspects!</p>
+</blockquote>
+<h2 id="main">Main</h2>
+<p>The <code>main</code> value is special in Elm. It describes what gets shown on screen. In this case, we are going to initialize our application with the <code>init</code> value, the <code>view</code> function is going to show everything on screen, and user input is going to be fed into the <code>update</code> function. Think of this as the high-level description of our program.</p>
+<h2 id="model">Model</h2>
+<p>Data modeling is extremely important in Elm. The point of the <strong>model</strong> is to capture all the details about your application as data.</p>
+<p>To make a counter, we need to keep track of a number that is going up and down. That means our model is really small this time:</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Model</span> =
+    <span class="hljs-type">Int</span>
+</code></pre>
+<p>We just need an <code>Int</code> value to track the current count. We can see that in our initial value:</p>
+<pre><code class="lang-elm"><span class="hljs-title">init</span> : <span class="hljs-type">Model</span>
+<span class="hljs-title">init</span> =
+    <span class="hljs-number">0</span>
+</code></pre>
+<p>The initial value is zero, and it will go up and down as people press different buttons.</p>
+<h2 id="view">View</h2>
+<p>We have a model, but how do we show it on screen? That is the role of the <code>view</code> function:</p>
+<pre><code class="lang-elm"><span class="hljs-title">view</span> : <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Html</span> <span class="hljs-type">Msg</span>
+<span class="hljs-title">view</span> model =
+    div []
+        [ button [ onClick <span class="hljs-type">Decrement</span> ] [ text <span class="hljs-string">"-"</span> ]
+        , div [] [ text (<span class="hljs-type">String</span>.fromInt model) ]
+        , button [ onClick <span class="hljs-type">Increment</span> ] [ text <span class="hljs-string">"+"</span> ]
+        ]
+</code></pre>
+<p>This function takes in the <code>Model</code> as an argument. It outputs HTML. So we are saying that we want to show a decrement button, the current count, and an increment button.</p>
+<p>Notice that we have an <code>onClick</code> handler for each button. These are saying: <strong>when someone clicks, generate a message</strong>. So the plus button is generating an <code>Increment</code> message. What is that and where does it go? To the <code>update</code> function!</p>
+<h2 id="update">Update</h2>
+<p>The <code>update</code> function describes how our <code>Model</code> will change over time.</p>
+<p>We define two messages that it might receive:</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
+    = <span class="hljs-type">Increment</span>
+    | <span class="hljs-type">Decrement</span>
+</code></pre>
+<p>From there, the <code>update</code> function just describes what to do when you receive one of these messages.</p>
+<pre><code class="lang-elm"><span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Model</span>
+<span class="hljs-title">update</span> msg model =
+    <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
+        <span class="hljs-type">Increment</span> -&gt;
+            model + <span class="hljs-number">1</span>
+
+        <span class="hljs-type">Decrement</span> -&gt;
+            model - <span class="hljs-number">1</span>
+</code></pre>
+<p>If you get an <code>Increment</code> message, you increment the model. If you get a <code>Decrement</code> message, you decrement the model.</p>
+<p>So whenever we get a message, we run it through <code>update</code> to get a new model. We then call <code>view</code> to figure out how to show the new model on screen. Then repeat! User input generates a message, <code>update</code> the model, <code>view</code> it on screen. Etc.</p>
+<h2 id="overview">Overview</h2>
+<p>Now that you have seen all the parts of an Elm program, it may be a bit easier to see how they fit into the diagram we saw earlier:</p>
+<p><img src="buttons.svg" alt="Diagram of The Elm Architecture"></img></p>
+<p>Elm starts by rendering the initial value on screen. From there you enter into this loop:</p>
+<ol>
+<li>Wait for user input.</li>
+<li>Send a message to <code>update</code></li>
+<li>Produce a new <code>Model</code></li>
+<li>Call <code>view</code> to get new HTML</li>
+<li>Show the new HTML on screen</li>
+<li>Repeat!</li>
+</ol>
+<p>This is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern.</p>
+<blockquote>
+<p><strong>Exercise:</strong> Add a button to reset the counter to zero:</p>
+<ol>
+<li>Add a <code>Reset</code> variant to the <code>Msg</code> type</li>
+<li>Add a <code>Reset</code> branch in the <code>update</code> function</li>
+<li>Add a button in the <code>view</code> function.</li>
+</ol>
+<p>You can edit the example in the online editor <a href="https://elm-lang.org/examples/buttons" target="_blank">here</a>.</p>
+<p>If that goes well, try adding another button to increment by steps of 10.</p>
+</blockquote>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: The Elm Architecture">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="text_fields.html" class="navigation navigation-next " aria-label="Next page: Text Fields">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Buttons","level":"1.3.1","depth":2,"next":{"title":"Text Fields","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},"previous":{"title":"The Elm Architecture","level":"1.3","depth":1,"path":"architecture/README.md","ref":"architecture/README.md","articles":[{"title":"Buttons","level":"1.3.1","depth":2,"path":"architecture/buttons.md","ref":"architecture/buttons.md","articles":[]},{"title":"Text Fields","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},{"title":"Forms","level":"1.3.3","depth":2,"path":"architecture/forms.md","ref":"architecture/forms.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"architecture/buttons.md","mtime":"2024-08-25T16:41:13.279Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-elm-repl/repl.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

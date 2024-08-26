@@ -1,0 +1,911 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Elm · An Introduction to Elm</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 5.1.4">
+        <meta name="author" content="Evan Czaplicki">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../interop/" />
+    
+    
+    <link rel="prev" href="editor.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../core_language.html">
+            
+                <a href="../core_language.html">
+            
+                    
+                    Core Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../architecture/">
+            
+                <a href="../architecture/">
+            
+                    
+                    The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../architecture/buttons.html">
+            
+                <a href="../architecture/buttons.html">
+            
+                    
+                    Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../architecture/text_fields.html">
+            
+                <a href="../architecture/text_fields.html">
+            
+                    
+                    Text Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../architecture/forms.html">
+            
+                <a href="../architecture/forms.html">
+            
+                    
+                    Forms
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../types/">
+            
+                <a href="../types/">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../types/reading_types.html">
+            
+                <a href="../types/reading_types.html">
+            
+                    
+                    Reading Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../types/type_aliases.html">
+            
+                <a href="../types/type_aliases.html">
+            
+                    
+                    Type Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../types/custom_types.html">
+            
+                <a href="../types/custom_types.html">
+            
+                    
+                    Custom Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../types/pattern_matching.html">
+            
+                <a href="../types/pattern_matching.html">
+            
+                    
+                    Pattern Matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../error_handling/">
+            
+                <a href="../error_handling/">
+            
+                    
+                    Error Handling
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../error_handling/maybe.html">
+            
+                <a href="../error_handling/maybe.html">
+            
+                    
+                    Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../error_handling/result.html">
+            
+                <a href="../error_handling/result.html">
+            
+                    
+                    Result
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../effects/">
+            
+                <a href="../effects/">
+            
+                    
+                    Commands and Subscriptions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../effects/http.html">
+            
+                <a href="../effects/http.html">
+            
+                    
+                    HTTP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../effects/json.html">
+            
+                <a href="../effects/json.html">
+            
+                    
+                    JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../effects/random.html">
+            
+                <a href="../effects/random.html">
+            
+                    
+                    Random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../effects/time.html">
+            
+                <a href="../effects/time.html">
+            
+                    
+                    Time
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="editor.html">
+            
+                <a href="editor.html">
+            
+                    
+                    Code Editor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2" data-path="elm.html">
+            
+                <a href="elm.html">
+            
+                    
+                    Elm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../interop/">
+            
+                <a href="../interop/">
+            
+                    
+                    JavaScript Interop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../interop/flags.html">
+            
+                <a href="../interop/flags.html">
+            
+                    
+                    Flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../interop/ports.html">
+            
+                <a href="../interop/ports.html">
+            
+                    
+                    Ports
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../interop/custom_elements.html">
+            
+                <a href="../interop/custom_elements.html">
+            
+                    
+                    Custom Elements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../interop/limits.html">
+            
+                <a href="../interop/limits.html">
+            
+                    
+                    Limits
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../webapps/">
+            
+                <a href="../webapps/">
+            
+                    
+                    Web Apps
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../webapps/navigation.html">
+            
+                <a href="../webapps/navigation.html">
+            
+                    
+                    Navigation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../webapps/url_parsing.html">
+            
+                <a href="../webapps/url_parsing.html">
+            
+                    
+                    URL Parsing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../webapps/modules.html">
+            
+                <a href="../webapps/modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../webapps/structure.html">
+            
+                <a href="../webapps/structure.html">
+            
+                    
+                    Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../optimization/">
+            
+                <a href="../optimization/">
+            
+                    
+                    Optimization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../optimization/lazy.html">
+            
+                <a href="../optimization/lazy.html">
+            
+                    
+                    Html.lazy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../optimization/keyed.html">
+            
+                <a href="../optimization/keyed.html">
+            
+                    
+                    Html.keyed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../optimization/asset_size.html">
+            
+                <a href="../optimization/asset_size.html">
+            
+                    
+                    Minification
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../next_steps.html">
+            
+                <a href="../next_steps.html">
+            
+                    
+                    Next Steps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    Appendix
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../appendix/types_as_sets.html">
+            
+                <a href="../appendix/types_as_sets.html">
+            
+                    
+                    Types as Sets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../appendix/types_as_bits.html">
+            
+                <a href="../appendix/types_as_bits.html">
+            
+                    
+                    Types as Bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../appendix/function_types.html">
+            
+                <a href="../appendix/function_types.html">
+            
+                    
+                    Function Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Elm</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="install-elm">Install Elm</h1>
+<p>The previous page described how to install a code editor for Elm, so the next step is to obtain an executable file named <code>elm</code>. Here are the <strong>install</strong> links:</p>
+<ul>
+<li><strong>Mac</strong> - <a href="https://github.com/elm/compiler/releases/download/0.19.1/installer-for-mac.pkg" target="_blank">installer</a></li>
+<li><strong>Linux</strong> - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a></li>
+<li><strong>Windows</strong> - <a href="https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.exe" target="_blank">installer</a></li>
+</ul>
+<p>After installation is complete, open up the terminal on your computer. It may be called <code>cmd.exe</code> or <code>Command Prompt</code> on Windows.</p>
+<p><img src="images/terminal.png" alt="terminal"></img></p>
+<p>Start by navigating to your desktop in the terminal:</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># Mac and Linux</span>
+<span class="hljs-built_in">cd</span> ~/Desktop
+
+<span class="hljs-comment"># Windows (but with &lt;username&gt; filled in with your user name)</span>
+<span class="hljs-built_in">cd</span> C:\Users\&lt;username&gt;\Desktop
+</code></pre>
+<p>The next step is to get familiar with <code>elm</code> command. I personally had a really hard time learning terminal commands, so I worked hard to make the <code>elm</code> command nice to use. Let's go through a couple common scenarios.</p>
+<p><br></br></p>
+<h2 id="elm-init"><span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm init</span></h2>
+<p>You can start an Elm project by running:</p>
+<pre><code class="lang-bash">elm init
+</code></pre>
+<p>Try running this command to create an <code>elm.json</code> file and a <code>src/</code> directory:</p>
+<ul>
+<li><a href="https://github.com/elm/compiler/blob/master/docs/elm.json/application.md" target="_blank"><code>elm.json</code></a> describes your project.</li>
+<li><code>src/</code> holds all of your Elm files.</li>
+</ul>
+<p>Now try creating a file called <code>src/Main.elm</code> in your editor, and copying in the code from <a href="https://elm-lang.org/examples/buttons" target="_blank">the buttons example</a>.</p>
+<p><br></br></p>
+<h2 id="elm-reactor"><span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm reactor</span></h2>
+<p><code>elm reactor</code> helps you build Elm projects without messing with the terminal too much. You just run it at the root of your project, like this:</p>
+<pre><code class="lang-bash">elm reactor
+</code></pre>
+<p>This starts a server at <a href="http://localhost:8000" target="_blank"><code>http://localhost:8000</code></a>. You can navigate to any Elm file and see what it looks like. Run <code>elm reactor</code>, follow the localhost link, and try to check out your <code>src/Main.elm</code> file!</p>
+<p><br></br></p>
+<h2 id="elm-make"><span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm make</span></h2>
+<p>You can compile Elm code to HTML or JavaScript with commands like this:</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># Create an index.html file that you can open in your browser.</span>
+elm make src/Main.elm
+
+<span class="hljs-comment"># Create an optimized JS file to embed in a custom HTML document.</span>
+elm make src/Main.elm --optimize --output=elm.js
+</code></pre>
+<p>Try running these commands on your <code>src/Main.elm</code> file.</p>
+<p>This is the most general way to compile Elm code. It is extremely useful once your project becomes too advanced for <code>elm reactor</code>.</p>
+<p>This command produces the same messages you have been seeing in the online editor and with <code>elm reactor</code>. Years of work has gone into them so far, but please report any unhelpful messages <a href="https://github.com/elm/error-message-catalog/issues" target="_blank">here</a>. I am sure there are ways to improve!</p>
+<p><br></br></p>
+<h2 id="elm-install"><span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm install</span></h2>
+<p>Elm packages all live at <a href="https://package.elm-lang.org/" target="_blank"><code>package.elm-lang.org</code></a>.</p>
+<p>Say you look around and decide you need <a href="https://package.elm-lang.org/packages/elm/http/latest" target="_blank"><code>elm/http</code></a> and <a href="https://package.elm-lang.org/packages/elm/json/latest" target="_blank"><code>elm/json</code></a> to make some HTTP requests. You can get them set up in your project with the following commands:</p>
+<pre><code class="lang-bash">elm install elm/http
+elm install elm/json
+</code></pre>
+<p>This adds these dependencies into your <code>elm.json</code> file, making these packages available in your project. That will let you say <code>import Http</code> and use functions like <code>Http.get</code> in your programs.</p>
+<p><br></br></p>
+<h2 id="tips-and-tricks">Tips and Tricks</h2>
+<p><strong>First</strong>, do not worry about remembering all this stuff!</p>
+<p>You can always run <code>elm --help</code> to get a full outline of what <code>elm</code> is capable of.</p>
+<p>You can also run commands like <code>elm make --help</code> and <code>elm repl --help</code> to get hints about a specific command. This is great if you want to check which flags are available and what they do.</p>
+<p><strong>Second</strong>, do not worry if it takes some time to get comfortable with the terminal in general.</p>
+<p>I have been using it for over a decade now, and I still cannot remember how to compress files, find all Elm files in a directory, etc. I still look a lot of things up!</p>
+<hr></hr>
+<p>Now that we have our editor set up and <code>elm</code> available in the terminal, let's get back to learning Elm!</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="editor.html" class="navigation navigation-prev " aria-label="Previous page: Code Editor">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../interop/" class="navigation navigation-next " aria-label="Next page: JavaScript Interop">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Elm","level":"1.7.2","depth":2,"next":{"title":"JavaScript Interop","level":"1.8","depth":1,"path":"interop/README.md","ref":"interop/README.md","articles":[{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},{"title":"Ports","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},{"title":"Custom Elements","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},{"title":"Limits","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]}]},"previous":{"title":"Code Editor","level":"1.7.1","depth":2,"path":"install/editor.md","ref":"install/editor.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"install/elm.md","mtime":"2024-08-25T16:39:36.507Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-elm-repl/repl.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
