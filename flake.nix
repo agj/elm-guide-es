@@ -12,16 +12,25 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {system = system;};
+        commonPackages = with pkgs; [
+          elmPackages.elm
+          just
+          nodePackages.pnpm
+          nodePackages.prettier
+          nodePackages.uglify-js
+          nodejs-slim_22
+        ];
       in {
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            elmPackages.elm
-            just
-            nodePackages.pnpm
-            nodePackages.prettier
-            nodePackages.uglify-js
-            nodejs-slim_22
-          ];
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs =
+              commonPackages
+              ++ (with pkgs; [
+                act
+              ]);
+          };
+
+          ci = pkgs.mkShell {buildInputs = commonPackages;};
         };
       }
     );
