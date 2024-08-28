@@ -16,8 +16,7 @@ format:
     prettier '**/*.{md,json}' --write
 
 # Verifica que todo funcione y que los archivos estén formateados.
-check:
-    pnpm exec honkit build
+check: build
     prettier '**/*.{md,json}' --check
 
 # Publica en Github Pages.
