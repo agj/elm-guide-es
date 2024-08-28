@@ -2,9 +2,7 @@ name: Verificaciones
 
 on:
   push:
-    branches: [master]
   pull_request:
-    branches: [master]
 
 env:
   DEV_SHELL_NAME: ci
