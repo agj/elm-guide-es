@@ -2,8 +2,8 @@
 default:
     just --list
 
-# Levanta un servidor con el libro generado.
-dev: install build-repl
+# Levanta un servidor con una previsualización del libro.
+preview: install build-repl
     pnpm exec honkit serve
 
 # Genera el libro.
@@ -13,11 +13,11 @@ build: install build-repl
 
 # Da formato estándar a los archivos.
 format:
-    prettier '**/*.{md,json}' --write
+    prettier '**/*.{md,json,yml}' --write
 
 # Verifica que todo funcione y que los archivos estén formateados.
 check: build
-    prettier '**/*.{md,json}' --check
+    prettier '**/*.{md,json,yml}' --check
 
 # Publica en Github Pages.
 deploy: build
