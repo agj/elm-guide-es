@@ -1,20 +1,20 @@
-# An Introduction to Elm
+# Introducción a Elm
 
-**Elm is a functional language that compiles to JavaScript.** It helps you make websites and web apps. It has a strong emphasis on simplicity and quality tooling.
+**Elm is un lenguaje de programación funcional que compila a JavaScript.** Está hecho para construir sitios y aplicaciones web. Tiene un gran énfasis en ser simple y tener herramientas de calidad.
 
-This guide will:
+Esta guía va a:
 
-- Teach you the fundamentals of programming in Elm.
-- Show you how to make interactive apps with **The Elm Architecture**.
-- Emphasize principles and patterns that generalize to programming in any language.
+- Enseñarte los fundamentos de programar usando Elm.
+- Mostrarte cómo crear aplicaciones interactivas usando la **Arquitectura Elm**.
+- Enfatizar principios y patrones que pueden generalizarse al programar en cualquier lenguaje.
 
-By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
+Al terminar, espero que no sólo seas capaz de crear excelentes aplicaciones web con Elm, pero que también entiendas las ideas y patrones centrales que crean la experiencia de usar Elm.
 
-If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!
+Si aún no estás comprometido con usar Elm, te garantizo que si le das una oportunidad y construyes un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Es muy fácil aplicar las mismas ideas.
 
-## A Quick Sample
+## Un ejemplo simple
 
-Here is a little program that lets you increment and decrement a number:
+Este es un pequeño programa que te permite incrementar y decrementar un número:
 
 ```elm
 import Browser
@@ -48,19 +48,19 @@ view model =
         ]
 ```
 
-Try it out in the online editor [here](https://elm-lang.org/examples/buttons).
+Pruébalo usando el editor online, [aquí](https://elm-lang.org/examples/buttons).
 
-The code can definitely look unfamiliar at first, so we will get into how this example works soon!
+Al principio, seguro que el código te parecerá extraño, así que pronto vamos a entrar en cómo funciona este ejemplo.
 
-## Why a functional _language_?
+## ¿Por qué un lenguaje _funcional_?
 
-You can get some benefits from programming in a functional _style_, but there are some things you can only get from a functional _language_ like Elm:
+Puedes obtener ciertos beneficios programando en un _estilo_ funcional, pero hay algunas cosas que sólo puedes obtener de un _lenguaje_ funcional como Elm:
 
-- No runtime errors in practice.
-- Friendly error messages.
-- Reliable refactoring.
-- Automatically enforced semantic versioning for all Elm packages.
+- Tener virtualmente ningún error en tiempo de ejecución.
+- Mensajes de error amistosos.
+- Capacidad de refactorizar sin peligro.
+- Versionado semántico (_semver_) para todos los paquetes Elm.
 
-No combination of JS libraries can give you all of these guarantees. They come from the design of the language itself! And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so **confident** while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important!
+Ninguna combinación de librerías de JS te dará estas garantías, ya que provienen del diseño del lenguaje mismo. Y gracias a estas garantías, es muy común que programadores de Elm digan sienten más **confianza** que nunca al programar. Confianza en poder rápidamente añadir nuevas funcionalidades; confianza en poder refactorizar miles de líneas… Y sin la ansiedad de que se te pasó un detalle importante.
 
-I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
+He puesto mucho énfasis en hacer que Elm sea fácil de aprender y usar, así que todo lo que pido de ti es que le des una oportunidad y formes tu opinión. Espero que sea una grata sorpresa.
