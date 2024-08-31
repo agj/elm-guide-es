@@ -32,3 +32,24 @@ Ahora ya tendrás todo configurado. Las tareas ejecutables están gestionadas co
 [nix-installer]: https://github.com/DeterminateSystems/nix-installer
 [flakes]: https://nixos.wiki/wiki/Flakes
 [direnv]: https://direnv.net/
+
+## Traduciendo
+
+El objetivo central de esta traducción es **contribuir a diseminar el uso de Elm y sus ideas en la comunidad hispanohablante de programadores**, particularmente de Hispanoamérica. Por supuesto, más allá de este grupo principal, todos son bienvenidos a hacer uso de esta traducción.
+
+Los siguientes son otros ideales y directrices para este proyecto.
+
+La idea es conservar el tono original del texto en inglés, que intenta ser **cercano y amistoso**, jamás críptico o rebuscado. Tratamos al lector de “tú” y no de “usted”.
+
+Dicho esto, la traducción está pensada para ser leída por gente de toda Hispanoamérica. Preferimos **no usar localismos** que sean difíciles de entender por gente de otras partes. Por lo mismo, evitamos usar mucho coloquialismo, ya que éstos son regionales por naturaleza.
+
+Queremos que cualquier persona se sienta incluída cuando lea nuestra traducción, por lo que preferimos usar **lenguaje neutro al género**. La [“Guía para el uso de un lenguaje inclusivo al género”][onu-genero] de la ONU puede servir para obtener ideas sobre cómo cumplir ese objetivo.
+
+La disciplina de la informática es demasiado anglocéntrica. Gran parte de la terminología tiene origen en palabras cotidianas del inglés, pero al usarlas tal cual en español se vuelven jerga confusa. A través de esta traducción queremos también acercar a hablantes de español a la disciplina en general, por lo que preferimos **evitar el uso de términos literales del inglés** cuando exista una buena alternativa en español.
+
+[onu-genero]: https://authoring.prod.unwomen.org/sites/default/files/Headquarters/Attachments/Sections/Library/Gender-inclusive%20language/Guidelines-on-gender-inclusive-language-es.pdf
+
+### Referencias útiles
+
+- [Traducción del libro Pro Git](https://github.com/progit/progit2-es)
+- [Traducción del libro The Rust Programming Language](https://github.com/RustLangES/rust-book-es)
