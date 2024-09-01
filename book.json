@@ -1,6 +1,6 @@
 {
-  "title": "An Introduction to Elm",
-  "description": "Learn the basics of Elm. Build applications. Learn functional programming.",
+  "title": "Introducción a Elm",
+  "description": "Aprende Elm. Construye aplicaciones. Aprende programación funcional.",
   "author": "Evan Czaplicki",
   "root": "book",
   "plugins": ["youtube", "elm-repl", "bulk-redirect", "-sharing"],

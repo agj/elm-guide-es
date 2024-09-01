@@ -45,7 +45,7 @@ Dicho esto, la traducción está pensada para ser leída por gente de toda Hispa
 
 Queremos que cualquier persona se sienta incluída cuando lea nuestra traducción, por lo que preferimos usar **lenguaje neutro al género**. La [“Guía para el uso de un lenguaje inclusivo al género”][onu-genero] de la ONU puede servir para obtener ideas sobre cómo cumplir ese objetivo.
 
-La disciplina de la informática es demasiado anglocéntrica. Gran parte de la terminología tiene origen en palabras cotidianas del inglés, pero al usarlas tal cual en español se vuelven jerga confusa. A través de esta traducción queremos también acercar a hablantes de español a la disciplina en general, por lo que preferimos **evitar el uso de términos literales del inglés** cuando exista una buena alternativa en español.
+La disciplina de la informática es demasiado anglocéntrica. Gran parte de la terminología tiene origen en palabras cotidianas del inglés, pero al usarlas tal cual en español se vuelven jerga confusa. A través de esta traducción queremos también acercar a hablantes de español a la disciplina en general, por lo que preferimos **evitar el uso de anglicismos** cuando exista una buena alternativa en español.
 
 [onu-genero]: https://authoring.prod.unwomen.org/sites/default/files/Headquarters/Attachments/Sections/Library/Gender-inclusive%20language/Guidelines-on-gender-inclusive-language-es.pdf
 
