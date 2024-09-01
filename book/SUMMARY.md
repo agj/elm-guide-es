@@ -6,7 +6,7 @@
   - [Botones](architecture/buttons.md)
   - [Campos de texto](architecture/text_fields.md)
   - [Formularios](architecture/forms.md)
-- [Types](types/README.md)
+- [Tipos](types/README.md)
   - [Reading Types](types/reading_types.md)
   - [Type Aliases](types/type_aliases.md)
   - [Custom Types](types/custom_types.md)

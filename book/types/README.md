@@ -1,10 +1,10 @@
-# Types
+# Tipos
 
-One of Elm's major benefits is that **users do not see runtime errors in practice**. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called _type inference_. The compiler figures out what _type_ of values flow in and out of all your functions.
+Uno de los más grandes beneficios de usar Elm es que **tus usuarios virtualmente no verán errores en tiempo de ejecución**. Esto ocurre porque el compilador de Elm puede analizar tu código muy rápidamente y saber cómo fluyen los valores a través de tu programa. Si existen formas de usar valors de manera inválida, el compilador te avisa con un mensaje de error amistoso. Esto se llama _inferencia de tipos_. El compilador resuelve los _tipos_ de los valores que fluyen a través de todas tus funciones.
 
-## An Example of Type Inference
+## Un ejemplo de inferencia de tipos
 
-The following code defines a `toFullName` function which extracts a person’s full name as a string:
+Este código define una función `toFullName` que extrae el nombre completo de una persona como `String`:
 
 ```elm
 toFullName person =
@@ -15,9 +15,9 @@ fullName =
     toFullName { fistName = "Hermann", lastName = "Hesse" }
 ```
 
-Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?
+Tal como en JavaScript o Python, sólo necesitamos escribir el código, sin anotaciones. Pero, ¿notaste el error?
 
-In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:
+En JavaScript, código equivalente a este respondería con `"undefined Hesse"`. ¡Ni siquiera sería un error! Con un poco de suerte, uno de tus usuarios te avisaría cuando lo vea durante el uso. Por otro lado, el compilador de Elm revisa tu código y te da esta retroalimentación:
 
 ```
 -- TYPE MISMATCH ---------------------------------------------------------------
@@ -39,8 +39,10 @@ Hint: I compared the record fields and found some potential typos.
     firstName <-> fistName
 ```
 
-It sees that `toFullName` is getting the wrong _type_ of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
+“El argumento a la función `toFullName` no calza. La función `toFullName` espera que el argumento sea: (…) Pero es: (…)”
 
-It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that _everything_ fits together properly just based on the source code.
+Se dio cuenta de que `toFullName` está recibiendo el _tipo_ de argumento incorrecto. La ayuda en _Hint_ también muestra que escribiste “fist” en vez de “first”.
 
-The better you understand types, the more the compiler feels like a friendly assistant. So let's start learning more!
+Es muy útil tener esta ayuda para identificar errores simples como este, pero es invaluable cuando tienes cientos de archivos de código y varios contribuyentes haciendo cambios. No importa cuán grande y compleja se vuelva la aplicación, el compilador de Elm revisa que _todo_ calce correctamente sólo en base a tu código.
+
+Mientras mejor entiendas los tipos, más sentirás que el compilador es como un asistente amigo. ¡Aprendamos más, entonces!
