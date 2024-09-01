@@ -2,9 +2,9 @@
 
 Nuestro primer ejemplo es un contador que puede incrementarse o decrementarse.
 
-Abajo está el programa completo. Si apretas el botón “Edit” puedes jugar con el código interactivamente en el editor online. Prueba cambiar el texto de uno de los botones. **¡Apreta el botón azul!**
+Abajo está el programa completo. Si apretas el botón “Editar” puedes jugar con el código interactivamente en el editor online. Prueba cambiar el texto de uno de los botones. **¡Apreta el botón azul!**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/buttons">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/buttons">Editar</a></div>
 
 ```elm
 import Browser

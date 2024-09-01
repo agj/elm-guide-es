@@ -4,7 +4,7 @@ Vamos a crear una simple aplicación que escribe al revés lo que pongas en un c
 
 Ahora abre este programa en el editor online. Revisa el tip que aparece cuando pones el cursor sobre la palabra `type`. **¡Apreta el botón azul!**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/text-fields">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/text-fields">Editar</a></div>
 
 ```elm
 import Browser
