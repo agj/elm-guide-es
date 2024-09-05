@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Reading Types · An Introduction to Elm</title>
+        <title>Leyendo tipos · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -95,7 +95,7 @@
                 <a href="../">
             
                     
-                    Introduction
+                    Introducción
             
                 </a>
             
@@ -108,7 +108,7 @@
                 <a href="../core_language.html">
             
                     
-                    Core Language
+                    Lo esencial del lenguaje
             
                 </a>
             
@@ -121,7 +121,7 @@
                 <a href="../architecture/">
             
                     
-                    The Elm Architecture
+                    Arquitectura Elm
             
                 </a>
             
@@ -135,7 +135,7 @@
                 <a href="../architecture/buttons.html">
             
                     
-                    Buttons
+                    Botones
             
                 </a>
             
@@ -148,7 +148,7 @@
                 <a href="../architecture/text_fields.html">
             
                     
-                    Text Fields
+                    Campos de texto
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="../architecture/forms.html">
             
                     
-                    Forms
+                    Formularios
             
                 </a>
             
@@ -179,7 +179,7 @@
                 <a href="./">
             
                     
-                    Types
+                    Tipos
             
                 </a>
             
@@ -193,7 +193,7 @@
                 <a href="reading_types.html">
             
                     
-                    Reading Types
+                    Leyendo tipos
             
                 </a>
             
@@ -206,7 +206,7 @@
                 <a href="type_aliases.html">
             
                     
-                    Type Aliases
+                    Alias de tipo
             
                 </a>
             
@@ -219,7 +219,7 @@
                 <a href="custom_types.html">
             
                     
-                    Custom Types
+                    Tipos personalizados
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Reading Types</a>
+        <a href=".." >Leyendo tipos</a>
     </h1>
 </div>
 
@@ -722,10 +722,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="reading-types">Reading Types</h1>
-<p>In the <a href="../core_language.html">Core Language</a> section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but with a new question in mind. What <strong>type</strong> of value is that?</p>
-<h2 id="primitives-and-lists">Primitives and Lists</h2>
-<p>Let's enter some simple expressions and see what happens:</p>
+                                <h1 id="leyendo-tipos">Leyendo tipos</h1>
+<p>En la sección <a href="../core_language.html"><em>Lo esencial del lenguaje</em></a> revisamos varios ejemplos interactivos para darnos una intuición general del lenguaje. Ahora vamos a volver a hacer lo mismo, pero con una nueva pregunta en mente. ¿Qué <strong>tipo</strong> de valor es este?</p>
+<h2 id="valores-primitivos-y-listas">Valores primitivos y listas</h2>
+<p>Ingresemos algunas expresiones simples y veamos qué pasa:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -747,15 +747,16 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Click on this black box ⬆️ and the cursor should start blinking. Type in <code>3.1415</code> and press the ENTER key. It should print out <code>3.1415</code> followed by the type <code>Float</code>.</p>
-<p>Okay, but what is going on here exactly? Each entry shows value along with what <strong>type</strong> of value it happens to be. You can read these examples out loud like this:</p>
+<p>Haz clic sobre esta caja negra ⬆️ y verás un cursor parpadeando. Escribe <code>3.1415</code> y apreta ENTER. Debería aparecer <code>3.1415</code> seguido del tipo <code>Float</code>.</p>
+<p>Okay, but what is going on here exactly? Each entry shows value along with what <strong>type</strong> of value it happens to be. You can read these examples out loud like this:
+Okay, pero ¿qué está ocurriendo aquí, exactamente? Cada fila muestra un valor junto con el <strong>tipo</strong> del valor al que corresponde. Puedes leer estos valores de esta forma:</p>
 <ul>
-<li>The value <code>"hello"</code> is a <code>String</code>.</li>
-<li>The value <code>False</code> is a <code>Bool</code>.</li>
-<li>The value <code>3</code> is an <code>Int</code>.</li>
-<li>The value <code>3.1415</code> is a <code>Float</code>.</li>
+<li>El valor <code>"hello"</code> es un <code>String</code>.</li>
+<li>El valor <code>False</code> es un <code>Bool</code>.</li>
+<li>El valor <code>3</code> es un <code>Int</code>.</li>
+<li>El valor <code>3.1415</code> es un <code>Float</code>.</li>
 </ul>
-<p>Elm is able to figure out the type of any value you enter! Let's see what happens with lists:</p>
+<p>El es capaz de reconocer el tipo de cualquier valor que ingreses. Veamos qué pasa con listas:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -772,14 +773,14 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>You can read these types as:</p>
+<p>Puedes leer estos tipos de esta forma:</p>
 <ol>
-<li>We have a <code>List</code> filled with <code>String</code> values.</li>
-<li>We have a <code>List</code> filled with <code>Float</code> values.</li>
+<li>Tenemos una <code>List</code> rellena con valores <code>String</code>.</li>
+<li>Tenemos una <code>List</code> rellena con valores <code>Float</code>.</li>
 </ol>
-<p>The <strong>type</strong> is a rough description of the particular value we are looking at.</p>
-<h2 id="functions">Functions</h2>
-<p>Let's see the type of some functions:</p>
+<p>El <strong>tipo</strong> es una descripción general del valor particular que estamos viendo.</p>
+<h2 id="funciones">Funciones</h2>
+<p>Veamos el tipo de algunas funciones:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -791,8 +792,8 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Try entering <code>round</code> or <code>sqrt</code> to see some other function types ⬆️</p>
-<p>The <code>String.length</code> function has type <code>String -&gt; Int</code>. This means it <em>must</em> take in a <code>String</code> argument, and it will definitely return an <code>Int</code> value. So let's try giving it an argument:</p>
+<p>Ingresa <code>round</code> o <code>sqrt</code> para ver otros tipos de funciones ⬆️</p>
+<p>La función <code>String.length</code> tiene el tipo <code>String -&gt; Int</code>. Esto significa que <em>tiene que</em> recibir un argumento <code>String</code>, y que definitivamente retornará un valor <code>Int</code>. Probemos pasarle un argumento:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -804,12 +805,12 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>So we start with a <code>String -&gt; Int</code> function and give it a <code>String</code> argument. This results in an <code>Int</code>.</p>
-<p>What happens when you do not give a <code>String</code> though? Try entering <code>String.length [1,2,3]</code> or <code>String.length True</code> to see what happens ⬆️</p>
-<p>You will find that a <code>String -&gt; Int</code> function <em>must</em> get a <code>String</code> argument!</p>
+<p>Tenemos una función <code>String -&gt; Int</code> y le pasamos un argumento <code>String</code>. Esto resulta en un <code>Int</code>.</p>
+<p>¿Y qué pasa cuando no le pasas un <code>String</code>? Prueba escribir <code>String.length [1,2,3]</code> o <code>String.length True</code> y ve lo que ocurre ⬆️</p>
+<p>Vas a darte cuenta de que una función <code>String -&gt; Int</code> <em>tiene que</em> recibir un argumento <code>String</code>.</p>
 <!-- prettier-ignore-start -->
 <blockquote>
-<p><strong>Note:</strong> Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:</p>
+<p><strong>Nota:</strong> Las funciones que reciben múltiples argumentos se escriben con varias flechas. Por ejemplo, esta es una función que recibe dos argumentos:</p>
 <p></p><div class="elm-repl show-types">
 [
     {
@@ -819,11 +820,11 @@
     }
 ]
 </div><p></p>
-<p>Giving two arguments like <code>String.repeat 3 "ha"</code> will produce <code>"hahaha"</code>. It works to think of <code>-&gt;</code> as a weird way to separate arguments, but I explain the real reasoning <a href="../appendix/function_types.html">here</a>. It is pretty neat!
+<p>Si le das los dos argumentos <code>String.repeat 3 "ha"</code>, el resultado será <code>"hahaha"</code>. Puedes considerar <code>-&gt;</code> como una forma rara de separar los argumentos, pero explico su real significado <a href="../appendix/function_types.html">aquí</a>. ¡Es bastante interesante!
 <!-- prettier-ignore-end --></p>
 </blockquote>
-<h2 id="type-annotations">Type Annotations</h2>
-<p>So far we have just let Elm figure out the types, but it also lets you write a <strong>type annotation</strong> on the line above a definition. So when you are writing code, you can say things like this:</p>
+<h2 id="anotaciones-de-tipo">Anotaciones de tipo</h2>
+<p>Hasta ahora hemos permitido que Elm determine los tipos, pero también podemos escribir una <strong>anotación de tipo</strong> en la lina justo arriba de una definición. Es decir que en nuestro código podemos escribir cosas como estas:</p>
 <pre><code class="lang-elm"><span class="hljs-title">half</span> : <span class="hljs-type">Float</span> -&gt; <span class="hljs-type">Float</span>
 <span class="hljs-title">half</span> n =
     n / <span class="hljs-number">2</span>
@@ -857,14 +858,14 @@
 <span class="hljs-comment">-- checkPower 9001 == "It's over 9000!!!"</span>
 <span class="hljs-comment">-- checkPower True -- error!</span>
 </code></pre>
-<p>Adding type annotations is not required, but it is definitely recommended! Benefits include:</p>
+<p>No es necesario añadir anotaciones de tipo, pero definitivamente te lo recomiendo. Estos son algunos beneficios:</p>
 <ol>
-<li><strong>Error Message Quality</strong> — When you add a type annotation, it tells the compiler what you are <em>trying</em> to do. Your implementation may have mistakes, and now the compiler can compare against your stated intent. “You said argument <code>powerLevel</code> was an <code>Int</code>, but it is getting used as a <code>String</code>!”</li>
-<li><strong>Documentation</strong> — When you revisit code later (or when a colleague visits it for the first time) it can be really helpful to see exactly what is going in and out of the function without having to read the implementation super carefully.</li>
+<li><strong>Calidad de los mensajes de error</strong> — Cuando escribes una anotación de tipo, le estás contando al compilador <em>tu intención</em>. Tu implementación puede que tenga errores, y el compilador puede comparar eso con tu intención. “Dijiste que el argumento <code>powerLevel</code> era <code>Int</code>, pero está siendo usado como <code>String</code>”.</li>
+<li><strong>Documentación</strong> — Cuando vuelvas a enfrentarte a tu código más tarde (o cuando un colega lo haga por primera vez) va a ser muy útil ver exactamente lo que recibe y devuelve una función sin tener que leer la implementación en detalle.</li>
 </ol>
-<p>People can make mistakes in type annotations though, so what happens if the annotation does not match the implementation? The compiler figures out all the types on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct. So you get better error messages <em>and</em> documentation always stays up to date!</p>
-<h2 id="type-variables">Type Variables</h2>
-<p>As you look through more Elm code, you will start to see type annotations with lower-case letters in them. A common example is the <code>List.length</code> function:</p>
+<p>Pero la gente puede cometer errores al escribir anotaciones de tipo, así que ¿qué pasa si la anotación no coincide con la implementación? El compilador determina todos los tipos por su cuenta y confirma que tu anotación coincide con la respuesta real. En otras palabras, el compilador siempre verificará que todas las anotaciones que escribas estén correctas. Así tendrás mejores mensajes de error <em>y además</em> tu documentación se mantendrá siempre al día.</p>
+<h2 id="variables-de-tipo">Variables de tipo</h2>
+<p>A medida que revises más código Elm, te irás dando cuenta de que existen anotaciones de tipo con letras en minúscula. Un ejemplo común es el de la función <code>List.length</code>:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -876,7 +877,7 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Notice that lower-case <code>a</code> in the type? That is called a <strong>type variable</strong>. It can vary depending on how <a href="https://package.elm-lang.org/packages/elm/core/latest/List#length" target="_blank"><code>List.length</code></a> is used:</p>
+<p>Fíjate en esa <code>a</code> minúscula en el tipo. Esto se llama una <strong>variable de tipo</strong>. Puede cambiar según cómo se use <a href="https://package.elm-lang.org/packages/elm/core/latest/List#length" target="_blank"><code>List.length</code></a>:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -898,7 +899,7 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>We just want the length, so it does not matter what is in the list. So the type variable <code>a</code> is saying that we can match any type. Let’s look at another common example:</p>
+<p>Sólo necesitamos el largo de la lista, así que no nos importa lo que contenga la lista. Así que el la variable de tipo <code>a</code> nos dice que puede calzar con cualquier tipo. Veamos otro ejemplo común:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -920,12 +921,13 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Again, the type variable <code>a</code> can vary depending on how <a href="https://package.elm-lang.org/packages/elm/core/latest/List#reverse" target="_blank"><code>List.reverse</code></a> is used. But in this case, we have an <code>a</code> in the argument and in the result. This means that if you give a <code>List Int</code> you must get a <code>List Int</code> as well. Once we decide what <code>a</code> is, that’s what it is everywhere.</p>
+<p>Otra vez, la variable de tipo <code>a</code> puede cambiar según cómo <a href="https://package.elm-lang.org/packages/elm/core/latest/List#reverse" target="_blank"><code>List.reverse</code></a> sea usada. Pero en este caso, tenemos una <code>a</code> en el argumento y en el resultado. Esto significa que si le das una <code>List Int</code> deberás recibir una <code>List Int</code> también. Una vez que decidimos lo que es esa <code>a</code>, será lo mismo después también.</p>
 <blockquote>
-<p><strong>Note:</strong> Type variables must start with a lower-case letter, but they can be full words. We could write the type of <code>List.length</code> as <code>List value -&gt; Int</code> and we could write the type of <code>List.reverse</code> as <code>List element -&gt; List element</code>. It is fine as long as they start with a lower-case letter. Type variables <code>a</code> and <code>b</code> are used by convention in many places, but some type annotations benefit from more specific names.</p>
+<p><strong>Nota:</strong> Las variables de tipo deben empezar con una letra minúscula, pero pueden ser palabras completas. Podemos escribir el tipo de <code>List.length</code> como <code>List value -&gt; Int</code> y podríamos escribir el tipo de <code>List.reverse</code> como <code>List element -&gt; List element</code>. Funciona siempre y cuando comiencen con una letra minúscula. Las variables de tipo <code>a</code> y <code>b</code> son usadas por convención en muchos lugares, pero algunas anotaciones de tipo quedan mejor con nombres más específicos.</p>
 </blockquote>
-<h2 id="constrained-type-variables">Constrained Type Variables</h2>
-<p>There is a special variant of type variables in Elm called <strong>constrained</strong> type variables. The most common example is the <code>number</code> type. The <a href="https://package.elm-lang.org/packages/elm/core/latest/Basics#negate" target="_blank"><code>negate</code></a> function uses it:</p>
+<h2 id="variables-limitadas-de-tipo">Variables limitadas de tipo</h2>
+<p>There is a special variant of type variables in Elm called <strong>constrained</strong> type variables. The most common example is the <code>number</code> type. The <a href="https://package.elm-lang.org/packages/elm/core/latest/Basics#negate" target="_blank"><code>negate</code></a> function uses it:
+Hay una variante especial de las variables de tipo en Elm que se llama variables <strong>limitadas</strong> de tipo. El ejemplo más común es el del tipo <code>number</code>. La función <a href="https://package.elm-lang.org/packages/elm/core/latest/Basics#negate" target="_blank"><code>negate</code></a> la usa:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -937,17 +939,17 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Try expressions like <code>negate 3.1415</code> and <code>negate (round 3.1415)</code> and <code>negate "hi"</code> ⬆️</p>
-<p>Normally type variables can get filled in with anything, but <code>number</code> can only be filled in by <code>Int</code> and <code>Float</code> values. It <em>constrains</em> the possibilities.</p>
-<p>The full list of constrained type variables is:</p>
+<p>Prueba escribir expresiones como <code>negate 3.1415</code> o <code>negate (round 3.1415)</code> o <code>negate "hi"</code> ⬆️</p>
+<p>Normalmente, las variables de tipo pueden rellenarse con cualquier cosa, pero <code>number</code> sólo puede rellenarse con valores <code>Int</code> y <code>Float</code>. <em>Limita</em> las posibilidades.</p>
+<p>La lista completa de variables limitadas de tipo es:</p>
 <ul>
-<li><code>number</code> permits <code>Int</code> and <code>Float</code></li>
-<li><code>appendable</code> permits <code>String</code> and <code>List a</code></li>
-<li><code>comparable</code> permits <code>Int</code>, <code>Float</code>, <code>Char</code>, <code>String</code>, and lists/tuples of <code>comparable</code> values</li>
-<li><code>compappend</code> permits <code>String</code> and <code>List comparable</code></li>
+<li><code>number</code> permite <code>Int</code> y <code>Float</code></li>
+<li><code>appendable</code> permite <code>String</code> y <code>List a</code></li>
+<li><code>comparable</code> permite <code>Int</code>, <code>Float</code>, <code>Char</code>, <code>String</code>, y listas o tuplas de valores <code>comparable</code></li>
+<li><code>compappend</code> permite <code>String</code> y <code>List comparable</code></li>
 </ul>
-<p>These constrained type variables exist to make operators like <code>(+)</code> and <code>(&lt;)</code> a bit more flexible.</p>
-<p>By now we have covered types for values and functions pretty well, but what does this look like when we start wanting more complex data structures?</p>
+<p>Estas variables limitadas de tipo existen para que ciertos operadores como <code>(+)</code> y <code>(&lt;)</code> puedan ser un poco más flexibles.</p>
+<p>Ya cubrimos bastante bien los tipos de valores y funciones, pero ¿cómo se ve esto cuando empezamos a necesitar estructuras de datos más complejas?</p>
 
                                 
                                 </section>
@@ -975,12 +977,12 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Types">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Tipos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="type_aliases.html" class="navigation navigation-next " aria-label="Next page: Type Aliases">
+                <a href="type_aliases.html" class="navigation navigation-next " aria-label="Next page: Alias de tipo">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -991,7 +993,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Reading Types","level":"1.4.1","depth":2,"next":{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},"previous":{"title":"Types","level":"1.4","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Reading Types","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Custom Types","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"types/reading_types.md","mtime":"2024-08-25T16:41:14.565Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Leyendo tipos","level":"1.4.1","depth":2,"next":{"title":"Alias de tipo","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},"previous":{"title":"Tipos","level":"1.4","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Leyendo tipos","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Alias de tipo","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/reading_types.md","mtime":"2024-09-01T17:19:14.048Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

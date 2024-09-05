@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Forms · An Introduction to Elm</title>
+        <title>Formularios · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -95,7 +95,7 @@
                 <a href="../">
             
                     
-                    Introduction
+                    Introducción
             
                 </a>
             
@@ -108,7 +108,7 @@
                 <a href="../core_language.html">
             
                     
-                    Core Language
+                    Lo esencial del lenguaje
             
                 </a>
             
@@ -121,7 +121,7 @@
                 <a href="./">
             
                     
-                    The Elm Architecture
+                    Arquitectura Elm
             
                 </a>
             
@@ -135,7 +135,7 @@
                 <a href="buttons.html">
             
                     
-                    Buttons
+                    Botones
             
                 </a>
             
@@ -148,7 +148,7 @@
                 <a href="text_fields.html">
             
                     
-                    Text Fields
+                    Campos de texto
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="forms.html">
             
                     
-                    Forms
+                    Formularios
             
                 </a>
             
@@ -179,7 +179,7 @@
                 <a href="../types/">
             
                     
-                    Types
+                    Tipos
             
                 </a>
             
@@ -193,7 +193,7 @@
                 <a href="../types/reading_types.html">
             
                     
-                    Reading Types
+                    Leyendo tipos
             
                 </a>
             
@@ -206,7 +206,7 @@
                 <a href="../types/type_aliases.html">
             
                     
-                    Type Aliases
+                    Alias de tipo
             
                 </a>
             
@@ -219,7 +219,7 @@
                 <a href="../types/custom_types.html">
             
                     
-                    Custom Types
+                    Tipos personalizados
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Forms</a>
+        <a href=".." >Formularios</a>
     </h1>
 </div>
 
@@ -722,10 +722,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="forms">Forms</h1>
-<p>Now we will make a rudimentary form. It has a field for your name, a field for your password, and a field to verify that password. We will also do some very simple validation to check if the passwords match.</p>
-<p>I included the full program below. Click the blue "Edit" button to mess with it in the online editor. Try introducing a typo to see some error messages. Try misspelling a record field like <code>password</code> or a function like <code>placeholder</code>. <strong>Click the blue button now!</strong></p>
-<div class="edit-link"><a href="https://elm-lang.org/examples/forms" target="_blank">Edit</a></div>
+                                <h1 id="formularios">Formularios</h1>
+<p>Vamos a crear un pequeño formulario. Tiene un campo para tu nombre, otro para tu clave, y otro para verificar la clave. También vamos a hacer un poco de validación para asegurarnos de que ambas claves son iguales.</p>
+<p>Abajo tienes el programa completo. Puedes abrirlo en el editor online. Trata de escribir algo mal para ver mensajes de error. Por ejemplo, cambia el nombre de un campo, como <code>password</code>, o de una función, como <code>placeholder</code>. <strong>¡Apreta el botón azul!</strong></p>
+<div class="edit-link"><a href="https://elm-lang.org/examples/forms" target="_blank">Editar</a></div>
 
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
 <span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (..)
@@ -807,24 +807,24 @@
     <span class="hljs-keyword">else</span>
         div [ style <span class="hljs-string">"color"</span> <span class="hljs-string">"red"</span> ] [ text <span class="hljs-string">"Passwords do not match!"</span> ]
 </code></pre>
-<p>This is pretty similar to our <a href="text_fields.html">text field example</a> but with more fields.</p>
-<h1 id="model">Model</h1>
-<p>I always start out by guessing at the <code>Model</code>. We know there are going to be three text fields, so let's just go with that:</p>
+<p>Es bastante similar a nuestro <a href="text_fields.html">ejemplo de campos de texto</a>, pero con más campos.</p>
+<h1 id="modelo">Modelo</h1>
+<p>Yo siempre empiezo pensando en el <code>Modelo</code>. Sabemos que vamos a necesitar tres campos de texto, así que partamos con eso.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Model</span> =
     { name : <span class="hljs-type">String</span>
     , password : <span class="hljs-type">String</span>
     , passwordAgain : <span class="hljs-type">String</span>
     }
 </code></pre>
-<p>I usually try to start with a minimal model, maybe with just one field. I then attempt to write the <code>view</code> and <code>update</code> functions. That often reveals that I need to add more to my <code>Model</code>. Building the model gradually like this means I can have a working program through the development process. It may not have all the features yet, but it is getting there!</p>
-<h2 id="update">Update</h2>
-<p>Sometimes you have a pretty good idea of what the basic update code will look like. We know we need to be able to change our three fields, so we need messages for each case.</p>
+<p>Normalmente empiezo con un modelo mínimo, tal vez con un sólo campo. Después intento escribir las funciones <code>view</code> y <code>update</code>. En ese proceso suelo sentir la necesidad de guardar más cosas en <code>Model</code>. Si usamos esta estrategia de construir el modelo gradualmente, podemos tener un programa funcional en cada etapa de su desarrollo. No tendrá todas las funcionalidades desde un principio, pero llegaremos ahí de a poco.</p>
+<h2 id="actualización">Actualización</h2>
+<p>Hay veces en que tenemos una idea basante completa de cómo se vería el código de actualización. Sabemos que necesitamos cambiar los tres campos, así que necesitamos mensajes para cada caso.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
     = <span class="hljs-type">Name</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">Password</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">PasswordAgain</span> <span class="hljs-type">String</span>
 </code></pre>
-<p>This means our <code>update</code> needs a case for all three variations:</p>
+<p>Esto significa que <code>update</code> necesita una rama para cada variante:</p>
 <pre><code class="lang-elm"><span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Model</span>
 <span class="hljs-title">update</span> msg model =
     <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
@@ -837,10 +837,10 @@
         <span class="hljs-type">PasswordAgain</span> password -&gt;
             { model | passwordAgain = password }
 </code></pre>
-<p>Each case uses the record update syntax to make sure the appropriate field is transformed. This is similar to the previous example, except with more cases.</p>
-<p>We get a little bit fancier than normal in our <code>view</code> though.</p>
-<h2 id="view">View</h2>
-<p>This <code>view</code> function is using <strong>helper functions</strong> to make things a bit more organized:</p>
+<p>Cada rama usa la sintaxis de actualización de registros para transformar el campo correspondiente del modelo. Esto se parece a lo que hicimos en el ejemplo anterior, pero con más casos.</p>
+<p>En <code>view</code> vamos a tener que hacer un poco más de trabajo.</p>
+<h2 id="vista">Vista</h2>
+<p>Esta función <code>view</code> usa <strong>funciones de ayuda</strong> para organizar mejor la cosas:</p>
 <pre><code class="lang-elm"><span class="hljs-title">view</span> : <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Html</span> <span class="hljs-type">Msg</span>
 <span class="hljs-title">view</span> model =
     div []
@@ -850,15 +850,15 @@
         , viewValidation model
         ]
 </code></pre>
-<p>In previous examples we were using <code>input</code> and <code>div</code> directly. Why did we stop?</p>
-<p>The neat thing about HTML in Elm is that <code>input</code> and <code>div</code> are just normal functions. They take (1) a list of attributes and (2) a list of child nodes. <strong>Since we are using normal Elm functions, we have the full power of Elm to help us build our views!</strong> We can refactor repetitive code out into customized helper functions. That is exactly what we are doing here!</p>
-<p>So our <code>view</code> function has three calls to <code>viewInput</code>:</p>
+<p>En ejemplos anteriores usábamos <code>input</code> y <code>div</code> directamente. ¿Por qué aquí no?</p>
+<p>Lo bueno del HTML en Elm es que <code>input</code> y <code>div</code> son sólo funciones comunes y corrientes. Reciben (1) una lista de atributos, y (2) una lista de nodos hijo. <strong>Ya que son sólo funciones, tenemos el poder completo de Elm para construir nuestras vistas.</strong> Podemos refactorizar código repetitivo y ponerlo en funciones de ayuda de nuestra propia creación. Y eso es justamente lo que estamos haciendo aquí.</p>
+<p>La función <code>view</code> hace tres llamadas a <code>viewInput</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">viewInput</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">String</span> -&gt; <span class="hljs-type">String</span> -&gt; (<span class="hljs-type">String</span> -&gt; msg) -&gt; <span class="hljs-type">Html</span> msg
 <span class="hljs-title">viewInput</span> t p v toMsg =
     input [ type_ t, placeholder p, value v, onInput toMsg ] []
 </code></pre>
-<p>This means that writing <code>viewInput "text" "Name" "Bill" Name</code> in Elm would turn into an HTML value like <code>&lt;input type="text" placeholder="Name" value="Bill"&gt;</code> when shown on screen.</p>
-<p>The fourth entry is more interesting. It is a call to <code>viewValidation</code>:</p>
+<p>Esto significa que si escribimos <code>viewInput "text" "Name" "Bill" Name</code> en Elm, se convertiría en un valor HTML como <code>&lt;input type="text" placeholder="Name" value="Bill"&gt;</code> cuando se despliegue en pantalla.</p>
+<p>El cuarto hijo es más interesante. Es una llamada a <code>viewValidation</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">viewValidation</span> : <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Html</span> msg
 <span class="hljs-title">viewValidation</span> model =
     <span class="hljs-keyword">if</span> model.password == model.passwordAgain <span class="hljs-keyword">then</span>
@@ -867,17 +867,17 @@
     <span class="hljs-keyword">else</span>
         div [ style <span class="hljs-string">"color"</span> <span class="hljs-string">"red"</span> ] [ text <span class="hljs-string">"Passwords do not match!"</span> ]
 </code></pre>
-<p>This function first compares the two passwords. If they match, you get green text and a positive message. If they do not match, you get red text and a helpful message.</p>
-<p>These helper functions begin to show the benefits of having our HTML library be normal Elm code. We <em>could</em> put all that code into our <code>view</code>, but making helper functions is totally normal in Elm, even in view code. "Is this getting hard to understand? Maybe I can break out a helper function!"</p>
+<p>Esta función primero compara las dos claves. Si son iguales, retorna un texto en verde y un mensaje de afirmación. Si no son iguales, retorna un texto en rojo y un mensaje de ayuda.</p>
+<p>Estas funciones de ayuda ya empiezan a mostrar el beneficio de que nuestra librería de HTML sea sólo código Elm. Podríamos haber puesto todo este código dentro de <code>view</code>, pero crear funciones de ayuda es completamente normal en Elm, incluyendo en el código de la vista. “Parece que está un poco difícil de entender. Probemos extrayéndolo a una función de ayuda”.</p>
 <blockquote>
-<p><strong>Exercises:</strong> Go look at this example in the online editor <a href="https://elm-lang.org/examples/forms" target="_blank">here</a>. Try to add the following features to the <code>viewValidation</code> helper function:</p>
+<p><strong>Ejercicios:</strong> <a href="https://elm-lang.org/examples/forms" target="_blank">Revisa este ejemplo</a> en el editor online. Intenta añadir las siguientes funcionalidades a la función <code>viewValidation</code>:</p>
 <ul>
-<li>Check that the password is longer than 8 characters.</li>
-<li>Make sure the password contains upper case, lower case, and numeric characters.</li>
+<li>Confirma que la clave es más larga que 8 caracteres.</li>
+<li>Asegura que la clave tiene letras mayúsculas, minúsculas y dígitos numéricos.</li>
 </ul>
-<p>Use the functions from the <a href="https://package.elm-lang.org/packages/elm/core/latest/String" target="_blank"><code>String</code></a> module for these exercises!</p>
-<p><strong>Warning:</strong> We need to learn a lot more before we start sending HTTP requests. Keep reading all the way to the section on HTTP before trying it yourself. It will be significantly easier with proper guidance!</p>
-<p><strong>Note:</strong> It seems like efforts to make generic validation libraries have not been too successful. I think the problem is that the checks are usually best captured by normal Elm functions. Take some args, give back a <code>Bool</code> or <code>Maybe</code>. E.g. Why use a library to check if two strings are equal? So as far as we know, the simplest code comes from writing the logic for your particular scenario without any special extras. So definitely give that a shot before deciding you need something more complex!</p>
+<p>Usa las funciones del módulo <a href="https://package.elm-lang.org/packages/elm/core/latest/String" target="_blank"><code>String</code></a> para completar estos ejercicios.</p>
+<p><strong>Advertencia:</strong> Necestamos aprender mucho más antes de poder enviar una solicitud HTTP. Sigue leyendo en orden hasta llegar a la sección sobre HTTP antes de intentarlo por tu cuenta. Te va a resultar mucho más fácil siguiendo la guía.</p>
+<p><strong>Nota:</strong> Parece que los intentos de hacer librerías genéricas de validación no han dado muchos frutos. Creo que el problema es que los chequeos son más comúnmente resueltos con funciones normales. Éstas reciben argumentos y retornan un <code>Bool</code> o un <code>Maybe</code>. O sea, ¿para qué usar una librería para revisar que dos textos son iguales? De lo que hemos aprendido, el código más simple surge al escribir la lógica para tu caso particular, sin extras añadidos. Así que siempre intenta hacer esto antes de decidir que necesitas una solución más compleja.</p>
 </blockquote>
 
                                 
@@ -906,12 +906,12 @@
 
             
                 
-                <a href="text_fields.html" class="navigation navigation-prev " aria-label="Previous page: Text Fields">
+                <a href="text_fields.html" class="navigation navigation-prev " aria-label="Previous page: Campos de texto">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../types/" class="navigation navigation-next " aria-label="Next page: Types">
+                <a href="../types/" class="navigation navigation-next " aria-label="Next page: Tipos">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -922,7 +922,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Forms","level":"1.3.3","depth":2,"next":{"title":"Types","level":"1.4","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Reading Types","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Custom Types","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}]},"previous":{"title":"Text Fields","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"architecture/forms.md","mtime":"2024-08-25T16:41:13.361Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Formularios","level":"1.3.3","depth":2,"next":{"title":"Tipos","level":"1.4","depth":1,"path":"types/README.md","ref":"types/README.md","articles":[{"title":"Leyendo tipos","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Alias de tipo","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}]},"previous":{"title":"Campos de texto","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"architecture/forms.md","mtime":"2024-09-01T16:25:38.323Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

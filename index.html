@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Introduction · An Introduction to Elm</title>
+        <title>Introducción · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -93,7 +93,7 @@
                 <a href="./">
             
                     
-                    Introduction
+                    Introducción
             
                 </a>
             
@@ -106,7 +106,7 @@
                 <a href="core_language.html">
             
                     
-                    Core Language
+                    Lo esencial del lenguaje
             
                 </a>
             
@@ -119,7 +119,7 @@
                 <a href="architecture/">
             
                     
-                    The Elm Architecture
+                    Arquitectura Elm
             
                 </a>
             
@@ -133,7 +133,7 @@
                 <a href="architecture/buttons.html">
             
                     
-                    Buttons
+                    Botones
             
                 </a>
             
@@ -146,7 +146,7 @@
                 <a href="architecture/text_fields.html">
             
                     
-                    Text Fields
+                    Campos de texto
             
                 </a>
             
@@ -159,7 +159,7 @@
                 <a href="architecture/forms.html">
             
                     
-                    Forms
+                    Formularios
             
                 </a>
             
@@ -177,7 +177,7 @@
                 <a href="types/">
             
                     
-                    Types
+                    Tipos
             
                 </a>
             
@@ -191,7 +191,7 @@
                 <a href="types/reading_types.html">
             
                     
-                    Reading Types
+                    Leyendo tipos
             
                 </a>
             
@@ -204,7 +204,7 @@
                 <a href="types/type_aliases.html">
             
                     
-                    Type Aliases
+                    Alias de tipo
             
                 </a>
             
@@ -217,7 +217,7 @@
                 <a href="types/custom_types.html">
             
                     
-                    Custom Types
+                    Tipos personalizados
             
                 </a>
             
@@ -705,7 +705,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Introducción</a>
     </h1>
 </div>
 
@@ -720,18 +720,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="an-introduction-to-elm">An Introduction to Elm</h1>
-<p><strong>Elm is a functional language that compiles to JavaScript.</strong> It helps you make websites and web apps. It has a strong emphasis on simplicity and quality tooling.</p>
-<p>This guide will:</p>
+                                <h1 id="introducción-a-elm">Introducción a Elm</h1>
+<p><strong><a href="https://elm-lang.org/" target="_blank">Elm</a> es un lenguaje de programación funcional que compila a JavaScript.</strong> Está hecho para construir sitios y aplicaciones web. Tiene un gran énfasis en ser simple y ofrecer herramientas de calidad.</p>
+<p>Esta guía va a:</p>
 <ul>
-<li>Teach you the fundamentals of programming in Elm.</li>
-<li>Show you how to make interactive apps with <strong>The Elm Architecture</strong>.</li>
-<li>Emphasize principles and patterns that generalize to programming in any language.</li>
+<li>Enseñarte los fundamentos de programar usando Elm.</li>
+<li>Mostrarte cómo crear aplicaciones interactivas usando la <strong>Arquitectura Elm</strong>.</li>
+<li>Enfatizar principios y patrones que pueden generalizarse al programar en cualquier lenguaje.</li>
 </ul>
-<p>By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.</p>
-<p>If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!</p>
-<h2 id="a-quick-sample">A Quick Sample</h2>
-<p>Here is a little program that lets you increment and decrement a number:</p>
+<p>Al terminar, espero que no sólo seas capaz de crear excelentes aplicaciones web con Elm, pero que también entiendas las ideas y patrones centrales que crean la experiencia de usar Elm.</p>
+<p>Si aún no estás comprometido con usar Elm, te garantizo que si le das una oportunidad y construyes un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Es muy fácil aplicar las mismas ideas.</p>
+<h2 id="sobre-la-traducción">Sobre la traducción</h2>
+<p>Antes de empezar, un poquito de contexto. Estás leyendo la traducción no oficial al español hispanoamericano del libro de Evan Czaplicki.</p>
+<p>Toma en cuenta que esta traducción aún está en desarrollo, así que hay cosas que no están traducidas, errores, y funcionalidades incompletas. Aún así, le hemos puesto mucho cariño y esperamos que te sea útil. ❤️</p>
+<ul>
+<li><a href="https://guide.elm-lang.org/" target="_blank">El libro original en inglés.</a></li>
+<li><a href="https://github.com/agj/elm-guide-es" target="_blank">Repositorio en Github de esta traducción.</a> ¡Entra aquí si quieres aportar!</li>
+<li>Revisa los cambios en el original que aún no</li>
+</ul>
+<h2 id="un-ejemplo-sencillo">Un ejemplo sencillo</h2>
+<p>Ahora sí, entremos en materia. Este es un pequeño programa que te permite incrementar y decrementar un número:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
 <span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, button, div, text)
 <span class="hljs-keyword">import</span> Html.Events <span class="hljs-keyword">exposing</span> (onClick)
@@ -762,18 +770,18 @@
         , button [ onClick <span class="hljs-type">Increment</span> ] [ text <span class="hljs-string">"+"</span> ]
         ]
 </code></pre>
-<p>Try it out in the online editor <a href="https://elm-lang.org/examples/buttons" target="_blank">here</a>.</p>
-<p>The code can definitely look unfamiliar at first, so we will get into how this example works soon!</p>
-<h2 id="why-a-functional-language">Why a functional <em>language</em>?</h2>
-<p>You can get some benefits from programming in a functional <em>style</em>, but there are some things you can only get from a functional <em>language</em> like Elm:</p>
+<p>Pruébalo usando el editor online, <a href="https://elm-lang.org/examples/buttons" target="_blank">aquí</a>.</p>
+<p>Al principio, seguro que el código te parecerá extraño, así que pronto vamos a entrar en cómo funciona este ejemplo.</p>
+<h2 id="¿por-qué-un-lenguaje-funcional">¿Por qué un lenguaje <em>funcional</em>?</h2>
+<p>Puedes obtener ciertos beneficios programando en un <em>estilo</em> funcional, pero hay algunas cosas que sólo puedes obtener de un <em>lenguaje</em> funcional como Elm:</p>
 <ul>
-<li>No runtime errors in practice.</li>
-<li>Friendly error messages.</li>
-<li>Reliable refactoring.</li>
-<li>Automatically enforced semantic versioning for all Elm packages.</li>
+<li>Tener virtualmente ningún error en tiempo de ejecución.</li>
+<li>Mensajes de error amistosos.</li>
+<li>Capacidad de refactorizar sin peligro.</li>
+<li>Versionado semántico (<em>semver</em>) para todos los paquetes Elm.</li>
 </ul>
-<p>No combination of JS libraries can give you all of these guarantees. They come from the design of the language itself! And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so <strong>confident</strong> while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important!</p>
-<p>I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!</p>
+<p>Ninguna combinación de librerías de JS te dará estas garantías, ya que provienen del diseño del lenguaje mismo. Y gracias a estas garantías, es muy común que programadores de Elm digan que sienten <strong>más confianza</strong> que nunca al programar. Confianza en poder rápidamente añadir nuevas funcionalidades; confianza en poder refactorizar miles de líneas… Y sin la ansiedad de que se te pasó un detalle importante.</p>
+<p>He puesto mucho énfasis en hacer que Elm sea fácil de aprender y usar, así que todo lo que pido de ti es que le des una oportunidad y formes tu opinión. Espero que sea una grata sorpresa.</p>
 
                                 
                                 </section>
@@ -802,7 +810,7 @@
             
                 
                 
-                <a href="core_language.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Core Language">
+                <a href="core_language.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Lo esencial del lenguaje">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -813,7 +821,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Core Language","level":"1.2","depth":1,"path":"core_language.md","ref":"core_language.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"README.md","mtime":"2024-08-25T16:41:14.457Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introducción","level":"1.1","depth":1,"next":{"title":"Lo esencial del lenguaje","level":"1.2","depth":1,"path":"core_language.md","ref":"core_language.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"README.md","mtime":"2024-09-02T05:02:29.904Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

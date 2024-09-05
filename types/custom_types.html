@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Custom Types · An Introduction to Elm</title>
+        <title>Tipos personalizados · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -95,7 +95,7 @@
                 <a href="../">
             
                     
-                    Introduction
+                    Introducción
             
                 </a>
             
@@ -108,7 +108,7 @@
                 <a href="../core_language.html">
             
                     
-                    Core Language
+                    Lo esencial del lenguaje
             
                 </a>
             
@@ -121,7 +121,7 @@
                 <a href="../architecture/">
             
                     
-                    The Elm Architecture
+                    Arquitectura Elm
             
                 </a>
             
@@ -135,7 +135,7 @@
                 <a href="../architecture/buttons.html">
             
                     
-                    Buttons
+                    Botones
             
                 </a>
             
@@ -148,7 +148,7 @@
                 <a href="../architecture/text_fields.html">
             
                     
-                    Text Fields
+                    Campos de texto
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="../architecture/forms.html">
             
                     
-                    Forms
+                    Formularios
             
                 </a>
             
@@ -179,7 +179,7 @@
                 <a href="./">
             
                     
-                    Types
+                    Tipos
             
                 </a>
             
@@ -193,7 +193,7 @@
                 <a href="reading_types.html">
             
                     
-                    Reading Types
+                    Leyendo tipos
             
                 </a>
             
@@ -206,7 +206,7 @@
                 <a href="type_aliases.html">
             
                     
-                    Type Aliases
+                    Alias de tipo
             
                 </a>
             
@@ -219,7 +219,7 @@
                 <a href="custom_types.html">
             
                     
-                    Custom Types
+                    Tipos personalizados
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Custom Types</a>
+        <a href=".." >Tipos personalizados</a>
     </h1>
 </div>
 
@@ -723,17 +723,17 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><strong>Note:</strong> Custom types used to be referred to as “union types” in Elm. Names from other communities include <a href="https://en.wikipedia.org/wiki/Tagged_union" target="_blank">tagged unions</a> and <a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank">ADTs</a>.</p>
+<p><strong>Nota:</strong> Los tipos personalizados solían llamarse “tipos de unión” en Elm. En otras partes puede que los hayas oído llamar como <a href="https://es.wikipedia.org/wiki/Tipo_de_dato_algebraico" target="_blank">“tipos de datos algebraicos”</a>, también.</p>
 </blockquote>
-<h1 id="custom-types">Custom Types</h1>
-<p>So far we have seen a bunch of types like <code>Bool</code>, <code>Int</code>, and <code>String</code>. But how do we define our own?</p>
-<p>Say we are making a chat room. Everyone needs a name, but maybe some users do not have a permanent account. They just give a name each time they show up.</p>
-<p>We can describe this situation by defining a <code>UserStatus</code> type, listing all the possible variations:</p>
+<h1 id="tipos-personalizados">Tipos personalizados</h1>
+<p>Hasta ahora hemos visto muchos tipos, como <code>Bool</code>, <code>Int</code> y <code>String</code>. Pero ¿cómo definimos nuestro propio tipo?</p>
+<p>Imaginemos que queremos crear un chat. Cada usuario necesita un nombre, pero tal vez algunos usuarios no tienen cuenta permanente, solamente escriben un nombre cada vez que entran.</p>
+<p>Podemos describir esta situación definiendo un tipo <code>UserStatus</code> que lista todas las posibles variaciones:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">UserStatus</span>
     = <span class="hljs-type">Regular</span>
     | <span class="hljs-type">Visitor</span>
 </code></pre>
-<p>The <code>UserStatus</code> type has two <strong>variants</strong>. Someone can be a <code>Regular</code> or a <code>Visitor</code>. So we could represent a user as a record like this:</p>
+<p>El tipo <code>UserStatus</code> tiene dos <strong>variantes</strong>. Una persona puede ser <code>Regular</code> o <code>Visitor</code>. Así que representamos un usuario usando un registro así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">UserStatus</span>
     = <span class="hljs-type">Regular</span>
     | <span class="hljs-type">Visitor</span>
@@ -752,8 +752,8 @@
 <span class="hljs-title">kate95</span> =
     { status = <span class="hljs-type">Visitor</span>, name = <span class="hljs-string">"kate95"</span> }
 </code></pre>
-<p>So now we can track if someone is a <code>Regular</code> with an account or a <code>Visitor</code> who is just passing through. It is not too tough, but we can make it simpler!</p>
-<p>Rather than creating a custom type and a type alias, we can represent all this with just a single custom type. The <code>Regular</code> and <code>Visitor</code> variants each have an associated data. In our case, the associated data is a <code>String</code> value:</p>
+<p>Ahora podemos llevar cuenta de si un usuario es <code>Regular</code>, o sea que tiene cuenta, o es <code>Visitor</code>, es decir visitante temporal. No está tan mal, pero podemos simplificarlo aún más.</p>
+<p>En vez de crear un tipo personalizado y un alias de tipo, podemos representar todo esto con un sólo tipo personalizado. Las variantes <code>Regular</code> y <code>Visitor</code> pueden llevar información asociada. En nuestro caso, la información es un valor <code>String</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">User</span>
     = <span class="hljs-type">Regular</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">Visitor</span> <span class="hljs-type">String</span>
@@ -766,8 +766,8 @@
 <span class="hljs-title">kate95</span> =
     <span class="hljs-type">Visitor</span> <span class="hljs-string">"kate95"</span>
 </code></pre>
-<p>The data is attached directly to the variant, so there is no need for the record anymore.</p>
-<p>Another benefit of this approach is that each variant can have different associated data. Say that <code>Regular</code> users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own custom type it is no problem. Let's add some associated data to the <code>Regular</code> variant in an interactive example:</p>
+<p>La información se asocia directamente a la variante, y ya no hay necesidad de definir un registro.</p>
+<p>Otro beneficio de esta manera de hacerlo es que cada variante puede tener distinta información asociada. Por ejemplo, los usuarios <code>Regular</code> podrían informar su edad al registrarse. No hay una buena manera de capturar eso con registros, pero cuando defines tu propio tipo personalizado, ya no es problema. Añadamos un poco de información a la variante <code>Regular</code> en un ejemplo interactivo:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -798,34 +798,34 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Try defining a <code>Regular</code> visitor with a name and age ⬆️</p>
-<p>We only added an age, but variants of a type can diverge quite dramatically. For example, maybe we want to add location for <code>Regular</code> users so we can suggest regional chat rooms. Add more associated data! Or maybe we want to have anonymous users. Add a third variant called <code>Anonymous</code>. Maybe we end up with:</p>
+<p>Define un usuario <code>Regular</code> con nombre y edad ⬆️</p>
+<p>Sólo añadimos una edad, pero cada variante en un tipo puede diverger mucho más. Por ejemplo, podríamos querer añadir información de ubicación a los usuarios <code>Regular</code>, para ofrecer chats regionales; basta con agregar esa información a su variante. O tal vez queremos tener usuarios anónimos también, y para eso podemos añadir una variante <code>Anonymous</code>.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">User</span>
     = <span class="hljs-type">Regular</span> <span class="hljs-type">String</span> <span class="hljs-type">Int</span> <span class="hljs-type">Location</span>
     | <span class="hljs-type">Visitor</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">Anonymous</span>
 </code></pre>
-<p>No problem! Let’s see some other examples now.</p>
-<h2 id="messages">Messages</h2>
-<p>In the architecture section, we saw a couple of examples of defining a <code>Msg</code> type. This sort of type is extremely common in Elm. In our chat room, we might define a <code>Msg</code> type like this:</p>
+<p>¡Así de fácil! Veamos más ejemplos.</p>
+<h2 id="mensajes">Mensajes</h2>
+<p>En la sección de arquitectura, vimos algunos ejemplos de definir un tipo <code>Msg</code>. Esta clase de tipo es extremadamente común en Elm. En nuestro chat, tal vez necesitemos un tipo <code>Msg</code> como este:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
     = <span class="hljs-type">PressedEnter</span>
     | <span class="hljs-type">ChangedDraft</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">ReceivedMessage</span> { user : <span class="hljs-type">User</span>, message : <span class="hljs-type">String</span> }
     | <span class="hljs-type">ClickedExit</span>
 </code></pre>
-<p>We have four variants. Some variants have no associated data, others have a bunch. Notice that <code>ReceivedMessage</code> actually has a record as associated data. That is totally fine. Any type can be associated data! This allows you to describe interactions in your application very precisely.</p>
-<h2 id="modeling">Modeling</h2>
-<p>Custom types become extremely powerful when you start modeling situations very precisely. For example, if you are waiting for some data to load, you might want to model it with a custom type like this:</p>
+<p>Tenemos cuatro variantes. Algunas variantes no llevan información asociada, otras llevan bastante. Fíjate en que <code>ReceivedMessage</code> lleva un registro asociado. Es totalmente normal. Cualquier tipo puede ser parte de esa información asociada. Esto te permite describir interacciones en tu aplicación en forma muy precisa.</p>
+<h2 id="modelado">Modelado</h2>
+<p>Los tipos personalizados se vuelven muy poderosos cuando empiezas a modelar situaciones en forma precisa. Por ejemplo, si estás esperando que se carguen ciertos datos, puedes querer un modelo con un tipo personalizado así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Profile</span>
     = <span class="hljs-type">Failure</span>
     | <span class="hljs-type">Loading</span>
     | <span class="hljs-type">Success</span> { name : <span class="hljs-type">String</span>, description : <span class="hljs-type">String</span> }
 </code></pre>
-<p>So you can start in the <code>Loading</code> state and then transition to <code>Failure</code> or <code>Success</code> depending on what happens. This makes it really simple to write a <code>view</code> function that always shows something reasonable when data is loading.</p>
-<p>Now we know how to create custom types, the next section will show how to use them!</p>
+<p>Empiezas en el estado <code>Loading</code>, y luego haces la transición a <code>Failure</code> o <code>Success</code> según lo que ocurra. Esto permite que sea muy fácil escribir una función <code>view</code> que siempre muestre algo sensato mientras se cargan los datos.</p>
+<p>¡Ya aprendimos a crear tipos personalizados! En la próxima sección vamos a ver cómo usarlos.</p>
 <blockquote>
-<p><strong>Note: Custom types are the most important feature in Elm.</strong> They have a lot of depth, especially once you get in the habit of trying to model scenarios more precisely. I tried to share some of this depth in <a href="../appendix/types_as_sets.html">Types as Sets</a> and <a href="../appendix/types_as_bits.html">Types as Bits</a> in the appendix. I hope you find them helpful!</p>
+<p><strong>Nota:</strong> <strong>Los tipos personalizados son la funcionalidad más importante de Elm.</strong> Tienen muchísima profundidad, especialmente cuando entres en el hábito de modelar situaciones en forma bien precisa. Traté de comunicar esta profundidad en los apéndices <a href="../appendix/types_as_sets.html">“Tipos como conjuntos”</a> y <a href="../appendix/types_as_bits.html">“Tipos como bits”</a>. Ojalá los encuentres útiles.</p>
 </blockquote>
 
                                 
@@ -854,7 +854,7 @@
 
             
                 
-                <a href="type_aliases.html" class="navigation navigation-prev " aria-label="Previous page: Type Aliases">
+                <a href="type_aliases.html" class="navigation navigation-prev " aria-label="Previous page: Alias de tipo">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -870,7 +870,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Custom Types","level":"1.4.3","depth":2,"next":{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]},"previous":{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"types/custom_types.md","mtime":"2024-08-25T16:41:14.504Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Tipos personalizados","level":"1.4.3","depth":2,"next":{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]},"previous":{"title":"Alias de tipo","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/custom_types.md","mtime":"2024-09-05T02:46:50.196Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

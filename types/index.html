@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Types · An Introduction to Elm</title>
+        <title>Tipos · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -95,7 +95,7 @@
                 <a href="../">
             
                     
-                    Introduction
+                    Introducción
             
                 </a>
             
@@ -108,7 +108,7 @@
                 <a href="../core_language.html">
             
                     
-                    Core Language
+                    Lo esencial del lenguaje
             
                 </a>
             
@@ -121,7 +121,7 @@
                 <a href="../architecture/">
             
                     
-                    The Elm Architecture
+                    Arquitectura Elm
             
                 </a>
             
@@ -135,7 +135,7 @@
                 <a href="../architecture/buttons.html">
             
                     
-                    Buttons
+                    Botones
             
                 </a>
             
@@ -148,7 +148,7 @@
                 <a href="../architecture/text_fields.html">
             
                     
-                    Text Fields
+                    Campos de texto
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="../architecture/forms.html">
             
                     
-                    Forms
+                    Formularios
             
                 </a>
             
@@ -179,7 +179,7 @@
                 <a href="./">
             
                     
-                    Types
+                    Tipos
             
                 </a>
             
@@ -193,7 +193,7 @@
                 <a href="reading_types.html">
             
                     
-                    Reading Types
+                    Leyendo tipos
             
                 </a>
             
@@ -206,7 +206,7 @@
                 <a href="type_aliases.html">
             
                     
-                    Type Aliases
+                    Alias de tipo
             
                 </a>
             
@@ -219,7 +219,7 @@
                 <a href="custom_types.html">
             
                     
-                    Custom Types
+                    Tipos personalizados
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Types</a>
+        <a href=".." >Tipos</a>
     </h1>
 </div>
 
@@ -722,10 +722,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="types">Types</h1>
-<p>One of Elm's major benefits is that <strong>users do not see runtime errors in practice</strong>. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called <em>type inference</em>. The compiler figures out what <em>type</em> of values flow in and out of all your functions.</p>
-<h2 id="an-example-of-type-inference">An Example of Type Inference</h2>
-<p>The following code defines a <code>toFullName</code> function which extracts a person’s full name as a string:</p>
+                                <h1 id="tipos">Tipos</h1>
+<p>Uno de los más grandes beneficios de usar Elm es que <strong>tus usuarios virtualmente no verán errores en tiempo de ejecución</strong>. Esto ocurre porque el compilador de Elm puede analizar tu código muy rápidamente y saber cómo fluyen los valores a través de tu programa. Si existen formas de usar valors de manera inválida, el compilador te avisa con un mensaje de error amistoso. Esto se llama <em>inferencia de tipos</em>. El compilador resuelve los <em>tipos</em> de los valores que fluyen a través de todas tus funciones.</p>
+<h2 id="un-ejemplo-de-inferencia-de-tipos">Un ejemplo de inferencia de tipos</h2>
+<p>Este código define una función <code>toFullName</code> que extrae el nombre completo de una persona como <code>String</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">toFullName</span> person =
     person.firstName ++ <span class="hljs-string">" "</span> ++ person.lastName
 
@@ -733,8 +733,8 @@
 <span class="hljs-title">fullName</span> =
     toFullName { fistName = <span class="hljs-string">"Hermann"</span>, lastName = <span class="hljs-string">"Hesse"</span> }
 </code></pre>
-<p>Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?</p>
-<p>In JavaScript, the equivalent code spits out <code>"undefined Hesse"</code>. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:</p>
+<p>Tal como en JavaScript o Python, sólo necesitamos escribir el código, sin anotaciones. Pero, ¿notaste el error?</p>
+<p>En JavaScript, código equivalente a este respondería con <code>"undefined Hesse"</code>. ¡Ni siquiera sería un error! Con un poco de suerte, uno de tus usuarios te avisaría cuando lo vea durante el uso. Por otro lado, el compilador de Elm revisa tu código y te da esta retroalimentación:</p>
 <pre><code>-- TYPE MISMATCH ---------------------------------------------------------------
 
 The argument to function `toFullName` is causing a mismatch.
@@ -752,9 +752,10 @@ But it is:
 Hint: I compared the record fields and found some potential typos.
 
     firstName &lt;-&gt; fistName
-</code></pre><p>It sees that <code>toFullName</code> is getting the wrong <em>type</em> of argument. Like the hint in the error message says, someone accidentally wrote <code>fist</code> instead of <code>first</code>.</p>
-<p>It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that <em>everything</em> fits together properly just based on the source code.</p>
-<p>The better you understand types, the more the compiler feels like a friendly assistant. So let's start learning more!</p>
+</code></pre><p>“El argumento a la función <code>toFullName</code> no calza. La función <code>toFullName</code> espera que el argumento sea: (…) Pero es: (…)”</p>
+<p>Se dio cuenta de que <code>toFullName</code> está recibiendo el <em>tipo</em> de argumento incorrecto. La ayuda en <em>Hint</em> también muestra que escribiste “fist” en vez de “first”.</p>
+<p>Es muy útil tener esta ayuda para identificar errores simples como este, pero es invaluable cuando tienes cientos de archivos de código y varios contribuyentes haciendo cambios. No importa cuán grande y compleja se vuelva la aplicación, el compilador de Elm revisa que <em>todo</em> calce correctamente sólo en base a tu código.</p>
+<p>Mientras mejor entiendas los tipos, más sentirás que el compilador es como un asistente amigo. ¡Aprendamos más, entonces!</p>
 
                                 
                                 </section>
@@ -782,12 +783,12 @@ Hint: I compared the record fields and found some potential typos.
 
             
                 
-                <a href="../architecture/forms.html" class="navigation navigation-prev " aria-label="Previous page: Forms">
+                <a href="../architecture/forms.html" class="navigation navigation-prev " aria-label="Previous page: Formularios">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="reading_types.html" class="navigation navigation-next " aria-label="Next page: Reading Types">
+                <a href="reading_types.html" class="navigation navigation-next " aria-label="Next page: Leyendo tipos">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -798,7 +799,7 @@ Hint: I compared the record fields and found some potential typos.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Types","level":"1.4","depth":1,"next":{"title":"Reading Types","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},"previous":{"title":"Forms","level":"1.3.3","depth":2,"path":"architecture/forms.md","ref":"architecture/forms.md","articles":[]},"articles":[{"title":"Reading Types","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Type Aliases","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Custom Types","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"An Introduction to Elm","gitbook":"*","description":"Learn the basics of Elm. Build applications. Learn functional programming."},"file":{"path":"types/README.md","mtime":"2024-08-25T16:41:14.580Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-08-26T22:54:24.163Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Tipos","level":"1.4","depth":1,"next":{"title":"Leyendo tipos","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},"previous":{"title":"Formularios","level":"1.3.3","depth":2,"path":"architecture/forms.md","ref":"architecture/forms.md","articles":[]},"articles":[{"title":"Leyendo tipos","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},{"title":"Alias de tipo","level":"1.4.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},{"title":"Pattern Matching","level":"1.4.4","depth":2,"path":"types/pattern_matching.md","ref":"types/pattern_matching.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/README.md","mtime":"2024-09-01T16:42:57.706Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
