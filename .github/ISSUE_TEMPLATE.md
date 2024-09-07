@@ -1,7 +1,14 @@
-Please fill in the following information:
+¿Encontraste un error en el texto o en el código?
 
-- My programming background is ...
-- I want to learn Elm because ...
-- I was confused by ...
+- Primero asegúrate de que nadie lo haya reportado antes. Haz una búsqueda rápida entre los “issues”.
+- Indícanos la página y el párrafo con el problema. Si copias y pegas el texto es mejor.
+- Explícanos lo que está mal.
 
-> **Note:** The answers do not have to be super elaborate. I just need to understand who is confused and why. As I learn more about the readers, it is possible to revamp the book that addresses their concerns in a coherent way. Ultimately I must pick an audience, so it fundamentally cannot work for everyone. Choices must be made!
+¿No entendiste algo?
+
+- Cuéntanos cuál es tu experiencia previa programando.
+- Dinos tu motivación por leer esta guía.
+- Indícanos la página y el párrafo con el problema. Si copias y pegas el texto es mejor.
+- Explícanos cómo te confundió.
+
+No hace falta que te explayes demasiado al responder, sólo es para entenderte poco mejor.
