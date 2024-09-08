@@ -11,7 +11,7 @@
   - [Alias de tipo](types/type_aliases.md)
   - [Tipos personalizados](types/custom_types.md)
   - [Búsqueda de patrones](types/pattern_matching.md)
-- [Error Handling](error_handling/README.md)
+- [Manejo de errores](error_handling/README.md)
   - [Maybe](error_handling/maybe.md)
   - [Result](error_handling/result.md)
 - [Commands and Subscriptions](effects/README.md)
