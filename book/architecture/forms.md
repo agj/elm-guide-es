@@ -187,6 +187,6 @@ Estas funciones de ayuda ya empiezan a mostrar el beneficio de que nuestra libre
 >
 > Usa las funciones del módulo [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) para completar estos ejercicios.
 >
-> **Advertencia:** Necestamos aprender mucho más antes de poder enviar una solicitud HTTP. Sigue leyendo en orden hasta llegar a la sección sobre HTTP antes de intentarlo por tu cuenta. Te va a resultar mucho más fácil siguiendo la guía.
+> **Advertencia:** Necesitamos aprender mucho más antes de poder enviar una solicitud HTTP. Sigue leyendo en orden hasta llegar a la sección sobre HTTP antes de intentarlo por tu cuenta. Te va a resultar mucho más fácil siguiendo esta guía.
 >
 > **Nota:** Parece que los intentos de hacer librerías genéricas de validación no han dado muchos frutos. Creo que el problema es que los chequeos son más comúnmente resueltos con funciones normales. Éstas reciben argumentos y retornan un `Bool` o un `Maybe`. O sea, ¿para qué usar una librería para revisar que dos textos son iguales? De lo que hemos aprendido, el código más simple surge al escribir la lógica para tu caso particular, sin extras añadidos. Así que siempre intenta hacer esto antes de decidir que necesitas una solución más compleja.
