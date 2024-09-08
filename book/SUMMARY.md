@@ -10,7 +10,7 @@
   - [Leyendo tipos](types/reading_types.md)
   - [Alias de tipo](types/type_aliases.md)
   - [Tipos personalizados](types/custom_types.md)
-  - [Pattern Matching](types/pattern_matching.md)
+  - [Búsqueda de patrones](types/pattern_matching.md)
 - [Error Handling](error_handling/README.md)
   - [Maybe](error_handling/maybe.md)
   - [Result](error_handling/result.md)
