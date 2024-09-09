@@ -1,8 +1,8 @@
 # Result
 
-The `Maybe` type can help with simple functions that may fail, but it does not tell you _why_ it failed. Imagine if a compiler just said `Nothing` if anything was wrong with your program. Good luck figuring out what went wrong!
+El tipo `Maybe` puede ayudar con funciones simples que pueden fallar, pero no te dirá _por qué_ falló. Imagina si un compilador sólo te respondiera `Nothing` si cualquier cosa está mal en tu programa. Buena suerte descubriendo dónde está el problema.
 
-This is where the [`Result`][Result] type becomes helpful. It is defined like this:
+Ese es el caso de uso del tipo [`Result`][Result]. Está definido así:
 
 ```elm
 type Result error value
@@ -10,13 +10,13 @@ type Result error value
     | Err error
 ```
 
-The point of this type is to give additional information when things go wrong. It is really helpful for error reporting and error recovery!
+El punto de este tipo es dar información adicional cuando algo sale mal. Es muy útil para reportar problemas y recuperarse de errores.
 
 [Result]: https://package.elm-lang.org/packages/elm-lang/core/latest/Result#Result
 
-## Error Reporting
+## Reporte de errores
 
-Perhaps we have a website where people input their age. We could check that the age is reasonable with a function like this:
+Tal vez tenemos un sitio web donde la gente ingresa su edad. Podríamos revisar que la edad es un número sensato con una función como esta:
 
 ```elm
 isReasonableAge : String -> Result String Int
@@ -43,11 +43,11 @@ isReasonableAge input =
 -- isReasonableAge "150" == Err ...
 ```
 
-Not only can we check the age, but we can also show people error messages depending on the particulars of their input. This kind of feedback is much better than `Nothing`!
+No sólo podemos revisar la edad, sino que además podemos mostrar mensajes distintos según detalles de lo que ingresaron. Este tipo de retroalimentación es mucho mejor que un `Nothing`.
 
-## Error Recovery
+## Recuperación de errores
 
-The `Result` type can also help you recover from errors. One place you see this is when making HTTP requests. Say we want to show the full text of _Anna Karenina_ by Leo Tolstoy. Our HTTP request results in a `Result Error String` to capture the fact that the request may succeed with the full text, or it may fail in a bunch of different ways:
+El tipo `Result` también te puede ayudar a recuperarte después de un error. Una situación donde encontrarás esto es al hacer solicitudes HTTP. Digamos que queremos mosrar el texto completo de _Anna Karenina_ de León Tolstói. Nuestra solicitud retorna un valor `Result Error String` para capturar el hecho de que la solicitud puede ser exitosa y contener el texto completo, o tal vez falle en una de varias maneras:
 
 ```elm
 type Error
@@ -64,6 +64,6 @@ type Error
 -- Err NetworkError   : Result Error String
 ```
 
-From there we can show nicer error messages as we discussed before, but we can also try to recover from the failure! If we see a `Timeout` it may work to wait a little while and try again. Whereas if we see a `BadStatus 404` then there is no point in trying again.
+Teniendo esta información podemos mostrar mejores mensajes de error, como lo mencionamos antes, pero además podríamos intentar una rutina de recuperación. Si vemos un error `Timeout`, podría servir esperar un poco y volver a intentar la solicitud. Pero si vemos un valor `BadStatus 404` ya sabemos que no hay caso en reintentar.
 
-The next chapter shows how to actually make HTTP requests, so we will run into the `Result` and `Error` types again very soon!
+El próximo capítulo muestra cómo hacer solicitudes HTTP, así que nos volveremos a encontrar con los tipos `Result` y `Error` muy pronto.
