@@ -14,7 +14,7 @@
 - [Manejo de errores](error_handling/README.md)
   - [Maybe](error_handling/maybe.md)
   - [Result](error_handling/result.md)
-- [Commands and Subscriptions](effects/README.md)
+- [Comandos y suscripciones](effects/README.md)
   - [HTTP](effects/http.md)
   - [JSON](effects/json.md)
   - [Random](effects/random.md)
