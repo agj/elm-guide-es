@@ -17,7 +17,7 @@
 - [Comandos y suscripciones](effects/README.md)
   - [HTTP](effects/http.md)
   - [JSON](effects/json.md)
-  - [Random](effects/random.md)
+  - [Valores aleatorios](effects/random.md)
   - [Time](effects/time.md)
 - [Installation](install/README.md)
   - [Code Editor](install/editor.md)

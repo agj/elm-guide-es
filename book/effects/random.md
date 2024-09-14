@@ -1,10 +1,10 @@
-# Random
+# Valores aleatorios
 
-So far we have only seen commands to make HTTP requests, but we can command other things as well, like generating random values! So we are going to make an app that rolls dice, producing a random number between 1 and 6.
+Hasta ahora sólo hemos visto comandos que realizan solicitudes HTTP, pero también existen otros comandos, como aquellos que general valores aleatorios. Vamos a crear una aplicación que tira un dado y produce un valor entre 1 y 6.
 
-Click the blue "Edit" button to see this example in action. Generate a couple random numbers, and look through the code to try to figure out how it works. **Click the blue button now!**
+Apreta el botón azul “Editar” para ver este ejemplo en acción. Genera algunos números aleatorios y revisa el código para tratar de interpretar cómo funciona. **Apreta el botón azul.**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/numbers">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/numbers">Editar</a></div>
 
 ```elm
 import Browser
@@ -86,22 +86,22 @@ view model =
         ]
 ```
 
-The new thing here is command issued in the `update` function:
+Lo nuevo aquí es el comando generado en la función `update`:
 
 ```elm
 Random.generate NewFace (Random.int 1 6)
 ```
 
-Generating random values works a bit different than in languages like JavaScript, Python, Java, etc. So let&rsquo;s see how it works in Elm!
+Generar valores aleatorios funciona un poco distinto en comparación con otros lenguajes como JavaScript, Python, Java, etc. Veamos cómo funciona en Elm.
 
-## Random Generators
+## Generadores de valores aleatorios
 
-We are using the [`elm/random`][readme] package for this. The [`Random`][random] module in particular.
+Usamos el paquete [`elm/random`][readme] para esto. En particular, el módulo [`Random`][random].
 
 [readme]: https://package.elm-lang.org/packages/elm/random/latest
 [random]: https://package.elm-lang.org/packages/elm/random/latest/Random
 
-The core idea is that we have random `Generator` that describes _how_ to generate a random value. For example:
+La idea fundametal es que tenemos un generador `Generator` que describe _cómo_ vamos a generar el valor aleatorio. Por ejemplo:
 
 ```elm
 import Random
@@ -122,21 +122,21 @@ usuallyTrue =
     Random.weighted ( 80, True ) [ ( 20, False ) ]
 ```
 
-So here we have three random generators. The `roll` generator is saying it will produce an `Int`, and more specifically, it will produce an integer between `1` and `6` inclusive. Likewise, the `usuallyTrue` generator is saying it will produce a `Bool`, and more specifically, it will be true 80% of the time.
+Aquí tenemos tres generadores de valores aleatorios. El generador `roll` dice que producirá un `Int`, y más específicamente, uno entre `1` y `6`, inclusivos. Similarmente, el generador `usuallyTrue` dice que producirá un `Bool`, y más específicamente, que éste será `True` el 80% de las veces.
 
-The point is that we are not actually generating the values yet. We are just describing _how_ to generate them. From there you use the [`Random.generate`][gen] to turn it into a command:
+El punto es que no estamos aún generando los valores. Estamos sólo describiendo _cómo_ generarlos. Después podemos usar [`Random.generate`][gen] para convertirlo en un comando:
 
 ```elm
 generate : (a -> msg) -> Generator a -> Cmd msg
 ```
 
-When the command is performed, the `Generator` produces some value, and then that gets turned into a message for your `update` function. So in our example, the `Generator` produces a value between 1 and 6, and then it gets turned into a message like `NewFace 1` or `NewFace 4`. That is all we need to know to get our random dice rolls, but generators can do quite a bit more!
+Cuando el comando se ejecuta, el `Generator` produce un valor, y éste se convierte en un mensaje para la función `update`. En nuestro ejemplo, el `Generator` produce un valor entre 1 y 6, y después se convierte en un mensaje como `NewFace 1` o `NewFace 4`. Eso es todo lo que necesitamos para poder lanzar el dado, pero los generadores pueden hacer mucho más.
 
 [gen]: https://package.elm-lang.org/packages/elm/random/latest/Random#generate
 
-## Combining Generators
+## Combinando generadores
 
-Once we have some simple generators like `probability` and `usuallyTrue`, we can start snapping them together with functions like [`map3`](https://package.elm-lang.org/packages/elm/random/latest/Random#map3). Imagine we want to make a simple slot machine. We could create a generator like this:
+Teniendo generadores simples como `probability` o `usuallyTrue`, podemos empezar a conjugarlos usando funciones como [`map3`](https://package.elm-lang.org/packages/elm/random/latest/Random#map3). Imagina que quisiéramos hacer una máquina tragamonedas. Podríamos tener un generador como este:
 
 ```elm
 import Random
@@ -166,19 +166,19 @@ spin =
     Random.map3 Spin symbol symbol symbol
 ```
 
-We first create `Symbol` to describe the pictures that can appear on the slot machine. We then create a random generator that generates each symbol with equal probability.
+Primero creamos `Symbol` para describir los símbolos que aparecen en la máquina tragamonedas. Después creamos un generador que otorga la misma probabilidad a cada símbolo.
 
-From there we use `map3` to combine them into a new `spin` generator. It says to generate three symbols and then put them together into a `Spin`.
+Después usamos `map3` para combinarlos en un nuevo generador `spin`. Lo que hace es generar tres símbolos y después unirlos en un valor `Spin`.
 
-The point here is that from small building blocks, we can create a `Generator` that describes pretty complex behavior. And then from our application, we just have to say something like `Random.generate NewSpin spin` to get the next random value.
+El punto es que a partir de estas piezas básicas podemos crear un `Generator` que describe comportamientos bastante complejos. Y desde nuestra aplicación, sólo necesitamos decir algo como `Random.generate NewSpin spin` para obtener el siguiente valor aleatorio.
 
-> **Exercises:** Here are a few ideas to make the example code on this page a bit more interesting!
+> **Ejercicios:** Estas son algunas ideas para hacer más interesante el código que vimos en esta página.
 >
-> - Instead of showing a number, show the die face as an image.
-> - Instead of showing an image of a die face, use [`elm/svg`][svg] to draw it yourself.
-> - Create a weighted die with [`Random.weighted`][weighted].
-> - Add a second die and have them both roll at the same time.
-> - Have the dice flip around randomly before they settle on a final value.
+> - En vez de mostrar un número, muestra la cara del dado como imagen.
+> - En vez de mostrar una imagen de un dado, usa [`elm/svg`][svg] para dibujarla por tu cuenta.
+> - Crea un dado “tramposo” usando [`Random.weighted`][weighted].
+> - Añade un segundo dado y haz que se tiren ambos al mismo tiempo.
+> - Haz que el dado gire aleatoriamente antes de caer sobre su valor final.
 
 [svg]: https://package.elm-lang.org/packages/elm/svg/latest/
 [weighted]: https://package.elm-lang.org/packages/elm/random/latest/Random#weighted
