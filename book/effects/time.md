@@ -1,12 +1,12 @@
-# Time
+# Tiempo
 
-Now we are going to make a digital clock. (Analog will be an exercise!)
+Ahora vamos a crear un reloj digital. (La versión análoga viene como un ejercicio al final).
 
-So far we have focused on commands. With the HTTP and randomness examples, we commanded Elm to do specific work immediately, but that is sort of a weird pattern for a clock. We _always_ want to know the current time. This is where **subscriptions** come in!
+Hasta ahora nos hemos enfocado en los comandos. Con los ejemplos de HTTP y aleatoriedad, comandamos a Elm que haga cierto trabajo inmediatamente, pero eso no tiene sentido para un reloj. _Siempre_ queremos saber cuál es el tiempo actual. Y para eso sirven las **suscripciones**.
 
-Start by clicking the blue "Edit" button and looking through the code a bit in the online editor.
+Empieza apretando el botón azul “Editar” y revisa el código en el editor online.
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/time">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/time">Editar</a></div>
 
 ```elm
 import Browser
@@ -96,21 +96,21 @@ view model =
     h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
 ```
 
-The new stuff is all coming from the [`elm/time`][time] package. Let&rsquo;s go through these parts!
+Todo lo nuevo aquí proviene del paquete [`elm/time`][time]. Vamos parte por parte.
 
 [time]: https://package.elm-lang.org/packages/elm/time/latest/
 
-## `Time.Posix` and `Time.Zone`
+## `Time.Posix` y `Time.Zone`
 
-To work with time successfully in programming, we need three different concepts:
+Para trabajar correctamente con el tiempo al programar, necesitamos tres conceptos distintos:
 
-- **Human Time** &mdash; This is what you see on clocks (8am) or on calendars (May 3rd). Great! But if my phone call is at 8am in Boston, what time is it for my friend in Vancouver? If it is at 8am in Tokyo, is that even the same day in New York? (No!) So between [time zones][tz] based on ever-changing political boundaries and inconsistent use of [daylight saving time][dst], human time should basically never be stored in your `Model` or database! It is only for display!
+- **Tiempo humano** — Esto es lo que ves en los relojes (8 am) o en los calendarios (3 de mayo). Bien, pero, si tengo una llamada a las 8 am en Boston, ¿a qué hora sería para mi amigo en Vancouver? Si es a las 8 am en Tokio, ¿sería siquiera el mismo día en Nueva York? (¡No!). Ya que las [zonas horarias][tz] están basadas en fronteras políticas en flujo constante, y dado el uso inconsistente del [horario de verano][dst], básicamente nunca debiera almacenarse en tu `Model` o en tu base de datos. Es sólo para ser mostrado.
 
-- **POSIX Time** &mdash; With POSIX time, it does not matter where you live or what time of year it is. It is just the number of seconds elapsed since some arbitrary moment (in 1970). Everywhere you go on Earth, POSIX time is the same.
+- **Tiempo POSIX** — Con el tiempo POSIX, no importa dónde vivas o qué fecha en el año sea. Es simplemente el número de segundos transcurridos desde un punto arbitrario en el tiempo (en 1970). Vayas donde vayas en la Tierra, el tiempo POSIX es siempre el mismo.
 
-- **Time Zones** &mdash; A “time zone” is a bunch of data that allows you to turn POSIX time into human time. This is _not_ just `UTC-7` or `UTC+3` though! Time zones are way more complicated than a simple offset! Every time [Florida switches to DST forever][florida] or [Samoa switches from UTC-11 to UTC+13][samoa], some poor soul adds a note to the [IANA time zone database][iana]. That database is loaded onto every computer, and between POSIX time and all the corner cases in the database, we can figure out human times!
+- **Zonas horarias** — Una “zona horaria” es un montón de datos que te permiten convertir el tiempo POSIX en tiempo humano. Esto _no_ es sólo `UTC-7` o `UTC+3`. Las zonas horarias son mucho más complicadas que sólo un ajuste numérico. Cada vez que [Florida cambia permanentemente a tiempo DST][florida] o que [Samoa cambia de UTC-11 a UTC+13][samoa], un pobre individuo hace una anotación en la [base de datos de zonas horarias de IANA][iana]. Esa base de datos es cargada en cada computador, y combinando el tiempo POSIX y todos los casos borde incluídos en la base de datos, podemos calcular el tiempo humano.
 
-So to show a human being a time, you must always know `Time.Posix` and `Time.Zone`. That is it! So all that “human time” stuff is for the `view` function, not the `Model`. In fact, you can see that in our `view`:
+Para mostrarle a una persona el tiempo, siempre necesitamos tener un `Time.Posix` y un `Time.Zone`. Eso es todo. Recuerda que todo eso del “tiempo humano” es algo de lo que la función `view` se debe preocupar, y nunca el modelo. De hecho, puedes observarlo en nuestra vista:
 
 ```elm
 view : Model -> Html Msg
@@ -128,20 +128,20 @@ view model =
     h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
 ```
 
-The [`Time.toHour`][toHour] function takes `Time.Zone` and `Time.Posix` gives us back an `Int` from `0` to `23` indicating what hour it is in _your_ time zone.
+La función [`Time.toHour`][toHour] recibe un `Time.Zone` y un `Time.Posix`, y nos devuelve un `Int` entre `0` y `23` indicando qué hora es en _tu_ zona horaria.
 
-There is a lot more info about handling times in the README of [`elm/time`][time]. Definitely read it before doing more with time! Especially if you are working with scheduling, calendars, etc.
+Hay mucha más información relacionada con el manejo del tiempo en el README de [`elm/time`][time]. Dale una leída antes de hacer otras cosas que usen tiempo, especialmente si necesitas trabajar con planificación de horarios, calendarios, etc.
 
-[tz]: https://en.wikipedia.org/wiki/Time_zone
-[dst]: https://en.wikipedia.org/wiki/Daylight_saving_time
-[iana]: https://en.wikipedia.org/wiki/IANA_time_zone_database
+[tz]: https://es.wikipedia.org/wiki/Huso_horario
+[dst]: https://es.wikipedia.org/wiki/Horario_de_verano
+[iana]: https://es.wikipedia.org/wiki/TZ_Database
 [samoa]: https://en.wikipedia.org/wiki/Time_in_Samoa
 [florida]: https://www.npr.org/sections/thetwo-way/2018/03/08/591925587/
 [toHour]: https://package.elm-lang.org/packages/elm/time/latest/Time#toHour
 
 ## `subscriptions`
 
-Okay, well how should we get our `Time.Posix` though? With a **subscription**!
+Bueno, pero ¿cómo obtenemos un valor `Time.Posix`? La respuesta es, con una **suscripción**.
 
 ```elm
 subscriptions : Model -> Sub Msg
@@ -149,7 +149,7 @@ subscriptions model =
     Time.every 1000 Tick
 ```
 
-We are using the [`Time.every`][every] function:
+Usamos la función [`Time.every`][every]:
 
 [every]: https://package.elm-lang.org/packages/elm/time/latest/Time#every
 
@@ -157,31 +157,31 @@ We are using the [`Time.every`][every] function:
 every : Float -> (Time.Posix -> msg) -> Sub msg
 ```
 
-It takes two arguments:
+Ésta recibe dos argumentos:
 
-1. A time interval in milliseconds. We said `1000` which means every second. But we could also say `60 * 1000` for every minute, or `5 * 60 * 1000` for every five minutes.
-2. A function that turns the current time into a `Msg`. So every second, the current time is going to turn into a `Tick <time>` for our `update` function.
+1. Un intervalo de tiempo en milisegundos. Pusimos `1000`, lo que significa una vez por segundo. Pero también podríamos decir `60 * 1000` para una vez por minuto, o `5 * 60 * 1000` para cada cinco minutos.
+2. Una función que convierte el tiempo actual en un `Msg`. Es decir que cada segundo, el tiempo actual se convertirá en un mensaje `Tick <time>` que recibirá la función `update`.
 
-That is the basic pattern of any subscription. You give some configuration, and you describe how to produce `Msg` values. Not too bad!
+Ese es el patrón básico de cualquier suscripción. Le pasas un poco de configuración, y luego describes cómo producir un valor `Msg`. No es tan difícil, ¿o sí?
 
 ## `Task.perform`
 
-Getting `Time.Zone` is a bit trickier. Our program created a **command** with:
+Obtener `Time.Zone` es un poco más complicado. Nuestro programa crea un **comando** con:
 
 ```elm
 Task.perform AdjustTimeZone Time.here
 ```
 
-Reading through the [`Task`][task] docs is the best way to understand that line. The docs are written to actually explain the new concepts, and I think it would be too much of a digression to include a worse version of that info here. The point is just that we command the runtime to give us the `Time.Zone` wherever the code is running.
+Leer la documentación de [`Task`][task] es la mejor manera de entender esa línea de código. La documentación está escrita (lamentablemente en inglés) para explicar los conceptos nuevos, y creo que sería desviarse demasiado de lo importante si repitiéramos todo eso aquí. El punto es que comandamos al sistema de ejcución que nos entregue un `Time.Zone` que corresponde al lugar en donde se está ejecutando el código.
 
 [utc]: https://package.elm-lang.org/packages/elm/time/latest/Time#utc
 [task]: https://package.elm-lang.org/packages/elm/core/latest/Task
 
-> **Exercises:**
+> **Ejercicios:**
 >
-> - Add a button to pause the clock, turning the `Time.every` subscription off.
-> - Make the digital clock look nicer. Maybe add some [`style`][style] attributes.
-> - Use [`elm/svg`][svg] to make an analog clock with a red second hand!
+> - Agrega un botón que pause el reloj, apagando la suscripción de `Time.every`.
+> - Embellece el reloj digital. Le podrías añadir atributos [`style`][style].
+> - Usa [`elm/svg`][svg] para crear un reloj análogo con una manecilla roja para los segundos.
 
 [style]: https://package.elm-lang.org/packages/elm/html/latest/Html-Attributes#style
 [svg]: https://package.elm-lang.org/packages/elm/svg/latest/

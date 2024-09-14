@@ -18,7 +18,7 @@
   - [HTTP](effects/http.md)
   - [JSON](effects/json.md)
   - [Valores aleatorios](effects/random.md)
-  - [Time](effects/time.md)
+  - [Tiempo](effects/time.md)
 - [Installation](install/README.md)
   - [Code Editor](install/editor.md)
   - [Elm](install/elm.md)
