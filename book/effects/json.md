@@ -1,10 +1,10 @@
 # JSON
 
-We just saw an example that uses HTTP to get the content of a book. That is great, but a ton of servers return data in a special format called JavaScript Object Notation, or JSON for short.
+Recién vimos un ejemplo que usa HTTP para obtener el contenido de un libro. Muy útil, pero muchos servidores retornan datos en un formato especial llamado JSON.
 
-So our next example shows how to fetch some JSON data, allowing us to press a button to show random quotes from a haphazard selection of books. Click the blue "Edit" button and look through the program a bit. Maybe you have read some of these books too? **Click the blue button now!**
+Nuestro siguiente ejemplo demuestra cómo recuperar datos JSON, permitiéndonos apretar un botón para ver citas al azar desde una selección variada de libros. Apreta el botón azul “Editar” para echarle una mirada al programa. ¿Tal vez ya leíste algunos de esos libros? **Apreta el botón azul.**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/quotes">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/quotes">Editar</a></div>
 
 ```elm
 import Browser
@@ -141,17 +141,17 @@ quoteDecoder =
         (field "year" int)
 ```
 
-This example is pretty similar to the last one:
+Este ejemplo se parece mucho al anterior:
 
-- `init` starts us off in the `Loading` state, with a command to get a random quote.
-- `update` handles the `GotQuote` message for whenever a new quote is available. Whatever happens there, we do not have any additional commands. It also handles the `MorePlease` message when someone presses the button, issuing a command to get more random quotes.
-- `view` shows you the quotes!
+- `init` inicializa con el estado `Loading`, junto con un comando que recupera una cita al azar.
+- `update` maneja el mensaje `GotQuote` recibido cuando una nueva cita está disponible. Sea lo que sea que ocurra, no tenemos nuevos comandos. También maneja el mensaje `MorePlease` cuando alguien apreta el botón, y la respuesta es enviar un comando para obtener más citas.
+- `view` muestra las citas.
 
-The main difference is in the `getRandomCatGif` definition. Instead of using `Http.expectString`, we have switched to `Http.expectJson`. What is the deal with that?
+La principal diferencia está en la definición de `getRandomQuote`. En vez de usar `Http.expectString`, lo hemos cambiado a `Http.expectJson`. ¿Qué significa esto?
 
 ## JSON
 
-When you ask [`/api/random-quotes`](https://elm-lang.org/api/random-quotes) for a random quote, the server produces a string of JSON like this:
+Si le pides a [`/api/random-quotes`](https://elm-lang.org/api/random-quotes) una cita aleatoria, el servidor produce un poco de JSON que se parece a esto:
 
 ```json
 {
@@ -162,15 +162,15 @@ When you ask [`/api/random-quotes`](https://elm-lang.org/api/random-quotes) for 
 }
 ```
 
-We have no guarantees about any of the information here. The server can change the names of fields, and the fields may have different types in different situations. It is a wild world!
+No tenemos garantías sobre ninguna de esta información. El servidor podría cambiar el nombre de los campos, y los campos podrían tener datos de distinto tipo en distintas situaciones. El mundo es así, caótico.
 
-In JavaScript, the approach is to just turn JSON into JavaScript objects and hope nothing goes wrong. But if there is some typo or unexpected data, you get a runtime exception somewhere in your code. Was the code wrong? Was the data wrong? It is time to start digging around to find out!
+En JavaScript, lo normal es convertir ese JSON en objetos nativos de JavaScript, y cruzar los dedos para que todo salga bien. Pero si tecleaste mal el nombre de un campo, o vienen datos inesperados, tu código va a lanzar una excepción. ¿El código estaba mal, o tal vez los datos estaban mal…? No podemos saberlo sin empezar a investigar.
 
-In Elm, we validate the JSON before it comes into our program. So if the data has an unexpected structure, we learn about it immediately. There is no way for bad data to sneak through and cause a runtime exception three files over. This is accomplished with JSON decoders.
+En Elm, validamos el JSON antes de que entre a nuestro programa. Si los datos vienen con una estructura que no era la que esperábamos, inmediatamente los abemos. No hay ninguna forma de que datos incorrectos se cuelen entre las rendijas y causen una excepción en tiempo de ejecución tres archivos más allá. Este es el propósito de los decodificadores de JSON.
 
-## JSON Decoders
+## Decodificadores de JSON
 
-Say we have some JSON:
+Digamos que tenemos este JSON:
 
 ```json
 {
@@ -179,26 +179,26 @@ Say we have some JSON:
 }
 ```
 
-We need to run it through a `Decoder` to access specific information. So if we wanted to get the `"age"`, we would run the JSON through a `Decoder Int` that describes exactly how to access that information:
+Tendremos que pasarlo por un `Decoder` para acceder información específica contenida ahí. Si queremos obtener el campo `"age"`, pasamos el JSON por un `Decoder Int` que describe exactamente cómo acceder a esa información.
 
 ![](diagrams/int.svg)
 
-If all goes well, we get an `Int` on the other side! And if we wanted the `"name"` we would run the JSON through a `Decoder String` that describes exactly how to access it:
+Si todo sale bien, del otro lado obtendremos un valor `Int`. Y si quisiéramos el campo `"name"`, tendríamos que pasar el JSON por un decodificador `Decoder String` que describe exactamente cómo recuperarlo:
 
 ![](diagrams/string.svg)
 
-If all goes well, we get a `String` on the other side!
+Y nuevamente, si todo sale bien, del otro lado obtendremos un valor `String`.
 
-How do we create decoders like this though?
+¿Cómo creamos decodificadores como estos?
 
-## Building Blocks
+## Elementos básicos
 
-The [`elm/json`][json] package gives us the [`Json.Decode`][decode] module. It is filled with tiny decoders that we can snap together.
+El paquete [`elm/json`][json] nos ofrece el módulo [`Json.Decode`][decode]. Está lleno de pequeños decodificadores diseñados para usarse en conjunto.
 
 [json]: https://package.elm-lang.org/packages/elm/json/latest/
 [decode]: https://package.elm-lang.org/packages/elm/json/latest/Json-Decode
 
-So to get `"age"` from `{ "name": "Tom", "age": 42 }` we would create a decoder like this:
+Para obtener el campo `"age"` de `{ "name": "Tom", "age": 42 }`, necesitamos crear un decodificador como este:
 
 ```elm
 import Json.Decode exposing (Decoder, field, int)
@@ -214,14 +214,14 @@ ageDecoder =
 -- field : String -> Decoder a -> Decoder a
 ```
 
-The [`field`][field] function takes two arguments:
+La función [`field`][field] recibe dos argumentos:
 
-1. `String` &mdash; a field name. So we are demanding an object with an `"age"` field.
-2. `Decoder a` &mdash; a decoder to try next. So if the `"age"` field exists, we will try this decoder on the value there.
+1. `String` — nombre de un campo. Aquí, requerimos un objeto con un campo `"age"`.
+2. `Decoder a` — un decodificador para el valor. Si el campo `"age"` existe, tratamos de pasar su valor por este decodificador.
 
-So putting it together, `field "age" int` is asking for an `"age"` field, and if it exists, it runs the `Decoder Int` to try to extract an integer.
+Juntándolo todo, `field "age" int` dice que necesitamos un campo `"age"`, y si existe, lo pasamos por el decodificador `Decoder Int` para recuperar un número entero.
 
-We do pretty much exactly the same thing to extract the `"name"` field:
+Hacemos casi lo mismo para extraer el campo `"name"`:
 
 ```elm
 import Json.Decode exposing (Decoder, field, string)
@@ -236,19 +236,19 @@ nameDecoder =
 -- string : Decoder String
 ```
 
-In this case we demand an object with a `"name"` field, and if it exists, we want the value there to be a `String`.
+En este caso, necesitamos un campo `"name"`, y si existe, queremos que su valor sea `String`.
 
 [field]: https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#field
 
-## Combining Decoders
+## Combinando decodificadores
 
-But what if we want to decode _two_ fields? We snap decoders together with [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2):
+¿Y qué pasa si necesitamos decodificar _dos_ campos? Podemos conjugar decodificadores con [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2):
 
 ```elm
 map2 : (a -> b -> value) -> Decoder a -> Decoder b -> Decoder value
 ```
 
-This function takes in two decoders. It tries them both and combines their results. So now we can put together two different decoders:
+Esta función recibe dos decodificadores, pasa el JSON por ambos, y combina sus resultados. Con ella podemos juntar dos decodificadores así:
 
 ```elm
 import Json.Decode exposing (Decoder, map2, field, string, int)
@@ -265,13 +265,13 @@ personDecoder =
   	(field "age" int)
 ```
 
-So if we used `personDecoder` on `{ "name": "Tom", "age": 42 }` we would get out an Elm value like `Person "Tom" 42`.
+Si usáramos `personDecoder` en `{ "name": "Tom", "age": 42 }`, recuperaríamos un valor Elm como `Person "Tom" 42`.
 
-If we really wanted to get into the spirit of decoders, we would define `personDecoder` as `map2 Person nameDecoder ageDecoder` using our previous definitions. You always want to be building your decoders up from smaller building blocks!
+Y para entrar en el espíritu de los decodificadores como piezas combinables, definiríamos `personDecoder` como `map2 Person nameDecoder ageDecoder` usando nuestros decodificadores definidos anteriormente. O sea, la gracia está en armar decodificadores más grandes a partir de otros más pequeños.
 
-## Nesting Decoders
+## Anidar decodificadores
 
-A lot of JSON data is not so nice and flat. Imagine if `/api/random-quotes/v2` was released with richer information about authors:
+Muchos datos JSON no son tan planos. Imagina si existiera `/api/random-quotes/v2`, que trae información más completa sobre los autores:
 
 ```json
 {
@@ -286,7 +286,7 @@ A lot of JSON data is not so nice and flat. Imagine if `/api/random-quotes/v2` w
 }
 ```
 
-We could handle this new scenario by nesting our nice little decoders:
+Podemos manejar esta nueva situación anidando nuestros pequeños decodificadores:
 
 ```elm
 import Json.Decode exposing (Decoder, field, int, map2, map4, string)
@@ -322,19 +322,19 @@ personDecoder =
         (field "age" int)
 ```
 
-Notice that we do not bother decoding the `"origin"` field of the author. Decoders are fine with skipping over fields, which can be helpful when extracting a small amount of information from very large JSON values.
+Fíjate en que no nos hemos molestado en decodificar el campo `"origin"` del autor. Un decodificador bien puede ignorar campos, lo cual es útil si sólo necesitamos extraer información parcial desde valores JSON relativamente grandes.
 
-## Next Steps
+## Siguientes pasos
 
-There are a bunch of important functions in `Json.Decode` that we did not cover here:
+Hay muchas funciones importantes en `Json.Decode` que no hemos cubierto aquí:
 
 - [`bool`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#bool) : `Decoder Bool`
 - [`list`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#list) : `Decoder a -> Decoder (List a)`
 - [`dict`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#dict) : `Decoder a -> Decoder (Dict String a)`
 - [`oneOf`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#oneOf) : `List (Decoder a) -> Decoder a`
 
-So there are ways to extract all sorts of data structures. The `oneOf` function is particularly helpful for messy JSON. (e.g. sometimes you get an `Int` and other times you get a `String` containing digits. So annoying!)
+Existen formas de extraer todo tipo de estructuras de datos. La función `oneOf` es particularmente útil cuando tenemos datos JSON poco normalizados. Por ejemplo, si a veces trae un `Int` y otras veces trae dígitos en formato `String`… Puede llegar a ser muy molesto.
 
-We saw [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2) and [`map4`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map4) for handling objects with many fields. But as you start working with larger and larger JSON objects, it is worth checking out [`NoRedInk/elm-json-decode-pipeline`](https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest). The types there are a bit fancier, but some folks find them much easier to read and work with.
+Vimos cómo se usan [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2) y [`map4`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map4) para lidiar con objetos con muchos campos. Pero cuando empieces a trabajar con objetos JSON más y más grandes, vale la pena revisar [`NoRedInk/elm-json-decode-pipeline`](https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest). Sus tipos son un poco más complicados, pero mucha gente encuentra sus funciones más fáciles de leer y de usar.
 
-> **Fun Fact:** I have heard a bunch of stories of folks finding bugs in their _server_ code as they switched from JS to Elm. The decoders people write end up working as a validation phase, catching weird stuff in JSON values. So when NoRedInk switched from React to Elm, it revealed a couple bugs in their Ruby code!
+> **Dato curioso:** He oído varias historias de gente que encuentra bugs en su código de _servidor_ después de migrar de JS a Elm, porque los decodificadores que escriben acaban siendo una etapa de validación que identifica errores extraños en los valores JSON. Por ejemplo, cuando NoRedInk migró de usar React a usar Elm, salieron a la luz algunos bugs en su código Ruby.
