@@ -24,6 +24,12 @@ check: build
 deploy: build
     pnpm exec gh-pages --dist ./_book
 
+# (CI) Publica en Github Pages.
+deploy-ci: build
+    pnpm exec gh-pages \
+        --dist ./_book \
+        --user 'github-actions-bot <support+actions@github.com>'
+
 [private]
 install:
     pnpm install
