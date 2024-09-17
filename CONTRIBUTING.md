@@ -53,3 +53,15 @@ La disciplina de la informática es demasiado anglocéntrica. Gran parte de la t
 
 - [Traducción del libro Pro Git](https://github.com/progit/progit2-es)
 - [Traducción del libro The Rust Programming Language](https://github.com/RustLangES/rust-book-es)
+
+## Cosas que faltan
+
+- Traducción de varias páginas faltantes.
+- Revisión de traducción, pulido, regularización del lenguaje.
+- Adición de detalles importantes que no existen en la versión original.
+  - Explicación de `Task` en `effects/time.md`.
+- Reemplazo de links externos en inglés a equivalentes en español.
+- Corrección del REPL para que funcione.
+- Traducción de comentarios en código de ejemplo.
+- Traducción de contenido en código de ejemplo, donde mejor haga sentido.
+- Versión propia del editor online, que contenga los ejemplos traducidos.
