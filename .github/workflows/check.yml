@@ -1,11 +1,7 @@
 name: Verificaciones
 
 on:
-  push:
   pull_request:
-
-env:
-  DEV_SHELL_NAME: ci
 
 jobs:
   check:
