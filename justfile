@@ -18,6 +18,7 @@ format:
 # Verifica que todo funcione y que los archivos estén formateados.
 check: build
     prettier '**/*.{md,json,yml}' --check
+    alejandra *.nix --check
 
 # Publica en Github Pages.
 deploy: build
