@@ -1,14 +1,14 @@
-# Text Fields
+# Campos de texto
 
-We are about to create a simple app that reverses the contents of a text field.
+Vamos a crear una simple aplicación que escribe al revés lo que pongas en un campo de texto.
 
-Click the blue button to look at this program in the online editor. Try to check out the hint for the `type` keyword. **Click the blue button now!**
+Ahora abre este programa en el editor online. Revisa el tip que aparece cuando pones el cursor sobre la palabra `type`. **¡Apreta el botón azul!**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/text-fields">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/text-fields">Editar</a></div>
 
 ```elm
 import Browser
-import Html exposing (Html, Attribute, div, input, text)
+import Html exposing (Attribute, Html, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
@@ -18,7 +18,7 @@ import Html.Events exposing (onInput)
 
 
 main =
-  Browser.sandbox { init = init, update = update, view = view }
+    Browser.sandbox { init = init, update = update, view = view }
 
 
 
@@ -26,13 +26,13 @@ main =
 
 
 type alias Model =
-  { content : String
-  }
+    { content : String
+    }
 
 
 init : Model
 init =
-  { content = "" }
+    { content = "" }
 
 
 
@@ -40,14 +40,14 @@ init =
 
 
 type Msg
-  = Change String
+    = Change String
 
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Change newContent ->
-      { model | content = newContent }
+    case msg of
+        Change newContent ->
+            { model | content = newContent }
 
 
 
@@ -56,85 +56,81 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
-    , div [] [ text (String.reverse model.content) ]
-    ]
+    div []
+        [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
+        , div [] [ text (String.reverse model.content) ]
+        ]
 ```
 
-This code is a slight variant of the previous example. You set up a model. You define some messages. You say how to `update`. You make your `view`. The difference is just in how we filled this skeleton in. Let's walk through that!
+Este código es una ligera variación del ejemplo anterior. Primero configuras un modelo. Defines unos mensajes. Dices cómo actualizar con `update`. Defines la vista en `view`. La diferencia es sólo el cómo rellenamos este esqueleto. Vamos parte por parte.
 
+## Modelo
 
-## Model
-
-I always start by guessing at what my `Model` should be. We know we have to keep track of whatever the user has typed into the text field. We need that information to know how to render the reversed text. So we go with this:
+Siempre empiezo tratando de imaginar cómo tiene que ser mi `Model`. Sabemos que tenemos que llevar cuenta de lo que el usuario haya escrito en el campo de texto. Necesitamos esa información para saber cómo mostrar el texto al revés. Así que probamos con esto:
 
 ```elm
 type alias Model =
-  { content : String
-  }
+    { content : String
+    }
 ```
 
-This time I chose to represent the model as a record. The record stores the user input in the `content` field.
+Esta vez decidí representar el modelo como un registro. El registro guarda la información ingresada por el usuario en el campo `content`.
 
-> **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Sure! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
+> **Nota:** Tal vez te surja la duda de por qué usar un registro cuando sólo tiene un campo. ¿No podríamos usar `String` directamente? Claro que sí. Pero si empezamos con un registro, se hace más fácil después añadir más campos a medida que nuestra aplicación se hace más complicada. Cuando llegue el momento en que necesitemos _dos_ campos de texto, vamos a tener que hacer mucho menos trabajo.
 
+## Vista
 
-## View
-
-We have our model, so I usually proceed by creating a `view` function:
+Ya tenemos un modelo, así que normalmente lo siguiente que hago es crear la función `view`:
 
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
-    , div [] [ text (String.reverse model.content) ]
-    ]
+    div []
+        [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
+        , div [] [ text (String.reverse model.content) ]
+        ]
 ```
 
-We create a `<div>` with two children. The interesting child is the `<input>` node which has three attributes:
+Creamos un `<div>` con dos hijos. El hijo que más nos interesa es el nodo `<input>`, que tiene tres atributos:
 
-- `placeholder` is the text that shows when there is no content
-- `value` is the current content of this `<input>`
-- `onInput` sends messages when the user types in this `<input>` node
+- `placeholder` es el texto que se muestra cuando no hay contenido
+- `value` es el contenido actual de este `<input>`
+- `onInput` envía mensajes cuando el usuario escribe algo en este nodo `<input>`
 
-Typing in "bard" this would produce four messages:
+Si escribes “bard” vas a producir cuatro mensajes:
 
 1. `Change "b"`
 2. `Change "ba"`
 3. `Change "bar"`
 4. `Change "bard"`
 
-These would be fed into our `update` function.
+Estos serán ingresados a nuestra función `update`.
 
+## Actualización
 
-## Update
-
-There is only one kind of message in this program, so our `update` only has to handle one case:
+Solo hay un tipo de mensaje en este programa, así que nuestro `update` sólo tiene que tomar en cuenta un caso:
 
 ```elm
 type Msg
-  = Change String
+    = Change String
+
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Change newContent ->
-      { model | content = newContent }
+    case msg of
+        Change newContent ->
+            { model | content = newContent }
 ```
 
-When we receive a message that the `<input>` node has changed, we update the `content` of our model. So if you typed in "bard" the resulting messages would produce the following models:
+Cuando recibimos un mensaje de que hubo un cambio en nuestro `<input>`, actualizamos el campo `content` del modelo. Así que si escribes “bard”, los mensajes resultantes producirían estos modelos:
 
 1. `{ content = "b" }`
 2. `{ content = "ba" }`
 3. `{ content = "bar" }`
 4. `{ content = "bard" }`
 
-We need to track this information explicitly in our model, otherwise there is no way to show the reversed text in our `view` function!
+Necesitamos llevar cuenta de esta información en el modelo en forma explícita.Si no, no tendríamos cómo mostrar el texto al revés en nuestra función `view`.
 
-> **Exercise:** Go to the example in the online editor [here](https://elm-lang.org/examples/text-fields) and show the length of the `content` in your `view` function. Use the [`String.length`](https://package.elm-lang.org/packages/elm/core/latest/String#length) function!
+> **Ejercicio:** Abre el ejemplo en el editor online [aquí](https://elm-lang.org/examples/text-fields), y muestra el largo del campo `content` en tu función `view`. Usa la función [`String.length`](https://package.elm-lang.org/packages/elm/core/latest/String#length).
 >
-> **Note:** If you want more info on exactly how the `Change` values are working in this program, jump ahead to the sections on [custom types](/types/custom_types.html) and [pattern matching](/types/pattern_matching.html).
-
-
+> **Nota:** Si quieres más información sobre exactamente cómo funcionan los valores `Change` en este programa, revisa las secciones posteriores sobre [tipos personalizados](/types/custom_types.html) y [búsqueda de patrones](/types/pattern_matching.html).

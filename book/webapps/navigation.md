@@ -2,7 +2,6 @@
 
 We just saw how to serve one page, but say we are making a website like `package.elm-lang.org`. It has a bunch of pages (e.g. [search](https://package.elm-lang.org/), [README](https://package.elm-lang.org/packages/elm/core/latest/), [docs](https://package.elm-lang.org/packages/elm/core/latest/Maybe)) that all work differently. How does it do that?
 
-
 ## Multiple Pages
 
 The simple way would be to serve a bunch of different HTML files. Going to the home page? Load new HTML. Going to `elm/core` docs? Load new HTML. Going to `elm/json` docs? Load new HTML.
@@ -15,21 +14,20 @@ Until Elm 0.19, that is exactly what the package website did! It works. It is si
 
 We can improve all three cases! The basic idea is to only load HTML once, and then be a bit tricky to handle URL changes.
 
-
 ## Single Page
 
 Instead of creating our program with `Browser.element` or `Browser.document`, we can create a [`Browser.application`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#application) to avoid loading new HTML when the URL changes:
 
 ```elm
 application :
-  { init : flags -> Url -> Key -> ( model, Cmd msg )
-  , view : model -> Document msg
-  , update : msg -> model -> ( model, Cmd msg )
-  , subscriptions : model -> Sub msg
-  , onUrlRequest : UrlRequest -> msg
-  , onUrlChange : Url -> msg
-  }
-  -> Program flags model msg
+    { init : flags -> Url -> Key -> ( model, Cmd msg )
+    , view : model -> Document msg
+    , update : msg -> model -> ( model, Cmd msg )
+    , subscriptions : model -> Sub msg
+    , onUrlRequest : UrlRequest -> msg
+    , onUrlChange : Url -> msg
+    }
+    -> Program flags model msg
 ```
 
 It extends the functionality of `Browser.document` in three important scenarios.
@@ -49,11 +47,9 @@ So rather than loading new HTML, these three additions give you full control ove
 [bnp]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#pushUrl
 [bnl]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#load
 
-
 ## Example
 
 We will start with the baseline `Browser.application` program. It just keeps track of the current URL. Skim through the code now! Pretty much all of the new and interesting stuff happens in the `update` function, and we will get into those details after the code:
-
 
 ```elm
 import Browser
@@ -69,14 +65,14 @@ import Url
 
 main : Program () Model Msg
 main =
-  Browser.application
-    { init = init
-    , view = view
-    , update = update
-    , subscriptions = subscriptions
-    , onUrlChange = UrlChanged
-    , onUrlRequest = LinkClicked
-    }
+    Browser.application
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
+        }
 
 
 
@@ -84,14 +80,14 @@ main =
 
 
 type alias Model =
-  { key : Nav.Key
-  , url : Url.Url
-  }
+    { key : Nav.Key
+    , url : Url.Url
+    }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-  ( Model key url, Cmd.none )
+    ( Model key url, Cmd.none )
 
 
 
@@ -99,25 +95,25 @@ init flags url key =
 
 
 type Msg
-  = LinkClicked Browser.UrlRequest
-  | UrlChanged Url.Url
+    = LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    LinkClicked urlRequest ->
-      case urlRequest of
-        Browser.Internal url ->
-          ( model, Nav.pushUrl model.key (Url.toString url) )
+    case msg of
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
 
-        Browser.External href ->
-          ( model, Nav.load href )
+                Browser.External href ->
+                    ( model, Nav.load href )
 
-    UrlChanged url ->
-      ( { model | url = url }
-      , Cmd.none
-      )
+        UrlChanged url ->
+            ( { model | url = url }
+            , Cmd.none
+            )
 
 
 
@@ -126,7 +122,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-  Sub.none
+    Sub.none
 
 
 
@@ -135,28 +131,27 @@ subscriptions _ =
 
 view : Model -> Browser.Document Msg
 view model =
-  { title = "URL Interceptor"
-  , body =
-      [ text "The current URL is: "
-      , b [] [ text (Url.toString model.url) ]
-      , ul []
-          [ viewLink "/home"
-          , viewLink "/profile"
-          , viewLink "/reviews/the-century-of-the-self"
-          , viewLink "/reviews/public-opinion"
-          , viewLink "/reviews/shah-of-shahs"
-          ]
-      ]
-  }
+    { title = "URL Interceptor"
+    , body =
+        [ text "The current URL is: "
+        , b [] [ text (Url.toString model.url) ]
+        , ul []
+            [ viewLink "/home"
+            , viewLink "/profile"
+            , viewLink "/reviews/the-century-of-the-self"
+            , viewLink "/reviews/public-opinion"
+            , viewLink "/reviews/shah-of-shahs"
+            ]
+        ]
+    }
 
 
 viewLink : String -> Html msg
 viewLink path =
-  li [] [ a [ href path ] [ text path ] ]
+    li [] [ a [ href path ] [ text path ] ]
 ```
 
 The `update` function can handle either `LinkClicked` or `UrlChanged` messages. There is a lot of new stuff in the `LinkClicked` branch, so we will focus on that first!
-
 
 ## `UrlRequest`
 
@@ -164,8 +159,8 @@ Whenever someone clicks a link like `<a href="/home">/home</a>`, it produces a `
 
 ```elm
 type UrlRequest
-  = Internal Url.Url
-  | External String
+    = Internal Url.Url
+    | External String
 ```
 
 The `Internal` variant is for any link that stays on the same domain. So if you are browsing `https://example.com`, internal links include things like `settings#privacy`, `/home`, `https://example.com/home`, and `//example.com/home`.
@@ -174,7 +169,6 @@ The `External` variant is for any link that goes to a different domain. Links li
 
 Whichever link someone presses, our example program is going to create a `LinkClicked` message and send it to the `update` function. That is where we see most of the interesting new code!
 
-
 ### `LinkClicked`
 
 Most of our `update` logic is deciding what to do with these `UrlRequest` values:
@@ -182,19 +176,19 @@ Most of our `update` logic is deciding what to do with these `UrlRequest` values
 ```elm
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    LinkClicked urlRequest ->
-      case urlRequest of
-        Browser.Internal url ->
-          ( model, Nav.pushUrl model.key (Url.toString url) )
+    case msg of
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
 
-        Browser.External href ->
-          ( model, Nav.load href )
+                Browser.External href ->
+                    ( model, Nav.load href )
 
-    UrlChanged url ->
-      ( { model | url = url }
-      , Cmd.none
-      )
+        UrlChanged url ->
+            ( { model | url = url }
+            , Cmd.none
+            )
 ```
 
 The particularly interesting functions are `Nav.load` and `Nav.pushUrl`. These are both from the [`Browser.Navigation`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation) module which is all about changing the URL in different ways. We are using the two most common functions from that module:
@@ -208,7 +202,6 @@ So looking back at the `update` function, we can understand how it all fits toge
 >
 > **Note 2:** If you want to restore “what they were looking at” when they come `BACK`, scroll position is not perfect. If they resize their browser or reorient their device, it could be off by quite a lot! So it is probably better to save “what they were looking at” instead. Maybe that means using [`getViewportOf`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Dom#getViewportOf) to figure out exactly what is on screen at the moment. The particulars depend on how your application works exactly, so I cannot give exact advice!
 
-
 ## `UrlChanged`
 
 There are a couple ways to get `UrlChanged` messages. We just saw that `pushUrl` produces them, but pressing the browser `BACK` and `FORWARD` buttons produce them as well. And like I was saying in the notes a second ago, when you get a `LinkClicked` message, the `pushUrl` command may not be given immediately.
@@ -216,8 +209,6 @@ There are a couple ways to get `UrlChanged` messages. We just saw that `pushUrl`
 So the nice thing about having a separate `UrlChanged` message is that it does not matter how or when the URL changed. All you need to know is that it did!
 
 We are just storing the new URL in our example here, but in a real web app, you need to parse the URL to figure out what content to show. That is what the next page is all about!
-
-
 
 > **Note:** I skipped talking about [`Nav.Key`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#Key) to try to focus on more important concepts. But I will explain here for those who are interested!
 >

@@ -1,52 +1,52 @@
-# Pattern Matching
+# Búsqueda de patrones
 
-On the previous page, we learned how to create [custom types](/types/custom_types.html) with the `type` keyword. Our primary example was a `User` in a chat room:
+En la página anterior vimos cómo crear [tipos personalizados](/types/custom_types.html) con la palabra clave `type`. Nuestro ejemplo principal era un usuario en un chat:
 
 ```elm
 type User
-  = Regular String Int
-  | Visitor String
+    = Regular String Int
+    | Visitor String
 ```
 
-Regulars have a name and age, whereas visitors only have a name. So we have our custom type, but how do we actually use it?
-
+Usuarios `Regular` llevan nombre y edad, mientras que los `Visitor` sólo llevan nombre. Ya tenemos nuestro tipo personalizado, pero ¿cómo se usa?
 
 ## `case`
 
-Say we want a `toName` function that decides on a name to show for each `User`. We need to use a `case` expression:
+Digamos que queremos una función `toName` que decide qué nombre mostrar para un `User`. Para eso usamos una expresión `case`:
 
 ```elm
 toName : User -> String
 toName user =
-  case user of
-    Regular name age ->
-      name
+    case user of
+        Regular name age ->
+            name
 
-    Visitor name ->
-      name
+        Visitor name ->
+            name
+
+
 
 -- toName (Regular "Thomas" 44) == "Thomas"
 -- toName (Visitor "kate95")    == "kate95"
 ```
 
-The `case` expression allows us to branch based on which variant we happen to see, so whether we see Thomas or Kate, we always know how to show their name.
+La expresión `case` nos permite bifurcar el código en base a la variante que recibamos. Sea “Thomas” o “Kate”, siempre sabremos cómo mostrar su nombre.
 
-And if we try invalid arguments like `toName (Visitar "kate95")` or `toName Anonymous`, the compiler tells us about it immediately. This means many simple mistakes can be fixed in seconds, rather than making it to users and costing a lot more time overall.
+Y si intentamos pasarle argumentos inválidos, como `toName (Visitar "kate95")` o `toName Anonymous`, el compilador nos va a avisar inmediatamente. Esto significa que muchos errores simples pueden ser corregidos en segundos, en vez de aparecerle a los usuarios y terminar costando mucho más tiempo al fin y al cabo.
 
+## Comodines
 
-## Wild Cards
-
-The `toName` function we just defined works great, but notice that the `age` is not used in the implementation? When some of the associated data is unused, it is common to use a “wild card” instead of giving it a name:
+La función `toName` que definimos funciona sin problemas, pero nota que `age` no se usa en esta implementación. Cuando parte de los datos no se usan, es común usar un “comodín” en vez de darle un nombre:
 
 ```elm
 toName : User -> String
 toName user =
-  case user of
-    Regular name _ ->
-      name
+    case user of
+        Regular name _ ->
+            name
 
-    Visitor name ->
-      name
+        Visitor name ->
+            name
 ```
 
-The `_` acknowledges the data there, but also saying explicitly that nobody is using it.
+El uso de `_` indica que sabemos que hay un dato ahí, pero hemos decidido ignorarlo explícitamente.

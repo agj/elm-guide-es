@@ -1,6 +1,6 @@
-# Error Handling
+# Manejo de errores
 
-One of the guarantees of Elm is that you will not see runtime errors in practice. This is partly because **Elm treats errors as data**. Rather than crashing, we model the possibility of failure explicitly with custom types. For example, say you want to turn user input into an age. You might create a custom type like this:
+Una de las garantías que ofrece Elm es que no vas a ver virtualmente ningún error en tiempo de ejecución. Esto en parte es porque **Elm trata los errores como datos**. En vez de caerse, modelamos la posibilidad de un fallo en forma explícita usando tipos personalizados. Por ejemplo, digamos que quieres convertir un texto introducido por el usuario en una edad. Puedes crear un tipo personalizado como este:
 
 ```elm
 type MaybeAge
@@ -16,9 +16,9 @@ toAge userInput =
 -- toAge "ZZ" == InvalidInput
 ```
 
-No matter what input is given to the `toAge` function, it always produces a value. Valid input produces values like `Age 24` and `Age 99`, whereas invalid input produces the `InvalidInput` value. From there, we use pattern matching which will ensure that both possibilities are accounted for. No crashing!
+No importa cuál sea el dato de entrada para la función `toAge`, siempre va a producir un valor. Cuando el argumento sea válido, generará valores como `Age 24` o `Age 99`, mientras que un argumento inválido generará un valor `InvalidInput`. Después podemos usar búsqueda de patrones para asegurarnos de que nuestro código tome en cuenta ambas posibilidades. ¡Y el programa no se va a caer!
 
-This kind of thing comes up all the time! For example, maybe you want to turn a bunch of user input into a `Post` to share with others. But what happens if they forget to add a title? Or there is no content in the post? We could model all these problems explicitly:
+Este patrón lo vas a ver repetido siempre. Por ejemplo, si quisieras transformar texto ingresado por un usuario en un artículo `Post` a compartir con otros usuarios. Pero, ¿qué pasa si el usuario no ingresó un título? ¿O si el artículo no tiene contenido? Podemos modelar estos problemas en forma explícita:
 
 ```elm
 type MaybePost
@@ -35,6 +35,6 @@ toPost title content =
 -- toPost "hi" ""     == NoContent
 ```
 
-Instead of just saying that the input is invalid, we are describing each of the ways things might have gone wrong. If we have a `viewPreview : MaybePost -> Html msg` function to preview valid posts, now we can give more specific error messages in the preview area when something goes wrong!
+En vez de sólo decir que los argumentos son inválidos, hemos descrito cada una de las formas en que estos datos podrían causar problemas. Si tuviéramos una función `viewPreview : MaybePost -> Html msg` que nos permite previsualizar articulos válidos, podremos mostrar un mensaje de error específico cuando encontremos algo mal.
 
-These kinds of situations are extremely common. It is often valuable to create a custom type for your exact situation, but in some of the simpler cases, you can use an off-the-shelf type instead. So the rest of this chapter explores the `Maybe` and `Result` types, showing how they can help you treat errors as data!
+Esas situaciones son súper frecuentes. Es muy útil crear un tipo personalizado que se ajuste a tu situación específica, pero en los casos más simples puedes optar por una solución prehecha. Durante el resto de este capítulo vamos a explorar los tipos `Maybe` y `Result`, y veremos cómo nos ayudan a tratar errores como datos.

@@ -12,7 +12,6 @@ Before we get into the three mechanisms, we need to know how to compile Elm prog
 
 > **NOTE:** If you are evaluating Elm for use at work, I encourage you to make sure these three mechanisms will be able to cover all of your needs. You can get a quick overview of this chapter by looking at these [examples](https://github.com/elm-community/js-integration-examples/). Please ask [here](https://discourse.elm-lang.org/) if you are not sure about something, and I encourage you to circle back to Elm later if you are not fully confident.
 
-
 ## Compiling to JavaScript
 
 Running `elm make` produces HTML files by default. So if you say:
@@ -29,27 +28,26 @@ elm make src/Main.elm --output=main.js
 
 This produces a JavaScript file that exposes an `Elm.Main.init()` function. So once you have `main.js` you can write your own HTML file that does whatever you want.
 
-
 ## Embedding in HTML
 
 Here is the minimal HTML needed to make your `main.js` appear in a browser:
 
 ```html
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Main</title>
-  <script src="main.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main</title>
+    <script src="main.js"></script>
+  </head>
 
-<body>
-  <div id="myapp"></div>
-  <script>
-  var app = Elm.Main.init({
-    node: document.getElementById('myapp')
-  });
-  </script>
-</body>
+  <body>
+    <div id="myapp"></div>
+    <script>
+      var app = Elm.Main.init({
+        node: document.getElementById("myapp"),
+      });
+    </script>
+  </body>
 </html>
 ```
 

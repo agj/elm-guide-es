@@ -4,32 +4,30 @@ So far we have been creating Elm programs with `Browser.element`, allowing us to
 
 In this chapter, we will learn how to create a “web app” with a bunch of different pages that all integrate nicely with each other, but we must start by controlling a single page.
 
-
 ## Control the Document
 
 The first step is to switch to starting programs with [`Browser.document`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#document):
 
 ```elm
 document :
-  { init : flags -> ( model, Cmd msg )
-  , view : model -> Document msg
-  , update : msg -> model -> ( model, Cmd msg )
-  , subscriptions : model -> Sub msg
-  }
-  -> Program flags model msg
+    { init : flags -> ( model, Cmd msg )
+    , view : model -> Document msg
+    , update : msg -> model -> ( model, Cmd msg )
+    , subscriptions : model -> Sub msg
+    }
+    -> Program flags model msg
 ```
 
 The arguments are almost exactly the same as `Browser.element`, except for the `view` function. Rather than returning an `Html` value, you return a [`Document`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#Document) like this:
 
 ```elm
 type alias Document msg =
-  { title : String
-  , body : List (Html msg)
-  }
+    { title : String
+    , body : List (Html msg)
+    }
 ```
 
 This gives you control over the `<title>` and the `<body>` of the document. Perhaps your program downloads some data and that helps you determine a more specific title. Now you can just change it in your `view` function!
-
 
 ## Serve the Page
 
@@ -48,17 +46,19 @@ elm make src/Main.elm --output=main.js
 This will produce `main.js` which you can load from a custom HTML file like this:
 
 ```html
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Main</title>
-  <link rel="stylesheet" href="whatever-you-want.css">
-  <script src="main.js"></script>
-</head>
-<body>
-  <script>var app = Elm.Main.init();</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main</title>
+    <link rel="stylesheet" href="whatever-you-want.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <script>
+      var app = Elm.Main.init();
+    </script>
+  </body>
 </html>
 ```
 

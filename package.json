@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "gh-pages": "^6.1.1",
+    "gitbook-plugin-bulk-redirect": "^0.2.1",
+    "gitbook-plugin-elm-repl": "link:repl",
+    "honkit": "^5.1.4",
+    "honkit-plugin-youtube": "^0.0.14",
+    "prettier-plugin-elm": "^0.11.0"
+  }
+}

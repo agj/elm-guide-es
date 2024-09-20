@@ -1,62 +1,76 @@
-# An Introduction to Elm
+# Introducción a Elm
 
-**Elm is a functional language that compiles to JavaScript.** It helps you make websites and web apps. It has a strong emphasis on simplicity and quality tooling.
+**[Elm](https://elm-lang.org/) es un lenguaje de programación funcional que compila a JavaScript.** Está hecho para construir sitios y aplicaciones web. Tiene un gran énfasis en ser simple y ofrecer herramientas de calidad.
 
-This guide will:
+Esta guía va a:
 
-  - Teach you the fundamentals of programming in Elm.
-  - Show you how to make interactive apps with **The Elm Architecture**.
-  - Emphasize principles and patterns that generalize to programming in any language.
+- Enseñarte los fundamentos de programar usando Elm.
+- Mostrarte cómo crear aplicaciones interactivas usando la **Arquitectura Elm**.
+- Enfatizar principios y patrones que pueden generalizarse al programar en cualquier lenguaje.
 
-By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
+Al terminar, espero que no sólo seas capaz de crear excelentes aplicaciones web con Elm, pero que también entiendas las ideas y patrones centrales que crean la experiencia de usar Elm.
 
-If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!
+Si aún no estás comprometido con usar Elm, te garantizo que si le das una oportunidad y construyes un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Es muy fácil aplicar las mismas ideas.
 
+## Sobre la traducción
 
-## A Quick Sample
+Antes de empezar, un poquito de contexto. Estás leyendo la traducción no oficial al español hispanoamericano del libro de Evan Czaplicki, autor de Elm. [Aquí está el libro original en inglés.](https://guide.elm-lang.org/)
 
-Here is a little program that lets you increment and decrement a number:
+**Nota:** ¡Esta traducción aún está en desarrollo! Hay cosas que aún no están traducidas, posibles errores, y funcionalidades incompletas. Aún así, le hemos puesto mucho cariño y esperamos que te sea útil. ❤️
+
+¿Quieres escribirnos un **comentario**, mandar una **corrección**, o **aportar** con la traducción o sus aspectos técnicos? [El repositorio en Github](https://github.com/agj/elm-guide-es) es el lugar indicado.
+
+**¿Está al día la traducción?** Puedes [revisar aquí si hay cambios nuevos en el libro original](https://github.com/evancz/guide.elm-lang.org/compare/a6030f9968724629c374b936c552d2b8d2b30f31...master).
+
+## Un ejemplo sencillo
+
+Ahora sí, entremos en materia. Este es un pequeño programa que te permite incrementar y decrementar un número:
 
 ```elm
 import Browser
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 
-main =
-  Browser.sandbox { init = 0, update = update, view = view }
 
-type Msg = Increment | Decrement
+main =
+    Browser.sandbox { init = 0, update = update, view = view }
+
+
+type Msg
+    = Increment
+    | Decrement
+
 
 update msg model =
-  case msg of
-    Increment ->
-      model + 1
+    case msg of
+        Increment ->
+            model + 1
 
-    Decrement ->
-      model - 1
+        Decrement ->
+            model - 1
+
 
 view model =
-  div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
-    ]
+    div []
+        [ button [ onClick Decrement ] [ text "-" ]
+        , div [] [ text (String.fromInt model) ]
+        , button [ onClick Increment ] [ text "+" ]
+        ]
 ```
 
-Try it out in the online editor [here](https://elm-lang.org/examples/buttons).
+Pruébalo usando el editor online, [aquí](https://elm-lang.org/examples/buttons).
 
-The code can definitely look unfamiliar at first, so we will get into how this example works soon!
+Al principio, seguro que el código te parecerá extraño, así que pronto vamos a entrar en cómo funciona este ejemplo.
 
+## ¿Por qué un lenguaje _funcional_?
 
-## Why a functional *language*?
+Puedes obtener ciertos beneficios programando en un _estilo_ funcional, pero hay algunas cosas que sólo puedes obtener de un _lenguaje_ funcional como Elm:
 
-You can get some benefits from programming in a functional *style*, but there are some things you can only get from a functional *language* like Elm:
+- Tener virtualmente ningún error en tiempo de ejecución.
+- Mensajes de error amistosos.
+- Capacidad de refactorizar sin peligro.
+- Versionado semántico (_semver_) para todos los paquetes Elm.
 
-  - No runtime errors in practice.
-  - Friendly error messages.
-  - Reliable refactoring.
-  - Automatically enforced semantic versioning for all Elm packages.
+Ninguna combinación de librerías de JS te dará estas garantías, ya que provienen del diseño del lenguaje mismo. Y gracias a estas garantías, es muy común que programadores de Elm digan que sienten **más confianza** que nunca al programar. Confianza en poder rápidamente añadir nuevas funcionalidades; confianza en poder refactorizar miles de líneas… Y sin la ansiedad de que se te pasó un detalle importante.
 
-No combination of JS libraries can give you all of these guarantees. They come from the design of the language itself! And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so **confident** while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important!
-
-I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
+He puesto mucho énfasis en hacer que Elm sea fácil de aprender y usar, así que todo lo que pido de ti es que le des una oportunidad y formes tu opinión. Espero que sea una grata sorpresa.

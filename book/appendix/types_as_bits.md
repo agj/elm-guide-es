@@ -11,18 +11,15 @@ There are all sorts of types in Elm:
 
 We have a conceptual understanding of them by now, but how are they understood by a computer? How is `Maybe Int` stored on a hard disk?
 
-
 ## Bits
 
 A **bit** is little box that has two states. Zero or a one. On or off. Computer memory is one super long sequence of bits.
 
 Okay, so all we have is a bunch of bits. Now we need to represent _everything_ with that!
 
-
 ## `Bool`
 
 A `Bool` value can be either `True` or `False`. This corresponds exactly to a bit!
-
 
 ## `Int`
 
@@ -43,7 +40,6 @@ By some quick math, eight bits only allow (2^8 = 256) numbers. What about perfec
 The answer is to just add more bits. For a long time, people used 32 bits. That allowed for (2^32 = 4,294,967,296) numbers which covers the kinds of numbers humans typically think about. Computers these days support 64-bit integers, allowing for (2^64 = 18,446,744,073,709,551,616) numbers. That is a lot!
 
 > **Note:** If you are curious how addition works, learn about [two’s complement](https://en.wikipedia.org/wiki/Two%27s_complement). It reveals that numbers are not assigned to bit sequences arbitrarily. For the sake of making addition as fast as possible, this particular way of assigning numbers works really well.
-
 
 ## `String`
 
@@ -67,18 +63,19 @@ These days, languages tend to do this by storing the **length** of the string. S
 
 > **Note:** At some point, folks wanted to cover languages besides English. This effort eventually resulted in the [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoding. It is quite brilliant really, and I encourage you to learn about it. It turns out that “get the 5th character” is harder than it sounds!
 
-
 ## `(Int, Int)`
 
 What about tuples? Well, `(Int, Int)` is two `Int` values, and each one is a sequence of bits. Let’s just put those two sequences next to each other in memory and call it a day!
-
 
 ## Custom Types
 
 A custom type is all about combining different types. Those different types may have all sorts of different shapes. We will start with the `Color` type:
 
 ```elm
-type Color = Red | Yellow | Green
+type Color
+    = Red
+    | Yellow
+    | Green
 ```
 
 We can assign each case a number: `Red = 0`, `Yellow = 1`, and `Green = 2`. Now we can use the `Int` representation. Here we only need two bits to cover all the possible cases, so `00` is red, `01` is yellow, `10` is green, and `11` is unused.
@@ -92,7 +89,6 @@ But what about custom types that hold additional data? Like `Maybe Int`? The typ
 A `case` expression always looks at that “tag” before deciding what to do next. If it sees a `0` it knows there is no more data. If it sees a `1` it knows it is followed by a sequence of bits representing the data.
 
 This “tag” idea is similar to putting the length at the beginning of `String` values. The values may be different sizes, but the code can always figure out where they start and end.
-
 
 ## Summary
 

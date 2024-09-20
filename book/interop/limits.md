@@ -6,7 +6,6 @@ Many languages have a Foreign Function Interface (FFI) that allows direct bindin
 
 Why does Elm make a different choice than other languages on this?
 
-
 ## Tradeoffs
 
 Ports are somewhat of an outlier in the history of languages. There are two common interop strategies, and Elm did neither of them:

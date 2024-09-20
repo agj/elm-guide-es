@@ -6,7 +6,6 @@ Browsers seem to be supporting [custom elements](https://developer.mozilla.org/e
 
 Here is a [minimal example](https://github.com/elm-community/js-integration-examples/tree/master/internationalization) of how to use custom elements to do some localization and internationalization.
 
-
 ## Creating Custom Elements
 
 Say we want to localize dates, but that is not accessible in Elm core packages yet. Maybe you want to write a function that localizes dates:
@@ -17,16 +16,15 @@ Say we want to localize dates, but that is not accessible in Elm core packages y
 //   localizeDate('en-GB', 12, 5) === "Friday, 1 June 2012"
 //   localizeDate('en-US', 12, 5) === "Friday, June 1, 2012"
 //
-function localizeDate(lang, year, month)
-{
-	const dateTimeFormat = new Intl.DateTimeFormat(lang, {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
+function localizeDate(lang, year, month) {
+  const dateTimeFormat = new Intl.DateTimeFormat(lang, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
-	return dateTimeFormat.format(new Date(year, month));
+  return dateTimeFormat.format(new Date(year, month));
 }
 ```
 
@@ -38,23 +36,31 @@ But how do we use that in Elm?! Newer browsers allow you to create new types of 
 //   <intl-date lang="en-GB" year="2012" month="5">
 //   <intl-date lang="en-US" year="2012" month="5">
 //
-customElements.define('intl-date',
-	class extends HTMLElement {
-		// things required by Custom Elements
-		constructor() { super(); }
-		connectedCallback() { this.setTextContent(); }
-		attributeChangedCallback() { this.setTextContent(); }
-		static get observedAttributes() { return ['lang','year','month']; }
+customElements.define(
+  "intl-date",
+  class extends HTMLElement {
+    // things required by Custom Elements
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      this.setTextContent();
+    }
+    attributeChangedCallback() {
+      this.setTextContent();
+    }
+    static get observedAttributes() {
+      return ["lang", "year", "month"];
+    }
 
-		// Our function to set the textContent based on attributes.
-		setTextContent()
-		{
-			const lang = this.getAttribute('lang');
-			const year = this.getAttribute('year');
-			const month = this.getAttribute('month');
-			this.textContent = localizeDate(lang, year, month);
-		}
-	}
+    // Our function to set the textContent based on attributes.
+    setTextContent() {
+      const lang = this.getAttribute("lang");
+      const year = this.getAttribute("year");
+      const month = this.getAttribute("month");
+      this.textContent = localizeDate(lang, year, month);
+    }
+  },
 );
 ```
 
@@ -64,22 +70,22 @@ Load that before you initialize your Elm code, and you will be able to write cod
 
 ```elm
 import Html exposing (Html, node)
-import Html.Attributes (attribute)
+import Html.Attributes exposing (attribute)
+
 
 viewDate : String -> Int -> Int -> Html msg
 viewDate lang year month =
-  node "intl-date"
-    [ attribute "lang" lang
-    , attribute "year" (String.fromInt year)
-    , attribute "month" (String.fromInt month)
-    ]
-    []
+    node "intl-date"
+        [ attribute "lang" lang
+        , attribute "year" (String.fromInt year)
+        , attribute "month" (String.fromInt month)
+        ]
+        []
 ```
 
 Now you can call `viewDate` when you want access to that kind of localized information in your `view`.
 
 You can check out the full version of this example [here](https://github.com/elm-community/js-integration-examples/tree/master/internationalization).
-
 
 ## More Info
 

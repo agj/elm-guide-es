@@ -12,7 +12,6 @@ Why so many arrows? What is going on here?!
 [core]: https://package.elm-lang.org/packages/elm/core/latest/
 [html]: https://package.elm-lang.org/packages/elm/html/latest/
 
-
 ## Hidden Parentheses
 
 It starts to become clearer when you see all the parentheses. For example, it is also valid to write the type of `String.repeat` like this:
@@ -23,6 +22,7 @@ String.repeat : Int -> (String -> String)
 
 It is a function that takes an `Int` and then produces _another_ function. Let's see this in action:
 
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
 	{
@@ -57,13 +57,13 @@ It is a function that takes an `Int` and then produces _another_ function. Let's
 	}
 ]
 {% endreplWithTypes %}
+<!-- prettier-ignore-end -->
 
 So conceptually, **every function accepts one argument.** It may return another function that accepts one argument. Etc. At some point it will stop returning functions.
 
 We _could_ always put the parentheses to indicate that this is what is really happening, but it starts to get pretty unwieldy when you have multiple arguments. It is the same logic behind writing `4 * 2 + 5 * 3` instead of `(4 * 2) + (5 * 3)`. It means there is a bit extra to learn, but it is so common that it is worth it.
 
 Fine, but what is the point of this feature in the first place? Why not do `(Int, String) -> String` and give all the arguments at once?
-
 
 ## Partial Application
 
@@ -91,9 +91,10 @@ Now it is important to remember that **this can be overused!** It is convenient 
 ```elm
 -- List.map reduplicate ["ha","choo"]
 
+
 reduplicate : String -> String
 reduplicate string =
-  String.repeat 2 string
+    String.repeat 2 string
 ```
 
 This case is really simple, but (1) it is now clearer that I am interested in the linguistic phenomenon known as [reduplication](https://en.wikipedia.org/wiki/Reduplication) and (2) it will be quite easy to add new logic to `reduplicate` as my program evolves. Maybe I want [shm-reduplication](https://en.wikipedia.org/wiki/Shm-reduplication) support at some point?
@@ -102,27 +103,30 @@ In other words, **if your partial application is getting long, make it a helper 
 
 > **Note:** If you are ending up with “too many” functions when you use this advice, I recommend using comments like `-- REDUPLICATION` to give an overview of the next five or ten functions. Old school! I have shown this with `-- UPDATE` and `-- VIEW` comments in previous examples, but it is a generic technique that I use in all my code. And if you are worried about files getting too long with this advice, I recommend watching [The Life of a File](https://youtu.be/XpDsk374LDE)!
 
-
 ## Pipelines
 
 Elm also has a [pipe operator][pipe] that relies on partial application. For example, say we have a `sanitize` function for turning user input into integers:
 
 ```elm
 -- BEFORE
+
+
 sanitize : String -> Maybe Int
 sanitize input =
-  String.toInt (String.trim input)
+    String.toInt (String.trim input)
 ```
 
 We can rewrite it like this:
 
 ```elm
 -- AFTER
+
+
 sanitize : String -> Maybe Int
 sanitize input =
-  input
-    |> String.trim
-    |> String.toInt
+    input
+        |> String.trim
+        |> String.toInt
 ```
 
 So in this “pipeline” we pass the input to `String.trim` and then that gets passed along to `String.toInt`.
@@ -131,5 +135,4 @@ This is neat because it allows a “left-to-right” reading that many people li
 
 > **Note:** I personally prefer the `BEFORE`, but perhaps that is just because I learned functional programming in languages without pipes!
 
-[pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|&gt;
-
+[pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|>

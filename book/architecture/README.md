@@ -1,41 +1,39 @@
-# The Elm Architecture
+# Arquitectura Elm
 
-The Elm Architecture is a pattern for architecting interactive programs, like webapps and games.
+La Arquitectura Elm es un patrón para arquitecturar programas interactivos, tales como aplicaciones web y videojuegos.
 
-This architecture seems to emerge naturally in Elm. Rather than someone inventing it, early Elm programmers kept discovering the same basic patterns in their code. It was kind of spooky to see people ending up with well-architected code without planning ahead!
+Esta arquitectura parece emerger naturalmente en Elm. Más que ser un invento de alguien en particular, los primeros usuarios de Elm redescubrían constantemente los mismos patrones básicos en su código. Era un poco misterioso ver a tanta gente dar con código bien arquitecturado sin haber planificado con antelación.
 
-So The Elm Architecture is easy in Elm, but it is useful in any front-end project. In fact, projects like Redux have been inspired by The Elm Architecture, so you may have already seen derivatives of this pattern. Point is, even if you ultimately cannot use Elm at work yet, you will get a lot out of using Elm and internalizing this pattern.
+La Arquitectura Elm es fácil de usar en Elm, pero es útil en cualquier proyecto de front-end. De hecho, hay proyectos, como Redux, que han sido inspirados por la Arquitectura Elm, así que es posible que ya te hayas topado con derivados de este patrón. El punto es que, aunque en tu trabajo no puedas Elm aún, vas igual a poder sacar provecho de usar Elm e internalizar este patrón.
 
+## El patrón fundamental
 
-## The Basic Pattern
+Los programas escritos en Elm siempre se ven más o menos así:
 
-Elm programs always look something like this:
+![Diagrama de la Arquitectura Elm](buttons.svg)
 
-![Diagram of The Elm Architecture](buttons.svg)
+Un programa en Elm produce HTML para mostrar en pantalla, y el computador envía de vuelta mensajes de cosas que ocurren. “Apretaron un botón”, etc.
 
-The Elm program produces HTML to show on screen, and then the computer sends back messages of what is going on. "They clicked a button!"
+¿Y qué ocurre dentro del programa Elm? Se divide en estas tres partes:
 
-What happens within the Elm program though? It always breaks into three parts:
+- **Modelo** — el estado de tu aplicación.
+- **Vista** — una forma de convertir el estado en HTML.
+- **Actualización** — una forma de actualizar tu estado basado en mensajes.
 
-  * **Model** &mdash; the state of your application
-  * **View** &mdash; a way to turn your state into HTML
-  * **Update** &mdash; a way to update your state based on messages
+Estos tres conceptos son el núcleo de la **Arquitectura Elm**.
 
-These three concepts are the core of **The Elm Architecture**.
+Los siguientes ejemplos te demostrarán cómo usar este patrón para interpretar entrada del usuario, como botones y campos de texto. Vamos a hacer concreto todo lo que te acabo de decir.
 
-The next few examples are going to show how to use this pattern for user input, like buttons and text fields. It will make this much more concrete!
+## Hagámoslo juntos
 
+Todos los ejemplos están disponibles en el editor online:
 
-## Follow Along
+[![editor online](try.png)](https://elm-lang.org/try)
 
-The examples are all available in the online editor:
-
-[![online editor](try.png)](https://elm-lang.org/try)
-
-This editor shows hints in the top left corner:
+Este editor muestra tips en la esquina superior izquierda:
 
 <video id="hints-video" width="360" height="180" autoplay loop style="margin: 0.55em 0 1em 2em;" onclick="var v = document.getElementById('hints-video'); v.paused ? (v.play(), v.style.opacity = 1) : (v.pause(), v.style.opacity = 0.5)">
   <source src="hints.mp4" type="video/mp4">
 </video>
 
-Be sure to try out the hints if you run into something confusing!
+¡No te olvides de probar los tips si te topas con algo confuso!

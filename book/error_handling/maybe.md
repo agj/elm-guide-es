@@ -1,11 +1,13 @@
 # Maybe
 
-As you work more with Elm, you will start seeing the [`Maybe`][Maybe] type quite frequently. It is defined like this:
+A medida que uses Elm te toparás con el tipo [`Maybe`][Maybe] muy frecuentemente. Está definido así:
 
 ```elm
 type Maybe a
-  = Just a
-  | Nothing
+    = Just a
+    | Nothing
+
+
 
 -- Just 3.14 : Maybe Float
 -- Just "hi" : Maybe String
@@ -13,17 +15,17 @@ type Maybe a
 -- Nothing   : Maybe a
 ```
 
-This is a type with two variants. You either have `Nothing` or you have `Just` a value. The type variable makes it possible to have a `Maybe Float` and `Maybe String` depending on the particular value.
+Es un tipo con dos variantes. O bien tienes nada (`Nothing`), o tienes un valor (`Just`). La variable de tipo te permite tener `Maybe Float` o tal vez `Maybe String`, dependiendo del valor específico.
 
-This can be handy in two main scenarios: partial functions and optional fields.
+Este tipo es útil en dos situaciones principalmente: funciones parciales y campos opcionales.
 
 [Maybe]: https://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#Maybe
 
+## Funciones parciales
 
-## Partial Functions
+A veces necesitamos una función que da una respuesta a ciertos argumentos, pero no a otros. Muchos se encuentran con este tipo usando [`String.toFloat`][toFloat], al tratar de convertir texto introducido por el usuario a un número. Veamos cómo se usa:
 
-Sometimes you want a function that gives an answer for some inputs, but not others. Many people run into this with [`String.toFloat`][toFloat] when trying to convert user input into numbers. Let's see it in action:
-
+<!-- prettier-ignore-start -->
 {% replWithTypes %}
 [
   {
@@ -43,105 +45,104 @@ Sometimes you want a function that gives an answer for some inputs, but not othe
   }
 ]
 {% endreplWithTypes %}
+<!-- prettier-ignore-end -->
 
-Try calling `String.toFloat` with other strings to see what happens ⬆️
+Prueba llamar `String.toFloat` con un otros textos y observa lo que te devuelve ⬆️
 
-Not all strings make sense as numbers, so this function models that explicitly. Can a string be turned into a float? Maybe! From there we can pattern match on the resulting data and continue as appropriate.
+No cualquier texto tiene sentido como un número, por lo que esta función modela esa situación en forma explícita. ¿Puede un `String` ser convertido a un `Float`? ¡Tal vez (“maybe”)! Así podemos después usar búsqueda de patrones sobre el valor resultante y continuar según sea apropiado.
 
-> **Exercise:** I wrote a little program [here](https://ellie-app.com/bJSMQz9tydqa1) that converts from Celsius to Fahrenheit. Try refactoring the `view` code in different ways. Can you put a red border around invalid input? Can you add more conversions? Fahrenheit to Celsius? Inches to Meters?
+> **Ejercicio:** Escribí un pequeño programa que convierte grados Celcius a Fahrenheit, [aquí](https://ellie-app.com/bJSMQz9tydqa1). Intenta refactorizar el código `view` de distintas maneras. ¿Le puedes poner un borde rojo al campo de texto cuando el valor es inválido? ¿Puedes añadir más conversiones, como Fahrenheit a Celcius, o pulgadas a metros?
 
 [toFloat]: https://package.elm-lang.org/packages/elm-lang/core/latest/String#toFloat
 
+## Campos opcionales
 
-## Optional Fields
+Otro lugar donde aparecen valores `Maybe` es en registros con campos opcionales.
 
-Another place you commonly see `Maybe` values is in records with optional fields.
+Por ejemplo, digamos que administramos una red social. O sea, conectar gente, amistades, etc. Nuestro objetivo lo puso mejor el noticiero-parodia The Onion en 2011: [“recolecta toda la información posible para la CIA”](https://youtu.be/juQcZO_WnsI). Y si queremos _toda_ la información de los usuarios, tenemos que persuadirlos de a poquito. Hay que poner funcionalidades que los impulse a ir compartiendo más y más información mientras más usan nuestra red.
 
-For example, say we are running a social networking website. Connecting people, friendship, etc. You know the spiel. The Onion outlined our real goals best back in 2011: [mine as much data as possible for the CIA](https://www.theonion.com/cias-facebook-program-dramatically-cut-agencys-costs-1819594988). And if we want *all* the data, we need to ease people into it. Let them add it later. Add features that encourage them to share more and more information over time.
-
-So let's start with a simple model of a user. They must have a name, but we are going to make the age optional.
+Empecemos con un modelo simple del usuario. Deben tener un nombre, pero vamos a dejar la edad como opcional.
 
 ```elm
 type alias User =
-  { name : String
-  , age : Maybe Int
-  }
+    { name : String
+    , age : Maybe Int
+    }
 ```
 
-Now say Sue creates an account, but decides not to provide her birthday:
+Ahora imaginemos que Sue creó una cuenta, pero decide no compartir su fecha de nacimiento.
 
 ```elm
 sue : User
 sue =
-  { name = "Sue", age = Nothing }
+    { name = "Sue", age = Nothing }
 ```
 
-Sue’s friends cannot wish her a happy birthday though. I wonder if they _really_ care about her... Later Tom creates a profile and *does* give his age:
+Los amigos de Sue no le pueden desear un feliz cumpleaños. ¿Que acaso son amigos realmente? Tom, después, crea una cuenta y _sí_ comparte su edad:
 
 ```elm
 tom : User
 tom =
-  { name = "Tom", age = Just 24 }
+    { name = "Tom", age = Just 24 }
 ```
 
-Great, that will be nice on his birthday. But more importantly, Tom is part of a valuable demographic! The advertisers will be pleased.
+Genial, seguro que para su cumpleaños va a recibir muchas felicidades. Pero más importantemente, Tom es parte de un valioso grupo etario. Los anunciantes van a estar contentos.
 
-Alright, so now that we have some users, how can we market alcohol to them without breaking any laws? People would probably be mad if we market to people under 21, so let's check for that:
+Muy bien, ya tenemos algunos usuarios, pero ¿cómo les vendemos alcohol sin romper la ley? Seguro se enojan con nosotros si les tratamos de vender a jóvenes menores de 21, así que hagamos el chequeo:
 
 ```elm
 canBuyAlcohol : User -> Bool
 canBuyAlcohol user =
-  case user.age of
-    Nothing ->
-      False
+    case user.age of
+        Nothing ->
+            False
 
-    Just age ->
-      age >= 21
+        Just age ->
+            age >= 21
 ```
 
-Notice that the `Maybe` type forces us to pattern match on the user's age. It is actually impossible to write code where you forget that users may not have an age. Elm makes sure of it! Now we can advertise alcohol confident that we are not influencing minors directly! Only their older peers.
+Fíjate en que el tipo `Maybe` nos obliga a hacer búsqueda de patrones sobre la edad del usuario. Es, en realidad, imposible escribir código donde nos olvidemos de que un usuario podría no tener una edad. Elm se cerciora de esto. Ahora podemos venderle alcohol a nuestros usuarios sabiendo que no estamos haciéndolo a menores de edad sin querer, sino sólo a los mayores. Éxito.
 
+## Evitando el sobreuso
 
-## Avoiding Overuse
+Este tipo `Maybe` es muy útil, pero hay límites. Los principiantes tienen una particular tendencia a entusiasmarse con `Maybe` y ponerse a usarlo en todas partes, incluso cuando un tipo personalizado sería más apropiado.
 
-This `Maybe` type is quite useful, but there are limits. Beginners are particularly prone to getting excited about `Maybe` and using it everywhere, even though a custom type would be more appropriate.
-
-For example, say we have an exercise app where we compete against our friends. You start with a list of your friend’s names, but you can load more fitness information about them later. You might be tempted to model it like this:
+Por ejemplo, imaginemos que tenemos una aplicación de ejercicio donde competimos con nuestros amigos. Partimos con una lista con sólo los nombres de nuestros amigos, pero podemos cargar más información sobre ellos después. Podría tentarte modelarlo de esta manera:
 
 ```elm
 type alias Friend =
-  { name : String
-  , age : Maybe Int
-  , height : Maybe Float
-  , weight : Maybe Float
-  }
+    { name : String
+    , age : Maybe Int
+    , height : Maybe Float
+    , weight : Maybe Float
+    }
 ```
 
-All the information is there, but you are not really modeling the way your particular application works. It would be much more precise to model it like this instead:
+Toda la información está ahí, pero no estás realmente modelando la forma en que funciona esta aplicación. Sería mucho más preciso modelarlo así:
 
 ```elm
 type Friend
-  = Less String
-  | More String Info
+    = Less String
+    | More String Info
+
 
 type alias Info =
-  { age : Int
-  , height : Float
-  , weight : Float
-  }
+    { age : Int
+    , height : Float
+    , weight : Float
+    }
 ```
 
-This new model is capturing much more about your application. There are only two real situations. Either you have just the name, or you have the name and a bunch of information. In your view code, you just think about whether you are showing a `Less` or `More` view of the friend. You do not have to answer questions like &ldquo;what if I have an `age` but not a `weight`?&rdquo; That is not possible with our more precise type!
+Este nuevo modelo captura mucho mejor la realidad de la aplicación. Sólo tenemos dos posibles situaciones: O sólo tienes el nombre, o tienes el nombre y un montón de información extra. En el código de nuestra vista sólo necesitamos pensar en si acaso vamos a mostrar una vista `Less` o `More` del amigo. No hace falta responder preguntas como “¿Qué pasa si tengo `age` pero no tengo `weight`?”. Simplemente no es algo posible con nuestro tipo más preciso.
 
-Point is, if you find yourself using `Maybe` everywhere, it is worth examining your `type` and `type alias` definitions to see if you can find a more precise representation. This often leads to a lot of nice refactors in your update and view code!
+El punto es que si te hallas usando `Maybe` en todas partes, vale la pena revisar tus definiciones `type` y `type alias` y preguntarte si puedes acaso usar una representación más exacta. Esto comunmente conllevará refactorizaciones que simplifican tu código de actualización y de vista.
 
-
-> ## Aside: Connection to `null` references
+> ## Paréntesis: Relación a referencias nulas (`null`)
 >
-> The inventor of `null` references, Tony Hoare, described them like this:
+> El inventor de las referencias `null`, Tony Hoare, dijo lo siguiente:
 >
-> > I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
+> > Lo llamo mi “error de los mil millones”. Hablo de la invención de la referencia nula en 1965. En ese entonces estaba diseñando el primer sistema exhaustivo de tipos para referencias en un lenguaje orientado a objetos (ALGOL W). Mi objetivo era asegurarme de que el uso de cualquier referencia sea absolutamente seguro, con chequeos realizados en forma automática por el compilador. Pero no pude resistir la tentación de añadir referencias nulas, sólo porque eran tan fáciles de implementar. Esto conllevó a un sinfín de errores, vulnerabilidades y caídas de sistema, los que probablemente han causado miles de millones de dólares en sufrimiento y daños durante estos cuarenta años.
 >
-> That design makes failure **implicit**. Any time you think you have a `String` you just might have a `null` instead. Should you check? Did the person giving you the value check? Maybe it will be fine? Maybe it will crash your server? I guess we will find out later!
+> Es un diseño que hace que un error sea **implícito**. En cualquier momento que creas que tienes un `String`, podrías en realidad tener `null`. ¿Tenemos que revisarlo? ¿El código que te pasó el valor hizo el chequeo? Tal vez no haya problema; tal vez haga que se caiga tu servidor. Supongo que nos enteraremos después.
 >
-> Elm avoids these problems by not having `null` references at all. We instead use custom types like `Maybe` to make failure **explicit**. This way there are never any surprises. A `String` is always a `String`, and when you see a `Maybe String`, the compiler will ensure that both variants are accounted for. This way you get the same flexibility, but without the surprise crashes.
+> Elm evita estos problemas al simplemente no tener referencias `null`. En cambio, tenemos tipos personalizados como `Maybe` para que los errores sean **explícitos**. Así no nos topamos con sorpresas. Un `String` siempre será un `String`, y cuando veas `Maybe String`, el compilador te asegura que ambas variantes están siendo consideradas en el código. Así obtenemos la misma flexibilidad, pero ninguno de los bugs.

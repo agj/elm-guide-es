@@ -1,10 +1,10 @@
-# Forms
+# Formularios
 
-Now we will make a rudimentary form. It has a field for your name, a field for your password, and a field to verify that password. We will also do some very simple validation to check if the passwords match.
+Vamos a crear un pequeño formulario. Tiene un campo para tu nombre, otro para tu clave, y otro para verificar la clave. También vamos a hacer un poco de validación para asegurarnos de que ambas claves son iguales.
 
-I included the full program below. Click the blue "Edit" button to mess with it in the online editor. Try introducing a typo to see some error messages. Try misspelling a record field like `password` or a function like `placeholder`. **Click the blue button now!**
+Abajo tienes el programa completo. Puedes abrirlo en el editor online. Trata de escribir algo mal para ver mensajes de error. Por ejemplo, cambia el nombre de un campo, como `password`, o de una función, como `placeholder`. **¡Apreta el botón azul!**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/forms">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/forms">Editar</a></div>
 
 ```elm
 import Browser
@@ -18,7 +18,7 @@ import Html.Events exposing (onInput)
 
 
 main =
-  Browser.sandbox { init = init, update = update, view = view }
+    Browser.sandbox { init = init, update = update, view = view }
 
 
 
@@ -26,15 +26,15 @@ main =
 
 
 type alias Model =
-  { name : String
-  , password : String
-  , passwordAgain : String
-  }
+    { name : String
+    , password : String
+    , passwordAgain : String
+    }
 
 
 init : Model
 init =
-  Model "" "" ""
+    Model "" "" ""
 
 
 
@@ -42,22 +42,22 @@ init =
 
 
 type Msg
-  = Name String
-  | Password String
-  | PasswordAgain String
+    = Name String
+    | Password String
+    | PasswordAgain String
 
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Name name ->
-      { model | name = name }
+    case msg of
+        Name name ->
+            { model | name = name }
 
-    Password password ->
-      { model | password = password }
+        Password password ->
+            { model | password = password }
 
-    PasswordAgain password ->
-      { model | passwordAgain = password }
+        PasswordAgain password ->
+            { model | passwordAgain = password }
 
 
 
@@ -66,128 +66,127 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ viewInput "text" "Name" model.name Name
-    , viewInput "password" "Password" model.password Password
-    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
-    , viewValidation model
-    ]
+    div []
+        [ viewInput "text" "Name" model.name Name
+        , viewInput "password" "Password" model.password Password
+        , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
+        , viewValidation model
+        ]
 
 
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+    input [ type_ t, placeholder p, value v, onInput toMsg ] []
 
 
 viewValidation : Model -> Html msg
 viewValidation model =
-  if model.password == model.passwordAgain then
-    div [ style "color" "green" ] [ text "OK" ]
-  else
-    div [ style "color" "red" ] [ text "Passwords do not match!" ]
+    if model.password == model.passwordAgain then
+        div [ style "color" "green" ] [ text "OK" ]
+
+    else
+        div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
-This is pretty similar to our [text field example](text_fields.md) but with more fields.
+Es bastante similar a nuestro [ejemplo de campos de texto](text_fields.md), pero con más campos.
 
+# Modelo
 
-# Model
-
-I always start out by guessing at the `Model`. We know there are going to be three text fields, so let's just go with that:
+Yo siempre empiezo pensando en el `Modelo`. Sabemos que vamos a necesitar tres campos de texto, así que partamos con eso.
 
 ```elm
 type alias Model =
-  { name : String
-  , password : String
-  , passwordAgain : String
-  }
+    { name : String
+    , password : String
+    , passwordAgain : String
+    }
 ```
 
-I usually try to start with a minimal model, maybe with just one field. I then attempt to write the `view` and `update` functions. That often reveals that I need to add more to my `Model`. Building the model gradually like this means I can have a working program through the development process. It may not have all the features yet, but it is getting there!
+Normalmente empiezo con un modelo mínimo, tal vez con un sólo campo. Después intento escribir las funciones `view` y `update`. En ese proceso suelo sentir la necesidad de guardar más cosas en `Model`. Si usamos esta estrategia de construir el modelo gradualmente, podemos tener un programa funcional en cada etapa de su desarrollo. No tendrá todas las funcionalidades desde un principio, pero llegaremos ahí de a poco.
 
+## Actualización
 
-## Update
-
-Sometimes you have a pretty good idea of what the basic update code will look like. We know we need to be able to change our three fields, so we need messages for each case.
+Hay veces en que tenemos una idea basante completa de cómo se vería el código de actualización. Sabemos que necesitamos cambiar los tres campos, así que necesitamos mensajes para cada caso.
 
 ```elm
 type Msg
-  = Name String
-  | Password String
-  | PasswordAgain String
+    = Name String
+    | Password String
+    | PasswordAgain String
 ```
 
-This means our `update` needs a case for all three variations:
+Esto significa que `update` necesita una rama para cada variante:
 
 ```elm
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Name name ->
-      { model | name = name }
+    case msg of
+        Name name ->
+            { model | name = name }
 
-    Password password ->
-      { model | password = password }
+        Password password ->
+            { model | password = password }
 
-    PasswordAgain password ->
-      { model | passwordAgain = password }
+        PasswordAgain password ->
+            { model | passwordAgain = password }
 ```
 
-Each case uses the record update syntax to make sure the appropriate field is transformed. This is similar to the previous example, except with more cases.
+Cada rama usa la sintaxis de actualización de registros para transformar el campo correspondiente del modelo. Esto se parece a lo que hicimos en el ejemplo anterior, pero con más casos.
 
-We get a little bit fancier than normal in our `view` though.
+En `view` vamos a tener que hacer un poco más de trabajo.
 
+## Vista
 
-## View
-
-This `view` function is using **helper functions** to make things a bit more organized:
+Esta función `view` usa **funciones de ayuda** para organizar mejor la cosas:
 
 ```elm
 view : Model -> Html Msg
 view model =
-  div []
-    [ viewInput "text" "Name" model.name Name
-    , viewInput "password" "Password" model.password Password
-    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
-    , viewValidation model
-    ]
+    div []
+        [ viewInput "text" "Name" model.name Name
+        , viewInput "password" "Password" model.password Password
+        , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
+        , viewValidation model
+        ]
 ```
 
-In previous examples we were using `input` and `div` directly. Why did we stop?
+En ejemplos anteriores usábamos `input` y `div` directamente. ¿Por qué aquí no?
 
-The neat thing about HTML in Elm is that `input` and `div` are just normal functions. They take (1) a list of attributes and (2) a list of child nodes. **Since we are using normal Elm functions, we have the full power of Elm to help us build our views!** We can refactor repetitive code out into customized helper functions. That is exactly what we are doing here!
+Lo bueno del HTML en Elm es que `input` y `div` son sólo funciones comunes y corrientes. Reciben (1) una lista de atributos, y (2) una lista de nodos hijo. **Ya que son sólo funciones, tenemos el poder completo de Elm para construir nuestras vistas.** Podemos refactorizar código repetitivo y ponerlo en funciones de ayuda de nuestra propia creación. Y eso es justamente lo que estamos haciendo aquí.
 
-So our `view` function has three calls to `viewInput`:
+La función `view` hace tres llamadas a `viewInput`:
 
 ```elm
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+    input [ type_ t, placeholder p, value v, onInput toMsg ] []
 ```
 
-This means that writing `viewInput "text" "Name" "Bill" Name` in Elm would turn into an HTML value like `<input type="text" placeholder="Name" value="Bill">` when shown on screen.
+Esto significa que si escribimos `viewInput "text" "Name" "Bill" Name` en Elm, se convertiría en un valor HTML como `<input type="text" placeholder="Name" value="Bill">` cuando se despliegue en pantalla.
 
-The fourth entry is more interesting. It is a call to `viewValidation`:
+El cuarto hijo es más interesante. Es una llamada a `viewValidation`:
 
 ```elm
 viewValidation : Model -> Html msg
 viewValidation model =
-  if model.password == model.passwordAgain then
-    div [ style "color" "green" ] [ text "OK" ]
-  else
-    div [ style "color" "red" ] [ text "Passwords do not match!" ]
+    if model.password == model.passwordAgain then
+        div [ style "color" "green" ] [ text "OK" ]
+
+    else
+        div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
-This function first compares the two passwords. If they match, you get green text and a positive message. If they do not match, you get red text and a helpful message.
+Esta función primero compara las dos claves. Si son iguales, retorna un texto en verde y un mensaje de afirmación. Si no son iguales, retorna un texto en rojo y un mensaje de ayuda.
 
-These helper functions begin to show the benefits of having our HTML library be normal Elm code. We _could_ put all that code into our `view`, but making helper functions is totally normal in Elm, even in view code. "Is this getting hard to understand? Maybe I can break out a helper function!"
+Estas funciones de ayuda ya empiezan a mostrar el beneficio de que nuestra librería de HTML sea sólo código Elm. Podríamos haber puesto todo este código dentro de `view`, pero crear funciones de ayuda es completamente normal en Elm, incluyendo en el código de la vista. “Parece que está un poco difícil de entender. Probemos extrayéndolo a una función de ayuda”.
 
-> **Exercises:** Go look at this example in the online editor [here](https://elm-lang.org/examples/forms). Try to add the following features to the `viewValidation` helper function:
+> **Ejercicios:** [Revisa este ejemplo](https://elm-lang.org/examples/forms) en el editor online. Intenta añadir las siguientes funcionalidades a la función `viewValidation`:
 >
->  - Check that the password is longer than 8 characters.
->  - Make sure the password contains upper case, lower case, and numeric characters.
+> - Confirma que la clave es más larga que 8 caracteres.
+> - Asegura que la clave tiene letras mayúsculas, minúsculas y dígitos numéricos.
 >
-> Use the functions from the [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) module for these exercises!
+> Usa las funciones del módulo [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) para completar estos ejercicios.
 >
-> **Warning:** We need to learn a lot more before we start sending HTTP requests. Keep reading all the way to the section on HTTP before trying it yourself. It will be significantly easier with proper guidance!
+> **Advertencia:** Necesitamos aprender mucho más antes de poder enviar una solicitud HTTP. Sigue leyendo en orden hasta llegar a la sección sobre HTTP antes de intentarlo por tu cuenta. Te va a resultar mucho más fácil siguiendo esta guía.
 >
-> **Note:** It seems like efforts to make generic validation libraries have not been too successful. I think the problem is that the checks are usually best captured by normal Elm functions. Take some args, give back a `Bool` or `Maybe`. E.g. Why use a library to check if two strings are equal? So as far as we know, the simplest code comes from writing the logic for your particular scenario without any special extras. So definitely give that a shot before deciding you need something more complex!
+> **Nota:** Parece que los intentos de hacer librerías genéricas de validación no han dado muchos frutos. Creo que el problema es que los chequeos son más comúnmente resueltos con funciones normales. Éstas reciben argumentos y retornan un `Bool` o un `Maybe`. O sea, ¿para qué usar una librería para revisar que dos textos son iguales? De lo que hemos aprendido, el código más simple surge al escribir la lógica para tu caso particular, sin extras añadidos. Así que siempre intenta hacer esto antes de decidir que necesitas una solución más compleja.

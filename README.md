@@ -1,28 +1,13 @@
-# An Introduction to Elm
+# Introducción a Elm — en español
 
-This is my book about Elm. You can read it online [here](https://guide.elm-lang.org)!
+[_Introducción a Elm_](https://agj.github.io/elm-guide-es) (también conocido como “la guía”) es un libro sobre el lenguaje de programación funcional [Elm](https://elm-lang.org/), que compila a JavaScript. Su creador lo describe como “un lenguaje para deleitarse construyendo aplicaciones web confiables”.
 
-I update it like a paper book, with a new edition periodically rather than lots of small changes. Maybe it will be a paper book someday, but I plan to retain ownership of the material such that the complete book is always available for free online.
+El libro es de autoría del creador del lenguaje mismo, Evan Czaplicki. Esta es la traducción al español hispanoamericano. [La versión original en inglés está disponible aquí.](https://guide.elm-lang.org)
 
-<br>
+## ¿Descubriste un error? ¿Algo no se entiende?
 
-## About Suggestions
+Anota una incidencia (“issue”) [aquí, en Github](https://github.com/agj/elm-guide-es/issues/new).
 
-There are many ways to improve this book. Many of them require structural changes that would present concepts in a better order. Changes like this are quite difficult, especially in a collaborative way. I want the book to come out coherent more than I want it to address every possible concern.
+## ¿Quieres contribuir?
 
-**If you want to make a PR**, the kinds of PRs that are practical to handle include:
-
-- Fixing misspellings
-- Fixing broken links
-- Fixing typos in code
-
-Make a PR as small as possible. Reviewing a typo is easy. Reviewing 10 typos is hard because 9 may be good. Now there is a bigger coordination overhead.
-
-**If you want to record an issue**, make sure you share:
-
-- Your programming background
-- How you found the guide
-- Why you want to learn this language
-- The thing you found confusing
-
-The answers do not have to be super elaborate. I just need to understand who is confused and why. As I learn more about the readers, it is possible to revamp the book that addresses their concerns in a coherent way. Ultimately I must pick an audience, so it fundamentally cannot work for everyone. Choices must be made!
+¡Gracias! Revisa [`CONTRIBUTING.md`](./CONTRIBUTING.md) para aprender cómo hacerlo.
