@@ -2,7 +2,10 @@ name: Publicación
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+      - dev
+  workflow_dispatch:
 
 jobs:
   deploy:
