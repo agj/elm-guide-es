@@ -1,108 +1,98 @@
-# Install Elm
+# Instala Elm
 
-The previous page described how to install a code editor for Elm, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
+La página anterior explicó cómo instalar un editor de código para Elm, así que el próximo paso es obtener el archivo ejecutable de nombre `elm`. Aquí tienes los links de **instalación**:
 
 - **Mac** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-mac.pkg)
 - **Linux** - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a>
 - **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.exe)
 
-After installation is complete, open up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
+Después de que completes la instalación, abre el terminal en tu computador. Puede que se llame `cmd.exe` o `Command Prompt` en Windows.
 
 ![terminal](images/terminal.png)
 
-Start by navigating to your desktop in the terminal:
+Primero navega a tu escritorio en el terminal:
 
 ```bash
-# Mac and Linux
+# Mac y Linux
 cd ~/Desktop
 
-# Windows (but with <username> filled in with your user name)
-cd C:\Users\<username>\Desktop
+# Windows (pero cambia <username> por tu nombre de usuario)
+cd C:\Users\<usuario>\Desktop
 ```
 
-The next step is to get familiar with `elm` command. I personally had a really hard time learning terminal commands, so I worked hard to make the `elm` command nice to use. Let's go through a couple common scenarios.
-
-<br>
+El paso siguiente es familiarizarte con el comando `elm`. Personalmente, me costó mucho aprender comandos del terminal, así que hice un gran esfuerzo para que el comando `elm` sea fácil de usar. Vamos a ver cómo se usa en algunas situaciones diferentes.
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm init</span>
 
-You can start an Elm project by running:
+Puedes empezar un proyecto Elm corriendo:
 
 ```bash
 elm init
 ```
 
-Try running this command to create an `elm.json` file and a `src/` directory:
+Corre este comando para crear un archivo `elm.json` y un directorio `src/`.
 
-- [`elm.json`](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md) describes your project.
-- `src/` holds all of your Elm files.
+- [`elm.json`](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md) describe tu proyecto.
+- `src/` contiene todos tus archivos Elm.
 
-Now try creating a file called `src/Main.elm` in your editor, and copying in the code from [the buttons example](https://elm-lang.org/examples/buttons).
-
-<br>
+Ahora crea un archivo `src/Main.elm` en tu editor, y copia el código del [ejemplo de los botones](https://elm-lang.org/examples/buttons).
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm reactor</span>
 
-`elm reactor` helps you build Elm projects without messing with the terminal too much. You just run it at the root of your project, like this:
+`elm reactor` te ayuda a crear proyectos Elm sin lidiar demasiado con el terminal. Corre este comando en el directorio raíz de tu proyecto:
 
 ```bash
 elm reactor
 ```
 
-This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Run `elm reactor`, follow the localhost link, and try to check out your `src/Main.elm` file!
-
-<br>
+Esto inicializa un servidor en [`http://localhost:8000`](http://localhost:8000). Desde ahí puedes navegar a cualquier archivo Elm para ver cómo se ejecuta. Corre `elm reactor`, sigue el link de localhost, y busca tu archivo `src/Main.elm` en tu navegador.
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm make</span>
 
-You can compile Elm code to HTML or JavaScript with commands like this:
+Puedes compilar tu código Elm a HTML o JavaScript con comandos como este:
 
 ```bash
-# Create an index.html file that you can open in your browser.
+# Crea un archivo index.html que puedes abrir en tu navegador.
 elm make src/Main.elm
 
-# Create an optimized JS file to embed in a custom HTML document.
+# Crea un archivo JS optimizado para vincular desde un documento HTML personalizado.
 elm make src/Main.elm --optimize --output=elm.js
 ```
 
-Try running these commands on your `src/Main.elm` file.
+Corre estos comandos con tu archivo `src/Main.elm`.
 
-This is the most general way to compile Elm code. It is extremely useful once your project becomes too advanced for `elm reactor`.
+Esta es la forma más general de compilar código Elm. Es extremadamente útil una vez que tu proyecto se haya vuelto demasiado avanzado para `elm reactor`.
 
-This command produces the same messages you have been seeing in the online editor and with `elm reactor`. Years of work has gone into them so far, but please report any unhelpful messages [here](https://github.com/elm/error-message-catalog/issues). I am sure there are ways to improve!
-
-<br>
+Este comando produce los mismos mensajes que has visto en el editor online y con `elm reactor`. Hemos puesto años de trabajo en ellos, pero por favor reporta [aquí](https://github.com/elm/error-message-catalog/issues) cualquier mensaje confuso o poco útil. Estoy seguro de que aún podemos mejorarlos.
 
 ## <span style="font-family:Consolas,'Liberation Mono',Menlo,Courier,monospace;">elm install</span>
 
-Elm packages all live at [`package.elm-lang.org`](https://package.elm-lang.org/).
+Los paquetes de Elm los encuentras todos en [`package.elm-lang.org`](https://package.elm-lang.org/).
 
-Say you look around and decide you need [`elm/http`][http] and [`elm/json`][json] to make some HTTP requests. You can get them set up in your project with the following commands:
+Supongamos que después de buscar, decides que necesitas [`elm/http`][http] y [`elm/json`][json] para hacer solicitudes HTTP. Puedes configurarlos en tu proyecto con estos comandos:
 
 ```bash
 elm install elm/http
 elm install elm/json
 ```
 
-This adds these dependencies into your `elm.json` file, making these packages available in your project. That will let you say `import Http` and use functions like `Http.get` in your programs.
+Esto añade esas dependencias a tu archivo `elm.json`, dejando los paquetes disponibles dentro de tu proyecto. Esto te permitirá poner `import Http` y usar funciones como `Http.get` en tus programas.
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
 [json]: https://package.elm-lang.org/packages/elm/json/latest
 
-<br>
+## Tips
 
-## Tips and Tricks
+**Primero**, no te canses tratando de memorizar todo lo de arriba.
 
-**First**, do not worry about remembering all this stuff!
+Cuando te haga falta, puedes correr `elm --help` para tener una vista general de lo que `elm` te permite hacer.
 
-You can always run `elm --help` to get a full outline of what `elm` is capable of.
+También puedes correr comandos como `elm make --help` y `elm repl --help` para obtener ayuda sobre comandos específicos. Es muy útil si quieres revisar detalles sobre lo que hace cada uno y las opciones que reciben.
 
-You can also run commands like `elm make --help` and `elm repl --help` to get hints about a specific command. This is great if you want to check which flags are available and what they do.
+**Segundo**, no te preocupes si te toma un poco de tiempo acostumbrarte a usar el terminal.
 
-**Second**, do not worry if it takes some time to get comfortable with the terminal in general.
-
-I have been using it for over a decade now, and I still cannot remember how to compress files, find all Elm files in a directory, etc. I still look a lot of things up!
+Yo llevo más de una década usándolo, y todavía no recuerdo cómo comprimir archivos, encontrar todos los archivos Elm en un directorio, etc. ¡Todavía tengo que buscar ayuda para hacer muchas cosas!
 
 ---
 
-Now that we have our editor set up and `elm` available in the terminal, let's get back to learning Elm!
+Ahora que ya tenemos nuestro editor configurado y `elm` disponible en el terminal, ¡volvamos a aprender Elm!

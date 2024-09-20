@@ -20,7 +20,7 @@
   - [Valores aleatorios](effects/random.md)
   - [Tiempo](effects/time.md)
 - [Instalación](install/README.md)
-  - [Code Editor](install/editor.md)
+  - [Editor de código](install/editor.md)
   - [Elm](install/elm.md)
 - [JavaScript Interop](interop/README.md)
   - [Flags](interop/flags.md)
