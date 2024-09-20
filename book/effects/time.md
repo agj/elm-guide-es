@@ -174,6 +174,8 @@ Task.perform AdjustTimeZone Time.here
 
 Leer la documentación de [`Task`][task] es la mejor manera de entender esa línea de código. La documentación está escrita (lamentablemente en inglés) para explicar los conceptos nuevos, y creo que sería desviarse demasiado de lo importante si repitiéramos todo eso aquí. El punto es que comandamos al sistema de ejcución que nos entregue un `Time.Zone` que corresponde al lugar en donde se está ejecutando el código.
 
+<!-- TODO: Añadir explicación breve de Task, para no depender de la documentación en inglés. -->
+
 [utc]: https://package.elm-lang.org/packages/elm/time/latest/Time#utc
 [task]: https://package.elm-lang.org/packages/elm/core/latest/Task
 

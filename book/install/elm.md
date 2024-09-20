@@ -6,6 +6,8 @@ La página anterior explicó cómo instalar un editor de código para Elm, así 
 - **Linux** – [instrucciones](https://github.com/elm/compiler/blob/master/installers/linux/README.md)
 - **Windows** – [instalador](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.exe)
 
+<!-- TODO: Incluir aquí una traducción abreviada de la instalación en Linux. -->
+
 Después de que completes la instalación, abre el terminal en tu computador. Puede que se llame `cmd.exe` o `Command Prompt` en Windows.
 
 ![terminal](images/terminal.png)

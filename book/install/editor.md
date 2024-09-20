@@ -18,6 +18,8 @@ Puede ser un poco complicado configurar un editor, así que para propósitos de 
 - [Linux](https://github.com/evancz/elm-syntax-highlighting/blob/master/install/linux.md)
 - [Windows](https://github.com/evancz/elm-syntax-highlighting/blob/master/install/windows.md)
 
+<!-- TODO: Añadir una traducción abreviada de las guías del plugin de Sublime Text. -->
+
 Después de completar esos pasos, al abrir archivos Elm los vas a ver con coloreado de sintaxis. Vas a ver palabras claves como `import` y `type` en colores, lo que hace que el código sea más fácil de leer.
 
 > **Nota:** ¡Recuerda que hay otras alternativas! Hay miembros de la comunidad que han creado extensiones para Atom, Emacs, IntelliJ, Vim, VS Code, y muchos más. Tratamos de mantener [esta página](https://github.com/elm/editor-plugins) al día con las distintas opciones.
