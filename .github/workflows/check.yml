@@ -7,8 +7,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - name: Carga rama de Git
+        uses: actions/checkout@v4
+      - name: Carga caché
+        uses: actions/cache@v4
         with:
           path: |
             repl/elm-stuff
@@ -17,7 +19,9 @@ jobs:
             ~/.elm
             /nix
           key: ${{ runner.os }}-cache
-      - uses: cachix/install-nix-action@v27
+      - name: Instala Nix
+        uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-      - run: nix develop .#ci --command just check
+      - name: Verifica
+        run: nix develop .#ci --command just check
