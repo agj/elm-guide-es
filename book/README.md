@@ -16,11 +16,11 @@ Si aún no estás comprometido con usar Elm, te garantizo que si le das una opor
 
 Antes de empezar, un poquito de contexto. Estás leyendo la traducción no oficial al español hispanoamericano del libro de Evan Czaplicki, autor de Elm. [Aquí está el libro original en inglés.](https://guide.elm-lang.org/)
 
-**Nota:** ¡Esta traducción aún está en desarrollo! Así que hay cosas que aún no están traducidas, posibles errores, y funcionalidades incompletas. Aún así, le hemos puesto mucho cariño y esperamos que te sea útil. ❤️
+**Nota:** ¡Esta traducción aún está en desarrollo! Hay cosas que aún no están traducidas, posibles errores, y funcionalidades incompletas. Aún así, le hemos puesto mucho cariño y esperamos que te sea útil. ❤️
 
 ¿Quieres escribirnos un **comentario**, mandar una **corrección**, o **aportar** con la traducción o sus aspectos técnicos? [El repositorio en Github](https://github.com/agj/elm-guide-es) es el lugar indicado.
 
-¿Está al día la traducción? Puedes [revisar aquí si hay cambios nuevos en el libro original](https://github.com/evancz/guide.elm-lang.org/compare/a6030f9968724629c374b936c552d2b8d2b30f31...master).
+**¿Está al día la traducción?** Puedes [revisar aquí si hay cambios nuevos en el libro original](https://github.com/evancz/guide.elm-lang.org/compare/a6030f9968724629c374b936c552d2b8d2b30f31...master).
 
 ## Un ejemplo sencillo
 
