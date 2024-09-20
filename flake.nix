@@ -13,6 +13,7 @@
       system: let
         pkgs = import nixpkgs {system = system;};
         commonPackages = [
+          pkgs.alejandra
           pkgs.elmPackages.elm
           pkgs.just
           pkgs.nodePackages.pnpm
