@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Commands and Subscriptions · Introducción a Elm</title>
+        <title>Comandos y suscripciones · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -232,7 +232,7 @@
                 <a href="../types/pattern_matching.html">
             
                     
-                    Pattern Matching
+                    Búsqueda de patrones
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="../error_handling/">
             
                     
-                    Error Handling
+                    Manejo de errores
             
                 </a>
             
@@ -295,7 +295,7 @@
                 <a href="./">
             
                     
-                    Commands and Subscriptions
+                    Comandos y suscripciones
             
                 </a>
             
@@ -335,7 +335,7 @@
                 <a href="random.html">
             
                     
-                    Random
+                    Valores aleatorios
             
                 </a>
             
@@ -348,7 +348,7 @@
                 <a href="time.html">
             
                     
-                    Time
+                    Tiempo
             
                 </a>
             
@@ -366,7 +366,7 @@
                 <a href="../install/">
             
                     
-                    Installation
+                    Instalación
             
                 </a>
             
@@ -380,7 +380,7 @@
                 <a href="../install/editor.html">
             
                     
-                    Code Editor
+                    Editor de código
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Commands and Subscriptions</a>
+        <a href=".." >Comandos y suscripciones</a>
     </h1>
 </div>
 
@@ -722,42 +722,42 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="commands-and-subscriptions">Commands and Subscriptions</h1>
-<p>Earlier in this book we saw The Elm Architecture handle mouse and keyboard interactions, but what about talking to servers? Generating random numbers?</p>
-<p>To answer these questions, it helps to learn more about how The Elm Architecture works behind the scenes. This will explain why things work a bit differently than in languages like JavaScript, Python, etc.</p>
+                                <h1 id="comandos-y-suscripciones">Comandos y suscripciones</h1>
+<p>Hemos visto cómo manejar interacciones de mouse y teclado usando la Arquitectura Elm, pero ¿qué tal si queremos comunicarnos con un servidor? ¿O generar un número al azar?</p>
+<p>Para responder estas preguntas, nos va a servir saber más sobre cómo funciona la Arquitectura Elm detrás de bambalinas. Vamos a ver por qué las cosas funcionan un poco diferente en comparación con otros lenguajes como JavaScript, Python, etc.</p>
 <h2 id="sandbox"><code>sandbox</code></h2>
-<p>I have not made a big deal about it, but so far all of our programs were created with <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox" target="_blank"><code>Browser.sandbox</code></a>. We gave an initial <code>Model</code> and describe how to <code>update</code> and <code>view</code> it.</p>
-<p>You can think of <code>Browser.sandbox</code> as setting up a system like this:</p>
+<p>No me he referido directamente al hecho, pero hasta ahora todos nuestros programas han sido creados con <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox" target="_blank"><code>Browser.sandbox</code></a>. Le suplimos un <code>Model</code> inicial, y describimos cómo actualizarlo (<code>update</code>) y cómo visualizarlo (<code>view</code>).</p>
+<p>Puedes considerar que lo que <code>Browser.sandbox</code> hace es configurar un sistema así:</p>
 <p><img src="diagrams/sandbox.svg" alt=""></img></p>
-<p>We get to stay in the world of Elm, writing functions and transforming data. This hooks up to Elm’s <strong>runtime system</strong>. The runtime system figures out how to render <code>Html</code> efficiently. Did anything change? What is the minimal DOM modification needed? It also figures out when someone clicks a button or types into a text field. It turns that into a <code>Msg</code> and feeds it into your Elm code.</p>
-<p>By cleanly separating out all the DOM manipulation, it becomes possible to use extremely aggressive optimizations. So Elm’s runtime system is a big part of why Elm is <a href="https://elm-lang.org/blog/blazing-fast-html-round-two" target="_blank">one of the fastest options available</a>.</p>
+<p>Tenemos la ventaja de vivir dentro del mundo de Elm, escribiendo funciones y transformando datos. Éste se vincula con el <strong>sistema de ejecución</strong> de Elm. El sistema de ejecución decide cómo dibujar el <code>Html</code> eficientemente. ¿Hubo algún cambio? ¿Cuál es la más mínima modificación que necesitamos hacerle al DOM? También escucha cuando alguien hace clic en un botón o escribe en un campo de texto. Convierte estas acciones en mensajes <code>Msg</code>, y los provee a nuestro código Elm.</p>
+<p>Al separar limpiamente toda modificación al DOM, se vuelve posible hacer optimizaciones muy contundentes. Es gran parte de por qué Elm es <a href="https://elm-lang.org/blog/blazing-fast-html-round-two" target="_blank">una de las opciones más rápidas disponibles</a>.</p>
 <h2 id="element"><code>element</code></h2>
-<p>In the next few examples, we are going to use <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#element" target="_blank"><code>Browser.element</code></a> to create programs. This will introduce the ideas of <strong>commands</strong> and <strong>subscriptions</strong> which allow us to interact with the outside world.</p>
-<p>You can think of <code>Browser.element</code> as setting up a system like this:</p>
+<p>En los próximos ejemplos vamos a usar <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#element" target="_blank"><code>Browser.element</code></a> para crear programas. Éste introduce los conceptos <strong>comando</strong> y <strong>suscripción</strong>, que nos permiten interactuar con el mundo exterior.</p>
+<p>Puedes considerar que <code>Browser.element</code> configura un sistema así:</p>
 <p><img src="diagrams/element.svg" alt=""></img></p>
-<p>In addition to producing <code>Html</code> values, our programs will also send <code>Cmd</code> and <code>Sub</code> values to the runtime system. In this world, our programs can <strong>command</strong> the runtime system to make an HTTP request or to generate a random number. They can also <strong>subscribe</strong> to the current time.</p>
-<p>I think commands and subscriptions make more sense when you start seeing examples, so let’s do that!</p>
+<p>Además de producir valores <code>Html</code>, nuestros programas también enviarán valores <code>Cmd</code> y <code>Sub</code> al sistema de ejecución. En este mundo, nuestros programas pueden dar <strong>comandos</strong> al sistema de ejecución para que realice una solicitud HTTP, o que genere un número al azar. También pueden <strong>suscribirse</strong> al tiempo actual.</p>
+<p>Creo que los comandos y las suscripciones hacen más sentido cuando ves ejemplos, así que hagamos justamente eso.</p>
 <blockquote>
-<p><strong>Note 1:</strong> Some readers may be worrying about asset size. “A runtime system? That sounds big!” It is not! In fact, Elm assets are <a href="https://elm-lang.org/blog/small-assets-without-the-headache" target="_blank">exceptionally small</a> when compared to popular alternatives.</p>
-<p><strong>Note 2:</strong> We are going to use packages from <a href="https://package.elm-lang.org" target="_blank"><code>package.elm-lang.org</code></a> in the upcoming examples. We have already been working with a couple:</p>
+<p><strong>Nota 1:</strong> Algunos lectores podrán preocuparse del tamaño de los archivos producidos. “¿Sistema de ejecución? Suena pesado”. Pero en verdad, ¡no lo es! De hecho, Elm exporta <a href="https://elm-lang.org/blog/small-assets-without-the-headache" target="_blank">archivos extremadamente pequeños</a> si los comparamos con otras alternativas populares.</p>
+<p><strong>Nota 2:</strong> Vamos a usar paquetes de <a href="https://package.elm-lang.org" target="_blank"><code>package.elm-lang.org</code></a> en los siguientes ejemplos. Ya hemos usado un par:</p>
 <ul>
 <li><a href="https://package.elm-lang.org/packages/elm/core/latest/" target="_blank"><code>elm/core</code></a></li>
 <li><a href="https://package.elm-lang.org/packages/elm/html/latest/" target="_blank"><code>elm/html</code></a></li>
 </ul>
-<p>But now we will start getting into some fancier ones:</p>
+<p>Pero ahora vamos a hacer uso de algunos más complejos:</p>
 <ul>
 <li><a href="https://package.elm-lang.org/packages/elm/http/latest/" target="_blank"><code>elm/http</code></a></li>
 <li><a href="https://package.elm-lang.org/packages/elm/json/latest/" target="_blank"><code>elm/json</code></a></li>
 <li><a href="https://package.elm-lang.org/packages/elm/random/latest/" target="_blank"><code>elm/random</code></a></li>
 <li><a href="https://package.elm-lang.org/packages/elm/time/latest/" target="_blank"><code>elm/time</code></a></li>
 </ul>
-<p>There are tons of other packages on <code>package.elm-lang.org</code> though! So when you are making your own Elm programs locally, it will probably involve running some commands like this in the terminal:</p>
+<p>Hay muchísimos otros paquetes en <code>package.elm-lang.org</code>. Cuando empieces a desarrollar tus propios programas en tu entorno local, seguramente vas a ejecutar algunos comandos como estos en tu terminal:</p>
 <pre><code class="lang-bash">elm init
 elm install elm/http
 elm install elm/random
 </code></pre>
-<p>That would set up an <code>elm.json</code> file with <code>elm/http</code> and <code>elm/random</code> as dependencies.</p>
-<p>I will be mentioning the packages we are using in the following examples, so I hope this gives some context on what that is all about!</p>
+<p>Eso configurará un archivo <code>elm.json</code> con las dependencias <code>elm/http</code> y <code>elm/random</code>.</p>
+<p>En cada uno de los siguientes ejemplos voy a nombrar los paquetes en uso, así que espero que te aporte un poco de contexto sobre cómo funciona todo esto.</p>
 </blockquote>
 
                                 
@@ -802,7 +802,7 @@ elm install elm/random
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Commands and Subscriptions","level":"1.6","depth":1,"next":{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},"previous":{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]},"articles":[{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},{"title":"Random","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},{"title":"Time","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/README.md","mtime":"2024-08-25T16:39:36.499Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Comandos y suscripciones","level":"1.6","depth":1,"next":{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},"previous":{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]},"articles":[{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},{"title":"Valores aleatorios","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},{"title":"Tiempo","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/README.md","mtime":"2024-09-20T14:51:57.658Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-20T14:52:25.057Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

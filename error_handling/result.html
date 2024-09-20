@@ -232,7 +232,7 @@
                 <a href="../types/pattern_matching.html">
             
                     
-                    Pattern Matching
+                    Búsqueda de patrones
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="./">
             
                     
-                    Error Handling
+                    Manejo de errores
             
                 </a>
             
@@ -295,7 +295,7 @@
                 <a href="../effects/">
             
                     
-                    Commands and Subscriptions
+                    Comandos y suscripciones
             
                 </a>
             
@@ -335,7 +335,7 @@
                 <a href="../effects/random.html">
             
                     
-                    Random
+                    Valores aleatorios
             
                 </a>
             
@@ -348,7 +348,7 @@
                 <a href="../effects/time.html">
             
                     
-                    Time
+                    Tiempo
             
                 </a>
             
@@ -366,7 +366,7 @@
                 <a href="../install/">
             
                     
-                    Installation
+                    Instalación
             
                 </a>
             
@@ -380,7 +380,7 @@
                 <a href="../install/editor.html">
             
                     
-                    Code Editor
+                    Editor de código
             
                 </a>
             
@@ -723,15 +723,15 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="result">Result</h1>
-<p>The <code>Maybe</code> type can help with simple functions that may fail, but it does not tell you <em>why</em> it failed. Imagine if a compiler just said <code>Nothing</code> if anything was wrong with your program. Good luck figuring out what went wrong!</p>
-<p>This is where the <a href="https://package.elm-lang.org/packages/elm-lang/core/latest/Result#Result" target="_blank"><code>Result</code></a> type becomes helpful. It is defined like this:</p>
+<p>El tipo <code>Maybe</code> puede ayudar con funciones simples que pueden fallar, pero no te dirá <em>por qué</em> falló. Imagina si un compilador sólo te respondiera <code>Nothing</code> si cualquier cosa está mal en tu programa. Buena suerte descubriendo dónde está el problema.</p>
+<p>Ese es el caso de uso del tipo <a href="https://package.elm-lang.org/packages/elm-lang/core/latest/Result#Result" target="_blank"><code>Result</code></a>. Está definido así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Result</span> error value
     = <span class="hljs-type">Ok</span> value
     | <span class="hljs-type">Err</span> error
 </code></pre>
-<p>The point of this type is to give additional information when things go wrong. It is really helpful for error reporting and error recovery!</p>
-<h2 id="error-reporting">Error Reporting</h2>
-<p>Perhaps we have a website where people input their age. We could check that the age is reasonable with a function like this:</p>
+<p>El punto de este tipo es dar información adicional cuando algo sale mal. Es muy útil para reportar problemas y recuperarse de errores.</p>
+<h2 id="reporte-de-errores">Reporte de errores</h2>
+<p>Tal vez tenemos un sitio web donde la gente ingresa su edad. Podríamos revisar que la edad es un número sensato con una función como esta:</p>
 <pre><code class="lang-elm"><span class="hljs-title">isReasonableAge</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Result</span> <span class="hljs-type">String</span> <span class="hljs-type">Int</span>
 <span class="hljs-title">isReasonableAge</span> input =
     <span class="hljs-keyword">case</span> <span class="hljs-type">String</span>.toInt input <span class="hljs-keyword">of</span>
@@ -755,9 +755,9 @@
 <span class="hljs-comment">-- isReasonableAge "24"  == Ok 24</span>
 <span class="hljs-comment">-- isReasonableAge "150" == Err ...</span>
 </code></pre>
-<p>Not only can we check the age, but we can also show people error messages depending on the particulars of their input. This kind of feedback is much better than <code>Nothing</code>!</p>
-<h2 id="error-recovery">Error Recovery</h2>
-<p>The <code>Result</code> type can also help you recover from errors. One place you see this is when making HTTP requests. Say we want to show the full text of <em>Anna Karenina</em> by Leo Tolstoy. Our HTTP request results in a <code>Result Error String</code> to capture the fact that the request may succeed with the full text, or it may fail in a bunch of different ways:</p>
+<p>No sólo podemos revisar la edad, sino que además podemos mostrar mensajes distintos según detalles de lo que ingresaron. Este tipo de retroalimentación es mucho mejor que un <code>Nothing</code>.</p>
+<h2 id="recuperación-de-errores">Recuperación de errores</h2>
+<p>El tipo <code>Result</code> también te puede ayudar a recuperarte después de un error. Una situación donde encontrarás esto es al hacer solicitudes HTTP. Digamos que queremos mosrar el texto completo de <em>Anna Karenina</em> de León Tolstói. Nuestra solicitud retorna un valor <code>Result Error String</code> para capturar el hecho de que la solicitud puede ser exitosa y contener el texto completo, o tal vez falle en una de varias maneras:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Error</span>
     = <span class="hljs-type">BadUrl</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">Timeout</span>
@@ -771,8 +771,8 @@
 <span class="hljs-comment">-- Err Timeout        : Result Error String</span>
 <span class="hljs-comment">-- Err NetworkError   : Result Error String</span>
 </code></pre>
-<p>From there we can show nicer error messages as we discussed before, but we can also try to recover from the failure! If we see a <code>Timeout</code> it may work to wait a little while and try again. Whereas if we see a <code>BadStatus 404</code> then there is no point in trying again.</p>
-<p>The next chapter shows how to actually make HTTP requests, so we will run into the <code>Result</code> and <code>Error</code> types again very soon!</p>
+<p>Teniendo esta información podemos mostrar mejores mensajes de error, como lo mencionamos antes, pero además podríamos intentar una rutina de recuperación. Si vemos un error <code>Timeout</code>, podría servir esperar un poco y volver a intentar la solicitud. Pero si vemos un valor <code>BadStatus 404</code> ya sabemos que no hay caso en reintentar.</p>
+<p>El próximo capítulo muestra cómo hacer solicitudes HTTP, así que nos volveremos a encontrar con los tipos <code>Result</code> y <code>Error</code> muy pronto.</p>
 
                                 
                                 </section>
@@ -805,7 +805,7 @@
                 </a>
                 
                 
-                <a href="../effects/" class="navigation navigation-next " aria-label="Next page: Commands and Subscriptions">
+                <a href="../effects/" class="navigation navigation-next " aria-label="Next page: Comandos y suscripciones">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -816,7 +816,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Result","level":"1.5.2","depth":2,"next":{"title":"Commands and Subscriptions","level":"1.6","depth":1,"path":"effects/README.md","ref":"effects/README.md","articles":[{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},{"title":"Random","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},{"title":"Time","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]}]},"previous":{"title":"Maybe","level":"1.5.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"error_handling/result.md","mtime":"2024-08-25T16:41:13.890Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Result","level":"1.5.2","depth":2,"next":{"title":"Comandos y suscripciones","level":"1.6","depth":1,"path":"effects/README.md","ref":"effects/README.md","articles":[{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},{"title":"Valores aleatorios","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},{"title":"Tiempo","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]}]},"previous":{"title":"Maybe","level":"1.5.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"error_handling/result.md","mtime":"2024-09-20T14:51:57.659Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-20T14:52:25.057Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

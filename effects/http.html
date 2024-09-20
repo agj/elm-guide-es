@@ -232,7 +232,7 @@
                 <a href="../types/pattern_matching.html">
             
                     
-                    Pattern Matching
+                    Búsqueda de patrones
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="../error_handling/">
             
                     
-                    Error Handling
+                    Manejo de errores
             
                 </a>
             
@@ -295,7 +295,7 @@
                 <a href="./">
             
                     
-                    Commands and Subscriptions
+                    Comandos y suscripciones
             
                 </a>
             
@@ -335,7 +335,7 @@
                 <a href="random.html">
             
                     
-                    Random
+                    Valores aleatorios
             
                 </a>
             
@@ -348,7 +348,7 @@
                 <a href="time.html">
             
                     
-                    Time
+                    Tiempo
             
                 </a>
             
@@ -366,7 +366,7 @@
                 <a href="../install/">
             
                     
-                    Installation
+                    Instalación
             
                 </a>
             
@@ -380,7 +380,7 @@
                 <a href="../install/editor.html">
             
                     
-                    Code Editor
+                    Editor de código
             
                 </a>
             
@@ -723,10 +723,10 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="http">HTTP</h1>
-<p>It is often helpful to grab information from elsewhere on the internet.</p>
-<p>For example, say we want to load the full text of <em>Public Opinion</em> by Walter Lippmann. Published in 1922, this book provides a historical perspective on the rise of mass media and its implications for democracy. For our purposes here, we will focus on how to use the <a href="https://package.elm-lang.org/packages/elm/http/latest" target="_blank"><code>elm/http</code></a> package to get this book into our program!</p>
-<p>Click the blue "Edit" button to look through this program in the online editor. You will probably see the screen say "Loading..." before the full book shows up. <strong>Click the blue button now!</strong></p>
-<div class="edit-link"><a href="https://elm-lang.org/examples/book" target="_blank">Edit</a></div>
+<p>Muy frecuentemente vamos a tener que recuperar información desde algún otro lugar de internet.</p>
+<p>Por ejemplo, imaginemos que queremos cargar el texto completo de <em>La opinión pública</em> por Walter Lippmann. Este libro publicado en 1922 entrega una perspectiva histórica sobre la proliferación de los medios masivos y su incidencia en la democracia. Para lo que vamos a ver a continuación, usaremos el paquete <a href="https://package.elm-lang.org/packages/elm/http/latest" target="_blank"><code>elm/http</code></a> para descargar este libro en nuestro programa.</p>
+<p>Apreta el botón azul “Editar” para abrir este programa en el editor online. Seguramente vas a ver una pantalla que dice “Loading...” antes de que aparezca el libro completo. <strong>Apreta ahora el botón.</strong></p>
+<div class="edit-link"><a href="https://elm-lang.org/examples/book" target="_blank">Editar</a></div>
 
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
 <span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, pre, text)
@@ -811,10 +811,10 @@
         <span class="hljs-type">Success</span> fullText -&gt;
             pre [] [ text fullText ]
 </code></pre>
-<p>Some parts of this should be familiar from previous examples of The Elm Architecture. We still have a <code>Model</code> of our application. We still have an <code>update</code> that reacts to messages. We still have a <code>view</code> function that shows everything on screen.</p>
-<p>The new parts extend the core pattern we saw before with some changes in <code>init</code> and <code>update</code>, and the addition of <code>subscription</code>.</p>
+<p>Partes de este código te pareceran similares a ejemplos anteriores de la Arquitectura Elm. Aún tenemos un <code>Model</code> como modelo de nuestra aplicación. Aún tenemos la función <code>update</code> que reacciona ante mensajes. Aún tenemos una función <code>view</code> que muestra todo en pantalla.</p>
+<p>Las partes nuevas extienden el patrón básico que ya hemos visto, con algunos cambios en <code>init</code> y en <code>update</code>, y la adición de la función <code>subscription</code>.</p>
 <h2 id="init"><code>init</code></h2>
-<p>The <code>init</code> function describes how to initialize our program:</p>
+<p>La función <code>init</code> describe cómo inicializar nuestro programa:</p>
 <pre><code class="lang-elm"><span class="hljs-title">init</span> : () -&gt; ( <span class="hljs-type">Model</span>, <span class="hljs-type">Cmd</span> <span class="hljs-type">Msg</span> )
 <span class="hljs-title">init</span> _ =
     ( <span class="hljs-type">Loading</span>
@@ -824,9 +824,9 @@
         }
     )
 </code></pre>
-<p>Like always, we have to produce the initial <code>Model</code>, but now we are also producing some <strong>command</strong> of what we want to do immediately. That command will eventually produce a <code>Msg</code> that gets fed into the <code>update</code> function.</p>
-<p>Our book website starts in the <code>Loading</code> state, and we want to GET the full text of our book. When making a GET request with <a href="https://package.elm-lang.org/packages/elm/http/latest/Http#get" target="_blank"><code>Http.get</code></a>, we specify the <code>url</code> of the data we want to fetch, and we specify what we <code>expect</code> that data to be. So in our case, the <code>url</code> is pointing at some data on the Elm website, and we <code>expect</code> it to be a big <code>String</code> we can show on screen.</p>
-<p>The <code>Http.expectString GotText</code> line is saying a bit more than that we <code>expect</code> a <code>String</code> though. It is also saying that when we get a response, it should be turned into a <code>GotText</code> message:</p>
+<p>Como siempre, tenemos que producir el <code>Model</code> inicial, pero ahora también estamos produciendo un <strong>comando</strong> de lo que necesitamos que ocurra inmediatamente. Ese comando eventualmente producirá un valor <code>Msg</code>, que luego será suplido a la función <code>update</code>.</p>
+<p>Nuestro sitio web del libro comienza con el estado <code>Loading</code>, y queremos hacer un GET del texto completo. Cuando hagamos la solicitud GET usando <a href="https://package.elm-lang.org/packages/elm/http/latest/Http#get" target="_blank"><code>Http.get</code></a> vamos a especificar la <code>url</code> de los datos que queremos recuperar, y también necesitamos especificar lo que anticipamos que sean esos datos en <code>expect</code>. En nuestro caso, la <code>url</code> apunta a ciertos datos en el sitio web de Elm, y anticipamos que el dato sea un gran <code>String</code> que podremos mostrar en pantalla.</p>
+<p>Pero la línea <code>Http.expectString GotText</code> dice algo más que el hecho de que esperamos un <code>String</code>. También está diciendo que cuando obtengamos la respuesta, ésta debiera convertirse en un mensaje <code>GotText</code>.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
     = <span class="hljs-type">GotText</span> (<span class="hljs-type">Result</span> <span class="hljs-type">Http</span>.<span class="hljs-type">Error</span> <span class="hljs-type">String</span>)
 
@@ -836,12 +836,12 @@
 <span class="hljs-comment">-- GotText (Err Http.NetworkError)</span>
 <span class="hljs-comment">-- GotText (Err (Http.BadStatus 404))</span>
 </code></pre>
-<p>Notice that we are using the <code>Result</code> type from a couple sections back. This allows us to fully account for the possible failures in our <code>update</code> function. Speaking of <code>update</code> functions...</p>
+<p>Fíjate en que estamos usando el tipo <code>Result</code> que vimos un par de secciones atrás. Esto nos permite considerar en nuestra función <code>update</code>todos los posibles errores. Y hablando de funciones <code>update</code>…</p>
 <blockquote>
-<p><strong>Note:</strong> If you are wondering why <code>init</code> is a function (and why we are ignoring the argument) we will talk about it in the upcoming chapter on JavaScript interop! (Preview: the argument lets us get information from JS on initialization.)</p>
+<p><strong>Nota:</strong> Si te preguntas por qué <code>init</code> es una función (y por qué ignoramos su argumento), vamos a hablar de eso en el capítulo siguiente sobre interoperabilidad con JavaScript. (Un pequeño avance: el argumento nos permite recuperar información desde JS al inicializar).</p>
 </blockquote>
 <h2 id="update"><code>update</code></h2>
-<p>Our <code>update</code> function is returning a bit more information as well:</p>
+<p>Nuestra función <code>update</code> también retorna un poco más de información:</p>
 <pre><code class="lang-elm"><span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; ( <span class="hljs-type">Model</span>, <span class="hljs-type">Cmd</span> <span class="hljs-type">Msg</span> )
 <span class="hljs-title">update</span> msg model =
     <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
@@ -853,17 +853,17 @@
                 <span class="hljs-type">Err</span> _ -&gt;
                     ( <span class="hljs-type">Failure</span>, <span class="hljs-type">Cmd</span>.none )
 </code></pre>
-<p>Looking at the type signature, we see that we are not just returning an updated model. We are <em>also</em> producing a <strong>command</strong> of what we want Elm to do.</p>
-<p>Moving on to the implementation, we pattern match on messages like normal. When a <code>GotText</code> message comes in, we inspect the <code>Result</code> of our HTTP request and update our model depending on whether it was a success or failure. The new part is that we also provide a command.</p>
-<p>So in the case that we got the full text successfully, we say <code>Cmd.none</code> to indicate that there is no more work to do. We already got the full text!</p>
-<p>And in the case that there was some error, we also say <code>Cmd.none</code> and just give up. The text of the book did not load. If we wanted to get fancier, we could pattern match on the <a href="https://package.elm-lang.org/packages/elm/http/latest/Http#Error" target="_blank"><code>Http.Error</code></a> and retry the request if we got a timeout or something.</p>
-<p>The point here is that however we decide to update our model, we are also free to issue new commands. I need more data! I want a random number! Etc.</p>
+<p>Si te fijas en la firma, verás que no sólo retornamos un modelo actualizado, sino que <em>además</em> producimos un <strong>comando</strong> de lo que queremos que Elm haga por nosotros.</p>
+<p>Después, en la implementación, estamos haciendo búsqueda de patrones como es normal. Cuando llega un mensaje <code>GotText</code>, inspeccionamos el <code>Result</code> proveniente de nuestra solicitud HTTP, y actualizamos el modelo según si fue exitoso o no. La parte nueva es que también suplimos un comando.</p>
+<p>En el caso de que recuperáramos el texto exitosamente, decimos <code>Cmd.none</code> para indicar que no hay más que hacer. Ya tenemos el contenido del libro.</p>
+<p>Y si por otro lado hubiera ocurrido un error, también decimos <code>Cmd.none</code> y simplemente nos rendimos. El texto del libro no se cargó. Si quisiéramos evolucionarlo un poco, podríamos hacer búsqueda de patrones sobre el <a href="https://package.elm-lang.org/packages/elm/http/latest/Http#Error" target="_blank"><code>Http.Error</code></a> y reintentar la solicitud si ésta expiró por tiempo.</p>
+<p>El punto es que sea como sea que actualicemos el modelo, también tenemos la libertad de emitir nuevos comandos. ¡Necesito más datos! ¡Necesito un número al azar! Etc.</p>
 <h2 id="subscription"><code>subscription</code></h2>
-<p>The other new thing in this program is the <code>subscription</code> function. It lets you look at the <code>Model</code> and decide if you want to subscribe to certain information. In our example, we say <code>Sub.none</code> to indicate that we do not need to subscribe to anything, but we will soon see an example of a clock where we want to subscribe to the current time!</p>
-<h2 id="summary">Summary</h2>
-<p>When we create a program with <code>Browser.element</code>, we set up a system like this:</p>
+<p>Otro aspecto nuevo de este programa es la función <code>subscription</code>. Nos permite revisar el <code>Model</code> y decidir si queremos suscribirnos a cierta información. En nuestro ejemplo, decimos <code>Sub.none</code> para indicar que no necesitamos suscribirnos a nada, pero pronto veremos un ejemplo de un reloj donde nos interesa suscribirnos al tiempo actual.</p>
+<h2 id="resumen">Resumen</h2>
+<p>Cuando creamos programas con <code>Browser.element</code>, configuramos un sistema como este:</p>
 <p><img src="diagrams/element.svg" alt=""></img></p>
-<p>We get the ability to issue <strong>commands</strong> from <code>init</code> and <code>update</code>. This allows us to do things like make HTTP requests whenever we want. We also get the ability to <strong>subscribe</strong> to interesting information. (We will see an example of subscriptions later!)</p>
+<p>Tenemos la abilidad de emitir <strong>comandos</strong> desde <code>init</code> y <code>update</code>. Esto nos permite hacer cosas como mandar solicitudes HTTP cuando queramos. También podemos <strong>suscribirnos</strong> a información interesante. (Pronto veremos un ejemplo que usa suscripciones).</p>
 
                                 
                                 </section>
@@ -891,7 +891,7 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Commands and Subscriptions">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Comandos y suscripciones">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -907,7 +907,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"HTTP","level":"1.6.1","depth":2,"next":{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},"previous":{"title":"Commands and Subscriptions","level":"1.6","depth":1,"path":"effects/README.md","ref":"effects/README.md","articles":[{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},{"title":"Random","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},{"title":"Time","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/http.md","mtime":"2024-08-25T16:41:13.556Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"HTTP","level":"1.6.1","depth":2,"next":{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},"previous":{"title":"Comandos y suscripciones","level":"1.6","depth":1,"path":"effects/README.md","ref":"effects/README.md","articles":[{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},{"title":"Valores aleatorios","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},{"title":"Tiempo","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/http.md","mtime":"2024-09-20T14:51:57.659Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-20T14:52:25.057Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

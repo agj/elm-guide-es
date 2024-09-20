@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Random · Introducción a Elm</title>
+        <title>Valores aleatorios · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -232,7 +232,7 @@
                 <a href="../types/pattern_matching.html">
             
                     
-                    Pattern Matching
+                    Búsqueda de patrones
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="../error_handling/">
             
                     
-                    Error Handling
+                    Manejo de errores
             
                 </a>
             
@@ -295,7 +295,7 @@
                 <a href="./">
             
                     
-                    Commands and Subscriptions
+                    Comandos y suscripciones
             
                 </a>
             
@@ -335,7 +335,7 @@
                 <a href="random.html">
             
                     
-                    Random
+                    Valores aleatorios
             
                 </a>
             
@@ -348,7 +348,7 @@
                 <a href="time.html">
             
                     
-                    Time
+                    Tiempo
             
                 </a>
             
@@ -366,7 +366,7 @@
                 <a href="../install/">
             
                     
-                    Installation
+                    Instalación
             
                 </a>
             
@@ -380,7 +380,7 @@
                 <a href="../install/editor.html">
             
                     
-                    Code Editor
+                    Editor de código
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Random</a>
+        <a href=".." >Valores aleatorios</a>
     </h1>
 </div>
 
@@ -722,10 +722,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="random">Random</h1>
-<p>So far we have only seen commands to make HTTP requests, but we can command other things as well, like generating random values! So we are going to make an app that rolls dice, producing a random number between 1 and 6.</p>
-<p>Click the blue "Edit" button to see this example in action. Generate a couple random numbers, and look through the code to try to figure out how it works. <strong>Click the blue button now!</strong></p>
-<div class="edit-link"><a href="https://elm-lang.org/examples/numbers" target="_blank">Edit</a></div>
+                                <h1 id="valores-aleatorios">Valores aleatorios</h1>
+<p>Hasta ahora sólo hemos visto comandos que realizan solicitudes HTTP, pero también existen otros comandos, como aquellos que general valores aleatorios. Vamos a crear una aplicación que tira un dado y produce un valor entre 1 y 6.</p>
+<p>Apreta el botón azul “Editar” para ver este ejemplo en acción. Genera algunos números aleatorios y revisa el código para tratar de interpretar cómo funciona. <strong>Apreta el botón azul.</strong></p>
+<div class="edit-link"><a href="https://elm-lang.org/examples/numbers" target="_blank">Editar</a></div>
 
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
 <span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (..)
@@ -805,13 +805,13 @@
         , button [ onClick <span class="hljs-type">Roll</span> ] [ text <span class="hljs-string">"Roll"</span> ]
         ]
 </code></pre>
-<p>The new thing here is command issued in the <code>update</code> function:</p>
+<p>Lo nuevo aquí es el comando generado en la función <code>update</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-type">Random</span>.generate <span class="hljs-type">NewFace</span> (<span class="hljs-type">Random</span>.int <span class="hljs-number">1</span> <span class="hljs-number">6</span>)
 </code></pre>
-<p>Generating random values works a bit different than in languages like JavaScript, Python, Java, etc. So let’s see how it works in Elm!</p>
-<h2 id="random-generators">Random Generators</h2>
-<p>We are using the <a href="https://package.elm-lang.org/packages/elm/random/latest" target="_blank"><code>elm/random</code></a> package for this. The <a href="https://package.elm-lang.org/packages/elm/random/latest/Random" target="_blank"><code>Random</code></a> module in particular.</p>
-<p>The core idea is that we have random <code>Generator</code> that describes <em>how</em> to generate a random value. For example:</p>
+<p>Generar valores aleatorios funciona un poco distinto en comparación con otros lenguajes como JavaScript, Python, Java, etc. Veamos cómo funciona en Elm.</p>
+<h2 id="generadores-de-valores-aleatorios">Generadores de valores aleatorios</h2>
+<p>Usamos el paquete <a href="https://package.elm-lang.org/packages/elm/random/latest" target="_blank"><code>elm/random</code></a> para esto. En particular, el módulo <a href="https://package.elm-lang.org/packages/elm/random/latest/Random" target="_blank"><code>Random</code></a>.</p>
+<p>La idea fundametal es que tenemos un generador <code>Generator</code> que describe <em>cómo</em> vamos a generar el valor aleatorio. Por ejemplo:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Random
 
 
@@ -829,13 +829,13 @@
 <span class="hljs-title">usuallyTrue</span> =
     <span class="hljs-type">Random</span>.weighted ( <span class="hljs-number">80</span>, <span class="hljs-type">True</span> ) [ ( <span class="hljs-number">20</span>, <span class="hljs-type">False</span> ) ]
 </code></pre>
-<p>So here we have three random generators. The <code>roll</code> generator is saying it will produce an <code>Int</code>, and more specifically, it will produce an integer between <code>1</code> and <code>6</code> inclusive. Likewise, the <code>usuallyTrue</code> generator is saying it will produce a <code>Bool</code>, and more specifically, it will be true 80% of the time.</p>
-<p>The point is that we are not actually generating the values yet. We are just describing <em>how</em> to generate them. From there you use the <a href="https://package.elm-lang.org/packages/elm/random/latest/Random#generate" target="_blank"><code>Random.generate</code></a> to turn it into a command:</p>
+<p>Aquí tenemos tres generadores de valores aleatorios. El generador <code>roll</code> dice que producirá un <code>Int</code>, y más específicamente, uno entre <code>1</code> y <code>6</code>, inclusivos. Similarmente, el generador <code>usuallyTrue</code> dice que producirá un <code>Bool</code>, y más específicamente, que éste será <code>True</code> el 80% de las veces.</p>
+<p>El punto es que no estamos aún generando los valores. Estamos sólo describiendo <em>cómo</em> generarlos. Después podemos usar <a href="https://package.elm-lang.org/packages/elm/random/latest/Random#generate" target="_blank"><code>Random.generate</code></a> para convertirlo en un comando:</p>
 <pre><code class="lang-elm"><span class="hljs-title">generate</span> : (a -&gt; msg) -&gt; <span class="hljs-type">Generator</span> a -&gt; <span class="hljs-type">Cmd</span> msg
 </code></pre>
-<p>When the command is performed, the <code>Generator</code> produces some value, and then that gets turned into a message for your <code>update</code> function. So in our example, the <code>Generator</code> produces a value between 1 and 6, and then it gets turned into a message like <code>NewFace 1</code> or <code>NewFace 4</code>. That is all we need to know to get our random dice rolls, but generators can do quite a bit more!</p>
-<h2 id="combining-generators">Combining Generators</h2>
-<p>Once we have some simple generators like <code>probability</code> and <code>usuallyTrue</code>, we can start snapping them together with functions like <a href="https://package.elm-lang.org/packages/elm/random/latest/Random#map3" target="_blank"><code>map3</code></a>. Imagine we want to make a simple slot machine. We could create a generator like this:</p>
+<p>Cuando el comando se ejecuta, el <code>Generator</code> produce un valor, y éste se convierte en un mensaje para la función <code>update</code>. En nuestro ejemplo, el <code>Generator</code> produce un valor entre 1 y 6, y después se convierte en un mensaje como <code>NewFace 1</code> o <code>NewFace 4</code>. Eso es todo lo que necesitamos para poder lanzar el dado, pero los generadores pueden hacer mucho más.</p>
+<h2 id="combinando-generadores">Combinando generadores</h2>
+<p>Teniendo generadores simples como <code>probability</code> o <code>usuallyTrue</code>, podemos empezar a conjugarlos usando funciones como <a href="https://package.elm-lang.org/packages/elm/random/latest/Random#map3" target="_blank"><code>map3</code></a>. Imagina que quisiéramos hacer una máquina tragamonedas. Podríamos tener un generador como este:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Random
 
 
@@ -862,17 +862,17 @@
 <span class="hljs-title">spin</span> =
     <span class="hljs-type">Random</span>.map3 <span class="hljs-type">Spin</span> symbol symbol symbol
 </code></pre>
-<p>We first create <code>Symbol</code> to describe the pictures that can appear on the slot machine. We then create a random generator that generates each symbol with equal probability.</p>
-<p>From there we use <code>map3</code> to combine them into a new <code>spin</code> generator. It says to generate three symbols and then put them together into a <code>Spin</code>.</p>
-<p>The point here is that from small building blocks, we can create a <code>Generator</code> that describes pretty complex behavior. And then from our application, we just have to say something like <code>Random.generate NewSpin spin</code> to get the next random value.</p>
+<p>Primero creamos <code>Symbol</code> para describir los símbolos que aparecen en la máquina tragamonedas. Después creamos un generador que otorga la misma probabilidad a cada símbolo.</p>
+<p>Después usamos <code>map3</code> para combinarlos en un nuevo generador <code>spin</code>. Lo que hace es generar tres símbolos y después unirlos en un valor <code>Spin</code>.</p>
+<p>El punto es que a partir de estas piezas básicas podemos crear un <code>Generator</code> que describe comportamientos bastante complejos. Y desde nuestra aplicación, sólo necesitamos decir algo como <code>Random.generate NewSpin spin</code> para obtener el siguiente valor aleatorio.</p>
 <blockquote>
-<p><strong>Exercises:</strong> Here are a few ideas to make the example code on this page a bit more interesting!</p>
+<p><strong>Ejercicios:</strong> Estas son algunas ideas para hacer más interesante el código que vimos en esta página.</p>
 <ul>
-<li>Instead of showing a number, show the die face as an image.</li>
-<li>Instead of showing an image of a die face, use <a href="https://package.elm-lang.org/packages/elm/svg/latest/" target="_blank"><code>elm/svg</code></a> to draw it yourself.</li>
-<li>Create a weighted die with <a href="https://package.elm-lang.org/packages/elm/random/latest/Random#weighted" target="_blank"><code>Random.weighted</code></a>.</li>
-<li>Add a second die and have them both roll at the same time.</li>
-<li>Have the dice flip around randomly before they settle on a final value.</li>
+<li>En vez de mostrar un número, muestra la cara del dado como imagen.</li>
+<li>En vez de mostrar una imagen de un dado, usa <a href="https://package.elm-lang.org/packages/elm/svg/latest/" target="_blank"><code>elm/svg</code></a> para dibujarla por tu cuenta.</li>
+<li>Crea un dado “tramposo” usando <a href="https://package.elm-lang.org/packages/elm/random/latest/Random#weighted" target="_blank"><code>Random.weighted</code></a>.</li>
+<li>Añade un segundo dado y haz que se tiren ambos al mismo tiempo.</li>
+<li>Haz que el dado gire aleatoriamente antes de caer sobre su valor final.</li>
 </ul>
 </blockquote>
 
@@ -907,7 +907,7 @@
                 </a>
                 
                 
-                <a href="time.html" class="navigation navigation-next " aria-label="Next page: Time">
+                <a href="time.html" class="navigation navigation-next " aria-label="Next page: Tiempo">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -918,7 +918,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Random","level":"1.6.3","depth":2,"next":{"title":"Time","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]},"previous":{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/random.md","mtime":"2024-08-25T16:41:13.774Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Valores aleatorios","level":"1.6.3","depth":2,"next":{"title":"Tiempo","level":"1.6.4","depth":2,"path":"effects/time.md","ref":"effects/time.md","articles":[]},"previous":{"title":"JSON","level":"1.6.2","depth":2,"path":"effects/json.md","ref":"effects/json.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/random.md","mtime":"2024-09-20T14:51:57.659Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-20T14:52:25.057Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

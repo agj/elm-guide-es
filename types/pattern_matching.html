@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Pattern Matching · Introducción a Elm</title>
+        <title>Búsqueda de patrones · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -232,7 +232,7 @@
                 <a href="pattern_matching.html">
             
                     
-                    Pattern Matching
+                    Búsqueda de patrones
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="../error_handling/">
             
                     
-                    Error Handling
+                    Manejo de errores
             
                 </a>
             
@@ -295,7 +295,7 @@
                 <a href="../effects/">
             
                     
-                    Commands and Subscriptions
+                    Comandos y suscripciones
             
                 </a>
             
@@ -335,7 +335,7 @@
                 <a href="../effects/random.html">
             
                     
-                    Random
+                    Valores aleatorios
             
                 </a>
             
@@ -348,7 +348,7 @@
                 <a href="../effects/time.html">
             
                     
-                    Time
+                    Tiempo
             
                 </a>
             
@@ -366,7 +366,7 @@
                 <a href="../install/">
             
                     
-                    Installation
+                    Instalación
             
                 </a>
             
@@ -380,7 +380,7 @@
                 <a href="../install/editor.html">
             
                     
-                    Code Editor
+                    Editor de código
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Pattern Matching</a>
+        <a href=".." >Búsqueda de patrones</a>
     </h1>
 </div>
 
@@ -722,15 +722,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pattern-matching">Pattern Matching</h1>
-<p>On the previous page, we learned how to create <a href="custom_types.html">custom types</a> with the <code>type</code> keyword. Our primary example was a <code>User</code> in a chat room:</p>
+                                <h1 id="búsqueda-de-patrones">Búsqueda de patrones</h1>
+<p>En la página anterior vimos cómo crear <a href="custom_types.html">tipos personalizados</a> con la palabra clave <code>type</code>. Nuestro ejemplo principal era un usuario en un chat:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">User</span>
     = <span class="hljs-type">Regular</span> <span class="hljs-type">String</span> <span class="hljs-type">Int</span>
     | <span class="hljs-type">Visitor</span> <span class="hljs-type">String</span>
 </code></pre>
-<p>Regulars have a name and age, whereas visitors only have a name. So we have our custom type, but how do we actually use it?</p>
+<p>Usuarios <code>Regular</code> llevan nombre y edad, mientras que los <code>Visitor</code> sólo llevan nombre. Ya tenemos nuestro tipo personalizado, pero ¿cómo se usa?</p>
 <h2 id="case"><code>case</code></h2>
-<p>Say we want a <code>toName</code> function that decides on a name to show for each <code>User</code>. We need to use a <code>case</code> expression:</p>
+<p>Digamos que queremos una función <code>toName</code> que decide qué nombre mostrar para un <code>User</code>. Para eso usamos una expresión <code>case</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">toName</span> : <span class="hljs-type">User</span> -&gt; <span class="hljs-type">String</span>
 <span class="hljs-title">toName</span> user =
     <span class="hljs-keyword">case</span> user <span class="hljs-keyword">of</span>
@@ -745,10 +745,10 @@
 <span class="hljs-comment">-- toName (Regular "Thomas" 44) == "Thomas"</span>
 <span class="hljs-comment">-- toName (Visitor "kate95")    == "kate95"</span>
 </code></pre>
-<p>The <code>case</code> expression allows us to branch based on which variant we happen to see, so whether we see Thomas or Kate, we always know how to show their name.</p>
-<p>And if we try invalid arguments like <code>toName (Visitar "kate95")</code> or <code>toName Anonymous</code>, the compiler tells us about it immediately. This means many simple mistakes can be fixed in seconds, rather than making it to users and costing a lot more time overall.</p>
-<h2 id="wild-cards">Wild Cards</h2>
-<p>The <code>toName</code> function we just defined works great, but notice that the <code>age</code> is not used in the implementation? When some of the associated data is unused, it is common to use a “wild card” instead of giving it a name:</p>
+<p>La expresión <code>case</code> nos permite bifurcar el código en base a la variante que recibamos. Sea “Thomas” o “Kate”, siempre sabremos cómo mostrar su nombre.</p>
+<p>Y si intentamos pasarle argumentos inválidos, como <code>toName (Visitar "kate95")</code> o <code>toName Anonymous</code>, el compilador nos va a avisar inmediatamente. Esto significa que muchos errores simples pueden ser corregidos en segundos, en vez de aparecerle a los usuarios y terminar costando mucho más tiempo al fin y al cabo.</p>
+<h2 id="comodines">Comodines</h2>
+<p>La función <code>toName</code> que definimos funciona sin problemas, pero nota que <code>age</code> no se usa en esta implementación. Cuando parte de los datos no se usan, es común usar un “comodín” en vez de darle un nombre:</p>
 <pre><code class="lang-elm"><span class="hljs-title">toName</span> : <span class="hljs-type">User</span> -&gt; <span class="hljs-type">String</span>
 <span class="hljs-title">toName</span> user =
     <span class="hljs-keyword">case</span> user <span class="hljs-keyword">of</span>
@@ -758,7 +758,7 @@
         <span class="hljs-type">Visitor</span> name -&gt;
             name
 </code></pre>
-<p>The <code>_</code> acknowledges the data there, but also saying explicitly that nobody is using it.</p>
+<p>El uso de <code>_</code> indica que sabemos que hay un dato ahí, pero hemos decidido ignorarlo explícitamente.</p>
 
                                 
                                 </section>
@@ -791,7 +791,7 @@
                 </a>
                 
                 
-                <a href="../error_handling/" class="navigation navigation-next " aria-label="Next page: Error Handling">
+                <a href="../error_handling/" class="navigation navigation-next " aria-label="Next page: Manejo de errores">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -802,7 +802,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pattern Matching","level":"1.4.4","depth":2,"next":{"title":"Error Handling","level":"1.5","depth":1,"path":"error_handling/README.md","ref":"error_handling/README.md","articles":[{"title":"Maybe","level":"1.5.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]}]},"previous":{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/pattern_matching.md","mtime":"2024-08-25T16:41:14.524Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-05T20:25:02.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Búsqueda de patrones","level":"1.4.4","depth":2,"next":{"title":"Manejo de errores","level":"1.5","depth":1,"path":"error_handling/README.md","ref":"error_handling/README.md","articles":[{"title":"Maybe","level":"1.5.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]}]},"previous":{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["youtube","elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"youtube":{},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/pattern_matching.md","mtime":"2024-09-20T14:51:57.661Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2024-09-20T14:52:25.057Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
