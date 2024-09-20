@@ -60,6 +60,7 @@ La disciplina de la informática es demasiado anglocéntrica. Gran parte de la t
 - Revisión de traducción, pulido, regularización del lenguaje.
 - Adición de detalles importantes que no existen en la versión original.
   - Explicación de `Task` en `effects/time.md`.
+  - Instalación de extensión de Sublime Text.
 - Reemplazo de links externos en inglés a equivalentes en español.
 - Corrección del REPL para que funcione.
 - Traducción de comentarios en código de ejemplo.
