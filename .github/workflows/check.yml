@@ -18,7 +18,7 @@ jobs:
             .direnv
             .pnpm-store
             ~/.elm
-            /nix
+            /nix/store
           key: ${{ runner.os }}-cache
       - name: Instala Nix
         uses: cachix/install-nix-action@v27
