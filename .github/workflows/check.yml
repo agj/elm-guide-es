@@ -26,10 +26,14 @@ jobs:
             repl/elm-stuff
             .direnv
             .pnpm-store
+            ~/.local/share/pnpm/store/v3
             ~/.elm
           key: ${{ runner.os }}-cache
 
       - name: Verifica
         run: nix develop .#ci --command just check
 
-      - run: nix develop .#ci --command pnpm store path
+      - run: |
+          nix develop .#ci --command pnpm store path
+          nix develop .#ci --command echo $HOME
+
