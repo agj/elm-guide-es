@@ -27,11 +27,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            repl/elm-stuff
             .direnv
             .pnpm-store
+            ~/.local/share/pnpm
             ~/.elm
           key: ${{ runner.os }}-cache
+
+      - name: Información del entorno
+      - run: |
+          echo $HOME
+          nix develop .#ci --command pnpm store path
 
       - name: Sube a GH Pages
         run: |
