@@ -36,4 +36,3 @@ jobs:
       - run: |
           nix develop .#ci --command pnpm store path
           nix develop .#ci --command echo $HOME
-
