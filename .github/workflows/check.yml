@@ -30,7 +30,7 @@ jobs:
           key: ${{ runner.os }}-cache
 
       - name: Información del entorno
-      - run: |
+        run: |
           echo $HOME
           nix develop .#ci --command pnpm store path
 
