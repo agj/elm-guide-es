@@ -31,3 +31,5 @@ jobs:
 
       - name: Verifica
         run: nix develop .#ci --command just check
+
+      - run: nix develop .#ci --command pnpm store path
