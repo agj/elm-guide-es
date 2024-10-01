@@ -22,7 +22,7 @@
 - [Instalación](install/README.md)
   - [Editor de código](install/editor.md)
   - [Elm](install/elm.md)
-- [JavaScript Interop](interop/README.md)
+- [Interoperabilidad con JS](interop/README.md)
   - [Flags](interop/flags.md)
   - [Ports](interop/ports.md)
   - [Custom Elements](interop/custom_elements.md)

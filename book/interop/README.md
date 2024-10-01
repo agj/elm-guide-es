@@ -1,36 +1,36 @@
-# JavaScript Interop
+# Interoperabilidad con JavaScript
 
-By now we have seen **The Elm Architecture**, **types**, **commands**, **subscriptions**, and we even have Elm installed locally.
+Hasta este punto hemos visto la **Arquitectura Elm**, **tipos**, **comandos**, **suscripciones**, y hasta instalamos Elm localmente.
 
-But what happens when you need to integrate with JavaScript? Maybe there is a browser API that does not have an equivalent Elm package yet. Maybe you want to embed a JavaScript widget within your Elm app? Etc. This chapter will outline Elm's three interop mechanisms:
+Pero ¿y si necesitamos integrar con JavaScript? Tal vez hay alguna API del navegador que aún no tiene un equivalente en un paquete de Elm. O tal vez quieres incrustar un _widget_ de Javascript en tu app Elm. Etc. En este capítulo vamos a revisar las tres formas con las que podemos interoperar con JavaScript.
 
 - [Flags](/interop/flags.html)
 - [Ports](/interop/ports.html)
 - [Custom Elements](/interop/custom_elements.html)
 
-Before we get into the three mechanisms, we need to know how to compile Elm programs to JavaScript!
+Antes de entrar en materia, aprendamos a compilar nuestros programas Elm a JavaScript.
 
-> **NOTE:** If you are evaluating Elm for use at work, I encourage you to make sure these three mechanisms will be able to cover all of your needs. You can get a quick overview of this chapter by looking at these [examples](https://github.com/elm-community/js-integration-examples/). Please ask [here](https://discourse.elm-lang.org/) if you are not sure about something, and I encourage you to circle back to Elm later if you are not fully confident.
+> **Nota:** Si estás evaluando el usar Elm en tu trabajo, te sugiero que te asegures de que estos tres mecanismos sean capaces de cubrir todas tus necesidades. Puedes ver [estos ejemplos](https://github.com/elm-community/js-integration-examples/) como un resumen breve de este capítulo. [Pregunta aquí](https://elm-lang.org/community) si hay algo que te haga dudar, y si decides que aún no es el momento, ojalá vuelvas a darte una vuelta a revisar Elm en el futuro.
 
-## Compiling to JavaScript
+## Compilar a JavaScript
 
-Running `elm make` produces HTML files by default. So if you say:
+Si corres `elm make` producirás archivos HTML por defecto. Es decir que si pones:
 
 ```bash
 elm make src/Main.elm
 ```
 
-It produces an `index.html` file that you can just open and start playing with. If you are getting into JavaScript interop, you want to produce JavaScript files instead:
+Esto producirá un archivo `index.html` que puedes abrir directamente para interactuar con tu programa. Pero si necesitas interoperabilidad con JavaScript, vas a necesitar producir archivos JavaScript.
 
 ```bash
 elm make src/Main.elm --output=main.js
 ```
 
-This produces a JavaScript file that exposes an `Elm.Main.init()` function. So once you have `main.js` you can write your own HTML file that does whatever you want.
+Este comando produce un archivo JavaScript que expone una función `Elm.Main.init()`. Teniendo este archivo `main.js`, puedes escribir tu propio archivo HTML que haga lo que necesites.
 
-## Embedding in HTML
+## Incrustar en HTML
 
-Here is the minimal HTML needed to make your `main.js` appear in a browser:
+Este es el HTML mínimo necesario para que `main.js` funcione en un navegador:
 
 ```html
 <html>
@@ -51,12 +51,12 @@ Here is the minimal HTML needed to make your `main.js` appear in a browser:
 </html>
 ```
 
-I want to call attention to the important lines here:
+Revisemos las líneas más importantes aquí:
 
-- `<head>` - We have a line to load our compiled `main.js` file. This is required! If you compile an Elm module called `Main`, you will get an `Elm.Main.init()` function available in JavaScript. If you compile an Elm module named `Home`, you will get an `Elm.Home.init()` function in JavaScript. Etc.
+- `<head>` - Tenemos una línea que carga nuestro archivo compilado `main.js`. ¡Esto es necesario! Si compilas un módulo llamado `Main`, vas a obtener una función `Elm.Main.init()` disponible en JavaScript. Si compilas un módulo llamado `Home`, vas a obtener una función `Elm.Home.init()` en JavaScript. Etc.
 
-- `<body>` - We need to do two things here. First, we create a `<div>` that we want our Elm program to take over. Maybe it is within a larger application, surrounded by tons of other stuff? That is fine! Second, we have a `<script>` to initialize our Elm program. Here we call the `Elm.Main.init()` function to start our program, passing in the `node` we want to take over.
+- `<body>` - Hay dos cosas que tenemos que hacer aquí. Primero, creamos un `<div>` del que Elm tomará cargo. Tal vez es sólo una parte dentro de una aplicación más grande, y no habría problema. Segundo, tenemos un `<script>` para inicializar nuestro programa Elm. Aquí llamamos la función `Elm.Main.init()` para inicializar el programa, pasándole el nodo HTML (`node`) del que se hará cargo.
 
-Now that we know how to embed Elm programs in an HTML document, it is time to start exploring the three interop options: flags, ports, and custom elements!
+Ya aprendimos a incrustar programas Elm dentro de un documento HTML, así que podemos empezar a explorar las tres opciones de interoperabilidad: flags, puertos, y elementos personalizados.
 
-> **Note:** This is a normal HTML file, so you can put whatever you want in it! Many people load additional JS and CSS files in the `<head>`. That means it is totally fine to write your CSS by hand or to generate it somehow. Add something like `<link rel="stylesheet" href="whatever-you-want.css">` in your `<head>` and you have access to it. (There are some great options for specifying your CSS all _within_ Elm as well, but that is a whole other topic!)
+> **Nota:** Este es un archivo HTML normal, lo que signiffica que puedes ponerle cualquier cosa que necesites. Mucha gente carga más archivos JS y CSS en `<head>`. Eso significa que es válido escribir tu CSS a mano, o generarlo con alguna herramienta. Puedes añadir algo como `<link rel="stylesheet" href="whatever-you-want.css">` en tu `<head>`, y ya tendrás acceso. También hay buenas opciones para manejar tu CSS _dentro_ de Elm, pero ese es un tema para otra ocasión.
