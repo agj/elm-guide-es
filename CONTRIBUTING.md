@@ -53,6 +53,8 @@ Queremos que cualquier persona se sienta incluída cuando lea nuestra traducció
 
 La disciplina de la informática es demasiado anglocéntrica. Gran parte de la terminología tiene origen en palabras cotidianas del inglés, pero al usarlas tal cual en español se vuelven jerga confusa. A través de esta traducción queremos también acercar a hablantes de español a la disciplina en general, por lo que preferimos **evitar el uso de anglicismos** cuando exista una buena alternativa en español.
 
+Por supuesto que queremos ser fieles al contenido original hasta cierto punto, pero donde hayan oportunidades de mejorar la experiencia del lector tal vez **nos permitiremos diverger**. Por ejemplo, si hay contenido desactualizado o faltante.
+
 [onu-genero]: https://authoring.prod.unwomen.org/sites/default/files/Headquarters/Attachments/Sections/Library/Gender-inclusive%20language/Guidelines-on-gender-inclusive-language-es.pdf
 
 ### Referencias útiles
