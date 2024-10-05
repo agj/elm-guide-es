@@ -12,6 +12,8 @@ Antes de entrar en materia, aprendamos a compilar nuestros programas Elm a JavaS
 
 > **Nota:** Si estás evaluando el usar Elm en tu trabajo, te sugiero que te asegures de que estos tres mecanismos sean capaces de cubrir todas tus necesidades. Puedes ver [estos ejemplos](https://github.com/elm-community/js-integration-examples/) como un resumen breve de este capítulo. [Pregunta aquí](https://elm-lang.org/community) si hay algo que te haga dudar, y si decides que aún no es el momento, ojalá vuelvas a darte una vuelta a revisar Elm en el futuro.
 
+<!-- TODO: 👆 Agregar este ejemplo al repositorio y traducirlo. -->
+
 ## Compilar a JavaScript
 
 Si corres `elm make` producirás archivos HTML por defecto. Es decir que si pones:

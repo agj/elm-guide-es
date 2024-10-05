@@ -4,6 +4,8 @@ Las “flags” son una forma de pasarle valores a Elm al inicializar.
 
 Algunos usos comunes incluye pasarle llaves de API, variables de entorno y datos de usuario. Esto puede ser útil si generaste el HTML dinámicamente. También nos pueden ayudar a cargar información en caché, como en [este ejemplo de `localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage).
 
+<!-- TODO: 👆 Agregar este ejemplo al repositorio y traducirlo. -->
+
 ## Flags en HTML
 
 El HTML es prácticamente igual a como lo vimos antes, pero con un argumento `flags` adicional que le pasamos a la función `Elm.Main.init()`.
@@ -106,6 +108,8 @@ subscriptions _ =
 Lo único importante aquí es que la función `init` dice que recibe un argumento `Int`. Esta es la manera en que Elm puede acceder inmediatamente a las flags que le pases desde JavaScript. Después de eso puedes poner los datos en el modelo o ejecutar algún comando, lo que sea que necesites hacer.
 
 Te recomiendo que revises [este ejemplo que usa `localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage) para ver un caso más interesante que usa flags.
+
+<!-- TODO: 👆 Agregar este ejemplo al repositorio y traducirlo. -->
 
 ## Verificando las flags
 

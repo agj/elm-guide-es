@@ -4,6 +4,8 @@ Many languages have a Foreign Function Interface (FFI) that allows direct bindin
 
 **Elm does not have a traditional Foreign Function Interface with JavaScript.** It is not possible to call arbitrary JavaScript functions at any time. This has tradeoffs that some people really love, but it is not for everyone! If you are evaluating Elm for commercial use, I highly encourage you to look through [these interop examples](https://github.com/elm-community/js-integration-examples) to get a feeling for whether flags, ports, and custom elements can cover everything you need.
 
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
+
 Why does Elm make a different choice than other languages on this?
 
 ## Tradeoffs
@@ -28,3 +30,5 @@ Given these pitfalls, ports and custom elements are attractive because they let 
 This is definitely a longer and harder path, but languages live for 30+ years. They have to support teams and companies for decades, and when I think about what Elm will look like in 20 or 30 years, I think the trade-offs that come with ports look really promising! My talk [What is Success?](https://youtu.be/uGlzRt-FYto) starts a little slow, but it gets into this a bit more!
 
 And again, this path is not for everyone! There are many alternative languages that have a traditional FFI instead, and I encourage you to look into those languages if you think that path might be better. Is the package ecosystem as cohesive? Do you get runtime exceptions more often? Maybe, but maybe the extra flexibility is worth it for you. So I encourage you to take a look at [these interop examples](https://github.com/elm-community/js-integration-examples) to decide if flags, ports, and custom elements will cover everything you need. This is especially important if you are considering Elm for commercial use!
+
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
