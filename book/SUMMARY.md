@@ -24,7 +24,7 @@
   - [Elm](install/elm.md)
 - [Interoperabilidad con JS](interop/README.md)
   - [Flags](interop/flags.md)
-  - [Ports](interop/ports.md)
+  - [Puertos](interop/ports.md)
   - [Custom Elements](interop/custom_elements.md)
   - [Limits](interop/limits.md)
 - [Web Apps](webapps/README.md)

@@ -1,12 +1,16 @@
-# Ports
+# Puertos
 
-Ports allow communication between Elm and JavaScript.
+Los puertos permiten la comunicación entre Elm y JavaScript.
 
-Ports are probably most commonly used for [`WebSockets`](https://github.com/elm-community/js-integration-examples/tree/master/websockets) and [`localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage). Let's focus on the `WebSockets` example.
+Son más frecuentemente usados con [`WebSockets`](https://github.com/elm-community/js-integration-examples/tree/master/websockets) y con [`localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage). Enfoquémonos en el ejemplo de `WebSockets`.
 
-## Ports in JavaScript
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
 
-Here we have pretty much the same HTML we have been using on the previous pages, but with a bit of extra JavaScript code in there. We create a connection to `wss://echo.websocket.org` that just repeats back whatever you send it. You can see in the [live example](https://ellie-app.com/8yYgw7y7sM2a1) that this lets us make the skeleton of a chat room:
+## Puertos en JavaScript
+
+Aquí tenemos prácticamente el mismo HTML que hemos usado en las últimas dos páginas, pero con un poco de JavaScript añadido. Creamos una conexión con `wss://echo.websocket.org` que repite lo que sea que le envíes. Puedes comprobar viendo [este ejemplo](https://ellie-app.com/8yYgw7y7sM2a1) que nos permite crear el esqueleto de un chat:
+
+<!-- TODO: 👆 Traducir el ejemplo en el Ellie, y actualizar el link y el código abajo. -->
 
 ```html
 <!doctype html>
@@ -48,13 +52,13 @@ Here we have pretty much the same HTML we have been using on the previous pages,
 </html>
 ```
 
-We call `Elm.Main.init()` like in all of our interop examples, but this time we are actually using the resulting `app` object. We are subscribing to the `sendMessage` port and we are sending to the `messageReceiver` port.
+Llamamos `Elm.Main.init()` igual que en otros ejemplos de interoperabilidad, pero esta vez sí usamos el objeto `app` que devuelve. Nos suscribimos al puerto `sendMessage` y estamos enviando datos al puerto `messageReceiver`.
 
-Those correspond to code written on the Elm side.
+Estos tienen una correspondencia en el lado Elm.
 
-## Ports in Elm
+## Puertos en Elm
 
-Check out the lines that use the `port` keyword in the corresponding Elm file. This is how we define the ports that we just saw on the JavaScript side.
+Revisa las líneas en que usamos la palabra clave `port` en el archivo Elm correspondiente. Así es como definimos los puertos que acabamos de ver en el lado JavaScript.
 
 ```elm
 port module Main exposing (..)
@@ -194,21 +198,23 @@ ifIsEnter msg =
             )
 ```
 
-Notice that the first line says `port module` rather than just `module`. This makes it possible to define ports in a given module. The compiler gives a hint about this if it is needed, so hopefully no one gets too stuck on that!
+Fíjate en que la primera línea dice `port module` en vez de sólo `module`. Esto es lo que hace posible definir puertos dentro del módulo. El compilador te va a dar ayuda si acaso te equivocas en esto, así que espero que no llegue a ser un problema muy grande.
 
-Okay, but what is going on with the `port` declarations for `sendMessage` and `messageReceiver`?
+Bueno, pero ¿qué significan las declaraciones `port` para `sendMessage` y `messageReceiver`?
 
-## Outgoing Messages (`Cmd`)
+## Mensajes de salida (`Cmd`)
 
-The `sendMessage` declaration lets us send messages out of Elm.
+La declaración de `sendMessage` nos permite enviar mensajes de salida desde Elm.
 
 ```elm
 port sendMessage : String -> Cmd msg
 ```
 
-Here we are declaring that we want to send out `String` values, but we could send out any of the types that work with flags. We talked about those types on the previous page, and you can check out [this `localStorage` example](https://ellie-app.com/8yYddD6HRYJa1) to see a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) getting sent out to JavaScript.
+Aquí declaramos que queremos enviar valores `String`, pero podríamos poner cualquiera de los otros tipos que funcionan con flags. Hablamos sobre esos tipos en la página anterior, y puedes revisar este [ejemplo que usa `localStorage`](https://ellie-app.com/8yYddD6HRYJa1) para ver cómo enviamos un valor [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) hacia JavaScript.
 
-From there we can use `sendMessage` like any other function. If your `update` function produces a `sendMessage "hello"` command, you will hear about it on the JavaScript side:
+<!-- TODO: 👆 Traducir este ejemplo en el Ellie. -->
+
+Ahora podemos usar `sendMessage` igual que cualquier función. Si tu función `update` genera un comando `sendMessage "hello"`, lo vas a recibir en el lado de JavaScript:
 
 ```javascript
 app.ports.sendMessage.subscribe(function (message) {
@@ -216,23 +222,23 @@ app.ports.sendMessage.subscribe(function (message) {
 });
 ```
 
-This JavaScript code is subscribed to all of the outgoing messages. You can `subscribe` multiple functions and `unsubscribe` functions by reference, but we generally recommend keeping things static.
+Este código JavaScript está suscrito a todos los mensajes de salida. Puedes llamar suscribir múltiples funciones con `subscribe`, y después desuscribirlas por referencia usando `unsubscribe`, pero en general sugerimos mantener esto estático.
 
-We also recommend sending out richer messages, rather than making lots of individual ports. Maybe that means having a custom type in Elm that represents everything you might need to tell JS, and then using [`Json.Encode`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode) to send it out to a single JS subscription. Many people find that this creates a cleaner separation of concerns. The Elm code clearly owns some state, and the JS clearly owns other state.
+También recomendamos enviar mensajes más completos en vez de crear muchos puertos individuales. Tal vez eso significaría tener un tipo personalizado en Elm que representa todo lo que necesites decirle a JS, y después usar [`Json.Encode`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode) para enviarlo a una única suscripción de JS. Mucha gente cree que esto contribuye a tener una mejor separación de intereses. El código Elm es claramente dueño de cierto estado, y el lado JS es claramente dueño de cierto otro estado.
 
-## Incoming Messages (`Sub`)
+## Mensajes de entrada (`Sub`)
 
-The `messageReceiver` declaration lets us listen for messages coming in to Elm.
+La declaración de `messageReceiver` nos permite escuchar mensajes que entran a Elm.
 
 ```elm
 port messageReceiver : (String -> msg) -> Sub msg
 ```
 
-We are saying we are going to receive `String` values, but again, we can listen for any type that can come in through flags or outgoing ports. Just swap out the `String` type with one of the types that can cross the border.
+Aquí decimos que vamos a recibir valores `String`, pero nuevamente, podemos escuchar cualquier tipo que sea compatible con flags o con puertos de salida. Simplemente cambia el tipo `String` por el de uno de los tipos que puede cruzar la frontera.
 
-Again we can use `messageReceiver` like any other function. In our case we call `messageReceiver Recv` when defining our `subscriptions` because we want to hear about any incoming messages from JavaScript. This will let us get messages like `Recv "how are you?"` in our `update` function.
+Podemos usar `messageReceiver` igual que otras funciones. En nuestro caso, llamamos `messageReceiver Recv` cuando definimos nuestras suscripciones, porque queremos escuchar cualquier mensaje de entrada desde JavaScript. Esto nos permitirá recibir mensajes como `Recv "¿cómo estás?"` en nuestra función `update`.
 
-On the JavaScript side, we are able to send things to this port whenever we want:
+En el lado JavaScript, podemos enviar cosas a un puerto cuando queramos:
 
 ```javascript
 socket.addEventListener("message", function (event) {
@@ -240,20 +246,20 @@ socket.addEventListener("message", function (event) {
 });
 ```
 
-We happen to be sending whenever the websocket gets a message, but you could send at other times as well. Maybe we are getting messages from another data source as well. That is fine, and Elm does not need to know anything about it! Just send the strings through the relevant port.
+En este caso lo estamos haciendo cuando recibimos un mensaje vía un websocket, pero podrías enviarlo en cualquier otro momento también. Tal vez hay otra fuente más desde la cual recibimos mensajes. No hay problema, Elm no necesita saber los detalles. Sólo mándale el string por el puerto que corresponda.
 
-## Notes
+## Notas
 
-**Ports are about creating strong boundaries!** Definitely do not try to make a port for every JS function you need. You may really like Elm and want to do everything in Elm no matter the cost, but ports are not designed for that. Instead, focus on questions like “who owns the state?” and use one or two ports to send messages back and forth. If you are in a complex scenario, you can even simulate `Msg` values by sending JS like `{ tag: "active-users-changed", list: ... }` where you have a tag for all the variants of information you might send across.
+**Los puertos están diseñados para crear fronteras.** Definitivamente no intentes crear un puerto por cada función JS que necesites. Tal vez te gusta mucho Elm y quieras hacer todo en Elm sin importar el costo, pero los puertos no están diseñados para eso. En vez de esto, enfócate en preguntas como “¿quién es el dueño de este estado?”, y usa uno o dos puertos para enviar mensajes de ida y vuelta. Si estás en un escenario complejo, puedes incluso simular valores `Msg` enviando objetos JS como `{ tag: "active-users-changed", list: ... }`, donde tienes una etiqueta para cada variante de la información que necesites transmitir.
 
-Here are some simple guidelines and common pitfalls:
+Aquí tienes algunas reglas generales y problemas frecuentes:
 
-- **Sending `Json.Encode.Value` through ports is recommended.** Like with flags, certain core types can pass through ports as well. This is from the time before JSON decoders, and you can read about it more [here](/interop/flags.html#verifying-flags).
+- **Es recomendado enviar `Json.Encode.Value` en tus puertos.** Igual que con flags, hay ciertos tipos básicos que pueden transmitirse vía puertos. Esto viene del tiempo antes de que existieran decodificadores de JSON, y puedes leer más al respecto [aquí](/interop/flags.html#verifying-flags).
 
-- **All `port` declarations must appear in a `port module`.** It is probably best to organize all your ports into one `port module` so it is easier to see the interface all in one place.
+- **Todas las declaraciones `port` deben aparecer en un `port module`.** Probablemente lo mejor es organizar tus puertos en un sólo `port module` para que sea más fácil visualizar la interfaz, toda en un sólo lugar.
 
-- **Ports are for applications.** A `port module` is available in applications, but not in packages. This ensures that application authors have the flexibility they need, but the package ecosystem is entirely written in Elm. We think this will create a stronger ecosystem and community in the long run, and we get into the tradeoffs in depth in the upcoming section on the [limits](/interop/limits.html) of Elm/JS interop.
+- **Los puertos son para aplicaciones.** Los `port module` están disponibles para aplicaciones, pero no para paquetes. Esto asegura que los autores de una aplicación tengan la flexibilidad que necesitan, pero el ecosistema de paquetes está escrito en Elm al cien porciento. Creemos que esto creará un ecosistema y una comunidad más fuertes a la larga, y nos referimos a los sacrificios involucrados más en detalle en la sección siguiente sobre los [límites](/interop/limits.html) de la interoperabilidad Elm/JS.
 
-- **Ports can be dead code eliminated.** Elm has quite aggressive [dead code elimination](https://en.wikipedia.org/wiki/Dead_code_elimination), and it will remove ports that are not used within Elm code. The compiler does not know what goes on in JavaScript, so try to hook things up in Elm before JavaScript.
+- **Los puertos pueden ser eliminados como código muerto.** Elm tiene un agresivo sistema de [eliminación de código muerto](/interop/limits.html), y borrará puertos que no son usados dentro de Elm, ya que el compilador no tiene idea de lo que ocurre en el lado JavaScript. Por lo tanto, intenta cablear tus puertos en el lado Elm antes que nada.
 
-I hope this information will help you find ways to embed Elm in your existing JavaScript! It is not as glamorous as doing a full-rewrite in Elm, but history has shown that it is a much more effective strategy.
+Espero que esta información te ayude a encontrar maneras de incluir Elm junto a tu JavaScript preexistente. No es tan excitante como hacer una reescritura completa en Elm, pero históricamente hemos visto que es una estrategia mucho más efectiva.
