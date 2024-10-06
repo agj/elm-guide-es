@@ -25,7 +25,7 @@
 - [Interoperabilidad con JS](interop/README.md)
   - [Flags](interop/flags.md)
   - [Puertos](interop/ports.md)
-  - [Custom Elements](interop/custom_elements.md)
+  - [Elementos personalizados](interop/custom_elements.md)
   - [Limits](interop/limits.md)
 - [Web Apps](webapps/README.md)
   - [Navigation](webapps/navigation.md)
