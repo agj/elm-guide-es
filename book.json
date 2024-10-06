@@ -3,7 +3,7 @@
   "description": "Aprende Elm. Construye aplicaciones. Aprende programación funcional.",
   "author": "Evan Czaplicki",
   "root": "book",
-  "plugins": ["youtube", "elm-repl", "bulk-redirect", "-sharing"],
+  "plugins": ["elm-repl", "bulk-redirect", "-sharing"],
   "pluginsConfig": {
     "bulk-redirect": {
       "basepath": "/",

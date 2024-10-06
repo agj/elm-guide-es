@@ -20,9 +20,6 @@ importers:
       honkit:
         specifier: ^5.1.4
         version: 5.1.4
-      honkit-plugin-youtube:
-        specifier: ^0.0.14
-        version: 0.0.14
       prettier-plugin-elm:
         specifier: ^0.11.0
         version: 0.11.0
@@ -516,10 +513,6 @@ packages:
   highlight.js@11.10.0:
     resolution: {integrity: sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==}
     engines: {node: '>=12.0.0'}
-
-  honkit-plugin-youtube@0.0.14:
-    resolution: {integrity: sha512-20MrTLiV5qB3rvzyu09RXl5qrUT1wRffx/Q9DzsNiMTx42h6nVWfenHDsMSX3sgqOZeoe8RzPeMjcgCQZSGJzA==}
-    engines: {gitbook: '>=3.0.0'}
 
   honkit@5.1.4:
     resolution: {integrity: sha512-dsRbdcT4xdjTJbNN4vd0whG3uPeypQusWyCn1sI2N5xEweZBb3qLuqcwGPkzGjxeKoYzyhUFCKmpcOARKYq79w==}
@@ -1609,8 +1602,6 @@ snapshots:
       function-bind: 1.1.2
 
   highlight.js@11.10.0: {}
-
-  honkit-plugin-youtube@0.0.14: {}
 
   honkit@5.1.4:
     dependencies:
