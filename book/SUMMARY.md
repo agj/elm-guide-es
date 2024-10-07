@@ -26,7 +26,7 @@
   - [Flags](interop/flags.md)
   - [Puertos](interop/ports.md)
   - [Elementos personalizados](interop/custom_elements.md)
-  - [Limits](interop/limits.md)
+  - [Límites](interop/limits.md)
 - [Web Apps](webapps/README.md)
   - [Navigation](webapps/navigation.md)
   - [URL Parsing](webapps/url_parsing.md)
