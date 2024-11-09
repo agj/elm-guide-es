@@ -27,7 +27,7 @@
   - [Puertos](interop/ports.md)
   - [Elementos personalizados](interop/custom_elements.md)
   - [Límites](interop/limits.md)
-- [Web Apps](webapps/README.md)
+- [Aplicaciones web](webapps/README.md)
   - [Navigation](webapps/navigation.md)
   - [URL Parsing](webapps/url_parsing.md)
   - [Modules](webapps/modules.md)
