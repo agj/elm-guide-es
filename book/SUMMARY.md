@@ -28,7 +28,7 @@
   - [Elementos personalizados](interop/custom_elements.md)
   - [Límites](interop/limits.md)
 - [Aplicaciones web](webapps/README.md)
-  - [Navigation](webapps/navigation.md)
+  - [Navegación](webapps/navigation.md)
   - [URL Parsing](webapps/url_parsing.md)
   - [Modules](webapps/modules.md)
   - [Structure](webapps/structure.md)
