@@ -29,7 +29,7 @@
   - [Límites](interop/limits.md)
 - [Aplicaciones web](webapps/README.md)
   - [Navegación](webapps/navigation.md)
-  - [URL Parsing](webapps/url_parsing.md)
+  - [Interpretación de URLs](webapps/url_parsing.md)
   - [Modules](webapps/modules.md)
   - [Structure](webapps/structure.md)
 - [Optimization](optimization/README.md)
