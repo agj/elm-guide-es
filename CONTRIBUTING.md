@@ -45,7 +45,7 @@ El objetivo central de esta traducción es **contribuir a diseminar el uso de El
 
 Los siguientes son otros ideales y directrices para este proyecto.
 
-La idea es conservar el tono original del texto en inglés, que intenta ser **cercano y amistoso**, jamás críptico o rebuscado. Tratamos al lector de “tú” y no de “usted”.
+La idea es conservar el tono original del texto en inglés, que intenta ser **cercano y amistoso**, jamás críptico o rebuscado. Tratamos al lector de “tú” y no de “usted”. Cuando el texto habla de “tú haces x” (segunda persona), escribamos “hacemos x” (primera persona plural, inclusiva), que en español suena menos acusatorio.
 
 Dicho esto, la traducción está pensada para ser leída por gente de toda Hispanoamérica. Preferimos **no usar localismos** que sean difíciles de entender por gente de otras partes. Por lo mismo, evitamos usar mucho coloquialismo, ya que éstos son regionales por naturaleza.
 
