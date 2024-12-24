@@ -31,7 +31,7 @@
   - [Navegación](webapps/navigation.md)
   - [Interpretación de URLs](webapps/url_parsing.md)
   - [Módulos](webapps/modules.md)
-  - [Structure](webapps/structure.md)
+  - [Estructurando aplicaciones web](webapps/structure.md)
 - [Optimization](optimization/README.md)
   - [Html.lazy](optimization/lazy.md)
   - [Html.keyed](optimization/keyed.md)
