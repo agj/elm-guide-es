@@ -30,7 +30,7 @@
 - [Aplicaciones web](webapps/README.md)
   - [Navegación](webapps/navigation.md)
   - [Interpretación de URLs](webapps/url_parsing.md)
-  - [Modules](webapps/modules.md)
+  - [Módulos](webapps/modules.md)
   - [Structure](webapps/structure.md)
 - [Optimization](optimization/README.md)
   - [Html.lazy](optimization/lazy.md)

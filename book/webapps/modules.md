@@ -1,10 +1,10 @@
-# Modules
+# Módulos
 
-Elm has **modules** to help you grow your codebase in a nice way. On the most basic level, modules let you break your code into multiple files.
+Elm te permite usar **módulos** para que tu código crezca sin problemas. En su nivel más básico, los módulos te permiten separar tu código en múltiples archivos.
 
-## Defining Modules
+## Definición de módulos
 
-Elm modules work best when you define them around a central type. Like how the `List` module is all about the `List` type. So say we want to build a module around a `Post` type for a blogging website. We can create something like this:
+Los módulos en Elm funcionan mejor cuando los defines en torno a un tipo central. Por ejemplo, el módulo `List` se trata exclusivamente del tipo `List`. Así que digamos que queremos crear un módulo en torno a un tipo `Post` para un blog. Podemos hacer algo como esto:
 
 ```elm
 module Post exposing (Post, decoder, encode, estimatedReadTime)
@@ -25,7 +25,7 @@ type alias Post =
 
 
 
--- READ TIME
+[The Life of a File](https://youtu.be/XpDsk374LDE)-- READ TIME
 
 
 estimatedReadTime : Post -> Float
@@ -59,35 +59,35 @@ decoder =
         (D.field "content" D.string)
 ```
 
-The only new syntax here is that `module Post exposing (..)` line at the very top. That means the module is known as `Post` and only certain values are available to outsiders. As written, the `wordCount` function is only available _within_ the `Post` module. Hiding functions like this is one of the most important techniques in Elm!
+La única sintaxis nueva es la primera línea, que dice `module Post exposing (Post, decoder, encode, estimatedReadTime)`. Significa que el módulo tiene el nombre `Post`, y que sólo ciertos valores específicos están visibles desde fuera del módulo. Por lo tanto, la función `wordCount` está sólo disponible _dentro_ del módulo `Post`. Esconder funciones de esta manera es, de hecho, una de las técnicas más importantes en Elm.
 
-> **Note:** If you forget to add a module declaration, Elm will use this one instead:
+> **Nota:** Si te olvidas de añadir una declaración de módulo, Elm va a usar esta:
 >
 > ```elm
 > module Main exposing (..)
 > ```
 >
-> This makes things easier for beginners working in just one file. They should not be confronted with the module system on their first day!
+> Esto hace que sea más fácil para principiantes que sólo necesitan un archivo. Así, no necesitan preocuparse del sistema de módulos en su primer día.
 
-## Growing Modules
+## Cuando un módulo crece
 
-As your application gets more complex, you will end up adding things to your modules. It is normal for Elm modules to be in the 400 to 1000 line range, as I explain in [The Life of a File](https://youtu.be/XpDsk374LDE). But when you have multiple modules, how do you decide _where_ to add new code?
+A medida que se va haciendo más compleja tu aplicación, vas a tener que ir añadiendo más cosas a tus módulos. Es normal que un módulo Elm tenga entre 400 y 1000 líneas, como explico en mi charla [“The Life of a File”](https://youtu.be/XpDsk374LDE). Pero cuando tenemos múltiples módulos, ¿cómo decidimos _dónde_ añadir código nuevo?
 
-I try to use the following heuristics when code is:
+Yo trato de seguir las siguientes estrategias cuando el código en cuestión es:
 
-- **Unique** &mdash; If logic only appears in one place, I break out top-level helper functions as close to the usage as possible. Maybe use a comment header like `-- POST PREVIEW` to indicate that the following definitions are related to previewing posts.
-- **Similar** &mdash; Say we want to show `Post` previews on the home page and on the author pages. On the home page, we want to emphasize the interesting content, so we want longer snippets. But on the author page, we want to emphasize the breadth of content, so we want to focus on titles. These cases are _similar_, not the same, so we go back to the **unique** heuristic. Just write the logic separately.
-- **The Same** &mdash; At some point we will have a bunch of **unique** code. That is fine! But perhaps we find that some definitions contain logic that is _exactly_ the same. Break out a helper function for that logic! If all the uses are in one module, no need to do anything more. Maybe put a comment header like `-- READ TIME` if you really want.
+- **Único** — Si la lógica aparece en un sólo lugar, ubico las funciones auxiliares lo más cerca de donde se usan que pueda. Tal vez pongo un comentario como si fuera un encabezado, algo como `-- PREVISUALIZACIÓN DEL ARTÍCULO`, para indicar que las siguientes definiciones están relacionadas con previsualizar artículos.
+- **Similar** — Tal vez queremos mostrar previsualizaciones de `Post` en la página principal y en las páginas de autor. En la página principal queremos enfatizar lo interesante del contenido, así que necesitamos extractos más largos. Pero en la página de un autor queremos exhibir variedad, así que le ponemos más énfasis a los títulos. Estos casos son _similares_, no iguales, así que volvemos a la estrategia de código **único**: escribe la lógica por separado.
+- **Lo mismo** — En algún momento tendremos bastante código **único**. No hay nada de malo en eso. Pero tal vez notaremos que algunas definiciones contienen lógica que es _exactamente_ igual. Sepárala en una función auxiliar. Si la función sólo se usa dentro del mismo módulo, no hace falta hacer nada más. Simplemente agrega un encabezado como `-- TIEMPO DE LECTURA`, si te hace falta.
 
-These heuristics are all about making helper functions within a single file. You only want to create a new module when a bunch of these helper functions all center around a specific custom type. For example, you start by creating a `Page.Author` module, and do not create a `Post` module until the helper functions start piling up. At that point, creating a new module should make your code feel easier to navigate and understand. If it does not, go back to the version that was clearer. More modules is not more better! Take the path that keeps the code simple and clear.
+Estas estrategias sirven para crear funciones auxiliares dentro del mismo archivo. Es más útil crear un nuevo módulo sólo cuando ya tenemos un montón de estas funciones en torno a un mismo tipo personalizado. Por ejemplo, podemos empezar creando un módulo `Page.Author`, y esperamos a crear el módulo `Post` hasta que sus funciones auxiliares comiencen a acumularse. En ese momento, crear el nuevo módulo debiera hacer que el código se sienta más fácil de navegar y de entender. Si no es así, entonces devuélvelo a la forma cuando era más claro. En lo que se refiere a módulos, más no significa mejor. Toma el camino que permita que tu código sea simple y claro.
 
-To summarize, assume **similar** code is **unique** by default. (It usually is in user interfaces in the end!) If you see logic that is **the same** in different definitions, make some helper functions with appropriate comment headers. When you have a bunch of helper functions about a specific type, _consider_ making a new module. If a new module makes your code clearer, great! If not, go back. More files is not inherently simpler or clearer.
+En resumen, asume que el código **similar** es **único** por defecto. Lo es, habitualmente, en interfaces de usuario. Si ves lógica que es **la misma** en distintas definiciones, crea funciones auxiliares con comentarios como encabezados. Cuando tengas varias funciones auxiliares para un tipo específico, _considera_ crear un nuevo módulo. Si el nuevo módulo hace que tu código sea más claro, ¡bien! Si no, revierte el cambio. Tener más archivos no es inherentemente más simple o claro.
 
-> **Note:** One of the most common ways to get tripped up with modules is when something that was once **the same** becomes **similar** later on. Very common, especially in user interfaces! Folks will often try to create a Frankenstein function that handles all the different cases. Adding more arguments. Adding more _complex_ arguments. The better path is to accept that you now have two **unique** situations and copy the code into both places. Customize it exactly how you need. Then see if any of the resulting logic is **the same**. If so, move it out into helpers. **Your long functions should split into multiple smaller functions, not grow longer and more complex!**
+> **Nota:** Una de las formas más comunes de complicarse con los módulos es cuando algo que solía ser **lo mismo** se vuelve **similar** en algún momento. Muy común, sobre todo en interfaces de usuario. Mucha gente termina construyendo funciones frankenstein para manejar todos los distintos casos, añadiendo más argumentos, o argumentos más _complejos_. El mejor camino es aceptar que ahora tienes dos situaciones **únicas**, y copiar el código en ambos lugares. Ajústalo hasta que quede justo como lo necesitas. Después, fíjate si parte de la lógica es **la misma**. Si es así, sepárala en funciones auxiliares. **Tus funciones largas van a quedar separadas en múltiples funciones más pequeñas, en vez de crecer y volverse más y más complejas.**
 
-## Using Modules
+## Cómo usar módulos
 
-It is customary in Elm for all of your code to live in the `src/` directory. That is the default for [`elm.json`](https://github.com/elm/compiler/blob/0.19.0/docs/elm.json/application.md) even. So our `Post` module would need to live in a file named `src/Post.elm`. From there, we can `import` a module and use its exposed values. There are four ways to do that:
+Lo más estándar es poner todo tu código Elm en el directorio `src/`. Este es el defecto para [`elm.json`](https://github.com/elm/compiler/blob/0.19.1/docs/elm.json/application.md), de hecho. Dado esto, nuestro módulo `Post` tendría que vivir en un archivo llamado `src/Post.elm`. Ahora podremos importar el módulo con una declaración `import`, y usar los valores que expone. Hay cuatro maneras distintas de hacerlo:
 
 <!-- prettier-ignore-start -->
 ```elm
@@ -107,4 +107,4 @@ import Post as P exposing (Post, estimatedReadTime)
 ```
 <!-- prettier-ignore-end -->
 
-I recommend using `exposing` pretty rarely. Ideally on zero or one of your imports. Otherwise, it can start getting hard to figure out where things came from when reading though. “Wait, where is `filterPostBy` from again? What arguments does it take?” It gets harder and harder to read through code as you add more `exposing`. I tend to use it for `import Html exposing (..)` but not on anything else. For everything else, I recommend using the standard `import` and maybe using `as` if you have a particularly long module name!
+Recomiendo usar `exposing` infrecuentemente. Idealmente, en ninguno o sólo uno de tus `import`s. De otra manera, puede empezar a volverse difícil entender de dónde salieron las cosas. “A ver, ¿de dónde era que venía `filterPostBy`? ¿Qué argumentos acepta?”. Mientras más uses `exposing`, más difícil se hace entender el código. Tiendo a usarlo para `import Html exposing (..)`, pero para nada más. Para todo lo demás, recomiendo usar `import` solo, y tal vez usar `as` si tienes un módulo con un nombre particularmente largo.
