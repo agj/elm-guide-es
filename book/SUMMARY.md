@@ -32,7 +32,7 @@
   - [Interpretación de URLs](webapps/url_parsing.md)
   - [Módulos](webapps/modules.md)
   - [Estructurando aplicaciones web](webapps/structure.md)
-- [Optimization](optimization/README.md)
+- [Optimización](optimization/README.md)
   - [Html.lazy](optimization/lazy.md)
   - [Html.keyed](optimization/keyed.md)
   - [Minification](optimization/asset_size.md)
