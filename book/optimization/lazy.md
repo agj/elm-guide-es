@@ -1,10 +1,10 @@
 # `Html.Lazy`
 
-The [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/) package is used to show things on screen. To understand how to optimize it, we need to learn how it works in the first place!
+Para mostrar cosas en pantalla usamos el paquete [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/). Y para entender cómo optimizar su uso, primero tenemos que aprender cómo funciona.
 
-## What is the DOM?
+## ¿Qué es el DOM?
 
-If you are creating an HTML file, you would write HTML directly like this:
+Cuando creamos un archivo HTML, escribimos algo como esto:
 
 ```html
 <div>
@@ -16,15 +16,15 @@ If you are creating an HTML file, you would write HTML directly like this:
 </div>
 ```
 
-You can think of this as producing some DOM data structure behind the scenes:
+Esto genera una estructura DOM así tras bambalinas:
 
 ![](diagrams/dom.svg)
 
-The black boxes represent heavy-weight DOM objects with hundreds of attributes. And when any of them change, it can trigger expensive renders and reflows of page content.
+Las cajas negras representan pesados objetos DOM, con cientos de atributos. Y cuando uno de ellos cambia, puede gatillar repintado y redistribución del contenido en la página, y tardar un tiempo considerable.
 
-## What is Virtual DOM?
+## ¿Qué es un DOM virtual?
 
-If you are creating an Elm file, you would use `elm/html` to write something like this:
+Si estamos creando un archivo Elm, podemos usar `elm/html` para escribir algo así:
 
 ```elm
 viewChairAlts : List String -> Html msg
@@ -40,69 +40,69 @@ viewAlt chairAlt =
     li [] [ text chairAlt ]
 ```
 
-You can think of `viewChairAlts ["seiza","chabudai"]` as producing some “Virtual DOM” data structure behind the scenes:
+Lo que `viewChairAlts ["seiza", "chabudai"]` está haciendo es producir una estructura de “DOM virtual” por detrás:
 
 ![](diagrams/vdom.svg)
 
-The white boxes represent light-weight JavaScript objects. They only have the attributes you specify. Their creation can never cause renders or reflows. Point is, compared to DOM nodes, these are much cheaper to allocate!
+Las cajas blancas representan objetos JavaScript livianos. Sólo contienen los atributos que especificamos. Su creación nunca causa repintado o redistribución en la página. El punto es que, en comparación con nodos del DOM, estos son mucho más livianos de manejar.
 
-## Render
+## Pintado
 
-If we are always working with these virtual nodes in Elm, how does it get converted to the DOM we see on screen? When an Elm program starts, it goes like this:
+Si sólo estamos manipulando nodos virtuales en Elm, ¿cómo se convierte esto al DOM que vemos en pantalla? Al inicializar, los programas Elm hacen esto:
 
-- Call `init` to get the initial `Model`.
-- Call `view` to get the initial virtual nodes.
+- Llaman a `init` para obtener el valor `Model` inicial.
+- Llaman a `view` para obtener los nodos virtuales iniciales.
 
-Now that we have virtual nodes, we make an exact replica in the real DOM:
+Teniendo estos nodos virtuales, construímos una réplica exacta en el DOM real:
 
 ![](diagrams/render.svg)
 
-Great! But what about when things change? Redoing the whole DOM on every frame does not work, so what do we do instead?
+Muy bien, pero ¿y cuando algo cambia? Reconstruir el DOM completo en cada fotograma no es buena idea. Entonces, ¿qué hacemos?
 
-## Diffing
+## Comparación de cambios
 
-Once we have the initial DOM, we switch to working primarily with virtual nodes instead. Whenever the `Model` changes, we run `view` again. From there, we “diff” the resulting virtual nodes to figure out how to touch the DOM as little as possible.
+Teniendo ya el DOM inicial, empezamos a trabajar usando nodos virtuales principalmente. Cuando el valor `Model` cambia, volvemos a correr `view`. Después, comparamos los nodos virtuales resultantes para determinar cuáles son los cambios mínimos a realizar en el DOM real.
 
-So imagine our `Model` gets a new chair alternative, and we want to add a new `li` node for it. Behind the scenes, Elm diffs the **current** virtual nodes and the **next** virtual nodes to detect any changes:
+Imagina que el `Model` tiene una nueva alternativa de silla, y queremos añadir un nuevo nodo `li` para ésta. Por detrás, Elm compara los nodos virtuales **actuales** y los **nuevos** nodos virtuales para detectar cambios:
 
 ![](diagrams/diff.svg)
 
-It noticed that a third `li` was added. I marked it in green. Elm now knows exactly how to modify the real DOM to make it match. Just insert that new `li`:
+Se dio cuenta de que un tercer nodo `li` fue añadido, el que está marcado en verde. Ahora Elm sabe exactamente cómo modificar el DOM real para hacer que coincidan. Sólo falta agregar el nuevo `li`:
 
 ![](diagrams/patch.svg)
 
-This diffing process makes it possible to touch the DOM as little as possible. And if no differences are found, we do not need to touch the DOM at all! So this process helps minimize the renders and reflows that need to happen.
+Este proceso de comparación hace posible tocar el DOM lo menos posible. Y si no hay diferencias, entonces no hace falta tocar el DOM en absoluto. Este proceso minimiza el repintado y la redistribución de contenido que ocurriría de otro modo.
 
-But can we do even less work?
+Pero, ¿podemos hacer aún menos trabajo?
 
 ## `Html.Lazy`
 
-The [`Html.Lazy`](https://package.elm-lang.org/packages/elm/html/latest/Html-Lazy/) module makes it possible to not even build the virtual nodes! The core idea is the `lazy` function:
+El módulo [`Html.Lazy`](https://package.elm-lang.org/packages/elm/html/latest/Html-Lazy/) nos permite evitar siquiera construir los nodos virtuales. La pieza central es la función `lazy`:
 
 ```elm
 lazy : (a -> Html msg) -> a -> Html msg
 ```
 
-Going back to our chair example, we called `viewChairAlts ["seiza","chabudai"]`, but we could just as easily have called `lazy viewChairAlts ["seiza","chabudai"]` instead. The lazy version allocates a single “lazy” node like this:
+Volviendo al ejemplo de las sillas, hicimos una llamada a `viewChairAlts ["seiza", "chabudai"]`, pero bien podemos hacer algo como `lazy viewChairAlts ["seiza", "chabudai"]`. La versión que usa `lazy` almacena un sólo nodo “perezoso”, así:
 
 ![](diagrams/lazy.svg)
 
-The node just keeps a reference to the function and arguments. Elm can put the function and arguments together to generate the whole structure if needed, but it is not always needed!
+Este nodo guarda una referencia a la función y a sus argumentos. Elm puede construir la estructura completa usando la función y los argumentos, pero no siempre hace falta.
 
-One of the cool things about Elm is the “same input, same output” guarantee for functions. So whenever we run into two “lazy” nodes while diffing virtual nodes, we ask is the function the same? Are the arguments the same? If they are all the same, we know the resulting virtual nodes are the same as well! **So we can skip building the virtual nodes entirely!** If any of them have changed, we can build the virtual nodes and do a normal diff.
+Uno de los superpoderes de Elm es la garantía de que _dados los mismos argumentos, el resultado es siempre el mismo._ Dado esto, cuando comparamos dos nodos “perezosos” preguntamos: ¿es la función la misma? ¿Son los argumentos los mismos? Si son todos los mismos, sabemos con seguridad que los nodos virtuales producidos son también iguales. **Podemos ahorrarnos el trabajo de crear los nodos virtuales.** Si algo en la ecuación cambia, simplemente construímos los nodos y procedemos a hacer la comparación habitual.
 
-> **Note:** When are two values “the same” though? To optimize for performance, we use JavaScript’s `===` operator behind the scenes:
+> **Nota:** ¿Cuándo son dos valores “lo mismo”? Para optimizar el rendimiento, la implementación compara usando el operador `===` de JavaScript:
 >
-> - Structural equality is used for `Int`, `Float`, `String`, `Char`, and `Bool`.
-> - Reference equality is used for records, lists, custom types, dictionaries, etc.
+> - Se usa la igualdad estructural para `Int`, `Float`, `String`, `Char`, y `Bool`.
+> - Se usa la igualdad de referencia para registros, listas, tipos personalizados, diccionarios, etc.
 >
-> Structural equality means that `4` is the same as `4` no matter how you produced those values. Reference equality means the actual pointer in memory has to be the same. Using reference equality is always cheap `O(1)`, even when the data structure has thousands or millions of entries. So this is mostly about making sure that using `lazy` will never slow your code down a bunch by accident. All the checks are super cheap!
+> La igualdad estructural significa que `4` es lo mismo que `4` sin importar cómo se produjeron esos valores. La igualdad de referencia significa que el puntero en memoria debe ser el mismo. Usar igualdad de referencia es de complejidad O(1), o sea muy óptimo, aún si la estructura de datos tuviera miles o millones de entradas. Esta decisión fue hecha principalmente para asegurarnos de que usar `lazy` nunca ralentice el código sin querer. Todos los chequeos que se realizan son súper livianos.
 
-## Usage
+## Uso
 
-The ideal place to put a lazy node is at the root of your application. Many applications are set up to have distinct visual regions like headers, sidebars, search results, etc. And when people are messing with one, they are very rarely messing with the others. This creates really natural lines for `lazy` calls!
+El lugar ideal para poner nodos `lazy` es cerca de la raíz de tu aplicación. Muchas aplicaciones tienen regiones visuales diferenciadas, como una cabecera, barras laterales, resultados de búsqueda, etc. Y cuando un usuario interactúa con una de éstas, normalmente no influye en las demás. Así se demarcan líneas donde se hace natural usar `lazy`.
 
-For example, in [my TodoMVC implementation](https://github.com/evancz/elm-todomvc/), the `view` is defined like this:
+Por ejemplo, en [mi implementación de TodoMVC](https://github.com/evancz/elm-todomvc/), `view` se define así:
 
 ```elm
 view : Model -> Html Msg
@@ -121,12 +121,12 @@ view model =
         ]
 ```
 
-Notice that the text input, entries, and controls are all in separate lazy nodes. So I can type however many characters I want in the input without ever building virtual nodes for the entries or controls. They are not changing! So the first tip is **try to use lazy nodes at the root of your application.**
+Fíjate en que el ingreso de texto (`viewInput`), los ítems en la lista (`viewEntries`) y los controles (`viewControls`) todos forman nodos “perezosos” separados. Así, puedo tipear en el campo de texto sin nunca construir nodos virtuales para la lista o los controles, porque no tienen cambios. Por lo tanto, el primer consejo es **trata de usar nodos `lazy` en la raíz de tu aplicación.**
 
-It can also be useful to use lazy in long lists of items. In the TodoMVC app, it is all about adding entries to your todo list. You could conceivably have hundreds of entries, but they change very infrequently. This is a great candidate for laziness! By switching `viewEntry entry` to `lazy viewEntry entry` we can skip a bunch of allocation that is very rarely useful. So the second tip is **try to use lazy nodes on repeated structures where each individual item changes infrequently.**
+También puede resultar útil usar `lazy` en listas con muchos ítems. La aplicación TodoMVC se trata de ir añadiendo ítems a una lista de pendientes. Eventualmente podríamos tener cientos de ítems, pero cada uno cambiará muy infrecuentemente. Los ítems de esta lista son grandes candidatos para hacerlos “perezosos”. Al cambiar `viewEntry entry` a `lazy viewEntry entry` podemos ahorrarnos un montón de infructuoso trajín en memoria. Dicho esto, el segundo consejo es **trata de usar nodos `lazy` en estructuras repetitivas donde cada ítem cambia poco frecuentemente.**
 
-## Summary
+## Resumen
 
-Touching the DOM is way more expensive than anything that happens in a normal user interface. Based on my benchmarking, you can do whatever you want with fancy data structures, but in the end it only matters how much you successfully use `lazy`.
+Tocar el DOM es mucho más costoso que cualquier otra operación que pueda ocurrir en una interfaz de usuario normal. Basado en mis comparativas de rendimiento, no importa lo mucho que optimicemos nuestras estructuras de datos, al final lo único que importa es qué tan bien usemos `lazy`.
 
-On the next page, we will learn a technique to use `lazy` even more!
+En la próxima página vamos a aprender una técnica para usar `lazy` aún mejor.
