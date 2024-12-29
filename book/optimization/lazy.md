@@ -125,7 +125,7 @@ Fíjate en que el ingreso de texto (`viewInput`), los ítems en la lista (`viewE
 
 También puede resultar útil usar `lazy` en listas con muchos ítems. La aplicación TodoMVC se trata de ir añadiendo ítems a una lista de pendientes. Eventualmente podríamos tener cientos de ítems, pero cada uno cambiará muy infrecuentemente. Los ítems de esta lista son grandes candidatos para hacerlos “perezosos”. Al cambiar `viewEntry entry` a `lazy viewEntry entry` podemos ahorrarnos un montón de infructuoso trajín en memoria. Dicho esto, el segundo consejo es **trata de usar nodos `lazy` en estructuras repetitivas donde cada ítem cambia poco frecuentemente.**
 
-## Resumen
+## En resumen
 
 Tocar el DOM es mucho más costoso que cualquier otra operación que pueda ocurrir en una interfaz de usuario normal. Basado en mis comparativas de rendimiento, no importa lo mucho que optimicemos nuestras estructuras de datos, al final lo único que importa es qué tan bien usemos `lazy`.
 
