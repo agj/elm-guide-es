@@ -36,7 +36,7 @@
   - [Html.lazy](optimization/lazy.md)
   - [Html.keyed](optimization/keyed.md)
   - [Minificación](optimization/asset_size.md)
-- [Next Steps](next_steps.md)
+- [Próximos pasos](next_steps.md)
 - Appendix
   - [Types as Sets](appendix/types_as_sets.md)
   - [Types as Bits](appendix/types_as_bits.md)
