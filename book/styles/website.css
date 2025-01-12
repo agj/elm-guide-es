@@ -130,3 +130,9 @@
   color: #f4f4f5;
   border-bottom-color: #272a3a;
 }
+
+/* ADJUST SIDEBAR PADDING */
+
+.book-summary > nav {
+  padding-bottom: 3em;
+}
