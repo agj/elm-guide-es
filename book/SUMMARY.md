@@ -37,7 +37,7 @@
   - [Html.keyed](optimization/keyed.md)
   - [Minificación](optimization/asset_size.md)
 - [Próximos pasos](next_steps.md)
-- Appendix
-  - [Types as Sets](appendix/types_as_sets.md)
-  - [Types as Bits](appendix/types_as_bits.md)
+- Apéndice
+  - [Tipos como conjuntos](appendix/types_as_sets.md)
+  - [Tipos como bits](appendix/types_as_bits.md)
   - [Function Types](appendix/function_types.md)
