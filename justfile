@@ -13,7 +13,7 @@ build: install build-repl
 
 # Da formato estándar a los archivos.
 format:
-    prettier '**/*.{md,json,yml}' --write
+    prettier '**/*.{md,json,yml,css}' --write
     alejandra *.nix
 
 # Verifica que todo funcione y que los archivos estén formateados.
