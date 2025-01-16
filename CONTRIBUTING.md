@@ -45,13 +45,15 @@ El objetivo central de esta traducción es **contribuir a diseminar el uso de El
 
 Los siguientes son otros ideales y directrices para este proyecto.
 
-La idea es conservar el tono original del texto en inglés, que intenta ser **cercano y amistoso**, jamás críptico o rebuscado. Tratamos al lector de “tú” y no de “usted”.
+La idea es conservar el tono original del texto en inglés, que intenta ser **cercano y amistoso**, jamás críptico o rebuscado. Tratamos al lector de “tú” y no de “usted”. Cuando el texto habla de “tú haces x” (segunda persona), escribamos “hacemos x” (primera persona plural, inclusiva), que en español suena menos acusatorio.
 
 Dicho esto, la traducción está pensada para ser leída por gente de toda Hispanoamérica. Preferimos **no usar localismos** que sean difíciles de entender por gente de otras partes. Por lo mismo, evitamos usar mucho coloquialismo, ya que éstos son regionales por naturaleza.
 
 Queremos que cualquier persona se sienta incluída cuando lea nuestra traducción, por lo que preferimos usar **lenguaje neutro al género**. La [“Guía para el uso de un lenguaje inclusivo al género”][onu-genero] de la ONU puede ser útil para obtener ideas sobre cómo cumplir ese objetivo.
 
 La disciplina de la informática es demasiado anglocéntrica. Gran parte de la terminología tiene origen en palabras cotidianas del inglés, pero al usarlas tal cual en español se vuelven jerga confusa. A través de esta traducción queremos también acercar a hablantes de español a la disciplina en general, por lo que preferimos **evitar el uso de anglicismos** cuando exista una buena alternativa en español.
+
+Por supuesto que queremos ser fieles al contenido original hasta cierto punto, pero donde hayan oportunidades de mejorar la experiencia del lector tal vez **nos permitiremos diverger**. Por ejemplo, si hay contenido desactualizado o faltante.
 
 [onu-genero]: https://authoring.prod.unwomen.org/sites/default/files/Headquarters/Attachments/Sections/Library/Gender-inclusive%20language/Guidelines-on-gender-inclusive-language-es.pdf
 
@@ -65,16 +67,31 @@ La disciplina de la informática es demasiado anglocéntrica. Gran parte de la t
 Esta es una lista de tareas por completar, en las que tal vez puedas aportar.
 
 - Traducción borrador de varias páginas faltantes.
+
 - Revisión y pulido de borradores; regularización del lenguaje.
+
+- Revisión de que los links funcionan correctamente, y en lo posible usar links “permantenes” en donde sea más necesario, p.ej. links a código. Esto significa usar links a un commit específico en Github, y cosas así.
+
 - Traducción de comentarios en código de ejemplo.
+
+- Traducción de los ejemplos vinculados desde [js-integration-examples](https://github.com/elm-community/js-integration-examples). Tal vez hay que clonar el repositorio y mantener esa traducción aparte, pero creo que es mejor unificar en un sólo repositorio y mantener todo sincronizado.
+
 - Adición de detalles importantes que no existen en la versión original. Están marcados como comentarios `TODO` en distintos archivos. Hay dos tipos:
+
   - `TODO`s nuestros. Cambios que mejorarían la experiencia de lectura para un hispanohablante.
   - `TODO`s de Evan mismo. Ideal sería agregar estas piezas faltantes, pero no es prioritario.
+
 - Reemplazo de links externos en inglés a equivalentes en español.
+
 - Corrección del REPL para que funcione. Así como está, no funciona por error de CORS. Posibles caminos:
-  - [Parchar el worker a la fuerza.](https://stackoverflow.com/a/62914052)
+
   - Pedir a Evan que agregue el dominio a la lista blanca de CORS (aparentemente lo que hicieron en la [traducción japonesa](https://guide.elm-lang.jp)).
-  - Poner el worker en otro dominio propio (no sé dónde está el código fuente, pero parece ser lo que hicieron en la [traducción francesa](https://guide.elm-france.fr)).
+  - Poner el código de backend en otro dominio propio. No sé dónde está el código fuente, pero parece ser lo que hicieron en la [traducción francesa](https://guide.elm-france.fr).
+  - Armar un REPL que opera en el navegador, usando las distintas versiones existentes de “Elm en Elm” o una compilación a WASM.
+
 - Traducción de strings, nombres de variables y otro contenido en código de ejemplo, donde mejor haga sentido. El problema es que genera diferencia con el código original, por lo que mientras no tengamos el punto siguiente, no es muy beneficioso.
+
+  - Se puede hacer con los ejemplos que usan Ellie y los del repositorio js-integration-examples.
+
 - Versión propia del editor online, que contenga los ejemplos traducidos.
   - Evaluar si es mejor usar Ellie para esto. El problema es que Ellie tiene más funcionalidades que no le importan a un novato, y le falta una importante, que es ver el tipo de lo que uno tiene seleccionado. El texto del libro también tendría que ser actualizado para tomar en cuenta las diferencias.
