@@ -1,28 +1,28 @@
 # `Html.Keyed`
 
-On the previous page, we learned how Virtual DOM works and how we can use `Html.Lazy` to avoid a bunch of work. Now we are going to introduce [`Html.Keyed`](https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed/) to skip even more work.
+En la página anterior aprendimos cómo funciona el DOM virtual y cómo podemos usar `Html.Lazy` para evitar computar de más. Ahora vamos a conocer [`Html.Keyed`](https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed/) para ahorrarnos aún más cómputo.
 
-This optimization is particularly helpful for lists of data in your interface that must support **insertion**, **removal**, and **reordering**.
+Esta optimización es particularmente útil para interfaces con listas de datos que requieren **añadir**, **quitar** y **reordenar** ítems.
 
-## The Problem
+## El problema
 
-Say we have a list of all the Presidents of the United States. And maybe it lets us sort by name, [by education](https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_education), [by net worth](https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_net_worth), and [by birthplace](https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_home_state).
+Digamos que tenemos una lista de todos los presidentes de los Estados Unidos. Tal vez nos deja ordenar por nombre, [por educación](https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_education), [por patrimonio neto](https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_net_worth) y [por lugar de nacimiento](https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_home_state).
 
-When the diffing algorithm (described on the previous page) gets to a long list of items, it just goes through pairwise:
+Cuando el algoritmo de comparación de nodos (descrito en la página anterior) se topa con una larga lista de ítems, simplemente la revisa de a pares:
 
-- Diff the current 1st element with the next 1st element.
-- Diff the current 2nd element with the next 2nd element.
-- ...
+- Compara el actual primer elemento con el nuevo primer elemento.
+- Compara el actual segundo elemento con el nuevo segundo elemento.
+- …
 
-But when you change the sort order, all of these are going to be different! So you end up doing a lot of work on the DOM when you could have just shuffled some nodes around.
+Pero si cambias el orden de los ítems, ¡todos van a resultar diferentes! Entonces terminas haciendo más trabajo en el DOM cuando podrías haber sólo intercambiado algunos nodos de lugar.
 
-This issue exists with insertion and removal as well. Say you remove the 1st of 100 items. Everything is going to be off-by-one and look different. So you get 99 diffs and one removal at the end. No good!
+El problema también ocurre al insertar y quitar ítems. Si quitamos el primero de una lista de cien, todo quedará desplazado por una posición, y verse distinto para el algoritmo. Terminamos haciendo 99 comparaciones y una eliminación al final. No es muy bueno.
 
-## The Solution
+## La solución
 
-The fix for all of this is [`Html.Keyed.node`](https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed#node), which makes it possible to pair each entry with a “key” that easily distinguishes it from all the others.
+La manera de arreglar este problema es con [`Html.Keyed.node`](https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed#node), que permite emparejar cada ítem con una “llave” que lo distingue fácilmente de todos los demás.
 
-So in our presidents example, we could write our code like this:
+En nuestro ejemplo de los presidentes, podríamos escribir código así:
 
 ```elm
 import Html exposing (..)
@@ -42,12 +42,12 @@ viewPresident president =
   li [] [ ... ]
 ```
 
-Each child node is associated with a key. So instead of doing a pairwise diff, we can diff based on matching keys!
+Cada nodo hijo tiene una llave asociada. En vez de hacer una comparación de a pares, comparamos en base a igualdad de llaves.
 
-Now the Virtual DOM implementation can recognize when the list is resorted. It first matches all the presidents up by key. Then it diffs those. We used `lazy` for each entry, so we can skip all that work. Nice! It then figures out how to shuffle the DOM nodes to show things in the order you want. So the keyed version does a lot less work in the end.
+Ahora el algoritmo del DOM virtual puede reconocer cuando una lista fue reordenada. Primero busca cada nodo de presidente por su llave, y compara el actual y el nuevo. Como usamos `lazy` para cada ítem, no necesita siquiera generar los nodos virtuales. Después determina cómo reordenar los nodos del DOM para mostrar las cosas en el orden que queremos. En suma, la versión con llaves acaba haciendo mucho menos trabajo.
 
-Resorting helps show how it works, but it is not the most common case that really needs this optimization. **Keyed nodes are extremely important for insertion and removal.** When you remove the 1st of 100 elements, using keyed nodes allows the Virtual DOM implementation to recognize that immediately. So you get a single removal instead of 99 diffs.
+Este ejemplo de reordenamiento ayuda para entender cómo funciona, pero no es el caso más común que necesita esta optimización. **Los nodos con llave son extremadamente importantes cuando añadimos o quitamos ítems.** Si quitamos el primero en cien elementos, al usar nodos con llave permitimos que el DOM virtual entienda la situación inmediatamente. Y al final sólo necesitamos hacer una eliminación, y no las 99 comparaciones.
 
-## Summary
+## En resumen
 
-Touching the DOM is extraordinarily slow compared to the sort of computations that happen in a normal application. **Always reach for `Html.Lazy` and `Html.Keyed` first.** I recommend verifying this with profiling as much as possible. Some browsers provide a timeline view of your program, [like this](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference). It gives you a summary of how much time is spent in loading, scripting, rendering, painting, etc. If you see that 10% of the time is spent scripting, you could make your Elm code twice as fast and not make any noticeable difference. Whereas simple additions of lazy and keyed nodes could start taking big chunks out of that other 90% by touching the DOM less!
+Manipular el DOM es extraordinariamente lento en comparación con el cómputo que ocurre típicamente durante una aplicación normal. **Siempre prueba usar `Html.Lazy` y `Html.Keyed` primero.** Recomiendo en lo posible verificar las optimizaciones usando perfilamiento. Algunos navegadores proveen una vista en forma de línea de tiempo de tu programa, [como este](https://developer.chrome.com/docs/devtools/performance?hl=es-419). Te da un resumen de cuánto tiempo se gasta en descarga, ejecución de código, pintado, etc. Si ves que el 10% del tiempo se gasta en ejecución de código, podrías hacer que tu código Elm ande el doble de rápido y aún así no notarías la diferencia. Mientras que usar nodos `Lazy` y `Keyed` nos permite darle un gran mordisco a ese otro 90%, al manipular menos el DOM.

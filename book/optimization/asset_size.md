@@ -1,42 +1,42 @@
-# Asset Size
+# Minificación
 
-The only thing that is slower than touching the DOM is talking to servers. Especially for folks on mobile phones with slow internet. So you can optimize your code all day with `Html.Lazy` and `Html.Keyed`, but your application will still feel slow if it loads slowly!
+Lo único más lento que modificar el DOM es comunicarse con un servidor, especialmente para gente en teléfonos celulares y con conexión lenta a internet. Podrías optimizar tu código con `Html.Lazy` y `Html.Keyed` todo lo que quieras, pero tu aplicación se seguiría sintiendo lenta si carga lento.
 
-A great way to improve is to send fewer bits. For example, if a 122kb asset can become a 9kb asset, it will load faster! We get results like that by using the following techniques:
+Una gran manera de mejorar esto es enviando menos bits. Por ejemplo, si podemos convertir un archivo de 122 kb a uno de 9 kb, va a cargar más rápido. Este tipo de resultados se pueden lograr con estas técnicas:
 
-- **Compilation.** The Elm compiler can perform optimizations like dead code elimination and record field renaming. So it can cut unused code and shorten record field names like `userStatus` in the generated code.
-- **Minification.** In the JavaScript world, there are tools called “minifiers” that do a bunch of transformations. They shorten variables. They inline. They convert `if` statements to ternary operators. They turn `'\u0041'` to `'A'`. Anything to save a few bits!
-- **Compression.** Once you have gotten the code as small as possible, you can use a compression algorithm like gzip to shrink it even further. It does particularly well with keywords like `function` and `return` that you just cannot get rid of in the code itself.
+- **Compilación.** El compilador de Elm puede realizar optimizaciones como eliminación de código muerto y renombramiento de campos en registros. Es decir, puede quitar código sin uso y hacer que nombres como `userStatus` sean más cortos dentro del código generado.
+- **Minificación.** En el mundo de JavaScript hay herramientas llamadas “minificadores”, que realizan varias transformaciones. Acortan variables, mueven código de funciones al lugar en donde son llamadas, convierten `if`s en ternarios `?:`, y transforman `'\u0041'` en `'A'`. Cualquier cosa que reduzca un poquito el peso.
+- **Compresión.** Una vez que el código haya quedado tan pequeño como es posible, puedes usar un algoritmo de compresión como gzip para apachurrarlo aún más. Funciona particularmente bien con palabras clave como `function` y `return`, que no se pueden quitar del código mismo.
 
-Elm makes it pretty easy to get all this set up for your project. No need for some complex build system. It is just two terminal commands!
+Elm facilita hacer todo esto en tu proyecto. No hace falta un sistema complicado de compilación. Basta con dos comandos de terminal.
 
-## Instructions
+## Instrucciones
 
-Step one is to compile with the `--optimize` flag. This does things like shortening record field names.
+El primer paso es compilar usando la opción `--optimize`. Esto abrevia nombres de campos en registros, entre otras cosas.
 
-Step two is to minify the resulting JavaScript code. I use a minifier called `uglifyjs`, but you can use a different one if you want. The neat thing about `uglifyjs` is all its special flags. These flags unlock optimizations that are unreliable in normal JS code, but thanks to the design of Elm, they are totally safe for us!
+El segundo paso es minificar el código JavaScript. Yo uso un minificador que se llama `uglifyjs`, pero puedes usar otro si prefieres. Lo interesante de `uglifyjs` son las muchas opciones que incluye. Estas opciones permiten muchas optimizaciones que son poco confiables en código JS normal, pero gracias al diseño de Elm, son totalmente seguras de realizar para nuestro caso.
 
-Putting those together, we can optimize `src/Main.elm` with two terminal commands:
+Si juntamos estos dos, podemos optimizar `src/Main.elm` usando dos comandos de terminal:
 
 ```bash
 elm make src/Main.elm --optimize --output=elm.js
 uglifyjs elm.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output elm.min.js
 ```
 
-After this you will have an `elm.js` and a smaller `elm.min.js` file!
+Con esto vas a tener un archivo `elm.js` y su versión más pequeña, `elm.min.js`.
 
-> **Note 1:** `uglifyjs` is called twice there. First to `--compress` and second to `--mangle`. This is necessary! Otherwise `uglifyjs` will ignore our `pure_funcs` flag.
+> **Nota 1:** Llamamos `uglifyjs` dos veces aquí. Primero usamos `--compress`, y la segunda vez usamos `--mangle`. ¡Esto es necesario! De otra manera `uglifyjs` ignorará la opción `pure_funcs`.
 >
-> **Note 2:** If the `uglifyjs` command is not available in your terminal, you can run the command `npm install uglify-js --global` to download it. If you do not have `npm` either, you can get it with [nodejs](https://nodejs.org/).
+> **Nota 2:** Si el comando `uglifyjs` no está disponible en tu terminal, puedes correr el comando `npm install uglify-js --global` para instalarlo. Si tampoco tienes `npm`, puedes obtenerlo junto con [Node.js](https://nodejs.org/).
 
 ## Scripts
 
-It is hard to remember all those flags for `uglifyjs`, so it is probably better to write a script that does this.
+Como es difícil recordar todas esas opciones de `uglifyjs`, tal vez es más fácil escribir un script para esto.
 
-Say we want a bash script that produces `elm.js` and `elm.min.js` files. On Mac or Linux, we can define `optimize.sh` like this:
+Podemos escribir un script Bash que genera los archivos `elm.js` y `elm.min.js`. En Mac y Linux podemos definir `optimize.sh` así:
 
 ```bash
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -47,25 +47,25 @@ elm make --optimize --output=$js "$@"
 
 uglifyjs $js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output $min
 
-echo "Compiled size:$(wc $js -c) bytes  ($js)"
-echo "Minified size:$(wc $min -c) bytes  ($min)"
-echo "Gzipped size: $(gzip $min -c | wc -c) bytes"
+echo "Tamaño compilado: $(wc $js -c) bytes  ($js)"
+echo "Tamaño minificado:$(wc $min -c) bytes  ($min)"
+echo "Tamaño comprimido:$(gzip $min -c | wc -c) bytes"
 ```
 
-Now if I run `./optimize.sh src/Main.elm` on my [TodoMVC](https://github.com/evancz/elm-todomvc) code, I see something like this in the terminal:
+Y ahora, si corro `./optimize.sh src/Main.elm` sobre mi código [TodoMVC](https://github.com/evancz/elm-todomvc) voy a ver este resultado en mi terminal:
 
 ```
-Compiled size:  122297 bytes  (elm.js)
-Minified size:   24123 bytes  (elm.min.js)
-Gzipped size:     9148 bytes
+Tamaño compilado:   122297 bytes  (elm.js)
+Tamaño minificado:  24123 bytes  (elm.min.js)
+Tamaño comprimido:  9148 bytes
 ```
 
-Pretty neat! We only need to send about 9kb to get this program to people!
+Buen resultado, ¿no? Ahora sólo necesitamos transferir aproximadamente 9 kb a nuestros usuarios.
 
-The important commands here are `elm` and `uglifyjs` which work on any platform, so it should not be too tough to do something similar on Windows.
+Los comandos importantes son `elm` y `uglifyjs`, que funcionan en cualquier plataforma, así que no sería muy difícil hacer algo parecido en Windows.
 
-## Advice
+## Consejos
 
-I recommend writing a `Browser.application` and compiling to a single JavaScript file as we have seen here. It will get downloaded (and cached) when people first visit. Elm creates quite small files compared to the popular competitors, as you can see [here](https://elm-lang.org/blog/small-assets-without-the-headache), so this strategy can take you quite far.
+Recomiendo escribir código usando `Browser.application` y compilarlo en un sólo archivo JavaScript, como hemos visto aquí. En la primera visita el archivo será descargado, y quedará guardado en caché. Elm genera archivos bien pequeños comparado con otros competidores populares [como puedes ver aquí](https://elm-lang.org/blog/small-assets-without-the-headache), así que esta estrategia te puede servir bastante bien.
 
-> **Note:** In theory, it is possible to get even smaller assets with Elm. It is not possible right now, but if you are working on 50k lines of Elm or more, we would like to learn about your situation as part of a user study. More details [here](https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7)!
+> **Nota:** En teoría, es posible reducir aún más los tamaños de archivos generados por Elm. Actualmente no es posible, pero si estás trabajando en un proyecto de 50 mil líneas de Elm o más, nos gustaría conocer tu situación como parte de un estudio de usuarios. [Más detalles aquí (en inglés).](https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7)

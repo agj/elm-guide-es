@@ -1,16 +1,16 @@
-# Parsing URLs
+# Interpretación de URLs
 
-In a realistic web app, we want to show different content for different URLs:
+En una aplicación real nos interesa mostrar distinto contenido para distintas URLs:
 
 - `/search`
 - `/search?q=seiza`
 - `/settings`
 
-How do we do that? We use the [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) to parse the raw strings into nice Elm data structures. This package makes the most sense when you just look at examples, so that is what we will do!
+¿Cómo lo logramos? Usando el paquete [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) para interpretar strings como estructuras de datos Elm. Este paquete se entiende mejor al mirar ejemplos, así que entremos directamente a ello.
 
-## Example 1
+## Ejemplo 1
 
-Say we have an art website where the following addresses should be valid:
+Digamos que tenemos un sitio web sobre arte donde las siguientes direcciones deben ser válidas:
 
 - `/topic/architecture`
 - `/topic/painting`
@@ -23,7 +23,7 @@ Say we have an art website where the following addresses should be valid:
 - `/user/sue/comment/11`
 - `/user/sue/comment/51`
 
-So we have topic pages, blog posts, user information, and a way to look up individual user comments. We would use the [`Url.Parser`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser) module to write a URL parser like this:
+Tenemos páginas de temas específicos, artículos del blog, información de usuarios y una forma de ver comentarios escritos por usuarios específicos. Vamos a usar el módulo [`Url.Parser`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser) para escribir un interpretador de URLs como el siguiente:
 
 ```elm
 import Url.Parser exposing ((</>), Parser, int, map, oneOf, s, string)
@@ -61,11 +61,11 @@ routeParser =
 -- /user/                ==>  Nothing
 ```
 
-The `Url.Parser` module makes it quite concise to fully turn valid URLs into nice Elm data!
+El módulo `Url.Parser` permite interpretar URLs válidas como datos Elm en forma muy concisa.
 
-## Example 2
+## Ejemplo 2
 
-Now say we have a personal blog where addresses like this are valid:
+Ahora imaginemos que tenemos un blog personal donde direcciones como las siguientes son válidas:
 
 - `/blog/12/the-history-of-chairs`
 - `/blog/13/the-endless-september`
@@ -74,7 +74,7 @@ Now say we have a personal blog where addresses like this are valid:
 - `/blog?q=whales`
 - `/blog?q=seiza`
 
-In this case we have individual blog posts and a blog overview with an optional query parameter. We need to add the [`Url.Parser.Query`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser-Query) module to write our URL parser this time:
+En este caso tenemos artículos y una página principal que lleva opcionalmente un parámetro `q` de consulta. Tenemos que añadir el módulo [`Url.Parser.Query`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser-Query) para escribir nuestro interpretador:
 
 ```elm
 import Url.Parser exposing ((</>), (<?>), Parser, int, map, oneOf, s, string)
@@ -105,11 +105,11 @@ routeParser =
 -- /blog/?query=whales   ==>  Just (BlogQuery Nothing)
 ```
 
-The `</>` and `<?>` operators let us write parsers that look quite like the actual URLs we want to parse. And adding `Url.Parser.Query` allowed us to handle query parameters like `?q=seiza`.
+Los operadores `</>` y `<?>` nos permiten escribir intepretadores que se ven como las URLs que queremos interpretar. Y el uso de `Url.Parser.Query` nos permitió manejar parámetros como `?q=seiza`.
 
-## Example 3
+## Ejemplo 3
 
-Okay, now we have a documentation website with addresses like this:
+Ahora lo que tenemos es un sitio web de documentación donde veremos direcciones como estas:
 
 - `/Basics`
 - `/Maybe`
@@ -118,7 +118,7 @@ Okay, now we have a documentation website with addresses like this:
 - `/List#filter`
 - `/List#foldl`
 
-We can use the [`fragment`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser#fragment) parser from `Url.Parser` to handle these addresses like this:
+Podemos usar el interpretador [`fragment`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser#fragment) de `Url.Parser` para interpretar direcciones, así:
 
 ```elm
 type alias Docs =
@@ -140,21 +140,21 @@ docsParser =
 -- /           ==>  Nothing
 ```
 
-So now we can handle URL fragments as well!
+Y así ya podemos interpretar “fragmentos” de URL también.
 
-## Synthesis
+## Síntesis
 
-Now that we have seen a few parsers, we should look at how this fits into a `Browser.application` program. Rather than just saving the current URL like last time, can we parse it into useful data and show that instead?
+Ya vimos varios interpretadores, así que ahora nos toca ver cómo se conjugan en un programa `Browser.application`. En vez de sólo guardar la URL como lo hicimos en el ejemplo anterior, veamos si podemos interpretar la URL y convertirla en datos útiles para mostrar.
 
 ```elm
 TODO
 ```
 
-The major new things are:
+Lo nuevo más importante es:
 
-1. Our `update` parses the URL when it gets a `UrlChanged` message.
-2. Our `view` function shows different content for different addresses!
+1. Nuestra función `update` interpreta la URL cuando recibe un mensaje `UrlChanged`.
+2. Nuestra función `view` muestra distinto contenido para direcciones distintas.
 
-It is really not too fancy. Nice!
+No es nada muy complicado, ¿no?
 
-But what happens when you have 10 or 20 or 100 different pages? Does it all go in this one `view` function? Surely it cannot be all in one file. How many files should it be in? What should be the directory structure? That is what we will discuss next!
+Pero ¿qué pasa si tengo 10, o 20, o 100 distintas páginas? ¿Tiene todo que ir dentro de esta función `view`? Seguro que no puede ir todo en el mismo archivo. ¿En cuántos archivos se separa? ¿Cómo debe ser la estructura de directorios? Bueno, eso mismo es lo que vamos a discutir en el próximo capítulo.

@@ -1,63 +1,63 @@
-# Structuring Web Apps
+# Estructurando aplicaciones web
 
-Like I was saying on the previous page, **all modules should be built around a central type.** So if I was making a web app for blog posts, I would start with modules like this:
+Como dije en la página anterior, **todos los módulos deben construirse en torno a un tipo central**. Por lo tanto, si estuviera construyendo una aplicación web para artículos de un blog, comenzaría con módulos como estos:
 
 - `Main`
 - `Page.Home`
 - `Page.Search`
 - `Page.Author`
 
-I would have a module for each page, centered around the `Model` type. Those modules follow The Elm Architecture with the typical `Model`, `init`, `update`, `view`, and whatever helper functions you need. From there, I would just keep growing those modules longer and longer. Keep adding the types and functions you need. If I ever notice that I created a custom type with a couple helper functions, I _might_ move that out into its own module.
+Tendría un módulo para cada página, creados en torno al tipo `Model`. Estos módulos siguen la Arquitectura Elm con los típicos `Model`, `init`, `update`, `view` y cualquier otra funcion auxiliar que haga falta. De ahí en adelante simplemente dejaría crecer estos módulos, añadiendo los tipos y funciones que sean necesarios. Si llego a notar que creé un tipo personalizado junto a un par de funciones auxiliares, _puede_ que los mueva a un módulo propio.
 
-Before we see some examples, I want to emphasize an important strategy.
+Antes de entrar a ver algunos ejemplos, quiero enfatizar una estrategia importante.
 
-## Do Not Plan Ahead
+## No planifiques por adelantado
 
-Notice that my `Page` modules do not make any guesses about the future. I do not try to define modules that can be used in multiple places. I do not try to share any functions. This is on purpose!
+Nota que mis módulos `Page` no hacen suposiciones sobre el futuro. No traté de definir módulos que puedan ser usados en múltiples lugares. No traté de compartir funciones. Esto es muy a propósito.
 
-Early in my projects, I always have these grand schemes of how everything will fit together. “The pages for editing and viewing posts both care about posts, so I will have a `Post` module!” But as I write my application, I find that only the viewing page should have a publication date. And I actually need to track editing differently to cache data when tabs are closed. And they actually need to be stored a bit differently on servers as a result. Etc. I end up turning `Post` into a big mess to handle all these competing concerns, and it ends up being worse for both pages.
+Al principio en cada uno de mis proyectos, siempre tengo un gran plan de cómo va a funcionar todo en conjunto. “Las páginas para editar y ver artículos ambas tienen que ver con artículos, así que voy a escribir un módulo `Post` compartido”. Pero mientras voy escribiendo la aplicación, noto que sólo la página de visualización de artículos necesita una fecha de publicación. Y realmente necesito manejar la edición de forma especial para cachear los datos al cerrar la pestaña. Y por lo mismo, los datos también necesitan guardarse de manera distinta en el servidor. Etcétera. Termino haciendo que el módulo `Post` se convierta en una confusa maraña que se encarga de todos estos casos particulares, y se hace más incómodo su uso en ambas páginas.
 
-By just starting with pages, it becomes much easier to see when things are **similar**, but not **the same**. The norm in user interfaces! So with editing and viewing posts, it seems plausible that we could end up with an `EditablePost` type and a `ViewablePost` type, each with different structure, helper functions, and JSON decoders. Maybe those types are complex enough to warrant their own module. Maybe not! I would just write the code and see what happens.
+Al sólo empezar con las páginas, se hace mucho más fácil ver cuándo las cosas son **similares**, pero no **lo mismo**. O sea, ¡lo más típico en interfaces de usuario! En el editar y ver artículos, es muy probable que terminemos con un tipo `EditablePost` y otro `ViewablePost`, cada uno con una estructura distinta y sus propios funciones auxiliares y decodificadores de JSON. Tal vez esos tipos son suficientemente complejos como para que tengan su propio módulo. O tal vez no. Tendríamos que escribir el código y ver qué pasa.
 
-This works because the compiler makes it really easy to do huge refactors. If I realize I got something majorly wrong across 20 files, I just fix it.
+Esto es posible porque el compilador hace que sea muy fácil hacer grandes refactorizaciones. Si de pronto me doy cuenta de que cometí un gran error que compromete 20 archivos, puedo simplemente ir y corregirlo.
 
-## Examples
+## Ejemplos
 
-You can see examples of this structure in the following open-source projects:
+Estos proyectos de código abierto funcionan como ejemplos de la estructura que acabo de mencionar:
 
 - [`elm-spa-example`](https://github.com/rtfeldman/elm-spa-example)
 - [`package.elm-lang.org`](https://github.com/elm/package.elm-lang.org)
 
-> ## Culture Shock
+> ## Choque cultural
 >
-> Folks coming from JavaScript tend to bring habits, expectations, and anxieties that are specific to JavaScript. They are legitimately important in that context, but they can cause some pretty severe troubles when transferred to Elm.
+> La gente que viene de JavaScript tiende a traer sus hábitos, expectativas y ansiedades específicas de JavaScript consigo. Son legítimamente importantes en ese contexto, pero pueden causar serios problemas al transferirlos a Elm.
 >
-> ### Defensive Instincts
+> ### Instintos defensivos
 >
-> In [The Life of a File](https://youtu.be/XpDsk374LDE) I point out some JavaScript Folk Knowledge that leads you astray in Elm:
+> En [“The Life of a File”](https://youtu.be/XpDsk374LDE) hago hincapié en cierto conocimiento popular del mundo de JavaScript que se puede convertir en una trampa en Elm.
 >
-> - ~~**“Prefer shorter files.”**~~ In JavaScript, the longer your file is, the more likely you have some sneaky mutation that will cause a really difficult bug. But in Elm, that is not possible! Your file can be 2000 lines long and that still cannot happen.
-> - ~~**“Get architecture right from the beginning.”**~~ In JavaScript, refactoring is extremely risky. In many cases, it is cheaper just to rewrite it from scratch. But in Elm, refactoring is cheap and reliable! You can make changes in 20 different files with confidence.
+> - ~~**“Prefiere archivos cortos.”**~~ En JavaScript, mientras más largo sea tu archivo, más probable será que tengas una mutación escondida que causará un bug complicado. Pero en Elm, eso simplemente no es posible. Tu archivo podría tener hasta 2000 líneas y seguirá sin ser posible.
+> - ~~**“Parte con la arquitectura correcta.”**~~ En JavaScript, refactorizar es extremadamente riesgoso. En muchos casos es menos costoso simplemente reescribir todo desde cero. Pero en Elm, refactorizar implica poco costo y riesgo. Puedes cambiar 20 archivos sin preocupación.
 >
-> These defensive instincts are protecting you from problems that do not exist in Elm. Knowing this in your mind is different than knowing it in your gut though, and I have observed that JS folks often feel deeply uncomfortable when they see files pass the 400 or 600 or 800 line mark. **So I encourage you to push your limit on number of lines!** See how far you can go. Try using comment headers, try making helper functions, but keep it all in one file. Having this experience yourself is extremely valuable!
+> Estos instintos defensivos nos protegen de problemas que no existen en Elm. Pero entender esto intelectualmente no es lo mismo que entenderlo en forma instintiva, y he observado que gente que programa JS se siente profundamente incómoda cuando ve archivos que superan las 400, 600, u 800 líneas. **Te invito a que superes tu propio límite de líneas.** Ve hasta dónde puedes llevarlo. Usa comentarios como encabezado, crea funciones auxiliares, pero siempre déjalo todo en el mismo archivo. Me parece que tener personalmente esta experiencia es algo muy valioso.
 >
 > ### MVC
 >
-> Some folks see The Elm Architecture and have the intuition to divide their code into separate modules for `Model`, `Update`, and `View`. Do not do this!
+> Hay gente que ve la Arquitectura Elm y tiene la intuición de dividir su código en módulos distintos `Model`, `Update` y `View`. ¡No lo hagas!
 >
-> It leads to unclear and debatable boundaries. What happens when `Post.estimatedReadTime` is used in both the `update` and `view` functions? Totally reasonable, but it does not clearly _belong_ to one or the other. Maybe you need a `Utils` module? Maybe it actually is a controller kind of thing? The resulting code tends to be hard to navigate because placing each function is now an [ontological](https://en.wikipedia.org/wiki/Ontology) question, and all of your colleagues have different theories. What is an `estimatedReadTime` really? What is its essence? Estimation? What would Richard think is its essence? Time?
+> Esto conlleva a tener fronteras debatibles y poco claras. ¿Qué pasa cuando `Post.estimatedReadTime` se use tanto en las funciones `update` como `view`? Es algo muy razonable, pero no hay una evidente _pertenencia_ a una u otra. ¿Tal vez necesitamos un módulo `Utils`? ¿Tal vez en realidad es alguna especie de controlador? El código resultante tiende a ser difícil de navegar, porque la ubicación de cada función se convirtió en una pregunta [ontológica](https://es.wikipedia.org/wiki/Ontolog%C3%ADa), y tus colegas tendrán cada uno su propia teoría. ¿Qué es un `estimatedReadTime`, realmente? ¿Cuál es su esencia? ¿La estimación? ¿Qué diría Ricardo que es su esencia? ¿El tiempo?
 >
-> **If you build each module around a type, you rarely run into these kinds of questions.** You have a `Page.Home` module that contains your `Model`, `update`, and `view`. You write helper functions. You add a `Post` type eventually. You add an `estimatedReadTime` function. Maybe someday there are a bunch of helpers about that `Post` type, and maybe it is worth splitting into its own module. With this convention, you end up spending a lot less time considering and reconsidering module boundaries. I find that the code also comes out much clearer.
+> **Si construímos cada módulo en torno a un tipo, muy rara vez nos toparemos con este tipo de preguntas.** Tenemos un módulo `Page.Home` que contiene su `Model`, `update` y `view`. Escribimos funciones auxiliares. Añadimos un tipo `Post`, eventualmente. Añadimos una función `estimatedReadTime`. Tal vez un día hayan suficientes funciones auxiliares sobre el tipo `Post`, y tal vez valga la pena separar ese código en su propio módulo. Usando esta convención acabamos gastando menos tiempo considerando y reconsiderando las fronteras entre módulos. En mi opinión, el código también queda mucho más claro.
 >
-> ### Components
+> ### Componentes
 >
-> Folks coming from React expect everything to be components. **Actively trying to make components is a recipe for disaster in Elm.** The root issue is that components are objects:
+> Gente acostumbrada a React espera que todo sea componentes. **Tratar intencionadamente de construir componentes es una fórmula para el desastre en Elm.** El problema fundamental es que los componentes son objetos:
 >
-> - components = local state + methods
-> - local state + methods = objects
+> - componentes = estado local + métodos
+> - estado local + métodos = objetos
 >
-> It would be odd to start using Elm and wonder "how do I structure my application with objects?" There are no objects in Elm! Folks in the community would recommend using custom types and functions instead.
+> Sería extraño usar Elm y preguntarse, “¿cómo uso objetos para estructurar mi aplicación?”. ¡No hay objetos en Elm! Los miembros de la comunidad recomiendan usar tipos personalizados y funciones.
 >
-> Thinking in terms of components encourages you to create modules based on the visual design of your application. “There is a sidebar, so I need a `Sidebar` module.” It would be way easier to just make a `viewSidebar` function and pass it whatever arguments it needs. It probably does not even have any state. Maybe one or two fields? Just put it in the `Model` you already have. If it really is worth splitting out into its own module, you will know because you will have a custom type with a bunch of relevant helper functions!
+> Pensar en términos de componentes fomenta que creemos módulos basados en el diseño visual de nuestra aplicación. “Hay una barra lateral, así que necesito un módulo `Sidebar`.” Sería mucho más fácil simplemente hacer una función `viewSidebar` y pasarle los argumentos que necesita. Tal vez ni siquiera tiene estado. Tal vez necesita uno o dos campos. Pongámolos en el `Model` que ya tenemos. Si realmente vale la pena separarlo en su propio módulo, lo sabremos porque tendremos un tipo personalizado con varias funciones auxiliares relevantes.
 >
-> Point is, writing a `viewSidebar` function **does not** mean you need to create a corresponding `update` and `Model` to go with it. Resist this instinct. **Just write the helper functions you need.**
+> El punto es que escribir una función `viewSidebar` **no significa** que necesitemos crear también un `update` y otro tipo `Model` junto con ella. Resiste el instinto. **Escribe las funciones auxiliares que necesites y nada más.**

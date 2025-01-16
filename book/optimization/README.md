@@ -1,9 +1,9 @@
-# Optimization
+# Optimización
 
-There are two major types of optimization in Elm. Optimizing performance and optimizing asset size:
+Hay dos principales tipos de optimización en Elm: la optimización de rendimiento, y la optimización del tamaño de archivo.
 
-- **Performance** &mdash; The slowest thing in browsers is the DOM. By a huge margin. I have done a lot of profiling to speed up Elm applications, and most things have no noticeable impact. Using better data structures? Negligible. Caching the results of computations in my model? Negligible _and_ my code is worse now. The only thing that makes a big difference is using `Html.Lazy` and `Html.Keyed` to do fewer DOM operations.
+- **Rendimiento** — Lo más lento en los navegadores es el DOM, por un amplio margen. He hecho mucho perfilamiento para medir y mejorar el rendimiento de aplicaciones Elm, y la mayoría de ajustes no ofrecen un gran impacto. ¿Usar estructuras de datos más óptimas? El cambio es ínfimo. ¿Guardar un caché del resultado de ciertas computaciones en el modelo? El cambio es ínfimo _y además_ el código queda peor. Lo único que hace una gran diferencia es usar `Html.Lazy` y `Html.Keyed` para reducir la cantidad de operaciones sobre el DOM.
 
-- **Asset Size** &mdash; Running in browsers means we have to care about download times. The smaller we can get our assets, the faster they load on mobile devices and slow internet connections. This is probably more important than any of the performance optimizations you will do! Fortunately, the Elm compiler does a really good job of making your code as small as possible, so you do not need to do a bunch of work making your code confusing to get decent outcomes here.
+- **Tamaño de archivos** — La ejecución en un navegador implica que tenemos que cuidar los tiempos de descarga. Mientras más pequeños sean nuestros archivos, más rápido cargarán en dispositivos móviles y en conexiones lentas. Esto es tal vez más importante que cualquier optimización de rendimiento. Por fortuna, Elm compila a un código ya muy pequeño, así que no necesitas gastar esfuerzos haciendo que tu código quede más confuso, sólo por necesidad de mejorar este aspecto.
 
-Both are important though, so this chapter will go through how this all works!
+Ambos son importantes, así que este capítulo se enfocará en cómo funcionan estas optimizaciones.

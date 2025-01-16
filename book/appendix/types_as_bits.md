@@ -1,29 +1,29 @@
-# Types as Bits
+# Tipos como bits
 
-There are all sorts of types in Elm:
+Todos estos son tipos en Elm:
 
 - `Bool`
 - `Int`
 - `String`
-- `(Int, Int)`
+- `( Int, Int )`
 - `Maybe Int`
 - ...
 
-We have a conceptual understanding of them by now, but how are they understood by a computer? How is `Maybe Int` stored on a hard disk?
+Ya adquirimos un entendimiento a nivel conceptual sobre ellos, pero ¿cómo los entiende un computador? ¿Cómo se almacena un `Maybe Int` en el disco duro?
 
 ## Bits
 
-A **bit** is little box that has two states. Zero or a one. On or off. Computer memory is one super long sequence of bits.
+Un **bit** es una pequeña caja con dos posibles estados: cero o uno, prendido o apagado. La memoria de un computador es una larguísima secuencia de bits.
 
-Okay, so all we have is a bunch of bits. Now we need to represent _everything_ with that!
+Lo único que tenemos a nuestra disposición es un montón de bits. Y tenemos que representarlo _todo_ usando eso.
 
 ## `Bool`
 
-A `Bool` value can be either `True` or `False`. This corresponds exactly to a bit!
+Un valor `Bool` puede ser `True` (verdadero) o `False` (falso). Es decir, ¡corresponde exactamente a un bit!
 
 ## `Int`
 
-An `Int` value is some whole number like `0`, `1`, `2`, etc. You cannot fit that in a single bit, so the only other option is to use multiple bits. So normally, an `Int` would be a sequence of bits, like these:
+Un valor `Int` es un número como `0`, `1`, `2`, etc. No hay forma de hacerlo caber en un sólo bit, así que la única otra opción es usar múltiples bits. Lo normal es que un `Int` se represente como una secuencia de bits, como las siguientes:
 
 ```
 00000000
@@ -33,19 +33,19 @@ An `Int` value is some whole number like `0`, `1`, `2`, etc. You cannot fit that
 ...
 ```
 
-We can arbitrarily assign meaning to each of these sequences. So maybe `00000000` is zero and `00000001` is one. Great! We can just start assigning numbers to bit sequences in ascending order. But eventually we will run out of bits...
+Podemos asignarle significado arbitrariamente a cada una de estas secuencias. Tal vez `00000000` es cero, y `00000001` es uno. Genial, ya podemos empezar a asignar números a secuencias de bits en orden ascendente. Pero eventualmente se nos van a acabar los bits…
 
-By some quick math, eight bits only allow (2^8 = 256) numbers. What about perfectly reasonable numbers like 9000 and 8004?
+Usando un poco de matemática, sabemos que ocho bits sólo permiten (2^8 = 256) números. ¿Qué pasa con otros números perfectamente razonables, como 9000 y 8004?
 
-The answer is to just add more bits. For a long time, people used 32 bits. That allowed for (2^32 = 4,294,967,296) numbers which covers the kinds of numbers humans typically think about. Computers these days support 64-bit integers, allowing for (2^64 = 18,446,744,073,709,551,616) numbers. That is a lot!
+La respuesta es sólo añadir más bits. Por largo tiempo, la gente usó 32 bits. Eso nos da espacio para (2^32 = 4.294.967.296) números, lo que cubre el rango de números que usamos típicamente los humanos. Hoy día, los computadores soportan números enteros de 64 bits, permitiendo (2^64 = 18.446.744.073.709.551.616) números. O sea, un enorme montón.
 
-> **Note:** If you are curious how addition works, learn about [two’s complement](https://en.wikipedia.org/wiki/Two%27s_complement). It reveals that numbers are not assigned to bit sequences arbitrarily. For the sake of making addition as fast as possible, this particular way of assigning numbers works really well.
+> **Nota:** Si te da curiosidad saber cómo funciona la adición, puedes leer sobre el [complemento a dos](https://es.wikipedia.org/wiki/Complemento_a_dos). Podrás ver que la manera en que se asignan los números a secuencias de bits no es arbitraria. Para optimizar la velocidad de la adición, esta forma particular de asignar números funciona muy bien.
 
 ## `String`
 
-The string `"abc"` is the sequence of characters `a` `b` `c`, so we will start by trying to represent characters as bits.
+El string `"abc"` es la secuencia de caracteres `a` `b` `c`, así que empecemos intentando representar caracteres como bits.
 
-One of the early ways of encoding characters is called [ASCII](https://en.wikipedia.org/wiki/ASCII). Just like with integers, they decided to list out a bunch of bit sequences and start assigning values arbitrarily:
+Una de las formas originales de codificación de caracteres es la llamada [ASCII](https://en.wikipedia.org/wiki/ASCII). Igual que con los números enteros, decidieron listar secuencias de bits y a asignarles valores en forma arbitraria:
 
 ```
 00000000
@@ -55,21 +55,21 @@ One of the early ways of encoding characters is called [ASCII](https://en.wikipe
 ...
 ```
 
-So every character needed to fit in eight bits, meaning only 256 characters could be represented! But if you only care about English, this actually works out pretty well. You need to cover 26 lower-case letters, 26 upper-case letters, and 10 numbers. That is 62. There is a bunch of room left for symbols and other weird stuff. You can see what they ended up with [here](https://ascii.cl/).
+Cada carácter debía caber en ocho bits, lo que significa que sólo 256 caracteres pueden ser representados. Pero ya que es un estándar estadounidense y les interesaba codificar textos en inglés, es un número más que suficiente. Necesitas 26 letras minúsculas, 26 mayúsculas y 10 números. Llevamos 62. Queda mucho espacio para símbolos y algunas cosas raras. Puedes mirar [aquí](https://ascii.cl/) la lista con la que acabaron.
 
-We have an idea for characters now, but how will the computer know where the `String` ends and the next piece of data begins? It is all just bits. Characters look just like `Int` values really! So we need some way to mark the end.
+Ya tenemos una idea de qué pasa con cada carácter, pero ¿cómo sabe el computador dónde termina el `String` y empieza el dato siguiente? Al fin y al cabo todo es bits; cada carácter es indistinguible un valor `Int`. Necesitamos una forma de especificar dónde termina un string.
 
-These days, languages tend to do this by storing the **length** of the string. So a string like `"hello"` might look something like `5` `h` `e` `l` `l` `o` in memory. So you know a `String` always starts with 32-bits representing the length. And whether the length is 0 or 9000, you know exactly where the characters end.
+Hoy en día, los lenguajes suelen hacer esto almacenando la **longitud** del string. O sea que un string como `"hello"` se vería en memoria algo como `5` `h` `e` `l` `l` `o`. Añadimos la presuposición de que un `String` siempre empieza con 32 bits representando su longitud. Y así, sea el string de 0 o de 9000 caracteres de largo, siempre sabremos exáctamente dónde termina en memoria.
 
-> **Note:** At some point, folks wanted to cover languages besides English. This effort eventually resulted in the [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoding. It is quite brilliant really, and I encourage you to learn about it. It turns out that “get the 5th character” is harder than it sounds!
+> **Nota:** Naturalmente, incluso los angloparlantes querían también poder representar textos en lenguajes que no son inglés. Eventualmente se ideó la codificación [UTF-8](https://es.wikipedia.org/wiki/UTF-8). Es una solución bastante brillante, y te sugiero que la investigues, si te interesa el tema. Resulta que obtener el “quinto carácter” es una tarea más difícil de lo que parece…
 
-## `(Int, Int)`
+## `( Int, Int )`
 
-What about tuples? Well, `(Int, Int)` is two `Int` values, and each one is a sequence of bits. Let’s just put those two sequences next to each other in memory and call it a day!
+¿Qué tal las tuplas? `( Int, Int )` es dos valores `Int`, y cada uno es una secuencia de bits. Nos basta con poner ambas secuencias una junto a la otra en memoria, y listo.
 
-## Custom Types
+## Tipos personalizados
 
-A custom type is all about combining different types. Those different types may have all sorts of different shapes. We will start with the `Color` type:
+Los tipos personalizados son buenos para combinar distintos tipos, y estos tipos pueden tener muchas formas distintas. Pero primero veamos el caso simple del tipo `Color`:
 
 ```elm
 type Color
@@ -78,22 +78,22 @@ type Color
     | Green
 ```
 
-We can assign each case a number: `Red = 0`, `Yellow = 1`, and `Green = 2`. Now we can use the `Int` representation. Here we only need two bits to cover all the possible cases, so `00` is red, `01` is yellow, `10` is green, and `11` is unused.
+Podemos asignarle a cada caso un número: `Red = 0`, `Yellow = 1` y `Green = 2`. Ahora podemos usar la misma representación de `Int`. Aquí sólo necesitamos dos bits para cubrir todos los casos posibles, por lo que `00` es `Red`, `01` es `Yellow`, `10` es `Green` y `11` queda sin uso.
 
-But what about custom types that hold additional data? Like `Maybe Int`? The typical approach is to set aside some bits to “tag” the data, so we can decide that `Nothing = 0` and `Just = 1`. Here are some examples:
+Pero ¿y qué pasa con los tipos personalizados que almacenan más información, como `Maybe Int`? Lo común es estos bits que representan cada variante sirvan como una “etiqueta” para los datos. Si definimos que `Nothing = 0` y `Just = 1`, quedaría como en estos ejemplos:
 
 - `Nothing` = `0`
 - `Just 12` = `1` `00001100`
 - `Just 16` = `1` `00010000`
 
-A `case` expression always looks at that “tag” before deciding what to do next. If it sees a `0` it knows there is no more data. If it sees a `1` it knows it is followed by a sequence of bits representing the data.
+Una expresión `case` revisaría primero la “etiqueta” antes de decidir qué hacer. Si encuentra una etiqueta `0`, sabe que no hay más datos. Si encuentra un `1`, sabe que está seguida de una secuencia de bits que representan un `Int`.
 
-This “tag” idea is similar to putting the length at the beginning of `String` values. The values may be different sizes, but the code can always figure out where they start and end.
+Esta idea de “etiquetar” se parece a la de poner la longitud al principio de un valor `String`. Los valores almacenados pueden tener distinta longitud de bits, pero el código tiene la información suficiente para siempre identificar dónde empiezan y terminan.
 
-## Summary
+## En resumen
 
-Eventually, all values need to be represented in bits. This page gives a rough overview of how that actually works.
+Eventualmente, todos los valores que necesitamos pueden ser representados en bits. Esta página ofrece una perspectiva general de cómo funciona eso en la práctica.
 
-Normally there is no real reason to think about this, but I found it to be helpful in deepening my understanding of custom types and `case` expressions. I hope it is helpful to you as well!
+Usualmente no hay razón de pensar en estos detalles, pero me resultó útil para profundizar mi entendimiento de los tipos personalizados y las expresiones `case`. Ojalá que te sirva a ti también.
 
-> **Note:** If you think this is interesting, it may be fun to learn more about garbage collection. I have found [The Garbage Collection Handbook](http://gchandbook.org/) to be an excellent resource on the topic!
+> **Nota:** Si esto te pareció interesante, podría gustarte aprender también sobre la recolección de basura. El libro [“The garbage collection handbook”](http://gchandbook.org/) (en inglés) es un recurso sobre el tema que me gustó mucho.
