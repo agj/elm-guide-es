@@ -40,4 +40,4 @@
 - Apéndice
   - [Tipos como conjuntos](appendix/types_as_sets.md)
   - [Tipos como bits](appendix/types_as_bits.md)
-  - [Function Types](appendix/function_types.md)
+  - [Tipos de función](appendix/function_types.md)
