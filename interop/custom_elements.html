@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Custom Elements · Introducción a Elm</title>
+        <title>Elementos personalizados · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="./">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="../webapps/">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="../webapps/navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="../webapps/url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="../webapps/modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="../webapps/structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Custom Elements</a>
+        <a href=".." >Elementos personalizados</a>
     </h1>
 </div>
 
@@ -722,12 +722,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="custom-elements">Custom Elements</h1>
-<p>On the last few pages, we have seen (1) how to start Elm programs from JavaScript, (2) how to pass data in as flags on initialization, and (3) how to send messages between Elm and JS with ports. But guess what people? There is another way to do interop!</p>
-<p>Browsers seem to be supporting <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements" target="_blank">custom elements</a> more and more, and that turns out to be quite helpful for embedding JS into Elm programs.</p>
-<p>Here is a <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">minimal example</a> of how to use custom elements to do some localization and internationalization.</p>
-<h2 id="creating-custom-elements">Creating Custom Elements</h2>
-<p>Say we want to localize dates, but that is not accessible in Elm core packages yet. Maybe you want to write a function that localizes dates:</p>
+                                <h1 id="elementos-personalizados">Elementos personalizados</h1>
+<p>En las últimas páginas hemos visto (1) cómo inicializar programas Elm desde JavaScript, (2) cómo pasar datos en forma de flags, y (3) cómo mandar mensajes entre Elm y JS usando puertos. Pero, adivina qué: ¡hay otra manera más de interoperar!</p>
+<p>Los navegadores populares ya todos soportan <a href="https://developer.mozilla.org/es/docs/Web/API/Web_components/Using_custom_elements" target="_blank">elementos personalizados</a>, y ésta resulta ser una forma muy práctica de incluir JS en programas Elm.</p>
+<p>Aquí tienes un <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">ejemplo mínimo</a> de cómo usar elementos personalizados para hacer localización e internacionalización.</p>
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
+<h2 id="crear-elementos-personalizados">Crear elementos personalizados</h2>
+<p>Supongamos que queremos localizar fechas, pero esto no es aún posible directo desde los paquetes básicos de Elm. Tal vez quieres escribir una función que localiza una fecha:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">//</span>
 <span class="hljs-comment">//   localizeDate('sr-RS', 12, 5) === "петак, 1. јун 2012."</span>
 <span class="hljs-comment">//   localizeDate('en-GB', 12, 5) === "Friday, 1 June 2012"</span>
@@ -744,7 +745,7 @@
   <span class="hljs-keyword">return</span> dateTimeFormat.<span class="hljs-title function_">format</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(year, month));
 }
 </code></pre>
-<p>But how do we use that in Elm?! Newer browsers allow you to create new types of DOM nodes like this:</p>
+<p>Pero, ¿cómo diantres la usamos en Elm? Las últimas versiones de los navegadores te permiten crear nuevos tipos de nodos DOM de esta forma:</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">//</span>
 <span class="hljs-comment">//   &lt;intl-date lang="sr-RS" year="2012" month="5"&gt;</span>
 <span class="hljs-comment">//   &lt;intl-date lang="en-GB" year="2012" month="5"&gt;</span>
@@ -777,8 +778,8 @@ customElements.<span class="hljs-title function_">define</span>(
   },
 );
 </code></pre>
-<p>The most important parts here are <code>attributeChangedCallback</code> and <code>observedAttributes</code>. You need some logic like that to detect changes to the attributes you care about.</p>
-<p>Load that before you initialize your Elm code, and you will be able to write code like this in Elm:</p>
+<p>La partes más importantes son <code>attributeChangedCallback</code> y <code>observedAttributes</code>. Necesitas lógica como seta para detectar cambios en los atributos que te interesan.</p>
+<p>Carga eso antes de inicializar tu programa Elm, y podrás escribir código Elm como el siguiente:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, node)
 <span class="hljs-keyword">import</span> Html.Attributes <span class="hljs-keyword">exposing</span> (attribute)
 
@@ -792,12 +793,13 @@ customElements.<span class="hljs-title function_">define</span>(
         ]
         []
 </code></pre>
-<p>Now you can call <code>viewDate</code> when you want access to that kind of localized information in your <code>view</code>.</p>
-<p>You can check out the full version of this example <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">here</a>.</p>
-<h2 id="more-info">More Info</h2>
-<p>Luke has a lot more experience with custom elements, and I think his Elm Europe talk is an excellent introduction!</p>
-<p><a href="https://www.youtube.com/watch?v=tyFe9Pw6TVE" target="_blank">https://www.youtube.com/watch?v=tyFe9Pw6TVE</a></p>
-<p>Docs on custom elements can be kind of confusing, but I hope this is enough for people to get started embedding simple logic for <code>Intl</code> or even large React widgets if that seems like the right choice for your project.</p>
+<p>Y así ya tienes acceso a <code>viewDate</code> para cuando necesites información localizada en tu vista.</p>
+<p>Revisa el ejemplo completo <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">aquí</a>.</p>
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
+<h2 id="más-información">Más información</h2>
+<p>Luke tiene mucha más experiencia usando elementos personalizados, y creo que <a href="https://www.youtube.com/watch?v=tyFe9Pw6TVE" target="_blank">su charla de Elm Europe</a> (en inglés) es una excelente introducción.</p>
+<!-- TODO: 👆 ¿Proveer subtítulos? ¿Usar otra referencia? 🤔 -->
+<p>La documentación de los elementos personalizados puede ser un poco confusa, pero espero que esta introducción sea suficiente para que puedas empezar a incluir lógica simple que use <code>Intl</code>, incrustar widgets hechos en React, o cualquier cosa así según las necesidades de tu proyecto.</p>
 
                                 
                                 </section>
@@ -825,12 +827,12 @@ customElements.<span class="hljs-title function_">define</span>(
 
             
                 
-                <a href="ports.html" class="navigation navigation-prev " aria-label="Previous page: Ports">
+                <a href="ports.html" class="navigation navigation-prev " aria-label="Previous page: Puertos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="limits.html" class="navigation navigation-next " aria-label="Next page: Limits">
+                <a href="limits.html" class="navigation navigation-next " aria-label="Next page: Límites">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -841,7 +843,7 @@ customElements.<span class="hljs-title function_">define</span>(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Custom Elements","level":"1.8.3","depth":2,"next":{"title":"Limits","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"previous":{"title":"Ports","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/custom_elements.md","mtime":"2025-01-16T02:30:22.550Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Elementos personalizados","level":"1.8.3","depth":2,"next":{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"previous":{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/custom_elements.md","mtime":"2025-01-16T02:33:11.316Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

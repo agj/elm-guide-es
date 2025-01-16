@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="../webapps/">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="../webapps/navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="../webapps/url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="../webapps/modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="../webapps/structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="./">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -723,21 +723,21 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="htmlkeyed"><code>Html.Keyed</code></h1>
-<p>On the previous page, we learned how Virtual DOM works and how we can use <code>Html.Lazy</code> to avoid a bunch of work. Now we are going to introduce <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed/" target="_blank"><code>Html.Keyed</code></a> to skip even more work.</p>
-<p>This optimization is particularly helpful for lists of data in your interface that must support <strong>insertion</strong>, <strong>removal</strong>, and <strong>reordering</strong>.</p>
-<h2 id="the-problem">The Problem</h2>
-<p>Say we have a list of all the Presidents of the United States. And maybe it lets us sort by name, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_education" target="_blank">by education</a>, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_net_worth" target="_blank">by net worth</a>, and <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_home_state" target="_blank">by birthplace</a>.</p>
-<p>When the diffing algorithm (described on the previous page) gets to a long list of items, it just goes through pairwise:</p>
+<p>En la página anterior aprendimos cómo funciona el DOM virtual y cómo podemos usar <code>Html.Lazy</code> para evitar computar de más. Ahora vamos a conocer <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed/" target="_blank"><code>Html.Keyed</code></a> para ahorrarnos aún más cómputo.</p>
+<p>Esta optimización es particularmente útil para interfaces con listas de datos que requieren <strong>añadir</strong>, <strong>quitar</strong> y <strong>reordenar</strong> ítems.</p>
+<h2 id="el-problema">El problema</h2>
+<p>Digamos que tenemos una lista de todos los presidentes de los Estados Unidos. Tal vez nos deja ordenar por nombre, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_education" target="_blank">por educación</a>, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_net_worth" target="_blank">por patrimonio neto</a> y <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_home_state" target="_blank">por lugar de nacimiento</a>.</p>
+<p>Cuando el algoritmo de comparación de nodos (descrito en la página anterior) se topa con una larga lista de ítems, simplemente la revisa de a pares:</p>
 <ul>
-<li>Diff the current 1st element with the next 1st element.</li>
-<li>Diff the current 2nd element with the next 2nd element.</li>
-<li>...</li>
+<li>Compara el actual primer elemento con el nuevo primer elemento.</li>
+<li>Compara el actual segundo elemento con el nuevo segundo elemento.</li>
+<li>…</li>
 </ul>
-<p>But when you change the sort order, all of these are going to be different! So you end up doing a lot of work on the DOM when you could have just shuffled some nodes around.</p>
-<p>This issue exists with insertion and removal as well. Say you remove the 1st of 100 items. Everything is going to be off-by-one and look different. So you get 99 diffs and one removal at the end. No good!</p>
-<h2 id="the-solution">The Solution</h2>
-<p>The fix for all of this is <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed#node" target="_blank"><code>Html.Keyed.node</code></a>, which makes it possible to pair each entry with a “key” that easily distinguishes it from all the others.</p>
-<p>So in our presidents example, we could write our code like this:</p>
+<p>Pero si cambias el orden de los ítems, ¡todos van a resultar diferentes! Entonces terminas haciendo más trabajo en el DOM cuando podrías haber sólo intercambiado algunos nodos de lugar.</p>
+<p>El problema también ocurre al insertar y quitar ítems. Si quitamos el primero de una lista de cien, todo quedará desplazado por una posición, y verse distinto para el algoritmo. Terminamos haciendo 99 comparaciones y una eliminación al final. No es muy bueno.</p>
+<h2 id="la-solución">La solución</h2>
+<p>La manera de arreglar este problema es con <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed#node" target="_blank"><code>Html.Keyed.node</code></a>, que permite emparejar cada ítem con una “llave” que lo distingue fácilmente de todos los demás.</p>
+<p>En nuestro ejemplo de los presidentes, podríamos escribir código así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (..)
 <span class="hljs-keyword">import</span> Html.Keyed <span class="hljs-keyword">as</span> Keyed
 <span class="hljs-keyword">import</span> Html.Lazy <span class="hljs-keyword">exposing</span> (lazy)
@@ -754,11 +754,11 @@
 <span class="hljs-title">viewPresident</span> president =
   li [] [ ... ]
 </code></pre>
-<p>Each child node is associated with a key. So instead of doing a pairwise diff, we can diff based on matching keys!</p>
-<p>Now the Virtual DOM implementation can recognize when the list is resorted. It first matches all the presidents up by key. Then it diffs those. We used <code>lazy</code> for each entry, so we can skip all that work. Nice! It then figures out how to shuffle the DOM nodes to show things in the order you want. So the keyed version does a lot less work in the end.</p>
-<p>Resorting helps show how it works, but it is not the most common case that really needs this optimization. <strong>Keyed nodes are extremely important for insertion and removal.</strong> When you remove the 1st of 100 elements, using keyed nodes allows the Virtual DOM implementation to recognize that immediately. So you get a single removal instead of 99 diffs.</p>
-<h2 id="summary">Summary</h2>
-<p>Touching the DOM is extraordinarily slow compared to the sort of computations that happen in a normal application. <strong>Always reach for <code>Html.Lazy</code> and <code>Html.Keyed</code> first.</strong> I recommend verifying this with profiling as much as possible. Some browsers provide a timeline view of your program, <a href="https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference" target="_blank">like this</a>. It gives you a summary of how much time is spent in loading, scripting, rendering, painting, etc. If you see that 10% of the time is spent scripting, you could make your Elm code twice as fast and not make any noticeable difference. Whereas simple additions of lazy and keyed nodes could start taking big chunks out of that other 90% by touching the DOM less!</p>
+<p>Cada nodo hijo tiene una llave asociada. En vez de hacer una comparación de a pares, comparamos en base a igualdad de llaves.</p>
+<p>Ahora el algoritmo del DOM virtual puede reconocer cuando una lista fue reordenada. Primero busca cada nodo de presidente por su llave, y compara el actual y el nuevo. Como usamos <code>lazy</code> para cada ítem, no necesita siquiera generar los nodos virtuales. Después determina cómo reordenar los nodos del DOM para mostrar las cosas en el orden que queremos. En suma, la versión con llaves acaba haciendo mucho menos trabajo.</p>
+<p>Este ejemplo de reordenamiento ayuda para entender cómo funciona, pero no es el caso más común que necesita esta optimización. <strong>Los nodos con llave son extremadamente importantes cuando añadimos o quitamos ítems.</strong> Si quitamos el primero en cien elementos, al usar nodos con llave permitimos que el DOM virtual entienda la situación inmediatamente. Y al final sólo necesitamos hacer una eliminación, y no las 99 comparaciones.</p>
+<h2 id="en-resumen">En resumen</h2>
+<p>Manipular el DOM es extraordinariamente lento en comparación con el cómputo que ocurre típicamente durante una aplicación normal. <strong>Siempre prueba usar <code>Html.Lazy</code> y <code>Html.Keyed</code> primero.</strong> Recomiendo en lo posible verificar las optimizaciones usando perfilamiento. Algunos navegadores proveen una vista en forma de línea de tiempo de tu programa, <a href="https://developer.chrome.com/docs/devtools/performance?hl=es-419" target="_blank">como este</a>. Te da un resumen de cuánto tiempo se gasta en descarga, ejecución de código, pintado, etc. Si ves que el 10% del tiempo se gasta en ejecución de código, podrías hacer que tu código Elm ande el doble de rápido y aún así no notarías la diferencia. Mientras que usar nodos <code>Lazy</code> y <code>Keyed</code> nos permite darle un gran mordisco a ese otro 90%, al manipular menos el DOM.</p>
 
                                 
                                 </section>
@@ -791,7 +791,7 @@
                 </a>
                 
                 
-                <a href="asset_size.html" class="navigation navigation-next " aria-label="Next page: Minification">
+                <a href="asset_size.html" class="navigation navigation-next " aria-label="Next page: Minificación">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -802,7 +802,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Html.keyed","level":"1.10.2","depth":2,"next":{"title":"Minification","level":"1.10.3","depth":2,"path":"optimization/asset_size.md","ref":"optimization/asset_size.md","articles":[]},"previous":{"title":"Html.lazy","level":"1.10.1","depth":2,"path":"optimization/lazy.md","ref":"optimization/lazy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/keyed.md","mtime":"2025-01-16T02:30:22.552Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Html.keyed","level":"1.10.2","depth":2,"next":{"title":"Minificación","level":"1.10.3","depth":2,"path":"optimization/asset_size.md","ref":"optimization/asset_size.md","articles":[]},"previous":{"title":"Html.lazy","level":"1.10.1","depth":2,"path":"optimization/lazy.md","ref":"optimization/lazy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/keyed.md","mtime":"2025-01-16T02:33:11.317Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

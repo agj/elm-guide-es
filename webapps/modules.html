@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Modules · Introducción a Elm</title>
+        <title>Módulos · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="./">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Modules</a>
+        <a href=".." >Módulos</a>
     </h1>
 </div>
 
@@ -722,10 +722,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="modules">Modules</h1>
-<p>Elm has <strong>modules</strong> to help you grow your codebase in a nice way. On the most basic level, modules let you break your code into multiple files.</p>
-<h2 id="defining-modules">Defining Modules</h2>
-<p>Elm modules work best when you define them around a central type. Like how the <code>List</code> module is all about the <code>List</code> type. So say we want to build a module around a <code>Post</code> type for a blogging website. We can create something like this:</p>
+                                <h1 id="módulos">Módulos</h1>
+<p>Elm te permite usar <strong>módulos</strong> para que tu código crezca sin problemas. En su nivel más básico, los módulos te permiten separar tu código en múltiples archivos.</p>
+<h2 id="definición-de-módulos">Definición de módulos</h2>
+<p>Los módulos en Elm funcionan mejor cuando los defines en torno a un tipo central. Por ejemplo, el módulo <code>List</code> se trata exclusivamente del tipo <code>List</code>. Así que digamos que queremos crear un módulo en torno a un tipo <code>Post</code> para un blog. Podemos hacer algo como esto:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">module</span> Post <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Post</span>, decoder, encode, estimatedReadTime)
 
 <span class="hljs-keyword">import</span> Json.Decode <span class="hljs-keyword">as</span> D
@@ -744,7 +744,7 @@
 
 
 
-<span class="hljs-comment">-- READ TIME</span>
+[<span class="hljs-type">The</span> <span class="hljs-type">Life</span> <span class="hljs-keyword">of</span> a <span class="hljs-type">File</span>](https://youtu.be/<span class="hljs-type">XpDsk374LDE</span>)<span class="hljs-comment">-- READ TIME</span>
 
 
 <span class="hljs-title">estimatedReadTime</span> : <span class="hljs-type">Post</span> -&gt; <span class="hljs-type">Float</span>
@@ -777,28 +777,28 @@
         (<span class="hljs-type">D</span>.field <span class="hljs-string">"author"</span> <span class="hljs-type">D</span>.string)
         (<span class="hljs-type">D</span>.field <span class="hljs-string">"content"</span> <span class="hljs-type">D</span>.string)
 </code></pre>
-<p>The only new syntax here is that <code>module Post exposing (..)</code> line at the very top. That means the module is known as <code>Post</code> and only certain values are available to outsiders. As written, the <code>wordCount</code> function is only available <em>within</em> the <code>Post</code> module. Hiding functions like this is one of the most important techniques in Elm!</p>
+<p>La única sintaxis nueva es la primera línea, que dice <code>module Post exposing (Post, decoder, encode, estimatedReadTime)</code>. Significa que el módulo tiene el nombre <code>Post</code>, y que sólo ciertos valores específicos están visibles desde fuera del módulo. Por lo tanto, la función <code>wordCount</code> está sólo disponible <em>dentro</em> del módulo <code>Post</code>. Esconder funciones de esta manera es, de hecho, una de las técnicas más importantes en Elm.</p>
 <blockquote>
-<p><strong>Note:</strong> If you forget to add a module declaration, Elm will use this one instead:</p>
+<p><strong>Nota:</strong> Si te olvidas de añadir una declaración de módulo, Elm va a usar esta:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">module</span> Main <span class="hljs-keyword">exposing</span> (..)
 </code></pre>
-<p>This makes things easier for beginners working in just one file. They should not be confronted with the module system on their first day!</p>
+<p>Esto hace que sea más fácil para principiantes que sólo necesitan un archivo. Así, no necesitan preocuparse del sistema de módulos en su primer día.</p>
 </blockquote>
-<h2 id="growing-modules">Growing Modules</h2>
-<p>As your application gets more complex, you will end up adding things to your modules. It is normal for Elm modules to be in the 400 to 1000 line range, as I explain in <a href="https://youtu.be/XpDsk374LDE" target="_blank">The Life of a File</a>. But when you have multiple modules, how do you decide <em>where</em> to add new code?</p>
-<p>I try to use the following heuristics when code is:</p>
+<h2 id="cuando-un-módulo-crece">Cuando un módulo crece</h2>
+<p>A medida que se va haciendo más compleja tu aplicación, vas a tener que ir añadiendo más cosas a tus módulos. Es normal que un módulo Elm tenga entre 400 y 1000 líneas, como explico en mi charla <a href="https://youtu.be/XpDsk374LDE" target="_blank">“The Life of a File”</a>. Pero cuando tenemos múltiples módulos, ¿cómo decidimos <em>dónde</em> añadir código nuevo?</p>
+<p>Yo trato de seguir las siguientes estrategias cuando el código en cuestión es:</p>
 <ul>
-<li><strong>Unique</strong> — If logic only appears in one place, I break out top-level helper functions as close to the usage as possible. Maybe use a comment header like <code>-- POST PREVIEW</code> to indicate that the following definitions are related to previewing posts.</li>
-<li><strong>Similar</strong> — Say we want to show <code>Post</code> previews on the home page and on the author pages. On the home page, we want to emphasize the interesting content, so we want longer snippets. But on the author page, we want to emphasize the breadth of content, so we want to focus on titles. These cases are <em>similar</em>, not the same, so we go back to the <strong>unique</strong> heuristic. Just write the logic separately.</li>
-<li><strong>The Same</strong> — At some point we will have a bunch of <strong>unique</strong> code. That is fine! But perhaps we find that some definitions contain logic that is <em>exactly</em> the same. Break out a helper function for that logic! If all the uses are in one module, no need to do anything more. Maybe put a comment header like <code>-- READ TIME</code> if you really want.</li>
+<li><strong>Único</strong> — Si la lógica aparece en un sólo lugar, ubico las funciones auxiliares lo más cerca de donde se usan que pueda. Tal vez pongo un comentario como si fuera un encabezado, algo como <code>-- PREVISUALIZACIÓN DEL ARTÍCULO</code>, para indicar que las siguientes definiciones están relacionadas con previsualizar artículos.</li>
+<li><strong>Similar</strong> — Tal vez queremos mostrar previsualizaciones de <code>Post</code> en la página principal y en las páginas de autor. En la página principal queremos enfatizar lo interesante del contenido, así que necesitamos extractos más largos. Pero en la página de un autor queremos exhibir variedad, así que le ponemos más énfasis a los títulos. Estos casos son <em>similares</em>, no iguales, así que volvemos a la estrategia de código <strong>único</strong>: escribe la lógica por separado.</li>
+<li><strong>Lo mismo</strong> — En algún momento tendremos bastante código <strong>único</strong>. No hay nada de malo en eso. Pero tal vez notaremos que algunas definiciones contienen lógica que es <em>exactamente</em> igual. Sepárala en una función auxiliar. Si la función sólo se usa dentro del mismo módulo, no hace falta hacer nada más. Simplemente agrega un encabezado como <code>-- TIEMPO DE LECTURA</code>, si te hace falta.</li>
 </ul>
-<p>These heuristics are all about making helper functions within a single file. You only want to create a new module when a bunch of these helper functions all center around a specific custom type. For example, you start by creating a <code>Page.Author</code> module, and do not create a <code>Post</code> module until the helper functions start piling up. At that point, creating a new module should make your code feel easier to navigate and understand. If it does not, go back to the version that was clearer. More modules is not more better! Take the path that keeps the code simple and clear.</p>
-<p>To summarize, assume <strong>similar</strong> code is <strong>unique</strong> by default. (It usually is in user interfaces in the end!) If you see logic that is <strong>the same</strong> in different definitions, make some helper functions with appropriate comment headers. When you have a bunch of helper functions about a specific type, <em>consider</em> making a new module. If a new module makes your code clearer, great! If not, go back. More files is not inherently simpler or clearer.</p>
+<p>Estas estrategias sirven para crear funciones auxiliares dentro del mismo archivo. Es más útil crear un nuevo módulo sólo cuando ya tenemos un montón de estas funciones en torno a un mismo tipo personalizado. Por ejemplo, podemos empezar creando un módulo <code>Page.Author</code>, y esperamos a crear el módulo <code>Post</code> hasta que sus funciones auxiliares comiencen a acumularse. En ese momento, crear el nuevo módulo debiera hacer que el código se sienta más fácil de navegar y de entender. Si no es así, entonces devuélvelo a la forma cuando era más claro. En lo que se refiere a módulos, más no significa mejor. Toma el camino que permita que tu código sea simple y claro.</p>
+<p>En resumen, asume que el código <strong>similar</strong> es <strong>único</strong> por defecto. Lo es, habitualmente, en interfaces de usuario. Si ves lógica que es <strong>la misma</strong> en distintas definiciones, crea funciones auxiliares con comentarios como encabezados. Cuando tengas varias funciones auxiliares para un tipo específico, <em>considera</em> crear un nuevo módulo. Si el nuevo módulo hace que tu código sea más claro, ¡bien! Si no, revierte el cambio. Tener más archivos no es inherentemente más simple o claro.</p>
 <blockquote>
-<p><strong>Note:</strong> One of the most common ways to get tripped up with modules is when something that was once <strong>the same</strong> becomes <strong>similar</strong> later on. Very common, especially in user interfaces! Folks will often try to create a Frankenstein function that handles all the different cases. Adding more arguments. Adding more <em>complex</em> arguments. The better path is to accept that you now have two <strong>unique</strong> situations and copy the code into both places. Customize it exactly how you need. Then see if any of the resulting logic is <strong>the same</strong>. If so, move it out into helpers. <strong>Your long functions should split into multiple smaller functions, not grow longer and more complex!</strong></p>
+<p><strong>Nota:</strong> Una de las formas más comunes de complicarse con los módulos es cuando algo que solía ser <strong>lo mismo</strong> se vuelve <strong>similar</strong> en algún momento. Muy común, sobre todo en interfaces de usuario. Mucha gente termina construyendo funciones frankenstein para manejar todos los distintos casos, añadiendo más argumentos, o argumentos más <em>complejos</em>. El mejor camino es aceptar que ahora tienes dos situaciones <strong>únicas</strong>, y copiar el código en ambos lugares. Ajústalo hasta que quede justo como lo necesitas. Después, fíjate si parte de la lógica es <strong>la misma</strong>. Si es así, sepárala en funciones auxiliares. <strong>Tus funciones largas van a quedar separadas en múltiples funciones más pequeñas, en vez de crecer y volverse más y más complejas.</strong></p>
 </blockquote>
-<h2 id="using-modules">Using Modules</h2>
-<p>It is customary in Elm for all of your code to live in the <code>src/</code> directory. That is the default for <a href="https://github.com/elm/compiler/blob/0.19.0/docs/elm.json/application.md" target="_blank"><code>elm.json</code></a> even. So our <code>Post</code> module would need to live in a file named <code>src/Post.elm</code>. From there, we can <code>import</code> a module and use its exposed values. There are four ways to do that:</p>
+<h2 id="cómo-usar-módulos">Cómo usar módulos</h2>
+<p>Lo más estándar es poner todo tu código Elm en el directorio <code>src/</code>. Este es el defecto para <a href="https://github.com/elm/compiler/blob/0.19.1/docs/elm.json/application.md" target="_blank"><code>elm.json</code></a>, de hecho. Dado esto, nuestro módulo <code>Post</code> tendría que vivir en un archivo llamado <code>src/Post.elm</code>. Ahora podremos importar el módulo con una declaración <code>import</code>, y usar los valores que expone. Hay cuatro maneras distintas de hacerlo:</p>
 <!-- prettier-ignore-start -->
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Post
 <span class="hljs-comment">-- Post.Post, Post.estimatedReadTime, Post.encode, Post.decoder</span>
@@ -815,7 +815,7 @@
 <span class="hljs-comment">-- P.Post, P.estimatedReadTime, P.encode, P.decoder</span>
 </code></pre>
 <!-- prettier-ignore-end -->
-<p>I recommend using <code>exposing</code> pretty rarely. Ideally on zero or one of your imports. Otherwise, it can start getting hard to figure out where things came from when reading though. “Wait, where is <code>filterPostBy</code> from again? What arguments does it take?” It gets harder and harder to read through code as you add more <code>exposing</code>. I tend to use it for <code>import Html exposing (..)</code> but not on anything else. For everything else, I recommend using the standard <code>import</code> and maybe using <code>as</code> if you have a particularly long module name!</p>
+<p>Recomiendo usar <code>exposing</code> infrecuentemente. Idealmente, en ninguno o sólo uno de tus <code>import</code>s. De otra manera, puede empezar a volverse difícil entender de dónde salieron las cosas. “A ver, ¿de dónde era que venía <code>filterPostBy</code>? ¿Qué argumentos acepta?”. Mientras más uses <code>exposing</code>, más difícil se hace entender el código. Tiendo a usarlo para <code>import Html exposing (..)</code>, pero para nada más. Para todo lo demás, recomiendo usar <code>import</code> solo, y tal vez usar <code>as</code> si tienes un módulo con un nombre particularmente largo.</p>
 
                                 
                                 </section>
@@ -843,12 +843,12 @@
 
             
                 
-                <a href="url_parsing.html" class="navigation navigation-prev " aria-label="Previous page: URL Parsing">
+                <a href="url_parsing.html" class="navigation navigation-prev " aria-label="Previous page: Interpretación de URLs">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="structure.html" class="navigation navigation-next " aria-label="Next page: Structure">
+                <a href="structure.html" class="navigation navigation-next " aria-label="Next page: Estructurando aplicaciones web">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -859,7 +859,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Modules","level":"1.9.3","depth":2,"next":{"title":"Structure","level":"1.9.4","depth":2,"path":"webapps/structure.md","ref":"webapps/structure.md","articles":[]},"previous":{"title":"URL Parsing","level":"1.9.2","depth":2,"path":"webapps/url_parsing.md","ref":"webapps/url_parsing.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/modules.md","mtime":"2025-01-16T02:30:22.553Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Módulos","level":"1.9.3","depth":2,"next":{"title":"Estructurando aplicaciones web","level":"1.9.4","depth":2,"path":"webapps/structure.md","ref":"webapps/structure.md","articles":[]},"previous":{"title":"Interpretación de URLs","level":"1.9.2","depth":2,"path":"webapps/url_parsing.md","ref":"webapps/url_parsing.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/modules.md","mtime":"2025-01-16T02:33:11.317Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

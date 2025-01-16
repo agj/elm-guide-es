@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Structure · Introducción a Elm</title>
+        <title>Estructurando aplicaciones web · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="./">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Structure</a>
+        <a href=".." >Estructurando aplicaciones web</a>
     </h1>
 </div>
 
@@ -722,50 +722,50 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="structuring-web-apps">Structuring Web Apps</h1>
-<p>Like I was saying on the previous page, <strong>all modules should be built around a central type.</strong> So if I was making a web app for blog posts, I would start with modules like this:</p>
+                                <h1 id="estructurando-aplicaciones-web">Estructurando aplicaciones web</h1>
+<p>Como dije en la página anterior, <strong>todos los módulos deben construirse en torno a un tipo central</strong>. Por lo tanto, si estuviera construyendo una aplicación web para artículos de un blog, comenzaría con módulos como estos:</p>
 <ul>
 <li><code>Main</code></li>
 <li><code>Page.Home</code></li>
 <li><code>Page.Search</code></li>
 <li><code>Page.Author</code></li>
 </ul>
-<p>I would have a module for each page, centered around the <code>Model</code> type. Those modules follow The Elm Architecture with the typical <code>Model</code>, <code>init</code>, <code>update</code>, <code>view</code>, and whatever helper functions you need. From there, I would just keep growing those modules longer and longer. Keep adding the types and functions you need. If I ever notice that I created a custom type with a couple helper functions, I <em>might</em> move that out into its own module.</p>
-<p>Before we see some examples, I want to emphasize an important strategy.</p>
-<h2 id="do-not-plan-ahead">Do Not Plan Ahead</h2>
-<p>Notice that my <code>Page</code> modules do not make any guesses about the future. I do not try to define modules that can be used in multiple places. I do not try to share any functions. This is on purpose!</p>
-<p>Early in my projects, I always have these grand schemes of how everything will fit together. “The pages for editing and viewing posts both care about posts, so I will have a <code>Post</code> module!” But as I write my application, I find that only the viewing page should have a publication date. And I actually need to track editing differently to cache data when tabs are closed. And they actually need to be stored a bit differently on servers as a result. Etc. I end up turning <code>Post</code> into a big mess to handle all these competing concerns, and it ends up being worse for both pages.</p>
-<p>By just starting with pages, it becomes much easier to see when things are <strong>similar</strong>, but not <strong>the same</strong>. The norm in user interfaces! So with editing and viewing posts, it seems plausible that we could end up with an <code>EditablePost</code> type and a <code>ViewablePost</code> type, each with different structure, helper functions, and JSON decoders. Maybe those types are complex enough to warrant their own module. Maybe not! I would just write the code and see what happens.</p>
-<p>This works because the compiler makes it really easy to do huge refactors. If I realize I got something majorly wrong across 20 files, I just fix it.</p>
-<h2 id="examples">Examples</h2>
-<p>You can see examples of this structure in the following open-source projects:</p>
+<p>Tendría un módulo para cada página, creados en torno al tipo <code>Model</code>. Estos módulos siguen la Arquitectura Elm con los típicos <code>Model</code>, <code>init</code>, <code>update</code>, <code>view</code> y cualquier otra funcion auxiliar que haga falta. De ahí en adelante simplemente dejaría crecer estos módulos, añadiendo los tipos y funciones que sean necesarios. Si llego a notar que creé un tipo personalizado junto a un par de funciones auxiliares, <em>puede</em> que los mueva a un módulo propio.</p>
+<p>Antes de entrar a ver algunos ejemplos, quiero enfatizar una estrategia importante.</p>
+<h2 id="no-planifiques-por-adelantado">No planifiques por adelantado</h2>
+<p>Nota que mis módulos <code>Page</code> no hacen suposiciones sobre el futuro. No traté de definir módulos que puedan ser usados en múltiples lugares. No traté de compartir funciones. Esto es muy a propósito.</p>
+<p>Al principio en cada uno de mis proyectos, siempre tengo un gran plan de cómo va a funcionar todo en conjunto. “Las páginas para editar y ver artículos ambas tienen que ver con artículos, así que voy a escribir un módulo <code>Post</code> compartido”. Pero mientras voy escribiendo la aplicación, noto que sólo la página de visualización de artículos necesita una fecha de publicación. Y realmente necesito manejar la edición de forma especial para cachear los datos al cerrar la pestaña. Y por lo mismo, los datos también necesitan guardarse de manera distinta en el servidor. Etcétera. Termino haciendo que el módulo <code>Post</code> se convierta en una confusa maraña que se encarga de todos estos casos particulares, y se hace más incómodo su uso en ambas páginas.</p>
+<p>Al sólo empezar con las páginas, se hace mucho más fácil ver cuándo las cosas son <strong>similares</strong>, pero no <strong>lo mismo</strong>. O sea, ¡lo más típico en interfaces de usuario! En el editar y ver artículos, es muy probable que terminemos con un tipo <code>EditablePost</code> y otro <code>ViewablePost</code>, cada uno con una estructura distinta y sus propios funciones auxiliares y decodificadores de JSON. Tal vez esos tipos son suficientemente complejos como para que tengan su propio módulo. O tal vez no. Tendríamos que escribir el código y ver qué pasa.</p>
+<p>Esto es posible porque el compilador hace que sea muy fácil hacer grandes refactorizaciones. Si de pronto me doy cuenta de que cometí un gran error que compromete 20 archivos, puedo simplemente ir y corregirlo.</p>
+<h2 id="ejemplos">Ejemplos</h2>
+<p>Estos proyectos de código abierto funcionan como ejemplos de la estructura que acabo de mencionar:</p>
 <ul>
 <li><a href="https://github.com/rtfeldman/elm-spa-example" target="_blank"><code>elm-spa-example</code></a></li>
 <li><a href="https://github.com/elm/package.elm-lang.org" target="_blank"><code>package.elm-lang.org</code></a></li>
 </ul>
 <blockquote>
-<h2 id="culture-shock">Culture Shock</h2>
-<p>Folks coming from JavaScript tend to bring habits, expectations, and anxieties that are specific to JavaScript. They are legitimately important in that context, but they can cause some pretty severe troubles when transferred to Elm.</p>
-<h3 id="defensive-instincts">Defensive Instincts</h3>
-<p>In <a href="https://youtu.be/XpDsk374LDE" target="_blank">The Life of a File</a> I point out some JavaScript Folk Knowledge that leads you astray in Elm:</p>
+<h2 id="choque-cultural">Choque cultural</h2>
+<p>La gente que viene de JavaScript tiende a traer sus hábitos, expectativas y ansiedades específicas de JavaScript consigo. Son legítimamente importantes en ese contexto, pero pueden causar serios problemas al transferirlos a Elm.</p>
+<h3 id="instintos-defensivos">Instintos defensivos</h3>
+<p>En <a href="https://youtu.be/XpDsk374LDE" target="_blank">“The Life of a File”</a> hago hincapié en cierto conocimiento popular del mundo de JavaScript que se puede convertir en una trampa en Elm.</p>
 <ul>
-<li><del><strong>“Prefer shorter files.”</strong></del> In JavaScript, the longer your file is, the more likely you have some sneaky mutation that will cause a really difficult bug. But in Elm, that is not possible! Your file can be 2000 lines long and that still cannot happen.</li>
-<li><del><strong>“Get architecture right from the beginning.”</strong></del> In JavaScript, refactoring is extremely risky. In many cases, it is cheaper just to rewrite it from scratch. But in Elm, refactoring is cheap and reliable! You can make changes in 20 different files with confidence.</li>
+<li><del><strong>“Prefiere archivos cortos.”</strong></del> En JavaScript, mientras más largo sea tu archivo, más probable será que tengas una mutación escondida que causará un bug complicado. Pero en Elm, eso simplemente no es posible. Tu archivo podría tener hasta 2000 líneas y seguirá sin ser posible.</li>
+<li><del><strong>“Parte con la arquitectura correcta.”</strong></del> En JavaScript, refactorizar es extremadamente riesgoso. En muchos casos es menos costoso simplemente reescribir todo desde cero. Pero en Elm, refactorizar implica poco costo y riesgo. Puedes cambiar 20 archivos sin preocupación.</li>
 </ul>
-<p>These defensive instincts are protecting you from problems that do not exist in Elm. Knowing this in your mind is different than knowing it in your gut though, and I have observed that JS folks often feel deeply uncomfortable when they see files pass the 400 or 600 or 800 line mark. <strong>So I encourage you to push your limit on number of lines!</strong> See how far you can go. Try using comment headers, try making helper functions, but keep it all in one file. Having this experience yourself is extremely valuable!</p>
+<p>Estos instintos defensivos nos protegen de problemas que no existen en Elm. Pero entender esto intelectualmente no es lo mismo que entenderlo en forma instintiva, y he observado que gente que programa JS se siente profundamente incómoda cuando ve archivos que superan las 400, 600, u 800 líneas. <strong>Te invito a que superes tu propio límite de líneas.</strong> Ve hasta dónde puedes llevarlo. Usa comentarios como encabezado, crea funciones auxiliares, pero siempre déjalo todo en el mismo archivo. Me parece que tener personalmente esta experiencia es algo muy valioso.</p>
 <h3 id="mvc">MVC</h3>
-<p>Some folks see The Elm Architecture and have the intuition to divide their code into separate modules for <code>Model</code>, <code>Update</code>, and <code>View</code>. Do not do this!</p>
-<p>It leads to unclear and debatable boundaries. What happens when <code>Post.estimatedReadTime</code> is used in both the <code>update</code> and <code>view</code> functions? Totally reasonable, but it does not clearly <em>belong</em> to one or the other. Maybe you need a <code>Utils</code> module? Maybe it actually is a controller kind of thing? The resulting code tends to be hard to navigate because placing each function is now an <a href="https://en.wikipedia.org/wiki/Ontology" target="_blank">ontological</a> question, and all of your colleagues have different theories. What is an <code>estimatedReadTime</code> really? What is its essence? Estimation? What would Richard think is its essence? Time?</p>
-<p><strong>If you build each module around a type, you rarely run into these kinds of questions.</strong> You have a <code>Page.Home</code> module that contains your <code>Model</code>, <code>update</code>, and <code>view</code>. You write helper functions. You add a <code>Post</code> type eventually. You add an <code>estimatedReadTime</code> function. Maybe someday there are a bunch of helpers about that <code>Post</code> type, and maybe it is worth splitting into its own module. With this convention, you end up spending a lot less time considering and reconsidering module boundaries. I find that the code also comes out much clearer.</p>
-<h3 id="components">Components</h3>
-<p>Folks coming from React expect everything to be components. <strong>Actively trying to make components is a recipe for disaster in Elm.</strong> The root issue is that components are objects:</p>
+<p>Hay gente que ve la Arquitectura Elm y tiene la intuición de dividir su código en módulos distintos <code>Model</code>, <code>Update</code> y <code>View</code>. ¡No lo hagas!</p>
+<p>Esto conlleva a tener fronteras debatibles y poco claras. ¿Qué pasa cuando <code>Post.estimatedReadTime</code> se use tanto en las funciones <code>update</code> como <code>view</code>? Es algo muy razonable, pero no hay una evidente <em>pertenencia</em> a una u otra. ¿Tal vez necesitamos un módulo <code>Utils</code>? ¿Tal vez en realidad es alguna especie de controlador? El código resultante tiende a ser difícil de navegar, porque la ubicación de cada función se convirtió en una pregunta <a href="https://es.wikipedia.org/wiki/Ontolog%C3%ADa" target="_blank">ontológica</a>, y tus colegas tendrán cada uno su propia teoría. ¿Qué es un <code>estimatedReadTime</code>, realmente? ¿Cuál es su esencia? ¿La estimación? ¿Qué diría Ricardo que es su esencia? ¿El tiempo?</p>
+<p><strong>Si construímos cada módulo en torno a un tipo, muy rara vez nos toparemos con este tipo de preguntas.</strong> Tenemos un módulo <code>Page.Home</code> que contiene su <code>Model</code>, <code>update</code> y <code>view</code>. Escribimos funciones auxiliares. Añadimos un tipo <code>Post</code>, eventualmente. Añadimos una función <code>estimatedReadTime</code>. Tal vez un día hayan suficientes funciones auxiliares sobre el tipo <code>Post</code>, y tal vez valga la pena separar ese código en su propio módulo. Usando esta convención acabamos gastando menos tiempo considerando y reconsiderando las fronteras entre módulos. En mi opinión, el código también queda mucho más claro.</p>
+<h3 id="componentes">Componentes</h3>
+<p>Gente acostumbrada a React espera que todo sea componentes. <strong>Tratar intencionadamente de construir componentes es una fórmula para el desastre en Elm.</strong> El problema fundamental es que los componentes son objetos:</p>
 <ul>
-<li>components = local state + methods</li>
-<li>local state + methods = objects</li>
+<li>componentes = estado local + métodos</li>
+<li>estado local + métodos = objetos</li>
 </ul>
-<p>It would be odd to start using Elm and wonder "how do I structure my application with objects?" There are no objects in Elm! Folks in the community would recommend using custom types and functions instead.</p>
-<p>Thinking in terms of components encourages you to create modules based on the visual design of your application. “There is a sidebar, so I need a <code>Sidebar</code> module.” It would be way easier to just make a <code>viewSidebar</code> function and pass it whatever arguments it needs. It probably does not even have any state. Maybe one or two fields? Just put it in the <code>Model</code> you already have. If it really is worth splitting out into its own module, you will know because you will have a custom type with a bunch of relevant helper functions!</p>
-<p>Point is, writing a <code>viewSidebar</code> function <strong>does not</strong> mean you need to create a corresponding <code>update</code> and <code>Model</code> to go with it. Resist this instinct. <strong>Just write the helper functions you need.</strong></p>
+<p>Sería extraño usar Elm y preguntarse, “¿cómo uso objetos para estructurar mi aplicación?”. ¡No hay objetos en Elm! Los miembros de la comunidad recomiendan usar tipos personalizados y funciones.</p>
+<p>Pensar en términos de componentes fomenta que creemos módulos basados en el diseño visual de nuestra aplicación. “Hay una barra lateral, así que necesito un módulo <code>Sidebar</code>.” Sería mucho más fácil simplemente hacer una función <code>viewSidebar</code> y pasarle los argumentos que necesita. Tal vez ni siquiera tiene estado. Tal vez necesita uno o dos campos. Pongámolos en el <code>Model</code> que ya tenemos. Si realmente vale la pena separarlo en su propio módulo, lo sabremos porque tendremos un tipo personalizado con varias funciones auxiliares relevantes.</p>
+<p>El punto es que escribir una función <code>viewSidebar</code> <strong>no significa</strong> que necesitemos crear también un <code>update</code> y otro tipo <code>Model</code> junto con ella. Resiste el instinto. <strong>Escribe las funciones auxiliares que necesites y nada más.</strong></p>
 </blockquote>
 
                                 
@@ -794,12 +794,12 @@
 
             
                 
-                <a href="modules.html" class="navigation navigation-prev " aria-label="Previous page: Modules">
+                <a href="modules.html" class="navigation navigation-prev " aria-label="Previous page: Módulos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../optimization/" class="navigation navigation-next " aria-label="Next page: Optimization">
+                <a href="../optimization/" class="navigation navigation-next " aria-label="Next page: Optimización">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -810,7 +810,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Structure","level":"1.9.4","depth":2,"next":{"title":"Optimization","level":"1.10","depth":1,"path":"optimization/README.md","ref":"optimization/README.md","articles":[{"title":"Html.lazy","level":"1.10.1","depth":2,"path":"optimization/lazy.md","ref":"optimization/lazy.md","articles":[]},{"title":"Html.keyed","level":"1.10.2","depth":2,"path":"optimization/keyed.md","ref":"optimization/keyed.md","articles":[]},{"title":"Minification","level":"1.10.3","depth":2,"path":"optimization/asset_size.md","ref":"optimization/asset_size.md","articles":[]}]},"previous":{"title":"Modules","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/structure.md","mtime":"2025-01-16T02:30:22.553Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Estructurando aplicaciones web","level":"1.9.4","depth":2,"next":{"title":"Optimización","level":"1.10","depth":1,"path":"optimization/README.md","ref":"optimization/README.md","articles":[{"title":"Html.lazy","level":"1.10.1","depth":2,"path":"optimization/lazy.md","ref":"optimization/lazy.md","articles":[]},{"title":"Html.keyed","level":"1.10.2","depth":2,"path":"optimization/keyed.md","ref":"optimization/keyed.md","articles":[]},{"title":"Minificación","level":"1.10.3","depth":2,"path":"optimization/asset_size.md","ref":"optimization/asset_size.md","articles":[]}]},"previous":{"title":"Módulos","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/structure.md","mtime":"2025-01-16T02:33:11.318Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Types as Bits · Introducción a Elm</title>
+        <title>Tipos como bits · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="../webapps/">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="../webapps/navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="../webapps/url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="../webapps/modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="../webapps/structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Types as Bits</a>
+        <a href=".." >Tipos como bits</a>
     </h1>
 </div>
 
@@ -722,72 +722,72 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="types-as-bits">Types as Bits</h1>
-<p>There are all sorts of types in Elm:</p>
+                                <h1 id="tipos-como-bits">Tipos como bits</h1>
+<p>Todos estos son tipos en Elm:</p>
 <ul>
 <li><code>Bool</code></li>
 <li><code>Int</code></li>
 <li><code>String</code></li>
-<li><code>(Int, Int)</code></li>
+<li><code>( Int, Int )</code></li>
 <li><code>Maybe Int</code></li>
 <li>...</li>
 </ul>
-<p>We have a conceptual understanding of them by now, but how are they understood by a computer? How is <code>Maybe Int</code> stored on a hard disk?</p>
+<p>Ya adquirimos un entendimiento a nivel conceptual sobre ellos, pero ¿cómo los entiende un computador? ¿Cómo se almacena un <code>Maybe Int</code> en el disco duro?</p>
 <h2 id="bits">Bits</h2>
-<p>A <strong>bit</strong> is little box that has two states. Zero or a one. On or off. Computer memory is one super long sequence of bits.</p>
-<p>Okay, so all we have is a bunch of bits. Now we need to represent <em>everything</em> with that!</p>
+<p>Un <strong>bit</strong> es una pequeña caja con dos posibles estados: cero o uno, prendido o apagado. La memoria de un computador es una larguísima secuencia de bits.</p>
+<p>Lo único que tenemos a nuestra disposición es un montón de bits. Y tenemos que representarlo <em>todo</em> usando eso.</p>
 <h2 id="bool"><code>Bool</code></h2>
-<p>A <code>Bool</code> value can be either <code>True</code> or <code>False</code>. This corresponds exactly to a bit!</p>
+<p>Un valor <code>Bool</code> puede ser <code>True</code> (verdadero) o <code>False</code> (falso). Es decir, ¡corresponde exactamente a un bit!</p>
 <h2 id="int"><code>Int</code></h2>
-<p>An <code>Int</code> value is some whole number like <code>0</code>, <code>1</code>, <code>2</code>, etc. You cannot fit that in a single bit, so the only other option is to use multiple bits. So normally, an <code>Int</code> would be a sequence of bits, like these:</p>
+<p>Un valor <code>Int</code> es un número como <code>0</code>, <code>1</code>, <code>2</code>, etc. No hay forma de hacerlo caber en un sólo bit, así que la única otra opción es usar múltiples bits. Lo normal es que un <code>Int</code> se represente como una secuencia de bits, como las siguientes:</p>
 <pre><code>00000000
 00000001
 00000010
 00000011
 ...
-</code></pre><p>We can arbitrarily assign meaning to each of these sequences. So maybe <code>00000000</code> is zero and <code>00000001</code> is one. Great! We can just start assigning numbers to bit sequences in ascending order. But eventually we will run out of bits...</p>
-<p>By some quick math, eight bits only allow (2^8 = 256) numbers. What about perfectly reasonable numbers like 9000 and 8004?</p>
-<p>The answer is to just add more bits. For a long time, people used 32 bits. That allowed for (2^32 = 4,294,967,296) numbers which covers the kinds of numbers humans typically think about. Computers these days support 64-bit integers, allowing for (2^64 = 18,446,744,073,709,551,616) numbers. That is a lot!</p>
+</code></pre><p>Podemos asignarle significado arbitrariamente a cada una de estas secuencias. Tal vez <code>00000000</code> es cero, y <code>00000001</code> es uno. Genial, ya podemos empezar a asignar números a secuencias de bits en orden ascendente. Pero eventualmente se nos van a acabar los bits…</p>
+<p>Usando un poco de matemática, sabemos que ocho bits sólo permiten (2^8 = 256) números. ¿Qué pasa con otros números perfectamente razonables, como 9000 y 8004?</p>
+<p>La respuesta es sólo añadir más bits. Por largo tiempo, la gente usó 32 bits. Eso nos da espacio para (2^32 = 4.294.967.296) números, lo que cubre el rango de números que usamos típicamente los humanos. Hoy día, los computadores soportan números enteros de 64 bits, permitiendo (2^64 = 18.446.744.073.709.551.616) números. O sea, un enorme montón.</p>
 <blockquote>
-<p><strong>Note:</strong> If you are curious how addition works, learn about <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank">two’s complement</a>. It reveals that numbers are not assigned to bit sequences arbitrarily. For the sake of making addition as fast as possible, this particular way of assigning numbers works really well.</p>
+<p><strong>Nota:</strong> Si te da curiosidad saber cómo funciona la adición, puedes leer sobre el <a href="https://es.wikipedia.org/wiki/Complemento_a_dos" target="_blank">complemento a dos</a>. Podrás ver que la manera en que se asignan los números a secuencias de bits no es arbitraria. Para optimizar la velocidad de la adición, esta forma particular de asignar números funciona muy bien.</p>
 </blockquote>
 <h2 id="string"><code>String</code></h2>
-<p>The string <code>"abc"</code> is the sequence of characters <code>a</code> <code>b</code> <code>c</code>, so we will start by trying to represent characters as bits.</p>
-<p>One of the early ways of encoding characters is called <a href="https://en.wikipedia.org/wiki/ASCII" target="_blank">ASCII</a>. Just like with integers, they decided to list out a bunch of bit sequences and start assigning values arbitrarily:</p>
+<p>El string <code>"abc"</code> es la secuencia de caracteres <code>a</code> <code>b</code> <code>c</code>, así que empecemos intentando representar caracteres como bits.</p>
+<p>Una de las formas originales de codificación de caracteres es la llamada <a href="https://en.wikipedia.org/wiki/ASCII" target="_blank">ASCII</a>. Igual que con los números enteros, decidieron listar secuencias de bits y a asignarles valores en forma arbitraria:</p>
 <pre><code>00000000
 00000001
 00000010
 00000011
 ...
-</code></pre><p>So every character needed to fit in eight bits, meaning only 256 characters could be represented! But if you only care about English, this actually works out pretty well. You need to cover 26 lower-case letters, 26 upper-case letters, and 10 numbers. That is 62. There is a bunch of room left for symbols and other weird stuff. You can see what they ended up with <a href="https://ascii.cl/" target="_blank">here</a>.</p>
-<p>We have an idea for characters now, but how will the computer know where the <code>String</code> ends and the next piece of data begins? It is all just bits. Characters look just like <code>Int</code> values really! So we need some way to mark the end.</p>
-<p>These days, languages tend to do this by storing the <strong>length</strong> of the string. So a string like <code>"hello"</code> might look something like <code>5</code> <code>h</code> <code>e</code> <code>l</code> <code>l</code> <code>o</code> in memory. So you know a <code>String</code> always starts with 32-bits representing the length. And whether the length is 0 or 9000, you know exactly where the characters end.</p>
+</code></pre><p>Cada carácter debía caber en ocho bits, lo que significa que sólo 256 caracteres pueden ser representados. Pero ya que es un estándar estadounidense y les interesaba codificar textos en inglés, es un número más que suficiente. Necesitas 26 letras minúsculas, 26 mayúsculas y 10 números. Llevamos 62. Queda mucho espacio para símbolos y algunas cosas raras. Puedes mirar <a href="https://ascii.cl/" target="_blank">aquí</a> la lista con la que acabaron.</p>
+<p>Ya tenemos una idea de qué pasa con cada carácter, pero ¿cómo sabe el computador dónde termina el <code>String</code> y empieza el dato siguiente? Al fin y al cabo todo es bits; cada carácter es indistinguible un valor <code>Int</code>. Necesitamos una forma de especificar dónde termina un string.</p>
+<p>Hoy en día, los lenguajes suelen hacer esto almacenando la <strong>longitud</strong> del string. O sea que un string como <code>"hello"</code> se vería en memoria algo como <code>5</code> <code>h</code> <code>e</code> <code>l</code> <code>l</code> <code>o</code>. Añadimos la presuposición de que un <code>String</code> siempre empieza con 32 bits representando su longitud. Y así, sea el string de 0 o de 9000 caracteres de largo, siempre sabremos exáctamente dónde termina en memoria.</p>
 <blockquote>
-<p><strong>Note:</strong> At some point, folks wanted to cover languages besides English. This effort eventually resulted in the <a href="https://en.wikipedia.org/wiki/UTF-8" target="_blank">UTF-8</a> encoding. It is quite brilliant really, and I encourage you to learn about it. It turns out that “get the 5th character” is harder than it sounds!</p>
+<p><strong>Nota:</strong> Naturalmente, incluso los angloparlantes querían también poder representar textos en lenguajes que no son inglés. Eventualmente se ideó la codificación <a href="https://es.wikipedia.org/wiki/UTF-8" target="_blank">UTF-8</a>. Es una solución bastante brillante, y te sugiero que la investigues, si te interesa el tema. Resulta que obtener el “quinto carácter” es una tarea más difícil de lo que parece…</p>
 </blockquote>
-<h2 id="int-int"><code>(Int, Int)</code></h2>
-<p>What about tuples? Well, <code>(Int, Int)</code> is two <code>Int</code> values, and each one is a sequence of bits. Let’s just put those two sequences next to each other in memory and call it a day!</p>
-<h2 id="custom-types">Custom Types</h2>
-<p>A custom type is all about combining different types. Those different types may have all sorts of different shapes. We will start with the <code>Color</code> type:</p>
+<h2 id="int-int-"><code>( Int, Int )</code></h2>
+<p>¿Qué tal las tuplas? <code>( Int, Int )</code> es dos valores <code>Int</code>, y cada uno es una secuencia de bits. Nos basta con poner ambas secuencias una junto a la otra en memoria, y listo.</p>
+<h2 id="tipos-personalizados">Tipos personalizados</h2>
+<p>Los tipos personalizados son buenos para combinar distintos tipos, y estos tipos pueden tener muchas formas distintas. Pero primero veamos el caso simple del tipo <code>Color</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Color</span>
     = <span class="hljs-type">Red</span>
     | <span class="hljs-type">Yellow</span>
     | <span class="hljs-type">Green</span>
 </code></pre>
-<p>We can assign each case a number: <code>Red = 0</code>, <code>Yellow = 1</code>, and <code>Green = 2</code>. Now we can use the <code>Int</code> representation. Here we only need two bits to cover all the possible cases, so <code>00</code> is red, <code>01</code> is yellow, <code>10</code> is green, and <code>11</code> is unused.</p>
-<p>But what about custom types that hold additional data? Like <code>Maybe Int</code>? The typical approach is to set aside some bits to “tag” the data, so we can decide that <code>Nothing = 0</code> and <code>Just = 1</code>. Here are some examples:</p>
+<p>Podemos asignarle a cada caso un número: <code>Red = 0</code>, <code>Yellow = 1</code> y <code>Green = 2</code>. Ahora podemos usar la misma representación de <code>Int</code>. Aquí sólo necesitamos dos bits para cubrir todos los casos posibles, por lo que <code>00</code> es <code>Red</code>, <code>01</code> es <code>Yellow</code>, <code>10</code> es <code>Green</code> y <code>11</code> queda sin uso.</p>
+<p>Pero ¿y qué pasa con los tipos personalizados que almacenan más información, como <code>Maybe Int</code>? Lo común es estos bits que representan cada variante sirvan como una “etiqueta” para los datos. Si definimos que <code>Nothing = 0</code> y <code>Just = 1</code>, quedaría como en estos ejemplos:</p>
 <ul>
 <li><code>Nothing</code> = <code>0</code></li>
 <li><code>Just 12</code> = <code>1</code> <code>00001100</code></li>
 <li><code>Just 16</code> = <code>1</code> <code>00010000</code></li>
 </ul>
-<p>A <code>case</code> expression always looks at that “tag” before deciding what to do next. If it sees a <code>0</code> it knows there is no more data. If it sees a <code>1</code> it knows it is followed by a sequence of bits representing the data.</p>
-<p>This “tag” idea is similar to putting the length at the beginning of <code>String</code> values. The values may be different sizes, but the code can always figure out where they start and end.</p>
-<h2 id="summary">Summary</h2>
-<p>Eventually, all values need to be represented in bits. This page gives a rough overview of how that actually works.</p>
-<p>Normally there is no real reason to think about this, but I found it to be helpful in deepening my understanding of custom types and <code>case</code> expressions. I hope it is helpful to you as well!</p>
+<p>Una expresión <code>case</code> revisaría primero la “etiqueta” antes de decidir qué hacer. Si encuentra una etiqueta <code>0</code>, sabe que no hay más datos. Si encuentra un <code>1</code>, sabe que está seguida de una secuencia de bits que representan un <code>Int</code>.</p>
+<p>Esta idea de “etiquetar” se parece a la de poner la longitud al principio de un valor <code>String</code>. Los valores almacenados pueden tener distinta longitud de bits, pero el código tiene la información suficiente para siempre identificar dónde empiezan y terminan.</p>
+<h2 id="en-resumen">En resumen</h2>
+<p>Eventualmente, todos los valores que necesitamos pueden ser representados en bits. Esta página ofrece una perspectiva general de cómo funciona eso en la práctica.</p>
+<p>Usualmente no hay razón de pensar en estos detalles, pero me resultó útil para profundizar mi entendimiento de los tipos personalizados y las expresiones <code>case</code>. Ojalá que te sirva a ti también.</p>
 <blockquote>
-<p><strong>Note:</strong> If you think this is interesting, it may be fun to learn more about garbage collection. I have found <a href="http://gchandbook.org/" target="_blank">The Garbage Collection Handbook</a> to be an excellent resource on the topic!</p>
+<p><strong>Nota:</strong> Si esto te pareció interesante, podría gustarte aprender también sobre la recolección de basura. El libro <a href="http://gchandbook.org/" target="_blank">“The garbage collection handbook”</a> (en inglés) es un recurso sobre el tema que me gustó mucho.</p>
 </blockquote>
 
                                 
@@ -816,12 +816,12 @@
 
             
                 
-                <a href="types_as_sets.html" class="navigation navigation-prev " aria-label="Previous page: Types as Sets">
+                <a href="types_as_sets.html" class="navigation navigation-prev " aria-label="Previous page: Tipos como conjuntos">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="function_types.html" class="navigation navigation-next " aria-label="Next page: Function Types">
+                <a href="function_types.html" class="navigation navigation-next " aria-label="Next page: Tipos de función">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -832,7 +832,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Types as Bits","level":"1.12.2","depth":2,"next":{"title":"Function Types","level":"1.12.3","depth":2,"path":"appendix/function_types.md","ref":"appendix/function_types.md","articles":[]},"previous":{"title":"Types as Sets","level":"1.12.1","depth":2,"path":"appendix/types_as_sets.md","ref":"appendix/types_as_sets.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"appendix/types_as_bits.md","mtime":"2025-01-16T02:30:22.545Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Tipos como bits","level":"1.12.2","depth":2,"next":{"title":"Tipos de función","level":"1.12.3","depth":2,"path":"appendix/function_types.md","ref":"appendix/function_types.md","articles":[]},"previous":{"title":"Tipos como conjuntos","level":"1.12.1","depth":2,"path":"appendix/types_as_sets.md","ref":"appendix/types_as_sets.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"appendix/types_as_bits.md","mtime":"2025-01-16T02:33:11.312Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

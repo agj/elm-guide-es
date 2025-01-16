@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Types as Sets · Introducción a Elm</title>
+        <title>Tipos como conjuntos · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -409,7 +409,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -436,7 +436,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -449,7 +449,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -462,7 +462,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -480,7 +480,7 @@
                 <a href="../webapps/">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -494,7 +494,7 @@
                 <a href="../webapps/navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -507,7 +507,7 @@
                 <a href="../webapps/url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -520,7 +520,7 @@
                 <a href="../webapps/modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -533,7 +533,7 @@
                 <a href="../webapps/structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -551,7 +551,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -591,7 +591,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -609,7 +609,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -622,7 +622,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -636,7 +636,7 @@
                 <a href="types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -649,7 +649,7 @@
                 <a href="types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -662,7 +662,7 @@
                 <a href="function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -705,7 +705,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Types as Sets</a>
+        <a href=".." >Tipos como conjuntos</a>
     </h1>
 </div>
 
@@ -720,76 +720,76 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="types-as-sets">Types as Sets</h1>
-<p>We have seen primitive types like <code>Bool</code> and <code>String</code>. We have made our own custom types like this:</p>
+                                <h1 id="tipos-como-conjuntos">Tipos como conjuntos</h1>
+<p>Hemos visto tipos primitivos como <code>Bool</code> y <code>String</code>. Hemos creado nuestros propios tipos personalizados así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Color</span>
     = <span class="hljs-type">Red</span>
     | <span class="hljs-type">Yellow</span>
     | <span class="hljs-type">Green</span>
 </code></pre>
-<p>One of the most important techniques in Elm programming is to make <strong>the possible values in code</strong> exactly match <strong>the valid values in real life</strong>. This leaves no room for invalid data, and this is why I always encourage folks to focus on custom types and data structures.</p>
-<p>In pursuit of this goal, I have found it helpful to understand the relationship between types and sets. It sounds like a stretch, but it really helps develop your mindset!</p>
-<h2 id="sets">Sets</h2>
-<p>You can think of types as a set of values.</p>
+<p>Una de las técnicas más importantes programando Elm is hacer que <strong>los valores posibles en el código</strong> calcen exactamente con <strong>los valores válidos en la realidad</strong>. Así no hay posibilidad de tener datos inválidos, y es la razón por la que siempre incentivo a centrarse en tipos personalizados y estructuras de datos.</p>
+<p>En búsqueda de este objetivo, he encontrado útil comprender la relación entre tipos y conjuntos. Puede parecer rebuscado, pero es algo que realmente ayuda a desarrollar una intuición.</p>
+<h2 id="conjuntos">Conjuntos</h2>
+<p>Podemos pensar en los tipos como un conjunto de valores.</p>
 <ul>
-<li><code>Bool</code> is the set <code>{ True, False }</code></li>
-<li><code>Color</code> is the set <code>{ Red, Yellow, Green }</code></li>
-<li><code>Int</code> is the set <code>{ ... -2, -1, 0, 1, 2 ... }</code></li>
-<li><code>Float</code> is the set <code>{ ... 0.9, 0.99, 0.999 ... 1.0 ... }</code></li>
-<li><code>String</code> is the set <code>{ "", "a", "aa", "aaa" ... "hello" ... }</code></li>
+<li><code>Bool</code> es el conjunto <code>{ True, False }</code></li>
+<li><code>Color</code> es el conjunto <code>{ Red, Yellow, Green }</code></li>
+<li><code>Int</code> es el conjunto <code>{ ... -2, -1, 0, 1, 2 ... }</code></li>
+<li><code>Float</code> es el conjunto <code>{ ... 0.9, 0.99, 0.999 ... 1.0 ... }</code></li>
+<li><code>String</code> es el conjunto <code>{ "", "a", "aa", "aaa" ... "hello" ... }</code></li>
 </ul>
-<p>So when you say <code>x : Bool</code> it is like saying <code>x</code> is in the <code>{ True, False }</code> set.</p>
-<h2 id="cardinality">Cardinality</h2>
-<p>Some interesting things happen when you start figuring out how many values are in these sets. For example the <code>Bool</code> set <code>{ True, False }</code> contains two values. So math people would say that <code>Bool</code> has a <a href="https://en.wikipedia.org/wiki/Cardinality" target="_blank">cardinality</a> of two. So conceptually:</p>
+<p>Es decir que cuando decimos <code>x : Bool</code>, es como decir que <code>x</code> está en el conjunto <code>{ True, False }</code>.</p>
+<h2 id="cardinalidad">Cardinalidad</h2>
+<p>Cosas interesantes ocurren cuando empezamos a considerar cuántos valores existen en estos conjuntos. Por ejemplo, el conjunto <code>Bool</code>, correspondiente a <code>{ True, False }</code>, contiene dos valores. Los matemáticos dirían que <code>Bool</code> tiene una <a href="https://es.wikipedia.org/wiki/Cardinalidad" target="_blank">cardinalidad</a> de 2. Es decir que conceptualmente:</p>
 <ul>
-<li>cardinality(<code>Bool</code>) = 2</li>
-<li>cardinality(<code>Color</code>) = 3</li>
-<li>cardinality(<code>Int</code>) = ∞</li>
-<li>cardinality(<code>Float</code>) = ∞</li>
-<li>cardinality(<code>String</code>) = ∞</li>
+<li>cardinalidad(<code>Bool</code>) = 2</li>
+<li>cardinalidad(<code>Color</code>) = 3</li>
+<li>cardinalidad(<code>Int</code>) = ∞</li>
+<li>cardinalidad(<code>Float</code>) = ∞</li>
+<li>cardinalidad(<code>String</code>) = ∞</li>
 </ul>
-<p>This gets more interesting when we start thinking about types like <code>(Bool, Bool)</code> that combine sets together.</p>
+<p>Se pone más interesante cuando empezamos a pensar en tipos como <code>( Bool, Bool )</code>, que combinan distintos conjuntos.</p>
 <blockquote>
-<p><strong>Note:</strong> The cardinality for <code>Int</code> and <code>Float</code> are actually smaller than infinity. Computers need to fit the numbers into a fixed amount of bits (as described <a href="types_as_bits.html">here</a>) so it is more like cardinality(<code>Int32</code>) = 2^32 and cardinality(<code>Float32</code>) = 2^32. The point is just that it is a lot.</p>
+<p><strong>Nota:</strong> La cardinalidad de <code>Int</code> y <code>Float</code> es en realidad menos que infinita. Los computadores necesitan almacenar los números en un número fijo de bits (como se describe <a href="types_as_bits.html">aquí</a>), así que en realidad es más cercano a ser cardinalidad(<code>Int32</code>) = 2^32 y cardinalidad(<code>Float32</code>) = 2^32. El punto es simplemente que es un número grandísimo.</p>
 </blockquote>
-<h2 id="multiplication-tuples-and-records">Multiplication (Tuples and Records)</h2>
-<p>When you combine types with tuples, the cardinalities get multiplied:</p>
+<h2 id="multiplicación-tuplas-y-registros">Multiplicación (tuplas y registros)</h2>
+<p>Cuando combinamos tipos usando tuplas, las cardinalidades se multiplican:</p>
 <ul>
-<li>cardinality(<code>(Bool, Bool)</code>) = cardinality(<code>Bool</code>) × cardinality(<code>Bool</code>) = 2 × 2 = 4</li>
-<li>cardinality(<code>(Bool, Color)</code>) = cardinality(<code>Bool</code>) × cardinality(<code>Color</code>) = 2 × 3 = 6</li>
+<li>cardinalidad(<code>( Bool, Bool )</code>) = cardinalidad(<code>Bool</code>) × cardinalidad(<code>Bool</code>) = 2 × 2 = 4</li>
+<li>cardinalidad(<code>( Bool, Color )</code>) = cardinalidad(<code>Bool</code>) × cardinalidad(<code>Color</code>) = 2 × 3 = 6</li>
 </ul>
-<p>To make sure you believe this, try listing all the possible values of <code>(Bool, Bool)</code> and <code>(Bool, Color)</code>. Do they match the numbers we predicted? How about for <code>(Color, Color)</code>?</p>
-<p>But what happens when we use infinite sets like <code>Int</code> and <code>String</code>?</p>
+<p>Si quieres confirmar esto, prueba hacer una lista de todos los posibles valores que tendrían <code>( Bool, Bool )</code> y <code>( Bool, Color )</code>. ¿Calzan los números con los que predijimos? ¿Qué tal el caso <code>( Color, Color )</code>?</p>
+<p>Pero, ¿qué pasa cuando usamos conjuntos infinitos, como <code>Int</code> y <code>String</code>?</p>
 <ul>
-<li>cardinality(<code>(Bool, String)</code>) = 2 × ∞</li>
-<li>cardinality(<code>(Int, Int)</code>) = ∞ × ∞</li>
+<li>cardinalidad(<code>( Bool, String )</code>) = 2 × ∞</li>
+<li>cardinalidad(<code>( Int, Int )</code>) = ∞ × ∞</li>
 </ul>
-<p>I personally really like the idea of having two infinities. One wasn’t enough? And then seeing infinite infinities. Aren’t we going to run out at some point?</p>
+<p>A mí personalmente me gusta mucho la idea de que tenemos dos infinidades. ¿No bastaba con una? Y después, infinitas infinidades. ¿No se nos van a acabar en algún punto?</p>
 <blockquote>
-<p><strong>Note:</strong> So far we have used tuples, but records work exactly the same way:</p>
+<p><strong>Nota:</strong> Hasta ahora hemos usado tuplas, pero los registros funcionan de la misma exacta manera:</p>
 <ul>
-<li>cardinality(<code>(Bool, Bool)</code>) = cardinality(<code>{ x : Bool, y : Bool }</code>)</li>
-<li>cardinality(<code>(Bool, Color)</code>) = cardinality(<code>{ active : Bool, color : Color }</code>)</li>
+<li>cardinalidad(<code>( Bool, Bool )</code>) = cardinalidad(<code>{ x : Bool, y : Bool }</code>)</li>
+<li>cardinalidad(<code>( Bool, Color )</code>) = cardinalidad(<code>{ active : Bool, color : Color }</code>)</li>
 </ul>
-<p>And if you define <code>type Point = Point Float Float</code> then cardinality(<code>Point</code>) is equivalent to cardinality(<code>(Float, Float)</code>). It is all multiplication!</p>
+<p>Y si definimos <code>type Point = Point Float Float</code>, entonces cardinalidad(<code>Point</code>) es equivalente a cardinalidad(<code>( Float, Float )</code>). ¡Todo es multiplicación!</p>
 </blockquote>
-<h2 id="addition-custom-types">Addition (Custom Types)</h2>
-<p>When figuring out the cardinality of a custom type, you add together the cardinality of each variant. Let’s start by looking at some <code>Maybe</code> and <code>Result</code> types:</p>
+<h2 id="adición-tipos-personalizados">Adición (tipos personalizados)</h2>
+<p>Al calcular la cardinalidad de un tipo personalizado, sumamos la cardinalidad de cada una de sus variantes. Empecemos viendo unos tipos <code>Maybe</code> y <code>Result</code>.</p>
 <ul>
-<li>cardinality(<code>Result Bool Color</code>) = cardinality(<code>Bool</code>) + cardinality(<code>Color</code>) = 2 + 3 = 5</li>
-<li>cardinality(<code>Maybe Bool</code>) = 1 + cardinality(<code>Bool</code>) = 1 + 2 = 3</li>
-<li>cardinality(<code>Maybe Int</code>) = 1 + cardinality(<code>Int</code>) = 1 + ∞</li>
+<li>cardinalidad(<code>Result Bool Color</code>) = cardinalidad(<code>Bool</code>) + cardinalidad(<code>Color</code>) = 2 + 3 = 5</li>
+<li>cardinalidad(<code>Maybe Bool</code>) = 1 + cardinalidad(<code>Bool</code>) = 1 + 2 = 3</li>
+<li>cardinalidad(<code>Maybe Int</code>) = 1 + cardinalidad(<code>Int</code>) = 1 + ∞</li>
 </ul>
-<p>To persuade yourself that this is true, try listing out all the possible values in the <code>Maybe Bool</code> and <code>Result Bool Color</code> sets. Does it match the numbers we got?</p>
-<p>Here are some other examples:</p>
+<p>Para persuadirnos de que esto es así, prueba listar todos los posibles valores que existen en los conjuntos <code>Maybe Bool</code> y <code>Result Bool Color</code>. ¿Coincide con los números que obtuvimos?</p>
+<p>Aquí tienes otros ejemplos:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Height</span>
     = <span class="hljs-type">Inches</span> <span class="hljs-type">Int</span>
     | <span class="hljs-type">Meters</span> <span class="hljs-type">Float</span>
 
 
 
-<span class="hljs-comment">-- cardinality(Height)</span>
-<span class="hljs-comment">-- = cardinality(Int) + cardinality(Float)</span>
+<span class="hljs-comment">-- cardinalidad(Height)</span>
+<span class="hljs-comment">-- = cardinalidad(Int) + cardinalidad(Float)</span>
 <span class="hljs-comment">-- = ∞ + ∞</span>
 
 
@@ -799,39 +799,39 @@
 
 
 
-<span class="hljs-comment">-- cardinality(Location)</span>
-<span class="hljs-comment">-- = 1 + cardinality((Float, Float))</span>
-<span class="hljs-comment">-- = 1 + cardinality(Float) × cardinality(Float)</span>
+<span class="hljs-comment">-- cardinalidad(Location)</span>
+<span class="hljs-comment">-- = 1 + cardinalidad(( Float, Float ))</span>
+<span class="hljs-comment">-- idad + cardinalidad(Float) × cardinalidad(Float)</span>
 <span class="hljs-comment">-- = 1 + ∞ × ∞</span>
 </code></pre>
-<p>Looking at custom types this way helps us see when two types are equivalent. For example, <code>Location</code> is equivalent to <code>Maybe (Float, Float)</code>. Once you know that, which one should you use? I prefer <code>Location</code> for two reasons:</p>
+<p>Si vemos los tipos personalizados de esta forma, podemos saber cuándo dos tipos son equivalentes. Por ejemplo, <code>Location</code> es equivalente a <code>Maybe ( Float, Float )</code>. Una vez que nos damos cuenta de esto, ¿cuál es mejor usar? Prefiero usar <code>Location</code> por dos razones:</p>
 <ol>
-<li>The code becomes more self-documenting. No need to wonder if <code>Just (1.6, 1.8)</code> is a location or a pair of heights.</li>
-<li>The <code>Maybe</code> module may expose functions that do not make sense for my particular data. For example, combining two locations probably should not work like <code>Maybe.map2</code>. Should one <code>Nowhere</code> mean that everything is <code>Nowhere</code>? Seems weird!</li>
+<li>El código se autodocumenta mejor. No hace falta pensar si <code>Just ( 1.6, 1.8 )</code> es una ubicación o un par de altitudes.</li>
+<li>El módulo <code>Maybe</code> puede exponer funciones que no hacen sentido para nuestros datos particulares. Por ejemplo, combinar dos <code>Location</code> probablemente no funciona de la misma manera que <code>Maybe.map2</code>. ¿La existencia de un <code>Nowhere</code> implica que todo es <code>Nowhere</code>? Suena extraño.</li>
 </ol>
-<p>In other words, I write a couple lines of code that are <em>similar</em> to other code, but it gives me a level of clarity and control that is extremely valuable for large code bases and teams.</p>
-<h2 id="who-cares">Who Cares?</h2>
-<p>Thinking of “types as sets” helps explain an important class of bugs: <strong>invalid data</strong>. For example, say we want to represent the color of a traffic light. The set of valid values are { red, yellow, green } but how do we represent that in code? Here are three different approaches:</p>
+<p>En otras palabras, escribimos unas cuantas líneas que son <em>similares</em> a otro código preexistente, pero la distinción nos da un nivel de claridad y control que es extremadamente valioso para equipos y bases de código grandes.</p>
+<h2 id="¿de-qué-me-sirve-esto">¿De qué me sirve esto?</h2>
+<p>Pensar en “tipos como conjuntos” nos ayuda a explicar una clase importante de bugs: <strong>datos inválidos</strong>. Por ejemplo, si queremos representar el color de un semáforo, los valores válidos son { rojo, amarillo, verde }; pero ¿cómo lo representamos en código? Estas son tres maneras:</p>
 <ul>
-<li><p><code>type alias Color = String</code> — We could decide that <code>"red"</code>, <code>"yellow"</code>, <code>"green"</code> are the three strings we will use, and that all the other ones are <em>invalid data</em>. But what happens if invalid data is produced? Maybe someone makes a typo like <code>"rad"</code>. Maybe someone types <code>"RED"</code> instead. Should all functions have checks for incoming color arguments? Should all functions have tests to make sure color results are valid? The root issue is that cardinality(<code>Color</code>) = ∞, meaning there are (∞ - 3) invalid values. We will need to do a lot of checking to make sure none of them ever show up!</p>
+<li><p><code>type alias Color = String</code> — Podemos decidir que <code>"red"</code>, <code>"yellow"</code> y <code>"green"</code> son los tres strings que usaremos, y que todos los demás son <em>datos inválidos</em>. Pero ¿qué pasa cuando aparecen datos inválidos? Tal vez alguien escribe mal y pone <code>"rad"</code>, o alguien decide escribirlo como <code>"RED"</code>. ¿Tendrían todas las funciones que revisar que estos argumentos estén bien? ¿Tendríamos que tener tests para asegurar que los resultados de este tipo son válidos? El problema fundamental es que cardinalidad(<code>Color</code>) = ∞, es decir que hay (∞ - 3) valores inválidos. Necesitamos hacer un montón de chequeos para asegurarnos de que nunca aparezcan.</p>
 </li>
-<li><p><code>type alias Color = { red : Bool, yellow : Bool, green : Bool }</code> — The idea here is that the idea of “red” is represented by <code>Color True False False</code>. But what about <code>Color True True True</code>? What does it mean for it to be all the colors at once? This is <em>invalid data</em>. Just like with the <code>String</code> representation, we end up writing checks in our code and tests to make sure there are no mistakes. In this case, cardinality(<code>Color</code>) = 2 × 2 × 2 = 8, so there are only 5 invalid values. There are definitely fewer ways to mess up, but we should still have some checks and tests.</p>
+<li><p><code>type alias Color = { red : Bool, yellow : Bool, green : Bool }</code> — La idea aquí es que “rojo” se representaría como <code>Color True False False</code>. Pero ¿qué pasa con <code>Color True True True</code>? ¿Qué significa que sean todos los colores a la vez? Esto es un <em>dato inválido</em>. Tal como en el caso de <code>String</code>, terminamos necesitando añadir chequeos y tests en nuestro código para asegurar que no tenemos errores. En este caso, cardinalidad(<code>Color</code>) = 2 × 2 × 2 = 8, así que sólo hay 5 valores inválidos. Definitivamente hay menos formas de equivocarse, pero aún necesitamos algunos chequeos y tests.</p>
 </li>
-<li><p><code>type Color = Red | Yellow | Green</code> — In this case, invalid data is impossible. cardinality(<code>Color</code>) = 1 + 1 + 1 = 3, exactly corresponding to the set of three values in real life. So there is no point checking for invalid color data in our code or tests. It cannot exist!</p>
+<li><p><code>type Color = Red | Yellow | Green</code> — En este caso, los datos inválidos son imposibles. cardinalidad(<code>Color</code>) = 1 + 1 + 1 = 3, que corresponde exactamente al conjunto de tres valores de la vida real. No hay necesidad de revisar datos inválidos de color en nuestro código, o escribir tests. Simplemente no existen.</p>
 </li>
 </ul>
-<p>So the whole point here is that <strong>ruling out invalid data makes your code shorter, simpler, and more reliable.</strong> By making sure the set of <em>possible</em> values in code exactly matches the set of <em>valid</em> values in real life, many problems just go away. This is a sharp knife!</p>
-<p>As your program changes, the set of possible values in code may start to diverge from the set of valid values in real life. <strong>I highly recommend revisiting your types periodically to make them match again.</strong> This is like noticing your knife has become dull and sharpening it with a whetstone. This kind of maintenance is a core part of programming in Elm.</p>
-<p><strong>When you start thinking this way, you end up needing fewer tests, yet having more reliable code.</strong> You start using fewer dependencies, yet accomplishing things more quickly. Similarly, someone skilled with a knife probably will not buy a <a href="https://www.slapchop.com/" target="_blank">SlapChop</a>. There is definitely a place for blenders and food processors, but it is smaller than you might think. No one runs ads about how you can be independent and self-sufficient without any serious downsides. No money in that!</p>
+<p>El punto es que <strong>descartar la posibilidad de tener datos inválidos hace que tu código sea más corto, más simple y más confiable.</strong> Asegurándonos de que el conjunto de valores <em>posibles</em> en el código coincida precisamente con el conjunto de valores <em>válidos</em> en la realidad, muchos problemas desaparecen. Es una herramienta que corta muy preciso.</p>
+<p>A medida que cambia nuestro programa, el conjunto de valores posibles en el código puede diverger del conjunto de valores válidos en la realidad. <strong>Recomiendo revisar periódicamente los tipos para volver a hacer que coincidan.</strong> Es como notar que el cuchillo está desafilado, y pasarlo por el afilador. Es un tipo de mantenimiento elemental al programar Elm.</p>
+<p><strong>Cuando empezamos a pensar de esta manera, terminamos necesitando menos tests, y aún así teniendo código más confiable.</strong> Usamos menos dependencias, pero terminamos las tareas más rápido. Es parecido al hecho de que alguien muy hábil con el cuchillo no compraría un <a href="https://duckduckgo.com/?q=slapchop&amp;iax=images&amp;ia=images" target="_blank">aparato “pica-fácil”</a>. Siempre existen casos de uso para licuadoras y tal, pero seguramente son muchos menos de lo que piensas. Nadie hace publicidades sobre cómo ser autónomos e independiente sin sufrir grandes inconvenientes. No hay mercado para eso.</p>
 <blockquote>
-<h2 id="aside-on-language-design">Aside on Language Design</h2>
-<p>Thinking of types as sets like this can also be helpful in explaining why a language would feel “easy” or “restrictive” or “error-prone” to some people. For example:</p>
+<h2 id="paréntesis-sobre-el-diseño-de-lenguajes">Paréntesis sobre el diseño de lenguajes</h2>
+<p>Pensar en tipos como conjuntos también ayuda a explicar por qué un lenguaje se siente “fácil” o “restrictivo” o “propenso a errores” para cierta gente. Por ejemplo:</p>
 <ul>
-<li><strong>Java</strong> — There are primitive values like <code>Bool</code> and <code>String</code>. From there, you can create classes with a fixed set of fields of different types. This is much like records in Elm, allowing you to multiply cardinalities. But it is quite difficult to do addition. You can do it with subtyping, but it is quite an elaborate process. So where <code>Result Bool Color</code> is easy in Elm, it is pretty tough in Java. I think some people find Java “restrictive” because designing a type with cardinality 5 is quite difficult, often seeming like it is not worth the trouble.</li>
-<li><strong>JavaScript</strong> — Again, there are primitive values like <code>Bool</code> and <code>String</code>. From there you can create objects with a dynamic set of fields, allowing you to multiply cardinalities. This is much more lightweight than creating classes. But like Java, doing addition is not particularly easy. For example, you can simulate <code>Maybe Int</code> with objects like <code>{ tag: "just", value: 42 }</code> and <code>{ tag: "nothing" }</code>, but this is really still multiplication of cardinality. This makes it quite difficult to exactly match the set of valid values in real life. So I think people find JavaScript “easy” because designing a type with cardinality (∞ × ∞ × ∞) is super easy and that can cover pretty much anything, but other people find it “error-prone” because designing a type with cardinality 5 is not really possible, leaving lots of space for invalid data.</li>
+<li><strong>Java</strong> — Existen valores primitivos como <code>Bool</code> y <code>String</code>. A partir de éstos podemos crear clases con un grupo definido de campos de distintos tipos. Se parece a los registros de Elm, permitiendo multiplicar cardinalidades. Pero es muy difícil lograr la adición. Se puede lograr usando subtipado, pero es un proceso bastante elaborado. Entonces, mientras <code>Result Bool Color</code> es algo fácilmente lograble en Elm, es bastante complicado en Java. Yo creo que la gente que opina que Java es “restrictivo” es porque diseñar un tipo con cardinalidad 5 es bastante difícil, al punto de que puede no valer la pena.</li>
+<li><strong>JavaScript</strong> — También tiene valores primitivos como <code>Bool</code> y <code>String</code>. A partir de éstos podemos crear objetos con un grupo dinámico de campos, permitiéndonos multiplicar cardinalidades. Es mucho más simple y liviano que crear clases. Pero igual que en el caso de Java, la adición no es muy fácil. Por ejemplo, puedes simular un <code>Maybe Int</code> con objetos como <code>{ tag: "just", value: 42 }</code> y <code>{ tag: "nothing" }</code>, pero esto sigue siendo multiplicación de cardinalidades. Se hace difícil obtener el conjunto exacto de valores válidos en la realidad. Por eso creo que hay gente que cree que JavaScript es “fácil”, porque diseñar un tipo con cardinalidad (∞ × ∞ × ∞) es extremadamente fácil, y puede cubrir casi cualquier caso de uso, pero otra gente lo encuentra “propenso a errores” porque diseñar un tipo con cardinalidad 5 no es verdaderamente posible, dejando mucho espacio para datos inválidos.</li>
 </ul>
-<p>Interestingly, some imperative languages have custom types! Rust is a great example. They call them <a href="https://doc.rust-lang.org/book/second-edition/ch06-01-defining-an-enum.html" target="_blank">enums</a> to build on the intuition folks may have from C and Java. So in Rust, addition of cardinalities is just as easy as in Elm, and it brings all the same benefits!</p>
-<p>I think the point here is that “addition” of types is extraordinarily underrated in general, and thinking of “types as sets” helps clarify why certain language designs would produce certain frustrations.</p>
+<p>Curiosamente, algunos lenguajes imperativos tienen tipos personalizados. Rust es un gran ejemplo. Los llaman <a href="https://book.rustlang-es.org/ch06-01-defining-an-enum" target="_blank">“enums”</a>, colgándose de la intuición que tienen muchos programadores que han usado C o Java. En Rust, la adición de cardinalidades es igual de fácil que en Elm, y trae los mismos beneficios.</p>
+<p>Creo que el punto aquí es que la “adición” de tipos está extraordinariamente subvalorada en general, y que pensar en “tipos como conjuntos” ayuda a clarificar por qué ciertos diseños de lenguaje producen ciertas frustraciones.</p>
 </blockquote>
 
                                 
@@ -861,7 +861,7 @@
             
                 
                 
-                <a href="types_as_bits.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Types as Bits">
+                <a href="types_as_bits.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Tipos como bits">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -872,7 +872,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Types as Sets","level":"1.12.1","depth":2,"next":{"title":"Types as Bits","level":"1.12.2","depth":2,"path":"appendix/types_as_bits.md","ref":"appendix/types_as_bits.md","articles":[]},"previous":{"title":"Appendix","level":"1.12","depth":1,"ref":"","articles":[{"title":"Types as Sets","level":"1.12.1","depth":2,"path":"appendix/types_as_sets.md","ref":"appendix/types_as_sets.md","articles":[]},{"title":"Types as Bits","level":"1.12.2","depth":2,"path":"appendix/types_as_bits.md","ref":"appendix/types_as_bits.md","articles":[]},{"title":"Function Types","level":"1.12.3","depth":2,"path":"appendix/function_types.md","ref":"appendix/function_types.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"appendix/types_as_sets.md","mtime":"2025-01-16T02:30:22.545Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Tipos como conjuntos","level":"1.12.1","depth":2,"next":{"title":"Tipos como bits","level":"1.12.2","depth":2,"path":"appendix/types_as_bits.md","ref":"appendix/types_as_bits.md","articles":[]},"previous":{"title":"Apéndice","level":"1.12","depth":1,"ref":"","articles":[{"title":"Tipos como conjuntos","level":"1.12.1","depth":2,"path":"appendix/types_as_sets.md","ref":"appendix/types_as_sets.md","articles":[]},{"title":"Tipos como bits","level":"1.12.2","depth":2,"path":"appendix/types_as_bits.md","ref":"appendix/types_as_bits.md","articles":[]},{"title":"Tipos de función","level":"1.12.3","depth":2,"path":"appendix/function_types.md","ref":"appendix/function_types.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"appendix/types_as_sets.md","mtime":"2025-01-16T02:33:11.312Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

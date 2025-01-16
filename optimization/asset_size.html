@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Minification · Introducción a Elm</title>
+        <title>Minificación · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="../webapps/">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="../webapps/navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="../webapps/url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="../webapps/modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="../webapps/structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="./">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Minification</a>
+        <a href=".." >Minificación</a>
     </h1>
 </div>
 
@@ -722,31 +722,31 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="asset-size">Asset Size</h1>
-<p>The only thing that is slower than touching the DOM is talking to servers. Especially for folks on mobile phones with slow internet. So you can optimize your code all day with <code>Html.Lazy</code> and <code>Html.Keyed</code>, but your application will still feel slow if it loads slowly!</p>
-<p>A great way to improve is to send fewer bits. For example, if a 122kb asset can become a 9kb asset, it will load faster! We get results like that by using the following techniques:</p>
+                                <h1 id="minificación">Minificación</h1>
+<p>Lo único más lento que modificar el DOM es comunicarse con un servidor, especialmente para gente en teléfonos celulares y con conexión lenta a internet. Podrías optimizar tu código con <code>Html.Lazy</code> y <code>Html.Keyed</code> todo lo que quieras, pero tu aplicación se seguiría sintiendo lenta si carga lento.</p>
+<p>Una gran manera de mejorar esto es enviando menos bits. Por ejemplo, si podemos convertir un archivo de 122 kb a uno de 9 kb, va a cargar más rápido. Este tipo de resultados se pueden lograr con estas técnicas:</p>
 <ul>
-<li><strong>Compilation.</strong> The Elm compiler can perform optimizations like dead code elimination and record field renaming. So it can cut unused code and shorten record field names like <code>userStatus</code> in the generated code.</li>
-<li><strong>Minification.</strong> In the JavaScript world, there are tools called “minifiers” that do a bunch of transformations. They shorten variables. They inline. They convert <code>if</code> statements to ternary operators. They turn <code>'\u0041'</code> to <code>'A'</code>. Anything to save a few bits!</li>
-<li><strong>Compression.</strong> Once you have gotten the code as small as possible, you can use a compression algorithm like gzip to shrink it even further. It does particularly well with keywords like <code>function</code> and <code>return</code> that you just cannot get rid of in the code itself.</li>
+<li><strong>Compilación.</strong> El compilador de Elm puede realizar optimizaciones como eliminación de código muerto y renombramiento de campos en registros. Es decir, puede quitar código sin uso y hacer que nombres como <code>userStatus</code> sean más cortos dentro del código generado.</li>
+<li><strong>Minificación.</strong> En el mundo de JavaScript hay herramientas llamadas “minificadores”, que realizan varias transformaciones. Acortan variables, mueven código de funciones al lugar en donde son llamadas, convierten <code>if</code>s en ternarios <code>?:</code>, y transforman <code>'\u0041'</code> en <code>'A'</code>. Cualquier cosa que reduzca un poquito el peso.</li>
+<li><strong>Compresión.</strong> Una vez que el código haya quedado tan pequeño como es posible, puedes usar un algoritmo de compresión como gzip para apachurrarlo aún más. Funciona particularmente bien con palabras clave como <code>function</code> y <code>return</code>, que no se pueden quitar del código mismo.</li>
 </ul>
-<p>Elm makes it pretty easy to get all this set up for your project. No need for some complex build system. It is just two terminal commands!</p>
-<h2 id="instructions">Instructions</h2>
-<p>Step one is to compile with the <code>--optimize</code> flag. This does things like shortening record field names.</p>
-<p>Step two is to minify the resulting JavaScript code. I use a minifier called <code>uglifyjs</code>, but you can use a different one if you want. The neat thing about <code>uglifyjs</code> is all its special flags. These flags unlock optimizations that are unreliable in normal JS code, but thanks to the design of Elm, they are totally safe for us!</p>
-<p>Putting those together, we can optimize <code>src/Main.elm</code> with two terminal commands:</p>
+<p>Elm facilita hacer todo esto en tu proyecto. No hace falta un sistema complicado de compilación. Basta con dos comandos de terminal.</p>
+<h2 id="instrucciones">Instrucciones</h2>
+<p>El primer paso es compilar usando la opción <code>--optimize</code>. Esto abrevia nombres de campos en registros, entre otras cosas.</p>
+<p>El segundo paso es minificar el código JavaScript. Yo uso un minificador que se llama <code>uglifyjs</code>, pero puedes usar otro si prefieres. Lo interesante de <code>uglifyjs</code> son las muchas opciones que incluye. Estas opciones permiten muchas optimizaciones que son poco confiables en código JS normal, pero gracias al diseño de Elm, son totalmente seguras de realizar para nuestro caso.</p>
+<p>Si juntamos estos dos, podemos optimizar <code>src/Main.elm</code> usando dos comandos de terminal:</p>
 <pre><code class="lang-bash">elm make src/Main.elm --optimize --output=elm.js
 uglifyjs elm.js --compress <span class="hljs-string">'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe'</span> | uglifyjs --mangle --output elm.min.js
 </code></pre>
-<p>After this you will have an <code>elm.js</code> and a smaller <code>elm.min.js</code> file!</p>
+<p>Con esto vas a tener un archivo <code>elm.js</code> y su versión más pequeña, <code>elm.min.js</code>.</p>
 <blockquote>
-<p><strong>Note 1:</strong> <code>uglifyjs</code> is called twice there. First to <code>--compress</code> and second to <code>--mangle</code>. This is necessary! Otherwise <code>uglifyjs</code> will ignore our <code>pure_funcs</code> flag.</p>
-<p><strong>Note 2:</strong> If the <code>uglifyjs</code> command is not available in your terminal, you can run the command <code>npm install uglify-js --global</code> to download it. If you do not have <code>npm</code> either, you can get it with <a href="https://nodejs.org/" target="_blank">nodejs</a>.</p>
+<p><strong>Nota 1:</strong> Llamamos <code>uglifyjs</code> dos veces aquí. Primero usamos <code>--compress</code>, y la segunda vez usamos <code>--mangle</code>. ¡Esto es necesario! De otra manera <code>uglifyjs</code> ignorará la opción <code>pure_funcs</code>.</p>
+<p><strong>Nota 2:</strong> Si el comando <code>uglifyjs</code> no está disponible en tu terminal, puedes correr el comando <code>npm install uglify-js --global</code> para instalarlo. Si tampoco tienes <code>npm</code>, puedes obtenerlo junto con <a href="https://nodejs.org/" target="_blank">Node.js</a>.</p>
 </blockquote>
 <h2 id="scripts">Scripts</h2>
-<p>It is hard to remember all those flags for <code>uglifyjs</code>, so it is probably better to write a script that does this.</p>
-<p>Say we want a bash script that produces <code>elm.js</code> and <code>elm.min.js</code> files. On Mac or Linux, we can define <code>optimize.sh</code> like this:</p>
-<pre><code class="lang-bash"><span class="hljs-meta">#!/bin/sh</span>
+<p>Como es difícil recordar todas esas opciones de <code>uglifyjs</code>, tal vez es más fácil escribir un script para esto.</p>
+<p>Podemos escribir un script Bash que genera los archivos <code>elm.js</code> y <code>elm.min.js</code>. En Mac y Linux podemos definir <code>optimize.sh</code> así:</p>
+<pre><code class="lang-bash"><span class="hljs-meta">#!/bin/bash</span>
 
 <span class="hljs-built_in">set</span> -e
 
@@ -757,20 +757,20 @@ elm make --optimize --output=<span class="hljs-variable">$js</span> <span class=
 
 uglifyjs <span class="hljs-variable">$js</span> --compress <span class="hljs-string">'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe'</span> | uglifyjs --mangle --output <span class="hljs-variable">$min</span>
 
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Compiled size:<span class="hljs-subst">$(wc $js -c)</span> bytes  (<span class="hljs-variable">$js</span>)"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Minified size:<span class="hljs-subst">$(wc $min -c)</span> bytes  (<span class="hljs-variable">$min</span>)"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Gzipped size: <span class="hljs-subst">$(gzip $min -c | wc -c)</span> bytes"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Tamaño compilado: <span class="hljs-subst">$(wc $js -c)</span> bytes  (<span class="hljs-variable">$js</span>)"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Tamaño minificado:<span class="hljs-subst">$(wc $min -c)</span> bytes  (<span class="hljs-variable">$min</span>)"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Tamaño comprimido:<span class="hljs-subst">$(gzip $min -c | wc -c)</span> bytes"</span>
 </code></pre>
-<p>Now if I run <code>./optimize.sh src/Main.elm</code> on my <a href="https://github.com/evancz/elm-todomvc" target="_blank">TodoMVC</a> code, I see something like this in the terminal:</p>
-<pre><code>Compiled size:  122297 bytes  (elm.js)
-Minified size:   24123 bytes  (elm.min.js)
-Gzipped size:     9148 bytes
-</code></pre><p>Pretty neat! We only need to send about 9kb to get this program to people!</p>
-<p>The important commands here are <code>elm</code> and <code>uglifyjs</code> which work on any platform, so it should not be too tough to do something similar on Windows.</p>
-<h2 id="advice">Advice</h2>
-<p>I recommend writing a <code>Browser.application</code> and compiling to a single JavaScript file as we have seen here. It will get downloaded (and cached) when people first visit. Elm creates quite small files compared to the popular competitors, as you can see <a href="https://elm-lang.org/blog/small-assets-without-the-headache" target="_blank">here</a>, so this strategy can take you quite far.</p>
+<p>Y ahora, si corro <code>./optimize.sh src/Main.elm</code> sobre mi código <a href="https://github.com/evancz/elm-todomvc" target="_blank">TodoMVC</a> voy a ver este resultado en mi terminal:</p>
+<pre><code>Tamaño compilado:   122297 bytes  (elm.js)
+Tamaño minificado:  24123 bytes  (elm.min.js)
+Tamaño comprimido:  9148 bytes
+</code></pre><p>Buen resultado, ¿no? Ahora sólo necesitamos transferir aproximadamente 9 kb a nuestros usuarios.</p>
+<p>Los comandos importantes son <code>elm</code> y <code>uglifyjs</code>, que funcionan en cualquier plataforma, así que no sería muy difícil hacer algo parecido en Windows.</p>
+<h2 id="consejos">Consejos</h2>
+<p>Recomiendo escribir código usando <code>Browser.application</code> y compilarlo en un sólo archivo JavaScript, como hemos visto aquí. En la primera visita el archivo será descargado, y quedará guardado en caché. Elm genera archivos bien pequeños comparado con otros competidores populares <a href="https://elm-lang.org/blog/small-assets-without-the-headache" target="_blank">como puedes ver aquí</a>, así que esta estrategia te puede servir bastante bien.</p>
 <blockquote>
-<p><strong>Note:</strong> In theory, it is possible to get even smaller assets with Elm. It is not possible right now, but if you are working on 50k lines of Elm or more, we would like to learn about your situation as part of a user study. More details <a href="https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7" target="_blank">here</a>!</p>
+<p><strong>Nota:</strong> En teoría, es posible reducir aún más los tamaños de archivos generados por Elm. Actualmente no es posible, pero si estás trabajando en un proyecto de 50 mil líneas de Elm o más, nos gustaría conocer tu situación como parte de un estudio de usuarios. <a href="https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7" target="_blank">Más detalles aquí (en inglés).</a></p>
 </blockquote>
 
                                 
@@ -804,7 +804,7 @@ Gzipped size:     9148 bytes
                 </a>
                 
                 
-                <a href="../next_steps.html" class="navigation navigation-next " aria-label="Next page: Next Steps">
+                <a href="../next_steps.html" class="navigation navigation-next " aria-label="Next page: Próximos pasos">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -815,7 +815,7 @@ Gzipped size:     9148 bytes
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Minification","level":"1.10.3","depth":2,"next":{"title":"Next Steps","level":"1.11","depth":1,"path":"next_steps.md","ref":"next_steps.md","articles":[]},"previous":{"title":"Html.keyed","level":"1.10.2","depth":2,"path":"optimization/keyed.md","ref":"optimization/keyed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/asset_size.md","mtime":"2025-01-16T02:30:22.551Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Minificación","level":"1.10.3","depth":2,"next":{"title":"Próximos pasos","level":"1.11","depth":1,"path":"next_steps.md","ref":"next_steps.md","articles":[]},"previous":{"title":"Html.keyed","level":"1.10.2","depth":2,"path":"optimization/keyed.md","ref":"optimization/keyed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/asset_size.md","mtime":"2025-01-16T02:33:11.316Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

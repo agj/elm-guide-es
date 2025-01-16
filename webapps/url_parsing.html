@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>URL Parsing · Introducción a Elm</title>
+        <title>Interpretación de URLs · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="./">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >URL Parsing</a>
+        <a href=".." >Interpretación de URLs</a>
     </h1>
 </div>
 
@@ -722,16 +722,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="parsing-urls">Parsing URLs</h1>
-<p>In a realistic web app, we want to show different content for different URLs:</p>
+                                <h1 id="interpretación-de-urls">Interpretación de URLs</h1>
+<p>En una aplicación real nos interesa mostrar distinto contenido para distintas URLs:</p>
 <ul>
 <li><code>/search</code></li>
 <li><code>/search?q=seiza</code></li>
 <li><code>/settings</code></li>
 </ul>
-<p>How do we do that? We use the <a href="https://package.elm-lang.org/packages/elm/url/latest/" target="_blank"><code>elm/url</code></a> to parse the raw strings into nice Elm data structures. This package makes the most sense when you just look at examples, so that is what we will do!</p>
-<h2 id="example-1">Example 1</h2>
-<p>Say we have an art website where the following addresses should be valid:</p>
+<p>¿Cómo lo logramos? Usando el paquete <a href="https://package.elm-lang.org/packages/elm/url/latest/" target="_blank"><code>elm/url</code></a> para interpretar strings como estructuras de datos Elm. Este paquete se entiende mejor al mirar ejemplos, así que entremos directamente a ello.</p>
+<h2 id="ejemplo-1">Ejemplo 1</h2>
+<p>Digamos que tenemos un sitio web sobre arte donde las siguientes direcciones deben ser válidas:</p>
 <ul>
 <li><code>/topic/architecture</code></li>
 <li><code>/topic/painting</code></li>
@@ -744,7 +744,7 @@
 <li><code>/user/sue/comment/11</code></li>
 <li><code>/user/sue/comment/51</code></li>
 </ul>
-<p>So we have topic pages, blog posts, user information, and a way to look up individual user comments. We would use the <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser" target="_blank"><code>Url.Parser</code></a> module to write a URL parser like this:</p>
+<p>Tenemos páginas de temas específicos, artículos del blog, información de usuarios y una forma de ver comentarios escritos por usuarios específicos. Vamos a usar el módulo <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser" target="_blank"><code>Url.Parser</code></a> para escribir un interpretador de URLs como el siguiente:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Url.Parser <span class="hljs-keyword">exposing</span> ((&lt;/&gt;), Parser, int, map, oneOf, s, string)
 
 
@@ -779,9 +779,9 @@
 <span class="hljs-comment">-- /user/sam/comment/    ==&gt;  Nothing</span>
 <span class="hljs-comment">-- /user/                ==&gt;  Nothing</span>
 </code></pre>
-<p>The <code>Url.Parser</code> module makes it quite concise to fully turn valid URLs into nice Elm data!</p>
-<h2 id="example-2">Example 2</h2>
-<p>Now say we have a personal blog where addresses like this are valid:</p>
+<p>El módulo <code>Url.Parser</code> permite interpretar URLs válidas como datos Elm en forma muy concisa.</p>
+<h2 id="ejemplo-2">Ejemplo 2</h2>
+<p>Ahora imaginemos que tenemos un blog personal donde direcciones como las siguientes son válidas:</p>
 <ul>
 <li><code>/blog/12/the-history-of-chairs</code></li>
 <li><code>/blog/13/the-endless-september</code></li>
@@ -790,7 +790,7 @@
 <li><code>/blog?q=whales</code></li>
 <li><code>/blog?q=seiza</code></li>
 </ul>
-<p>In this case we have individual blog posts and a blog overview with an optional query parameter. We need to add the <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser-Query" target="_blank"><code>Url.Parser.Query</code></a> module to write our URL parser this time:</p>
+<p>En este caso tenemos artículos y una página principal que lleva opcionalmente un parámetro <code>q</code> de consulta. Tenemos que añadir el módulo <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser-Query" target="_blank"><code>Url.Parser.Query</code></a> para escribir nuestro interpretador:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Url.Parser <span class="hljs-keyword">exposing</span> ((&lt;/&gt;), (&lt;?&gt;), Parser, int, map, oneOf, s, string)
 <span class="hljs-keyword">import</span> Url.Parser.Query <span class="hljs-keyword">as</span> Query
 
@@ -818,9 +818,9 @@
 <span class="hljs-comment">-- /blog/?q=whales       ==&gt;  Just (BlogQuery (Just "whales"))</span>
 <span class="hljs-comment">-- /blog/?query=whales   ==&gt;  Just (BlogQuery Nothing)</span>
 </code></pre>
-<p>The <code>&lt;/&gt;</code> and <code>&lt;?&gt;</code> operators let us write parsers that look quite like the actual URLs we want to parse. And adding <code>Url.Parser.Query</code> allowed us to handle query parameters like <code>?q=seiza</code>.</p>
-<h2 id="example-3">Example 3</h2>
-<p>Okay, now we have a documentation website with addresses like this:</p>
+<p>Los operadores <code>&lt;/&gt;</code> y <code>&lt;?&gt;</code> nos permiten escribir intepretadores que se ven como las URLs que queremos interpretar. Y el uso de <code>Url.Parser.Query</code> nos permitió manejar parámetros como <code>?q=seiza</code>.</p>
+<h2 id="ejemplo-3">Ejemplo 3</h2>
+<p>Ahora lo que tenemos es un sitio web de documentación donde veremos direcciones como estas:</p>
 <ul>
 <li><code>/Basics</code></li>
 <li><code>/Maybe</code></li>
@@ -829,7 +829,7 @@
 <li><code>/List#filter</code></li>
 <li><code>/List#foldl</code></li>
 </ul>
-<p>We can use the <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser#fragment" target="_blank"><code>fragment</code></a> parser from <code>Url.Parser</code> to handle these addresses like this:</p>
+<p>Podemos usar el interpretador <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser#fragment" target="_blank"><code>fragment</code></a> de <code>Url.Parser</code> para interpretar direcciones, así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Docs</span> =
     ( <span class="hljs-type">String</span>, <span class="hljs-type">Maybe</span> <span class="hljs-type">String</span> )
 
@@ -848,18 +848,18 @@
 <span class="hljs-comment">-- /List/map   ==&gt;  Nothing</span>
 <span class="hljs-comment">-- /           ==&gt;  Nothing</span>
 </code></pre>
-<p>So now we can handle URL fragments as well!</p>
-<h2 id="synthesis">Synthesis</h2>
-<p>Now that we have seen a few parsers, we should look at how this fits into a <code>Browser.application</code> program. Rather than just saving the current URL like last time, can we parse it into useful data and show that instead?</p>
+<p>Y así ya podemos interpretar “fragmentos” de URL también.</p>
+<h2 id="síntesis">Síntesis</h2>
+<p>Ya vimos varios interpretadores, así que ahora nos toca ver cómo se conjugan en un programa <code>Browser.application</code>. En vez de sólo guardar la URL como lo hicimos en el ejemplo anterior, veamos si podemos interpretar la URL y convertirla en datos útiles para mostrar.</p>
 <pre><code class="lang-elm"><span class="hljs-type">TODO</span>
 </code></pre>
-<p>The major new things are:</p>
+<p>Lo nuevo más importante es:</p>
 <ol>
-<li>Our <code>update</code> parses the URL when it gets a <code>UrlChanged</code> message.</li>
-<li>Our <code>view</code> function shows different content for different addresses!</li>
+<li>Nuestra función <code>update</code> interpreta la URL cuando recibe un mensaje <code>UrlChanged</code>.</li>
+<li>Nuestra función <code>view</code> muestra distinto contenido para direcciones distintas.</li>
 </ol>
-<p>It is really not too fancy. Nice!</p>
-<p>But what happens when you have 10 or 20 or 100 different pages? Does it all go in this one <code>view</code> function? Surely it cannot be all in one file. How many files should it be in? What should be the directory structure? That is what we will discuss next!</p>
+<p>No es nada muy complicado, ¿no?</p>
+<p>Pero ¿qué pasa si tengo 10, o 20, o 100 distintas páginas? ¿Tiene todo que ir dentro de esta función <code>view</code>? Seguro que no puede ir todo en el mismo archivo. ¿En cuántos archivos se separa? ¿Cómo debe ser la estructura de directorios? Bueno, eso mismo es lo que vamos a discutir en el próximo capítulo.</p>
 
                                 
                                 </section>
@@ -887,12 +887,12 @@
 
             
                 
-                <a href="navigation.html" class="navigation navigation-prev " aria-label="Previous page: Navigation">
+                <a href="navigation.html" class="navigation navigation-prev " aria-label="Previous page: Navegación">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="modules.html" class="navigation navigation-next " aria-label="Next page: Modules">
+                <a href="modules.html" class="navigation navigation-next " aria-label="Next page: Módulos">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -903,7 +903,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"URL Parsing","level":"1.9.2","depth":2,"next":{"title":"Modules","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},"previous":{"title":"Navigation","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/url_parsing.md","mtime":"2025-01-16T02:30:22.553Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Interpretación de URLs","level":"1.9.2","depth":2,"next":{"title":"Módulos","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},"previous":{"title":"Navegación","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/url_parsing.md","mtime":"2025-01-16T02:33:11.318Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

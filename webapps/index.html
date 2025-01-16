@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Web Apps · Introducción a Elm</title>
+        <title>Aplicaciones web · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="../interop/">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="../interop/ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="../interop/custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="../interop/limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="./">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Web Apps</a>
+        <a href=".." >Aplicaciones web</a>
     </h1>
 </div>
 
@@ -722,11 +722,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="web-apps">Web Apps</h1>
-<p>So far we have been creating Elm programs with <code>Browser.element</code>, allowing us to take over a single node in a larger application. This is great for <em>introducing</em> Elm at work (as described <a href="https://elm-lang.org/blog/how-to-use-elm-at-work" target="_blank">here</a>) but what happens after that? How can we use Elm more extensively?</p>
-<p>In this chapter, we will learn how to create a “web app” with a bunch of different pages that all integrate nicely with each other, but we must start by controlling a single page.</p>
-<h2 id="control-the-document">Control the Document</h2>
-<p>The first step is to switch to starting programs with <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#document" target="_blank"><code>Browser.document</code></a>:</p>
+                                <h1 id="aplicaciones-web">Aplicaciones web</h1>
+<p>Hasta este punto hemos creado programas Elm con <code>Browser.element</code>, que nos permite apoderarnos de un único nodo en una aplicación más grande. Esto funciona bien para introducir Elm en tu trabajo (como explico <a href="https://elm-lang.org/blog/how-to-use-elm-at-work" target="_blank">aquí</a>), pero ¿qué pasa después de eso? ¿Cómo podemos usar Elm más extensivamente?</p>
+<p>En este capítulo aprenderemos a crear una “aplicación web” con varias páginas distintas que funcionan en forma integrada, pero primero partamos controlando una sola página.</p>
+<h2 id="controla-el-documento">Controla el documento</h2>
+<p>El primer paso es cambiar a comenzar nuestros programas usando <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#document" target="_blank"><code>Browser.document</code></a>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">document</span> :
     { init : flags -&gt; ( model, <span class="hljs-type">Cmd</span> msg )
     , view : model -&gt; <span class="hljs-type">Document</span> msg
@@ -735,21 +735,21 @@
     }
     -&gt; <span class="hljs-type">Program</span> flags model msg
 </code></pre>
-<p>The arguments are almost exactly the same as <code>Browser.element</code>, except for the <code>view</code> function. Rather than returning an <code>Html</code> value, you return a <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#Document" target="_blank"><code>Document</code></a> like this:</p>
+<p>Los argumentos son casi exáctamente los mismos que <code>Browser.element</code>, excepto por la función <code>view</code>. En vez de retornar un valor <code>Html</code>, retornas un valor <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#Document" target="_blank"><code>Document</code></a> como este:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Document</span> msg =
     { title : <span class="hljs-type">String</span>
     , body : <span class="hljs-type">List</span> (<span class="hljs-type">Html</span> msg)
     }
 </code></pre>
-<p>This gives you control over the <code>&lt;title&gt;</code> and the <code>&lt;body&gt;</code> of the document. Perhaps your program downloads some data and that helps you determine a more specific title. Now you can just change it in your <code>view</code> function!</p>
-<h2 id="serve-the-page">Serve the Page</h2>
-<p>The compiler produces HTML by default, so you can compile your code like this:</p>
+<p>Esto te da control sobre los elementos <code>&lt;title&gt;</code> y <code>&lt;body&gt;</code> del documento. Tal vez tu programa descarga datos, y eso te ayuda a determinar un título más específico. Ahora ya tienes la posibilidad de cambiarlo desde tu función <code>view</code>.</p>
+<h2 id="sirve-la-página">Sirve la página</h2>
+<p>El compilador produce HTML por defecto, así que puedes compilar tu código así:</p>
 <pre><code class="lang-bash">elm make src/Main.elm
 </code></pre>
-<p>The output will be a file named <code>index.html</code> that you can serve like any other HTML file. That works fine, but you can get a bit more flexibility by (1) compiling Elm to JavaScript and (2) making your own custom HTML file. To take that path, you compile like this:</p>
+<p>La salida será un archivo <code>index.html</code> que puedes servir igual que cualquier otro archivo HTML. Esto funciona, pero ganas más flexibilidad al (1) compilar Elm a JavaScript, y (2) crear tu propio archivo HTML. Para tomar esa ruta, compila de esta forma:</p>
 <pre><code class="lang-bash">elm make src/Main.elm --output=main.js
 </code></pre>
-<p>This will produce <code>main.js</code> which you can load from a custom HTML file like this:</p>
+<p>Esto producirá un archivo <code>main.js</code> que puedes cargar desde tu HTML personalizado así:</p>
 <pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype <span class="hljs-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
@@ -765,11 +765,11 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
-<p>This HTML is pretty simple. You load whatever you need in the <code>&lt;head&gt;</code> and you initialize your Elm program in the <code>&lt;body&gt;</code>. The Elm program will take it from there and render everything.</p>
-<p>Either way, now you have some HTML that you can send to browsers. You can get that HTML to people with free services like <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> or <a href="https://www.netlify.com/" target="_blank">Netlify</a>, or maybe you make your own server and run a VPS with a service like <a href="https://m.do.co/c/c47faa1916d2" target="_blank">Digital Ocean</a>. Whatever works for you! You just need a way to get HTML into a browser.</p>
+<p>Este HTML es bastante simple. Cargas lo que necesitas en <code>&lt;head&gt;</code>, e inicializas tu programa Elm en <code>&lt;body&gt;</code>. El programa Elm se encargará del resto y renderizará todo.</p>
+<p>De cualquier manera, ya tienes HTML que pasarle a un navegador. Puedes servir el HTML vía servicios gratuitos como <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> o <a href="https://www.netlify.com/" target="_blank">Netlify</a>, o tal vez puedes configurar tu propio servidor como un VPS con un servicio como <a href="https://m.do.co/c/c47faa1916d2" target="_blank">Digital Ocean</a>. Haz lo que mejor te acomode; sólo necesitas una forma de servir tu HTML en un navegador.</p>
 <blockquote>
-<p><strong>Note 1:</strong> Creating custom HTML is helpful if you are doing something custom with CSS. Many people use projects like <a href="https://package.elm-lang.org/packages/rtfeldman/elm-css/latest/" target="_blank"><code>rtfeldman/elm-css</code></a> to handle all of their styles from within Elm, but maybe you are working in a team where there is lots of predefined CSS. Maybe the team is even using one of those CSS preprocessors. That is all fine. Just load the final CSS file in the <code>&lt;head&gt;</code> of your HTML file.</p>
-<p><strong>Note 2:</strong> The Digital Ocean link above is a referral link, so if you sign up through that and end up using the service, we get a $25 credit towards our hosting costs for <code>elm-lang.org</code> and <code>package.elm-lang.org</code>.</p>
+<p><strong>Nota 1:</strong> Si estás usando CSS personalizado, ayuda que manejes el HTML por tu cuenta. Mucha gente usa proyectos como <a href="https://package.elm-lang.org/packages/rtfeldman/elm-css/latest/" target="_blank"><code>rtfeldman/elm-css</code></a> para gestionar sus estilos desde Elm mismo, pero tal vez estás trabajando dentro de un equipo que ya tiene mucho CSS prdefinido. Tal vez el equipo usa algún preprocesador de CSS. No hay problema, sólo tienes que vincular al archivo CSS final desde <code>&lt;head&gt;</code> en tu archivo HTML.</p>
+<p><strong>Nota 2:</strong> El link a Digital Ocean que puse arriba es un link promocional. Si te suscribes desde ahí al servicio, nos ayudas con USD $25 de crédito contra el costo de alojamiento de <code>elm-lang.org</code> y <code>package.elm-lang.org</code>.</p>
 </blockquote>
 
                                 
@@ -798,12 +798,12 @@
 
             
                 
-                <a href="../interop/limits.html" class="navigation navigation-prev " aria-label="Previous page: Limits">
+                <a href="../interop/limits.html" class="navigation navigation-prev " aria-label="Previous page: Límites">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="navigation.html" class="navigation navigation-next " aria-label="Next page: Navigation">
+                <a href="navigation.html" class="navigation navigation-next " aria-label="Next page: Navegación">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -814,7 +814,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Web Apps","level":"1.9","depth":1,"next":{"title":"Navigation","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},"previous":{"title":"Limits","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"articles":[{"title":"Navigation","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},{"title":"URL Parsing","level":"1.9.2","depth":2,"path":"webapps/url_parsing.md","ref":"webapps/url_parsing.md","articles":[]},{"title":"Modules","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},{"title":"Structure","level":"1.9.4","depth":2,"path":"webapps/structure.md","ref":"webapps/structure.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/README.md","mtime":"2025-01-16T02:30:22.553Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Aplicaciones web","level":"1.9","depth":1,"next":{"title":"Navegación","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},"previous":{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"articles":[{"title":"Navegación","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},{"title":"Interpretación de URLs","level":"1.9.2","depth":2,"path":"webapps/url_parsing.md","ref":"webapps/url_parsing.md","articles":[]},{"title":"Módulos","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},{"title":"Estructurando aplicaciones web","level":"1.9.4","depth":2,"path":"webapps/structure.md","ref":"webapps/structure.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"webapps/README.md","mtime":"2025-01-16T02:33:11.317Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

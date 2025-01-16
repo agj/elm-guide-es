@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Limits · Introducción a Elm</title>
+        <title>Límites · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -411,7 +411,7 @@
                 <a href="./">
             
                     
-                    JavaScript Interop
+                    Interoperabilidad con JS
             
                 </a>
             
@@ -438,7 +438,7 @@
                 <a href="ports.html">
             
                     
-                    Ports
+                    Puertos
             
                 </a>
             
@@ -451,7 +451,7 @@
                 <a href="custom_elements.html">
             
                     
-                    Custom Elements
+                    Elementos personalizados
             
                 </a>
             
@@ -464,7 +464,7 @@
                 <a href="limits.html">
             
                     
-                    Limits
+                    Límites
             
                 </a>
             
@@ -482,7 +482,7 @@
                 <a href="../webapps/">
             
                     
-                    Web Apps
+                    Aplicaciones web
             
                 </a>
             
@@ -496,7 +496,7 @@
                 <a href="../webapps/navigation.html">
             
                     
-                    Navigation
+                    Navegación
             
                 </a>
             
@@ -509,7 +509,7 @@
                 <a href="../webapps/url_parsing.html">
             
                     
-                    URL Parsing
+                    Interpretación de URLs
             
                 </a>
             
@@ -522,7 +522,7 @@
                 <a href="../webapps/modules.html">
             
                     
-                    Modules
+                    Módulos
             
                 </a>
             
@@ -535,7 +535,7 @@
                 <a href="../webapps/structure.html">
             
                     
-                    Structure
+                    Estructurando aplicaciones web
             
                 </a>
             
@@ -553,7 +553,7 @@
                 <a href="../optimization/">
             
                     
-                    Optimization
+                    Optimización
             
                 </a>
             
@@ -593,7 +593,7 @@
                 <a href="../optimization/asset_size.html">
             
                     
-                    Minification
+                    Minificación
             
                 </a>
             
@@ -611,7 +611,7 @@
                 <a href="../next_steps.html">
             
                     
-                    Next Steps
+                    Próximos pasos
             
                 </a>
             
@@ -624,7 +624,7 @@
                 <span>
             
                     
-                    Appendix
+                    Apéndice
             
                 </span>
             
@@ -638,7 +638,7 @@
                 <a href="../appendix/types_as_sets.html">
             
                     
-                    Types as Sets
+                    Tipos como conjuntos
             
                 </a>
             
@@ -651,7 +651,7 @@
                 <a href="../appendix/types_as_bits.html">
             
                     
-                    Types as Bits
+                    Tipos como bits
             
                 </a>
             
@@ -664,7 +664,7 @@
                 <a href="../appendix/function_types.html">
             
                     
-                    Function Types
+                    Tipos de función
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Limits</a>
+        <a href=".." >Límites</a>
     </h1>
 </div>
 
@@ -722,30 +722,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="the-limits-of-elmjs-interop">The Limits of Elm/JS Interop</h1>
-<p>Many languages have a Foreign Function Interface (FFI) that allows direct bindings functions in the host language. For example, Scala can call Java functions directly. Same with Clojure/Java, Python/C, Haskell/C, and many others.</p>
-<p><strong>Elm does not have a traditional Foreign Function Interface with JavaScript.</strong> It is not possible to call arbitrary JavaScript functions at any time. This has tradeoffs that some people really love, but it is not for everyone! If you are evaluating Elm for commercial use, I highly encourage you to look through <a href="https://github.com/elm-community/js-integration-examples" target="_blank">these interop examples</a> to get a feeling for whether flags, ports, and custom elements can cover everything you need.</p>
-<p>Why does Elm make a different choice than other languages on this?</p>
-<h2 id="tradeoffs">Tradeoffs</h2>
-<p>Ports are somewhat of an outlier in the history of languages. There are two common interop strategies, and Elm did neither of them:</p>
+                                <h1 id="los-límites-de-la-interoperabilidad-elmjs">Los límites de la interoperabilidad Elm/JS</h1>
+<p>Muchos lenguajes tienen una “interfaz de funciones foráneas” (FFI por su sigla en inglés) que te permite vincular directamente con funciones del lenguaje subyacente. Por ejemplo, Scala puede llamar funciones de Java directamente. Lo mismo ocurre con Clojure y Java, Python y C, Haskell y C, y muchos otros.</p>
+<p><strong>Elm no tiene una interfaz de funciones foráneas tradicional con JavaScript.</strong> No es posible llamar funciones arbitrarias de JavaScript en cualquier momento. Es una limitación que trae beneficios que mucha gente prefiere, pero no es para cualquiera. Si te encuentras evaluando si usar Elm con fines comerciales, te recomiendo que revises <a href="https://github.com/elm-community/js-integration-examples" target="_blank">estos ejemplos de interoperabilidad</a> para saber si con flags, puertos y elementos personalizados tienes cubiertas tus necesidades.</p>
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
+<p>¿Por qué Elm tomó una decisión diferente en comparación con otros lenguajes?</p>
+<h2 id="ventajas-y-desventajas">Ventajas y desventajas</h2>
+<p>Los puertos son un caso atípico en la historia de los lenguajes de programación. Hay dos principales estrategias para la interoperabilidad, y Elm no adoptó ninguna de ellas:</p>
 <ol>
-<li><strong>Full backwards compatibility.</strong> For example, C++ is a superset of C, and TypeScript is a superset of JavaScript. This is the most permissive approach, and it has proven extremely effective. By definition, everyone is using your language already.</li>
-<li><strong>Foreign function interface (FFI)</strong> This allows direct bindings to functions in the host language. For example, Scala can call Java functions directly. Same with Clojure/Java, Python/C, Haskell/C, and many others. Again, this has proven quite effective.</li>
+<li><strong>Interfaz de función foránea (FFI).</strong> Permite crear vínculos directos hacia funciones en el lenguaje subyacente. Por ejemplo, Scala puede llamar funciones de Java directamente. Lo mismo ocurre con Clojure y Java, Python y C, Haskell y C, y muchos otros. Esta también es una estrategia que ha resultado ser muy efectiva.</li>
 </ol>
-<p>These paths are attractive for faster adoption and greater flexibility, but they are not ideal for Elm for two main reasons:</p>
+<p>Estos caminos son atractivos para facilitar un crecimiento rápido y tener máxima flexibilidad, pero no son ideales para Elm por dos razones:</p>
 <ol>
-<li><strong>Losing Guarantees.</strong> One of the best things about Elm is that there are entire categories of problems you just do not have to worry about. There are no surprise exceptions to catch, and functions cannot mutate data in surprising ways. I think this is the core value of Elm over alternative languages, but if we can call JS directly, all that goes away. Does this package produce runtime exceptions? When? Will it mutate the values I give to it? Do I need to detect that? Does the package have side-effects? Will it send messages to some 3rd party servers? Log passwords? A decent chunk of Elm users are drawn to the language specifically because they do not have to think like that anymore.</li>
-<li><strong>Package Flooding.</strong> There is quite high demand to directly copy JavaScript APIs into Elm. In the two years before <code>elm/html</code> existed, I am sure someone would have contributed jQuery bindings if it was possible. This has already happened in the typed functional languages that compile to JS, but have more traditional interop designs. As far as I know, package flooding is somewhat unique to compile-to-JS languages. The pressure is not nearly as high in Python for example, so I think that downside is a product of the unique culture and history of the JavaScript ecosystem.</li>
+<li><strong>Pérdida de garantías.</strong> Una de las mejores cosas sobre Elm es que hay categorías enteras de problemas de las que simplemente no te tienes que preocupar. No hay excepciones sorpresa para capturar, y las funciones no pueden mutar datos en forma sorpresiva. Creo que este es el principal valor de Elm por sobre otras alternativas, pero si pudiéramos llamar código JS directamente, todo se evapora. ¿Este paquete produce excepciones en tiempo de ejecución? ¿Cuándo? ¿Muta los valores que le paso? ¿Necesito chequear? ¿El paquete produce efectos secundarios? ¿Se comunica con servidores externos? ¿Escribe passwords en sus logs? Un gran número de usuarios de Elm tienen interés en Elm justamente porque con el lenguaje no necesitan cubrirse las espaldas de esta manera.</li>
+<li><strong>Avalancha de paquetes.</strong> Hay una gran demanda de copias directas de interfaces de JavaScript hacia Elm. En los dos años previos a que existiera <code>elm/html</code>, estoy seguro de que alguien hubiera escrito una interfaz para usar jQuery si fuera posible. Esto ya ha ocurrido con otros lenguajes funcionales tipados que compilan a JS, pero que tienen una estrategia más tradicional de interoperabilidad. Hasta donde sé, este tipo de situación es más o menos única en lenguajes que compilan a JS. No existe esa presión en Python, por ejemplo, así que probablemente es un problema producto de la cultura e historia del ecosistema de JavaScript en específico.</li>
 </ol>
-<p>Given these pitfalls, ports and custom elements are attractive because they let you get things done in JavaScript while preserving the best parts of Elm. Great! On the flip side, it means Elm cannot piggyback on the JS ecosystem to gain more libraries more quickly. If you take a longer-view, I think this is actually a key strength. As a result:</p>
+<p>Dados estos problemas, los puertos y los elementos personalizados son atractivos porque nos permiten lograr cosas usando JavaScript, sin sacrificar los beneficios de Elm. Ideal. Pero por otro lado, también significa que Elm no puede simplemente colgarse del ecosistema JavaScript para ganar en librerías más rápidamente. Si adoptamos una visión más a largo plazo, creo que es una buena estrategia. Como consecuencia:</p>
 <ol>
-<li><strong>Packages are designed for Elm.</strong> As members of the Elm community get more experience and confidence, we are starting to see fresh approaches to layout and data visualization that work seamlessly with The Elm Architecture and the overall ecosystem. I expect this to keep happening with other sorts of problems!</li>
-<li><strong>Code is portable.</strong> If the compiler someday produces x86 or WebAssembly, the whole ecosystem just keeps working, but faster! Ports guarantee that all packages are written entirely in Elm, and Elm itself was designed such that other non-JS compiler targets are viable.</li>
-<li><strong>Packages are more secure.</strong> Languages like JavaScript have serious security concerns with packages. Reports of <a href="https://www.bleepingcomputer.com/news/security/compromised-javascript-package-caught-stealing-npm-credentials/" target="_blank">stealing credentials</a> and <a href="https://winbuzzer.com/2020/01/14/microsoft-discovers-an-npm-package-thats-been-stealing-unix-user-data-xcxwbn/" target="_blank">stealing API keys</a> are not uncommon, imposing a permanent auditing cost on all packages. Do they add a keylogger to <code>window</code>? Elm packages can guarantee that entire categories of exploits just cannot happen, reducing auditing cost and security risks overall.</li>
-<li><strong>Optimization is easier.</strong> The style of generated code has changed significantly from release to release in the past. For example, the <a href="https://elm-lang.org/news/small-assets-without-the-headache" target="_blank">0.19 release</a> was able to dramatically reduce asset size by (1) generating code in a way that works better with JavaScript minifiers and (2) using different runtime representations of custom types depending on your optimization level. I expect it will change again for code slicing or if we find a faster calling convention for currying. Furthermore, the compiler can safely assume that all code is pure, which may allow it to move code around more aggressively than other compilers. Locking into a specific calling convention now is likely to make some of these optimizations impossible.</li>
+<li><strong>Los paquetes están diseñados para Elm.</strong> Mientras la comunidad de Elm adquiere experiencia y confianza, empezamos a ver nuevas y propositivas estrategias para enfrentar la diagramación y la visualización de datos que se acoplan perfectamente con la Arquitectura Elm y con el ecosistema en general. Anticipo que esto se repetirá con muchos otros problemas.</li>
+<li><strong>El código es portátil.</strong> Si Elm llegara un día a compilar a x86 o WebAssembly, todo el ecosistema seguiría funcionando, ¡pero más rápido! Los puertos garantizan que todos los paquetes estén escritos completamente en Elm, y el lenguaje mismo está diseñado para que nuevos destinos de compilación sean viables.</li>
+<li><strong>Los paquetes son más seguros.</strong> Lenguajes como JavaScript tienen serios problemas de seguridad con sus paquetes. No es infrecuente oir noticias sobre <a href="https://www.bleepingcomputer.com/news/security/compromised-javascript-package-caught-stealing-npm-credentials/" target="_blank">robo de credenciales</a> o <a href="https://winbuzzer.com/2020/01/14/microsoft-discovers-an-npm-package-thats-been-stealing-unix-user-data-xcxwbn/" target="_blank">de llaves de API</a>, y esto causa un costo permanente en auditoría de todos estos paquetes. Es hasta posible instalar un <a href="https://es.wikipedia.org/wiki/Keylogger" target="_blank">keylogger</a> en <code>window</code>. Los paquetes de Elm garantizan que categorías completas de vulnerabilidades simplemente no pueden ser explotadas, lo que reduce el costo de la auditoría y los riesgos de seguridad en general.</li>
+<li><strong>Es más fácil de optimizar.</strong> El estilo del código generado ha cambiado considerablemente de versión a versión. Por ejemplo, en la <a href="https://elm-lang.org/news/small-assets-without-the-headache" target="_blank">versión 0.19</a> pudimos reducir dramáticamente el tamaño de los exportables (1) al generar código que funciona mejor con los minificadores de JavaScript, y (2) al usar distintas maneras de representar tipos personalizados dependiendo del nivel de optimización elegido. Seguramente volveremos a hacer cambios para permitir la subdivisión de archivos o si encontramos una convención de llamada más rápida para las funciones currificadas. Además, el compilador puede asumir que todo el código es puro, lo que le permite manipularlo mucho más que otros compiladores. Si nos casáramos con una convención de llamada específica haría que muchas de estas optimizaciones sean imposibles.</li>
 </ol>
-<p>This is definitely a longer and harder path, but languages live for 30+ years. They have to support teams and companies for decades, and when I think about what Elm will look like in 20 or 30 years, I think the trade-offs that come with ports look really promising! My talk <a href="https://youtu.be/uGlzRt-FYto" target="_blank">What is Success?</a> starts a little slow, but it gets into this a bit more!</p>
-<p>And again, this path is not for everyone! There are many alternative languages that have a traditional FFI instead, and I encourage you to look into those languages if you think that path might be better. Is the package ecosystem as cohesive? Do you get runtime exceptions more often? Maybe, but maybe the extra flexibility is worth it for you. So I encourage you to take a look at <a href="https://github.com/elm-community/js-integration-examples" target="_blank">these interop examples</a> to decide if flags, ports, and custom elements will cover everything you need. This is especially important if you are considering Elm for commercial use!</p>
+<p>Es un camino más largo y arduo, pero los lenguajes pueden vivir mucho más de 30 años. Tienen que sostener a equipos y empresas por décadas, y cuando pienso en cómo será Elm en 20 o 30 años, las ventajas otorgadas por los puertos me permiten ser muy optimista. Mi charla <a href="https://youtu.be/uGlzRt-FYto" target="_blank">“¿Qué es el éxito?”</a> (en inglés) empieza lenta, pero eventualmente toca este tema.</p>
+<!-- TODO: 👆 ¿Proveer subtítulos? -->
+<p>Y repito, este no es un camino para cualquiera. Hay muchos lenguajes alternativos que tienen una interfaz de función foránea tradicional, y te sugiero que los investigues si crees que serían una mejor opción. ¿El ecosistema de paquetes es igual de coherente? ¿Tendrás más excepciones en tiempo de ejecución? Tal vez. Pero tal vez la flexibilidad vale la pena para ti. Así que te animo a que revises <a href="https://github.com/elm-community/js-integration-examples" target="_blank">estos ejemplos de interoperabilidad</a> para decidir si las flags, los puertos y los elementos personalizados cubren todas tus necesidades. Esto es especialmente importante si estás considerando usar Elm con fines comerciales.</p>
+<!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
 
                                 
                                 </section>
@@ -773,12 +775,12 @@
 
             
                 
-                <a href="custom_elements.html" class="navigation navigation-prev " aria-label="Previous page: Custom Elements">
+                <a href="custom_elements.html" class="navigation navigation-prev " aria-label="Previous page: Elementos personalizados">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../webapps/" class="navigation navigation-next " aria-label="Next page: Web Apps">
+                <a href="../webapps/" class="navigation navigation-next " aria-label="Next page: Aplicaciones web">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -789,7 +791,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Limits","level":"1.8.4","depth":2,"next":{"title":"Web Apps","level":"1.9","depth":1,"path":"webapps/README.md","ref":"webapps/README.md","articles":[{"title":"Navigation","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},{"title":"URL Parsing","level":"1.9.2","depth":2,"path":"webapps/url_parsing.md","ref":"webapps/url_parsing.md","articles":[]},{"title":"Modules","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},{"title":"Structure","level":"1.9.4","depth":2,"path":"webapps/structure.md","ref":"webapps/structure.md","articles":[]}]},"previous":{"title":"Custom Elements","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/limits.md","mtime":"2025-01-16T02:30:22.551Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:31:09.088Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Límites","level":"1.8.4","depth":2,"next":{"title":"Aplicaciones web","level":"1.9","depth":1,"path":"webapps/README.md","ref":"webapps/README.md","articles":[{"title":"Navegación","level":"1.9.1","depth":2,"path":"webapps/navigation.md","ref":"webapps/navigation.md","articles":[]},{"title":"Interpretación de URLs","level":"1.9.2","depth":2,"path":"webapps/url_parsing.md","ref":"webapps/url_parsing.md","articles":[]},{"title":"Módulos","level":"1.9.3","depth":2,"path":"webapps/modules.md","ref":"webapps/modules.md","articles":[]},{"title":"Estructurando aplicaciones web","level":"1.9.4","depth":2,"path":"webapps/structure.md","ref":"webapps/structure.md","articles":[]}]},"previous":{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/limits.md","mtime":"2025-01-16T02:33:11.316Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
