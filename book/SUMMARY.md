@@ -1,7 +1,7 @@
 # Summary
 
-- [Introducción](README.md)
-- [Lo esencial del lenguaje](core_language.md)
+- [Introducción a Elm](README.md)
+- [Fundamentos del lenguaje](core_language.md)
 - [Arquitectura Elm](architecture/README.md)
   - [Botones](architecture/buttons.md)
   - [Campos de texto](architecture/text_fields.md)
