@@ -1,6 +1,6 @@
 [private]
-default:
-    just --list
+@default:
+    just --list --unsorted
 
 # Levanta un servidor con una previsualización del libro.
 preview: install build-repl
