@@ -1,8 +1,8 @@
 # Formularios
 
-Vamos a crear un pequeño formulario. Tiene un campo para tu nombre, otro para tu clave, y otro para verificar la clave. También vamos a hacer un poco de validación para asegurarnos de que ambas claves son iguales.
+Vamos a crear un pequeño formulario. Tendrá un campo para un nombre, otro para la clave, y otro para verificar la clave. También vamos a hacer un poco de validación para asegurarnos de que ambas claves son iguales.
 
-Abajo tienes el programa completo. Puedes abrirlo en el editor online. Trata de escribir algo mal para ver mensajes de error. Por ejemplo, cambia el nombre de un campo, como `password`, o de una función, como `placeholder`. **¡Apreta el botón azul!**
+Abajo está el programa completo. Puedes abrirlo en el editor online. Prueba escribir algo mal en el código para ver mensajes de error. Por ejemplo, cambia el nombre de un campo, como `password`, o de una función, como `placeholder`. **¡Apreta el botón azul!**
 
 <div class="edit-link"><a href="https://elm-lang.org/examples/forms">Editar</a></div>
 
@@ -152,7 +152,7 @@ view model =
 
 En ejemplos anteriores usábamos `input` y `div` directamente. ¿Por qué aquí no?
 
-Lo bueno del HTML en Elm es que `input` y `div` son sólo funciones comunes y corrientes. Reciben (1) una lista de atributos, y (2) una lista de nodos hijo. **Ya que son sólo funciones, tenemos el poder completo de Elm para construir nuestras vistas.** Podemos refactorizar código repetitivo y ponerlo en funciones de ayuda de nuestra propia creación. Y eso es justamente lo que estamos haciendo aquí.
+Lo bueno del HTML en Elm es que `input` y `div` no son más que funciones comunes y corrientes. Reciben (1) una lista de atributos, y (2) una lista de nodos hijo. **Ya que son sólo funciones, tenemos el poder completo de Elm para construir nuestras vistas.** Podemos refactorizar código repetitivo y ponerlo en funciones de ayuda de nuestra propia creación. Y eso es justamente lo que estamos haciendo aquí.
 
 La función `view` hace tres llamadas a `viewInput`:
 
@@ -164,7 +164,7 @@ viewInput t p v toMsg =
 
 Esto significa que si escribimos `viewInput "text" "Name" "Bill" Name` en Elm, se convertiría en un valor HTML como `<input type="text" placeholder="Name" value="Bill">` cuando se despliegue en pantalla.
 
-El cuarto hijo es más interesante. Es una llamada a `viewValidation`:
+El cuarto elemento hijo es más interesante. Es una llamada a `viewValidation`:
 
 ```elm
 viewValidation : Model -> Html msg
@@ -176,17 +176,17 @@ viewValidation model =
         div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
-Esta función primero compara las dos claves. Si son iguales, retorna un texto en verde y un mensaje de afirmación. Si no son iguales, retorna un texto en rojo y un mensaje de ayuda.
+Esta función primero compara las dos claves. Si son iguales, retorna un texto en verde con un mensaje de confirmación. Si no son iguales, retorna un texto en rojo con un mensaje de ayuda.
 
-Estas funciones de ayuda ya empiezan a mostrar el beneficio de que nuestra librería de HTML sea sólo código Elm. Podríamos haber puesto todo este código dentro de `view`, pero crear funciones de ayuda es completamente normal en Elm, incluyendo en el código de la vista. “Parece que está un poco difícil de entender. Probemos extrayéndolo a una función de ayuda”.
+Estas funciones de ayuda ya empiezan a mostrar el beneficio de que nuestra librería de HTML sea sólo código Elm. Podríamos haber puesto todo este código dentro de `view`, pero crear funciones de ayuda es completamente normal en Elm, incluso para el código de la vista. Es habitual pensar: “Parece que está un poco difícil de entender. Probemos extrayéndolo a una función de ayuda”.
 
-> **Ejercicios:** [Revisa este ejemplo](https://elm-lang.org/examples/forms) en el editor online. Intenta añadir las siguientes funcionalidades a la función `viewValidation`:
+> **Ejercicios:** [Revisa el ejemplo en el editor online.](https://elm-lang.org/examples/forms) Intenta añadir las siguientes funcionalidades a la función `viewValidation`:
 >
-> - Confirma que la clave es más larga que 8 caracteres.
+> - Confirma que la clave tiene más de 8 caracteres.
 > - Asegura que la clave tiene letras mayúsculas, minúsculas y dígitos numéricos.
 >
 > Usa las funciones del módulo [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) para completar estos ejercicios.
 >
-> **Advertencia:** Necesitamos aprender mucho más antes de poder enviar una solicitud HTTP. Sigue leyendo en orden hasta llegar a la sección sobre HTTP antes de intentarlo por tu cuenta. Te va a resultar mucho más fácil siguiendo esta guía.
+> **Advertencia:** Necesitamos aprender mucho más antes de poder enviar una solicitud HTTP. Sigue leyendo en orden hasta llegar a la sección sobre HTTP antes de intentarlo por tu cuenta. Te va a resultar mucho más fácil si sigues esta guía.
 >
-> **Nota:** Parece que los intentos de hacer librerías genéricas de validación no han dado muchos frutos. Creo que el problema es que los chequeos son más comúnmente resueltos con funciones normales. Éstas reciben argumentos y retornan un `Bool` o un `Maybe`. O sea, ¿para qué usar una librería para revisar que dos textos son iguales? De lo que hemos aprendido, el código más simple surge al escribir la lógica para tu caso particular, sin extras añadidos. Así que siempre intenta hacer esto antes de decidir que necesitas una solución más compleja.
+> **Nota:** Parece que los intentos de hacer librerías genéricas de validación no han dado muchos frutos. Creo que el problema es que los chequeos son más fácilmente resueltos con funciones comunes y corrientes, que reciben argumentos y retornan un `Bool` o un `Maybe`. Es decir, no necesitamos una librería para revisar, por ejemplo, que dos textos son iguales. De lo que hemos aprendido desarrollando y usando Elm, el código más simple es resultado de escribir la lógica necesaria para nuestro caso particular, sin añadir nada más. Así que te sugiero que siempre intentes hacer esto antes de probar una solución más compleja.
