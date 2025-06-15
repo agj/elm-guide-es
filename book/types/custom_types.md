@@ -1,4 +1,4 @@
-> **Nota:** Los tipos personalizados solían llamarse “tipos de unión” en Elm. En otras partes puede que los hayas oído llamar como [“tipos de datos algebraicos”](https://es.wikipedia.org/wiki/Tipo_de_dato_algebraico), también.
+> **Nota:** Los tipos personalizados solían llamarse “tipos de unión” en Elm. En otras partes puede que los hayas oído llamar como [“unión etiquetada”](https://academia-lab.com/enciclopedia/union-etiquetada/) o [“tipos de datos algebraicos”](https://es.wikipedia.org/wiki/Tipo_de_dato_algebraico), también.
 
 # Tipos personalizados
 
@@ -6,7 +6,7 @@ Hasta ahora hemos visto muchos tipos, como `Bool`, `Int` y `String`. Pero ¿cóm
 
 Imaginemos que queremos crear un chat. Cada usuario necesita un nombre, pero tal vez algunos usuarios no tienen cuenta permanente, solamente escriben un nombre cada vez que entran.
 
-Podemos describir esta situación definiendo un tipo `UserStatus` que lista todas las posibles variaciones:
+Podemos describir esta situación definiendo un tipo `UserStatus` que lista todas las posibilidades:
 
 ```elm
 type UserStatus
@@ -36,7 +36,7 @@ kate95 =
     { status = Visitor, name = "kate95" }
 ```
 
-Ahora podemos llevar cuenta de si un usuario es `Regular`, o sea que tiene cuenta, o es `Visitor`, es decir visitante temporal. No está tan mal, pero podemos simplificarlo aún más.
+Ahora podemos llevar cuenta de si un usuario es `Regular`, o sea que tiene cuenta, o es `Visitor`, un visitante temporal. No está tan mal, pero podemos simplificarlo aún más.
 
 En vez de crear un tipo personalizado y un alias de tipo, podemos representar todo esto con un sólo tipo personalizado. Las variantes `Regular` y `Visitor` pueden llevar información asociada. En nuestro caso, la información es un valor `String`:
 
@@ -56,7 +56,7 @@ kate95 =
 
 La información se asocia directamente a la variante, y ya no hay necesidad de definir un registro.
 
-Otro beneficio de esta manera de hacerlo es que cada variante puede tener distinta información asociada. Por ejemplo, los usuarios `Regular` podrían informar su edad al registrarse. No hay una buena manera de capturar eso con registros, pero cuando defines tu propio tipo personalizado, ya no es problema. Añadamos un poco de información a la variante `Regular` en un ejemplo interactivo:
+Otro beneficio de esta manera de hacerlo es que cada variante puede tener distinta información asociada. Por ejemplo, los usuarios `Regular` podrían informar su edad al registrarse. No hay una buena manera de capturar eso usando registros, pero cuando definimos un tipo personalizado, ya no es problema. Añadamos un poco de información a la variante `Regular` en un ejemplo interactivo:
 
 <!-- prettier-ignore-start -->
 {% replWithTypes %}
@@ -89,9 +89,9 @@ Otro beneficio de esta manera de hacerlo es que cada variante puede tener distin
 {% endreplWithTypes %}
 <!-- prettier-ignore-end -->
 
-Define un usuario `Regular` con nombre y edad ⬆️
+Prueba definir un usuario `Regular` con nombre y edad ⬆️
 
-Sólo añadimos una edad, pero cada variante en un tipo puede diverger mucho más. Por ejemplo, podríamos querer añadir información de ubicación a los usuarios `Regular`, para ofrecer chats regionales; basta con agregar esa información a su variante. O tal vez queremos tener usuarios anónimos también, y para eso podemos añadir una variante `Anonymous`.
+Sólo hemos añadido la edad, pero cada variante en un tipo puede diverger mucho más. Por ejemplo, podríamos querer añadir información de ubicación a los usuarios `Regular`, para ofrecer chats regionales; basta con agregar esa información a su variante. O tal vez queremos tener usuarios anónimos también, y para eso podemos añadir una variante `Anonymous`.
 
 ```elm
 type User
@@ -104,7 +104,7 @@ type User
 
 ## Mensajes
 
-En la sección de arquitectura, vimos algunos ejemplos de definir un tipo `Msg`. Esta clase de tipo es extremadamente común en Elm. En nuestro chat, tal vez necesitemos un tipo `Msg` como este:
+En la sección de arquitectura vimos algunos ejemplos donde definimos un tipo `Msg`. Usar tipos personalizados es la manera más usual y recomendada de definir los mensajes. En nuestro chat, tal vez necesitemos un tipo `Msg` como este:
 
 ```elm
 type Msg
@@ -114,11 +114,11 @@ type Msg
     | ClickedExit
 ```
 
-Tenemos cuatro variantes. Algunas variantes no llevan información asociada, otras llevan bastante. Fíjate en que `ReceivedMessage` lleva un registro asociado. Es totalmente normal. Cualquier tipo puede ser parte de esa información asociada. Esto te permite describir interacciones en tu aplicación en forma muy precisa.
+Tenemos cuatro variantes. Algunas variantes no llevan información asociada, otras llevan bastante. Fíjate en que `ReceivedMessage` lleva un registro asociado. Es totalmente normal; cualquier tipo puede ser parte de esa información asociada. Esto te permite describir interacciones en tu aplicación en forma muy precisa.
 
 ## Modelado
 
-Los tipos personalizados se vuelven muy poderosos cuando empiezas a modelar situaciones en forma precisa. Por ejemplo, si estás esperando que se carguen ciertos datos, puedes querer un modelo con un tipo personalizado así:
+Los tipos personalizados se vuelven muy poderosos cuando empiezas a modelar situaciones en forma precisa. Por ejemplo, si estás esperando que se carguen ciertos datos, puedes querer un modelo con un tipo personalizado como este:
 
 ```elm
 type Profile
@@ -131,4 +131,4 @@ Empiezas en el estado `Loading`, y luego haces la transición a `Failure` o `Suc
 
 ¡Ya aprendimos a crear tipos personalizados! En la próxima sección vamos a ver cómo usarlos.
 
-> **Nota:** **Los tipos personalizados son la funcionalidad más importante de Elm.** Tienen muchísima profundidad, especialmente cuando entres en el hábito de modelar situaciones en forma bien precisa. Traté de comunicar esta profundidad en los apéndices [“Tipos como conjuntos”](/appendix/types_as_sets.html) y [“Tipos como bits”](/appendix/types_as_bits.html). Ojalá los encuentres útiles.
+> **Nota:** **Los tipos personalizados son la funcionalidad más importante de Elm.** Tienen muchísima profundidad, especialmente cuando entres en el hábito de modelar estados en forma bien precisa. Escribí los apéndices [“Tipos como conjuntos”](/appendix/types_as_sets.html) y [“Tipos como bits”](/appendix/types_as_bits.html) para tratar de comunicar esta profundidad. Ojalá que los encuentres interesantes.

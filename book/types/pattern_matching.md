@@ -32,7 +32,7 @@ toName user =
 
 La expresión `case` nos permite bifurcar el código en base a la variante que recibamos. Sea “Thomas” o “Kate”, siempre sabremos cómo mostrar su nombre.
 
-Y si intentamos pasarle argumentos inválidos, como `toName (Visitar "kate95")` o `toName Anonymous`, el compilador nos va a avisar inmediatamente. Esto significa que muchos errores simples pueden ser corregidos en segundos, en vez de aparecerle a los usuarios y terminar costando mucho más tiempo al fin y al cabo.
+Y si intentamos pasarle argumentos inválidos, como `toName (Bisitor "kate95")` o `toName Anonymous`, el compilador nos avisará inmediatamente. Esto significa que muchos errores simples pueden ser corregidos en segundos, en vez de aparecerle a los usuarios y terminar costando mucho más tiempo al fin y al cabo.
 
 ## Comodines
 

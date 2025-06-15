@@ -1,6 +1,6 @@
 # Alias de tipo
 
-Las anotaciones de tipo pueden quedar un poco extensas. Esto se vuelve particularmente problemático si tienes registros con muchos campos. Esa es la razón por la que existen los alias de tipo. Un **alias de tipo** es un nombre corto para un tipo. Por ejemplo, puedes creas un alias `User` de esta forma:
+Las anotaciones de tipo pueden quedar un poco grandes. Esto se vuelve particularmente problemático si tienes registros con muchos campos. Esa es la razón por la que existen los alias de tipo. Un **alias de tipo** es un nombre corto para un tipo. Por ejemplo, puedes creas un alias `User` de esta forma:
 
 ```elm
 type alias User =
@@ -33,7 +33,7 @@ Estas dos definiciones son equivalentes, pero la que lleva el alias de tipo es m
 
 ## Modelos
 
-Es súper común usar alias de tipo al diseñar el modelo. Cuando aprendimos sobre la Arquitectura Elm, usamos este modelo:
+Es súper común usar un alias de tipo al diseñar el modelo. Cuando aprendimos sobre la Arquitectura Elm, usamos este modelo:
 
 ```
 type alias Model =
@@ -43,7 +43,7 @@ type alias Model =
   }
 ```
 
-El principal beneficio de usar un alias de tipo es para cuando escribamos las anotaciones para las funciones `update` y `view`. Es mucho más sensato escribir `Msg -> Model -> Model` que la versión larga. Además tiene el beneficio de que podemos añadir campos a nuestro modelo sin necesitar cambiar anotaciones de tipo.
+El principal beneficio de escribir el modelo usando un alias de tipo es para la anotación de tipo de las funciones `update` y `view`. Es mucho más sensato escribir `Msg -> Model -> Model` que la versión larga. Además tiene el beneficio de que podemos añadir campos a nuestro modelo sin necesitar cambiar anotaciones de funciones.
 
 ## Constructores de registro
 
@@ -77,6 +77,6 @@ Cuando creas un alias de tipo para un registro específicamente, también se gen
 
 Prueba crear un usuario o un alias de tipo nuevo ⬆️
 
-Fíjate en que el orden de los argumentos que recibe el constructor es el mismo que el orden de los campos en el alias de tipo.
+Como puedes apreciar, un constructor de registro no es ni más ni menos que una función para generar un valor de ese tipo en forma abreviada. Esta función recibe la misma cantidad de argumentos y en el mismo orden que los campos definidos en el alias de tipo.
 
-Y repito, **esto sólo vale para registros**. Cuando crees alias de tipo para otros tipos no se generará un constructor.
+Y repito, **esto sólo vale para registros**. Si creamos un alias para otros tipos, no se generará un constructor.
