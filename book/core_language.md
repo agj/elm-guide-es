@@ -1,8 +1,8 @@
-# Lo esencial del lenguaje
+# Fundamentos del lenguaje
 
 Intentemos primero construir una intuición sobre cómo funciona Elm.
 
-El objetivo es familiarizarnos con **valores** y **funciones**, y tomar confianza para cuando nos enfrentemos a ejemplos más largos de código.
+El objetivo es familiarizarnos con los conceptos de **valores** y **funciones**, y adquirir confianza para cuando nos enfrentemos a ejemplos más largos de código.
 
 ## Valores
 
@@ -22,11 +22,11 @@ Veamos primero los números.
 {% endrepl %}
 <!-- prettier-ignore-end -->
 
-Todos los ejemplos en esta página son interactivos. Si apretas sobre esta caja negra ⬆️ vas a ver que el cursor de texto va a empezar a pestañear. Escribe `2 + 2` y apreta ENTER. Deberías ver que aparece `4` como resultado. Recuerda que puedes interactuar de la misma forma con todos los demás ejemplos en este documento.
+Todos los ejemplos en esta página son interactivos. Si apretas sobre esta caja negra ⬆️ verás que el cursor de texto empezará a pestañear. Escribe `2 + 2` y apreta ENTER. Deberías ver que aparece `4` como resultado. Recuerda que puedes interactuar de la misma forma con todos los demás ejemplos en este documento.
 
 Prueba escribir algo como `30 * 60 * 1000` o `2 ^ 4`. Verás que funciona igual que una calculadora.
 
-Está bien hacer aritmética, pero es algo sorprendentemente poco común en la mayoría de programas que uno escribe. Es mucho más frecuente manipular textos, lo que en informática se llama técnicamente **string**. Algo así:
+Está muy bien poder hacer aritmética, pero es algo sorprendentemente poco común en la mayoría de programas que uno escribe. Es mucho más frecuente manipular textos, lo que en informática llamamos técnicamente **strings**. Algo así:
 
 <!-- prettier-ignore-start -->
 {% repl %}
@@ -45,9 +45,9 @@ Está bien hacer aritmética, pero es algo sorprendentemente poco común en la m
 {% endrepl %}
 <!-- prettier-ignore-end -->
 
-Prueba unir varios strings con el operador `(++)` ⬆️
+Prueba juntar varios strings con el operador `(++)` ⬆️
 
-Estos valores primitivos se vuelven más interesantes a medida que escribamos funciones para transformarlos.
+Estos valores primitivos que hemos visto se vuelven más interesantes a medida que escribamos funciones para transformarlos.
 
 > **Nota:** Puedes leer más sobre distintos operadores, como [`(+)`](op-plus), [`(/)`](op-div) y [`(++)`](op-concat) en la documentación del módulo [`Basics`](core-basics). Lamentablemente, esta documentación está en inglés, pero está escrita en un lenguaje muy poco técnico, y aunque sea con traducción automática, creo que vale la pena darle una leída una vez que te parezca apropiado.
 
@@ -58,9 +58,9 @@ Estos valores primitivos se vuelven más interesantes a medida que escribamos fu
 
 ## Funciones
 
-Una **función** es una forma de transformar valores. Éstas toman algunos valores, y producen un nuevo valor.
+Una **función** es una forma de transformar valores. Reciben ciertos valores, y en base a ellos producen un nuevo valor.
 
-Por ejemplo, esta es una función `greet` que recibe un nombre y dice “hola”:
+Por ejemplo, esta es una función `greet` que recibe un nombre y devuelve un saludo:
 
 <!-- prettier-ignore-start -->
 {% repl %}
@@ -87,9 +87,9 @@ Por ejemplo, esta es una función `greet` que recibe un nombre y dice “hola”
 
 Trata saludar a alguna otra persona, como a `"Stokely"` o a `"Kwame"` ⬆️
 
-Los valores que le pasas a la función se suelen llamar **argumentos**, así que podríamos decir que `greet` es una función que recibe un argumento.
+Los valores que le pasas a la función se suelen llamar **argumentos**, así que podríamos decir que `greet` es una función que recibe un solo argumento.
 
-Bien, ahora que terminamos las formalidades, ¿qué te parece si probamos una función `madlib` que recibe _dos_ argumentos?
+Y ahora que terminamos de saludarnos, ¿qué te parece si probamos una función `madlib` que recibe _dos_ argumentos?
 
 <!-- prettier-ignore-start -->
 {% repl %}
@@ -114,11 +114,11 @@ Bien, ahora que terminamos las formalidades, ¿qué te parece si probamos una fu
 {% endrepl %}
 <!-- prettier-ignore-end -->
 
-Intenta darle dos argumentos a la función `madlib` ⬆️
+Intenta pasarle dos argumentos a la función `madlib` ⬆️
 
 Observa que usamos paréntesis para agrupar `"butter" ++ "fly"` en el segundo ejemplo. Cada argumento necesita ser un valor primitivo, como `"gato"`, y si no, necesitas usar paréntesis.
 
-> **Nota:** Si estás habituado a lenguajes como JavaScript, te puede sorprender que las funciones se ven distintas:
+> **Nota:** Si estás habituado a lenguajes como JavaScript, te habrás dado cuenta de que las funciones se ven distintas:
 >
 >     madlib "cat" "ergonomic"                  -- Elm
 >     madlib("cat", "ergonomic")                // JavaScript
@@ -126,13 +126,13 @@ Observa que usamos paréntesis para agrupar `"butter" ++ "fly"` en el segundo ej
 >     madlib ("butter" ++ "fly") "metallic"      -- Elm
 >     madlib("butter" + "fly", "metallic")       // JavaScript
 >
-> Te puede parecer raro al principio, pero para este estilo necesitamos usar menos paréntesis y comas. Cuando te acostumbres vas a ver que el lenguaje se siente más simple y limpio.
+> Te puede parecer raro al principio, pero este estilo necesita usar menos paréntesis y comas. Una vez que te acostumbres verás que el lenguaje se siente más simple y limpio.
 
 ## Expresiones `if`
 
-Cuando necesitas comportamiento condicional en Elm, puedes usar una expresión `if`.
+Cuando necesitamos comportamiento condicional en Elm, podemos usar una expresión `if`.
 
-Creemos una nueva función `greet` que es adecuadamente respetuosa con el expresidente Abraham Lincoln.
+Creemos una nueva función `greet` que es apropiadamente respetuosa con el presidente Abraham Lincoln.
 
 <!-- prettier-ignore-start -->
 {% repl %}
@@ -323,9 +323,9 @@ También es útil **actualizar** valores en un registro:
 {% endrepl %}
 <!-- prettier-ignore-end -->
 
-Si intentamos leer en voz alta las expresiones de arriba, diríamos algo como “Quiero una versión de John cuyo apellido es Adams”, o “cuya edad es 22”.
+Si intentáramos leer en voz alta las expresiones de arriba, diríamos algo como “Quiero una versión de John cuyo apellido es Adams”, o “cuya edad es 22”.
 
-Nótese que al actualizar los campos de `john`, estamos creando un registro completamente nuevo. El registro original no ha sido sobreescrito. Elm permite hacer esto en forma eficiente, compartiendo todo lo que pueda entre ambos. Si actualizas uno en diez campos, el nuevo registro va a compartir los otros nueve.
+Nótese que al actualizar los campos de `john`, estamos creando un registro completamente nuevo. El registro original no ha sido sobreescrito. Elm permite hacer esto en forma eficiente, compartiendo todo lo que pueda entre ambos. Si actualizas un campo entre diez, el nuevo registro va a compartir los otros nueve.
 
 Dicho esto, una función que actualiza la edad quedaría así:
 

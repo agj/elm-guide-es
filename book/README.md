@@ -6,11 +6,11 @@ Esta guía va a:
 
 - Enseñarte los fundamentos de programar usando Elm.
 - Mostrarte cómo crear aplicaciones interactivas usando la **Arquitectura Elm**.
-- Enfatizar principios y patrones que pueden generalizarse al programar en cualquier lenguaje.
+- Enfatizar principios y patrones que pueden generalizarse para aplicarlos en cualquier lenguaje de programación.
 
-Al terminar, espero que no sólo seas capaz de crear excelentes aplicaciones web con Elm, pero que también entiendas las ideas y patrones centrales que crean la experiencia de usar Elm.
+Al terminar, espero que no sólo seas capaz de crear excelentes aplicaciones web con Elm, sino que también entiendas las ideas y patrones centrales que forman la experiencia de usar Elm.
 
-Si aún no estás comprometido con usar Elm, te garantizo que si le das una oportunidad y construyes un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Es muy fácil aplicar las mismas ideas.
+Aunque no tengas completa seguridad de que Elm es para ti, te garantizo que si le das una oportunidad e intentas construir un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Es muy fácil aplicar las mismas ideas en otros contextos.
 
 ## Sobre la traducción
 
@@ -20,7 +20,7 @@ Antes de empezar, un poquito de contexto. Estás leyendo la traducción no ofici
 
 ¿Quieres escribirnos un **comentario**, mandar una **corrección**, o **aportar** con la traducción o sus aspectos técnicos? [El repositorio en Github](https://github.com/agj/elm-guide-es) es el lugar indicado.
 
-**¿Está al día la traducción?** Puedes [revisar aquí si hay cambios nuevos en el libro original](https://github.com/evancz/guide.elm-lang.org/compare/a6030f9968724629c374b936c552d2b8d2b30f31...master).
+**¿Está al día la traducción?** Puedes [revisar aquí si hay nuevos cambios en el libro original](https://github.com/evancz/guide.elm-lang.org/compare/a6030f9968724629c374b936c552d2b8d2b30f31...master).
 
 ## Un ejemplo sencillo
 
@@ -66,11 +66,11 @@ Al principio, seguro que el código te parecerá extraño, así que pronto vamos
 
 Puedes obtener ciertos beneficios programando en un _estilo_ funcional, pero hay algunas cosas que sólo puedes obtener de un _lenguaje_ funcional como Elm:
 
-- Tener virtualmente ningún error en tiempo de ejecución.
+- Tener cero errores en tiempo de ejecución, en la práctica.
 - Mensajes de error amistosos.
 - Capacidad de refactorizar sin peligro.
-- Versionado semántico (_semver_) para todos los paquetes Elm.
+- Versionado semántico (_semver_) impuesto automáticamente a todos los paquetes Elm.
 
-Ninguna combinación de librerías de JS te dará estas garantías, ya que provienen del diseño del lenguaje mismo. Y gracias a estas garantías, es muy común que programadores de Elm digan que sienten **más confianza** que nunca al programar. Confianza en poder rápidamente añadir nuevas funcionalidades; confianza en poder refactorizar miles de líneas… Y sin la ansiedad de que se te pasó un detalle importante.
+Ninguna combinación de librerías de JS te dará estas garantías, ya que provienen del diseño del lenguaje mismo. Y gracias a estas garantías, es muy común que programadores de Elm digan que sienten más **confianza** que nunca al programar. Confianza en poder rápidamente añadir nuevas funcionalidades; confianza en poder refactorizar miles de líneas… Y sin la ansiedad de que se te pasó un detalle importante.
 
 He puesto mucho énfasis en hacer que Elm sea fácil de aprender y usar, así que todo lo que pido de ti es que le des una oportunidad y formes tu opinión. Espero que sea una grata sorpresa.

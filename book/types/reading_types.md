@@ -1,6 +1,6 @@
 # Leyendo tipos
 
-En la sección [_Lo esencial del lenguaje_](/core_language.html) revisamos varios ejemplos interactivos para darnos una intuición general del lenguaje. Ahora vamos a volver a hacer lo mismo, pero con una nueva pregunta en mente. ¿Qué **tipo** de valor es este?
+En la sección [_Fundamentos del lenguaje_](/core_language.html) revisamos varios ejemplos interactivos para desarrollar una intuición general del lenguaje. Ahora vamos a volver a hacer lo mismo, pero con una nueva pregunta en mente: ¿Qué **tipo** de valor es este?
 
 ## Valores primitivos y listas
 
@@ -28,17 +28,16 @@ Ingresemos algunas expresiones simples y veamos qué pasa:
 {% endreplWithTypes %}
 <!-- prettier-ignore-end -->
 
-Haz clic sobre esta caja negra ⬆️ y verás un cursor parpadeando. Escribe `3.1415` y apreta ENTER. Debería aparecer `3.1415` seguido del tipo `Float`.
+Haz clic sobre esta caja negra ⬆️ y verás un cursor parpadeando. Escribe `3.1415` y apreta “enter”. Debería aparecer `3.1415` seguido del tipo `Float`.
 
-Okay, but what is going on here exactly? Each entry shows value along with what **type** of value it happens to be. You can read these examples out loud like this:
-Okay, pero ¿qué está ocurriendo aquí, exactamente? Cada fila muestra un valor junto con el **tipo** del valor al que corresponde. Puedes leer estos valores de esta forma:
+Okay, pero ¿qué es esto, exactamente? Cada fila muestra un valor junto con el **tipo** que le corresponde al valor. Puedes leer estos ejemplos de esta forma:
 
 - El valor `"hello"` es un `String`.
 - El valor `False` es un `Bool`.
 - El valor `3` es un `Int`.
 - El valor `3.1415` es un `Float`.
 
-El es capaz de reconocer el tipo de cualquier valor que ingreses. Veamos qué pasa con listas:
+Elm reconoce el tipo de cualquier valor que ingresemos. Veamos qué pasa con listas:
 
 <!-- prettier-ignore-start -->
 {% replWithTypes %}
@@ -96,11 +95,11 @@ La función `String.length` tiene el tipo `String -> Int`. Esto significa que _t
 {% endreplWithTypes %}
 <!-- prettier-ignore-end -->
 
-Tenemos una función `String -> Int` y le pasamos un argumento `String`. Esto resulta en un `Int`.
+Le pasamos un argumento `String` a una función `String -> Int`. Esto resulta en un `Int`.
 
-¿Y qué pasa cuando no le pasas un `String`? Prueba escribir `String.length [1,2,3]` o `String.length True` y ve lo que ocurre ⬆️
+¿Y qué ocurre si le pasamos algo que no es `String`? Prueba escribir `String.length [1, 2, 3]` o `String.length True` y ve lo que ocurre ⬆️
 
-Vas a darte cuenta de que una función `String -> Int` _tiene que_ recibir un argumento `String`.
+Vas a darte cuenta de que una función `String -> Int` _debe sí o sí_ recibir un argumento `String`.
 
 <!-- prettier-ignore-start -->
 > **Nota:** Las funciones que reciben múltiples argumentos se escriben con varias flechas. Por ejemplo, esta es una función que recibe dos argumentos:
@@ -115,19 +114,18 @@ Vas a darte cuenta de que una función `String -> Int` _tiene que_ recibir un ar
 ]
 {% endreplWithTypes %}
 >
-> Si le das los dos argumentos `String.repeat 3 "ha"`, el resultado será `"hahaha"`. Puedes considerar `->` como una forma rara de separar los argumentos, pero explico su real significado [aquí](/appendix/function_types.md). ¡Es bastante interesante!
+> Si le pasas dos argumentos, así: `String.repeat 3 "ha"`, el resultado será `"hahaha"`. Puedes considerar `->` como una forma rara de separar los argumentos, pero [la razón de por qué se escribe así la explico aquí](/appendix/function_types.md). ¡Es bastante interesante!
 <!-- prettier-ignore-end -->
 
 ## Anotaciones de tipo
 
-Hasta ahora hemos permitido que Elm determine los tipos, pero también podemos escribir una **anotación de tipo** en la lina justo arriba de una definición. Es decir que en nuestro código podemos escribir cosas como estas:
+Hasta ahora hemos permitido que Elm infiera el tipado, pero también podemos **anotar tipos** en la línea justo arriba de una definición. Es decir, podemos escribir algo así:
 
+<!-- prettier-ignore-start -->
 ```elm
 half : Float -> Float
 half n =
     n / 2
-
-
 
 -- half 256 == 128
 -- half "3" -- error!
@@ -136,8 +134,6 @@ half n =
 hypotenuse : Float -> Float -> Float
 hypotenuse a b =
     sqrt (a ^ 2 + b ^ 2)
-
-
 
 -- hypotenuse 3 4  == 5
 -- hypotenuse 5 12 == 13
@@ -151,18 +147,17 @@ checkPower powerLevel =
     else
         "Meh"
 
-
-
 -- checkPower 9001 == "It's over 9000!!!"
 -- checkPower True -- error!
 ```
+<!-- prettier-ignore-end -->
 
-No es necesario añadir anotaciones de tipo, pero definitivamente te lo recomiendo. Estos son algunos beneficios:
+No es necesario anotar tipos, pero definitivamente lo recomiendo. Estos son algunos beneficios:
 
-1. **Calidad de los mensajes de error** — Cuando escribes una anotación de tipo, le estás contando al compilador _tu intención_. Tu implementación puede que tenga errores, y el compilador puede comparar eso con tu intención. “Dijiste que el argumento `powerLevel` era `Int`, pero está siendo usado como `String`”.
-2. **Documentación** — Cuando vuelvas a enfrentarte a tu código más tarde (o cuando un colega lo haga por primera vez) va a ser muy útil ver exactamente lo que recibe y devuelve una función sin tener que leer la implementación en detalle.
+1. **Calidad de los mensajes de error** — Cuando anotamos un tipo, le estamos diciendo al compilador nuestra _intención_. La implementación puede que tenga errores, y después de comparar el código con nuestra anotación, el compilador nos dará un mensaje del tipo: “Dijiste que el argumento `powerLevel` era `Int`, pero está siendo usado como `String`”.
+2. **Documentación** — Cuando pase un tiempo sin que trabajemos sobre el mismo código, o cuando un colega lo haga por primera vez, va a ser muy útil ver exactamente lo que recibe y devuelve una función sin tener que leer la implementación en detalle.
 
-Pero la gente puede cometer errores al escribir anotaciones de tipo, así que ¿qué pasa si la anotación no coincide con la implementación? El compilador determina todos los tipos por su cuenta y confirma que tu anotación coincide con la respuesta real. En otras palabras, el compilador siempre verificará que todas las anotaciones que escribas estén correctas. Así tendrás mejores mensajes de error _y además_ tu documentación se mantendrá siempre al día.
+Pero la gente igual puede cometer errores al anotar tipos, así que ¿qué pasa si la anotación no coincide con la implementación? Pues, el compilador determina todos los tipos por su cuenta y confirma que tu anotación coincide con la respuesta real. En otras palabras, el compilador siempre verificará que todas las anotaciones que escribas estén correctas. Así tendrás mejores mensajes de error _y además_ tu documentación se mantendrá siempre al día.
 
 ## Variables de tipo
 
@@ -180,7 +175,7 @@ A medida que revises más código Elm, te irás dando cuenta de que existen anot
 {% endreplWithTypes %}
 <!-- prettier-ignore-end -->
 
-Fíjate en esa `a` minúscula en el tipo. Esto se llama una **variable de tipo**. Puede cambiar según cómo se use [`List.length`][length]:
+Fíjate en esa `a` minúscula en el tipo. Esto se llama una **variable de tipo**. Su significado puede cambiar según cómo se use [`List.length`][length]:
 
 <!-- prettier-ignore-start -->
 {% replWithTypes %}
@@ -204,7 +199,7 @@ Fíjate en esa `a` minúscula en el tipo. Esto se llama una **variable de tipo**
 {% endreplWithTypes %}
 <!-- prettier-ignore-end -->
 
-Sólo necesitamos el largo de la lista, así que no nos importa lo que contenga la lista. Así que el la variable de tipo `a` nos dice que puede calzar con cualquier tipo. Veamos otro ejemplo común:
+Como sólo queremos el largo de la lista, no nos importa qué lleva dentro. La variable de tipo `a` significa que ahí puede ir cualquier tipo. Veamos otro ejemplo común:
 
 <!-- prettier-ignore-start -->
 {% replWithTypes %}
@@ -228,17 +223,16 @@ Sólo necesitamos el largo de la lista, así que no nos importa lo que contenga 
 {% endreplWithTypes %}
 <!-- prettier-ignore-end -->
 
-Otra vez, la variable de tipo `a` puede cambiar según cómo [`List.reverse`][reverse] sea usada. Pero en este caso, tenemos una `a` en el argumento y en el resultado. Esto significa que si le das una `List Int` deberás recibir una `List Int` también. Una vez que decidimos lo que es esa `a`, será lo mismo después también.
+Otra vez, la variable de tipo `a` puede cambiar según cómo usemos [`List.reverse`][reverse]. Pero en este caso, tenemos una `a` tanto en el argumento como en el tipo de retorno. Esto significa que si le pasas una `List Int`, deberás recibir una `List Int` también. Una vez que se decide lo que es esa `a`, seguirá siendo lo mismo después.
 
-> **Nota:** Las variables de tipo deben empezar con una letra minúscula, pero pueden ser palabras completas. Podemos escribir el tipo de `List.length` como `List value -> Int` y podríamos escribir el tipo de `List.reverse` como `List element -> List element`. Funciona siempre y cuando comiencen con una letra minúscula. Las variables de tipo `a` y `b` son usadas por convención en muchos lugares, pero algunas anotaciones de tipo quedan mejor con nombres más específicos.
+> **Nota:** Las variables de tipo deben empezar con una letra minúscula, pero pueden ser palabras completas. Podemos escribir el tipo de `List.length` como `List value -> Int` y podríamos escribir el tipo de `List.reverse` como `List element -> List element`. Funciona siempre y cuando comiencen con una letra minúscula. Las variables de tipo `a` y `b` son usadas por convención en muchos lugares, pero algunas anotaciones quedan mejor con nombres más específicos.
 
 [length]: https://package.elm-lang.org/packages/elm/core/latest/List#length
 [reverse]: https://package.elm-lang.org/packages/elm/core/latest/List#reverse
 
 ## Variables limitadas de tipo
 
-There is a special variant of type variables in Elm called **constrained** type variables. The most common example is the `number` type. The [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) function uses it:
-Hay una variante especial de las variables de tipo en Elm que se llama variables **limitadas** de tipo. El ejemplo más común es el del tipo `number`. La función [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) la usa:
+Hay una variedad especial de variable de tipo en Elm que llamamos variables **limitadas** de tipo. El ejemplo más común es el tipo `number`. La función [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) la usa:
 
 <!-- prettier-ignore-start -->
 {% replWithTypes %}
@@ -254,15 +248,15 @@ Hay una variante especial de las variables de tipo en Elm que se llama variables
 
 Prueba escribir expresiones como `negate 3.1415` o `negate (round 3.1415)` o `negate "hi"` ⬆️
 
-Normalmente, las variables de tipo pueden rellenarse con cualquier cosa, pero `number` sólo puede rellenarse con valores `Int` y `Float`. _Limita_ las posibilidades.
+Normalmente, las variables de tipo pueden rellenarse con cualquier cosa, pero `number` sólo puede rellenarse con valores `Int` y `Float`. O sea, _limita_ las posibilidades.
 
-La lista completa de variables limitadas de tipo es:
+Esta es la lista completa de variables limitadas de tipo:
 
 - `number` permite `Int` y `Float`
 - `appendable` permite `String` y `List a`
-- `comparable` permite `Int`, `Float`, `Char`, `String`, y listas o tuplas de valores `comparable`
+- `comparable` permite `Int`, `Float`, `Char`, `String` y listas o tuplas de valores `comparable`
 - `compappend` permite `String` y `List comparable`
 
 Estas variables limitadas de tipo existen para que ciertos operadores como `(+)` y `(<)` puedan ser un poco más flexibles.
 
-Ya cubrimos bastante bien los tipos de valores y funciones, pero ¿cómo se ve esto cuando empezamos a necesitar estructuras de datos más complejas?
+Ya cubrimos bastante bien los tipos de valores y funciones, pero ¿cómo se ve esto cuando empezamos a necesitar estructuras más complejas de datos?
