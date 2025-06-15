@@ -95,7 +95,7 @@
                 <a href="../">
             
                     
-                    Introducción
+                    Introducción a Elm
             
                 </a>
             
@@ -108,7 +108,7 @@
                 <a href="../core_language.html">
             
                     
-                    Lo esencial del lenguaje
+                    Fundamentos del lenguaje
             
                 </a>
             
@@ -723,8 +723,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="botones">Botones</h1>
-<p>Nuestro primer ejemplo es un contador que puede incrementarse o decrementarse.</p>
-<p>Abajo está el programa completo. Si apretas el botón “Editar” puedes jugar con el código interactivamente en el editor online. Prueba cambiar el texto de uno de los botones. <strong>¡Apreta el botón azul!</strong></p>
+<p>Nuestro primer ejemplo es un contador, con un número que se puede aumentar o disminuir.</p>
+<p>Aquí abajo tienes el programa completo. Si apretas el botón azul “Editar” puedes jugar con el código interactivamente en el editor online. Prueba cambiar el texto de uno de los botones. Dale y <strong>apreta el botón azul.</strong></p>
 <div class="edit-link"><a href="https://elm-lang.org/examples/buttons" target="_blank">Editar</a></div>
 
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
@@ -784,15 +784,18 @@
         , button [ onClick <span class="hljs-type">Increment</span> ] [ text <span class="hljs-string">"+"</span> ]
         ]
 </code></pre>
-<p>Ahora que ya has jugado un poco con el código, seguramente tienes algunas preguntas. ¿Qué hace el valor <code>main</code>? ¿Cómo calzan todas estas partes? Discutámoslo parte por parte.</p>
+<p>Ahora que ya has jugado un poco con el código, seguramente tienes algunas preguntas, como: ¿Qué hace el valor <code>main</code>? ¿Cómo calzan todas estas piezas que veo aquí? Discutámoslo parte por parte.</p>
 <blockquote>
-<p><strong>Nota:</strong> El código usa <a href="../types/reading_types.html">anotaciones de tipo</a>, <a href="../types/type_aliases.html">tipos alias</a>, y <a href="../types/custom_types.html">tipos personalizados</a>. El punto de esta sección es que agarres una idea de la Arquitectura Elm, por lo que no vamos a entrar en esos temas hasta después. Te sugiero que no te adelantes, aunque te compliquen un poco estos aspectos.</p>
+<p><strong>Nota:</strong> El código usa <a href="../types/reading_types.html">anotaciones de tipo</a>, <a href="../types/type_aliases.html">alias de tipo</a>, y <a href="../types/custom_types.html">tipos personalizados</a>. El punto de esta sección es que te hagas una idea de la Arquitectura Elm, por lo que no vamos a entrar en esos temas hasta después. Pero si estos conceptos te confunden, siéntete libre de adelantarte un poco y quitarte las dudas.</p>
 </blockquote>
 <h2 id="main">Main</h2>
-<p>El valor <code>main</code> tiene un significado especial en Elm. Describe lo que se muestra en pantalla. En este caso, vamos a inicializar nuestra aplicación con el valor <code>init</code>, la función <code>view</code> va a mostrar todo en pantalla, y la entrada de usuario va a ser ingresada a la función <code>update</code>. <code>main</code> es como la descripción global de nuestro programa.</p>
-<h2 id="modelo">Modelo</h2>
-<p>El modelado de datos es extremadamente importante en Elm. El punto del <strong>modelo</strong> es capturar todos los detalles de tu aplicación en forma de datos.</p>
-<p>Para hacer un contador, necesitamos tener un número que aumentará o bajará. Eso significa que en esta ocasión el modelo es muy pequeño:</p>
+<p>El valor <code>main</code> (“principal”) tiene un significado especial en Elm: describe lo que se mostrará en pantalla. En este caso, estamos diciendo que el valor <code>init</code> inicializará nuestra aplicación, la función <code>view</code> va a mostrar todo en pantalla, y las acciones del usuario irán a parar a la función <code>update</code>. <code>main</code> es como la descripción global de nuestro programa.</p>
+<pre><code class="lang-elm"><span class="hljs-title">main</span> =
+    <span class="hljs-type">Browser</span>.sandbox { init = init, update = update, view = view }
+</code></pre>
+<h2 id="modelo-model">Modelo (<code>Model</code>)</h2>
+<p>El modelado de datos es extremadamente importante en Elm. El punto del modelo es capturar todos los detalles de tu aplicación en forma de datos.</p>
+<p>Para hacer un contador, lo que necesitamos es un número que subirá o bajará. Eso significa que en esta ocasión el modelo es muy simple:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Model</span> =
     <span class="hljs-type">Int</span>
 </code></pre>
@@ -801,8 +804,8 @@
 <span class="hljs-title">init</span> =
     <span class="hljs-number">0</span>
 </code></pre>
-<p>El valor inicial es cero, y éste subirá o bajará según la gente aprete los botones.</p>
-<h2 id="vista">Vista</h2>
+<p>El valor inicial es cero, y éste subirá o bajará según los botones que apretemos.</p>
+<h2 id="vista-view">Vista (<code>view</code>)</h2>
 <p>Tenemos un modelo, pero ¿cómo lo mostramos en pantalla? Ese es el rol de la función <code>view</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">view</span> : <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Html</span> <span class="hljs-type">Msg</span>
 <span class="hljs-title">view</span> model =
@@ -812,16 +815,16 @@
         , button [ onClick <span class="hljs-type">Increment</span> ] [ text <span class="hljs-string">"+"</span> ]
         ]
 </code></pre>
-<p>Esta función recibe el <code>Model</code> como un argumento, y retorna HTML. Estamos diciendo que queremos un botón de decremento, la cuenta actual, y un botón de incremento.</p>
-<p>Nótese que tenemos una suscripción al evento <code>onClick</code> para cada botón. Estamos diciendo: <strong>cuando alguien haga clic, genera un mensaje</strong>. Dado esto, el botón “+” está generando un mensaje <code>Increment</code>. ¿Qué es eso y a dónde va a parar? Bueno, terminará en la función <code>update</code>.</p>
-<h2 id="actualización">Actualización</h2>
+<p>Esta función recibe <code>Model</code> como un argumento, y retorna HTML. Estamos diciendo que queremos un botón para reducir, la cuenta actual, y un botón para aumentar.</p>
+<p>Nótese que tenemos una suscripción al evento <code>onClick</code> en cada botón. Estamos diciendo: <strong>cuando alguien haga clic, genera un mensaje</strong>. En este caso, el botón “+” está generando un mensaje <code>Increment</code>. ¿Qué es eso, y a dónde va a parar? Veamos la función <code>update</code>.</p>
+<h2 id="actualización-update">Actualización (<code>update</code>)</h2>
 <p>La función <code>update</code> describe cómo nuestro <code>Model</code> cambiará en el tiempo.</p>
 <p>Definimos dos mensajes que puede recibir:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
     = <span class="hljs-type">Increment</span>
     | <span class="hljs-type">Decrement</span>
 </code></pre>
-<p>Después, la función <code>update</code> simplemente describe qué se debe hacer cuando se recibe uno de estos mensajes.</p>
+<p>Después, la función <code>update</code> simplemente describe qué se debe hacer cuando se recibe alguno de estos mensajes.</p>
 <pre><code class="lang-elm"><span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Model</span>
 <span class="hljs-title">update</span> msg model =
     <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
@@ -831,26 +834,26 @@
         <span class="hljs-type">Decrement</span> -&gt;
             model - <span class="hljs-number">1</span>
 </code></pre>
-<p>Si recibe un mensaje <code>Increment</code>, incrementamos el modelo. Si recibe un mensaje <code>Decrement</code>, decrementamos el modelo.</p>
-<p>Cada vez que recibimos un mensaje, se le suplirá a la función <code>update</code> para generar un nuevo modelo. Después llamamos a <code>view</code> para saber cómo mostrar este modelo en pantalla. Y así sucesivamente. Las interacciones del usuario generan un mensaje, actualizamos el modelo con <code>update</code>, lo mostramos en pantalla con <code>view</code>. Etc.</p>
+<p>Si recibe un mensaje <code>Increment</code>, sumamos 1 al modelo. Si recibe un mensaje <code>Decrement</code>, restamos 1 al modelo.</p>
+<p>Cada vez que se produzca un mensaje, éste pasará por la función <code>update</code> para generar un nuevo modelo. Después, la función <code>view</code> es llamada para saber cómo mostrar este modelo en pantalla. Y esto se seguirá repitiendo indefinidamente. Las acciones del usuario generan un mensaje, actualizamos el modelo con <code>update</code>, lo mostramos en pantalla con <code>view</code>. Etc.</p>
 <h2 id="resumen">Resumen</h2>
-<p>Ahora que hemos visto todas las partes de un programa Elm, tal vez sea más fácil entender cómo se relacionan con el diagrama que vimos antes:</p>
+<p>Ahora que hemos visto todas las partes de un programa en Elm, tal vez sea más fácil entender cómo se relacionan con el diagrama que vimos antes:</p>
 <p><img src="buttons.svg" alt="Diagrama de la Arquitectura Elm"></img></p>
-<p>Elm empieza visualizando el valor inicial en pantalla. Después, entras en este loop:</p>
+<p>Elm empieza visualizando el valor inicial en pantalla. Después se repiten los siguientes pasos:</p>
 <ol>
-<li>Esperar interacción del usuario.</li>
-<li>Mandar un mensaje a <code>update</code>.</li>
-<li>Producir un nuevo <code>Model</code>.</li>
-<li>Llamar a <code>view</code> para obtener un nuevo HTML.</li>
-<li>Mostrar el nuevo HTML en pantalla.</li>
-<li>Y se repite.</li>
+<li>Se espera una acción del usuario.</li>
+<li>Se manda un mensaje a <code>update</code>.</li>
+<li>Se produce un nuevo <code>Model</code>.</li>
+<li>Se llama a <code>view</code> para obtener un nuevo HTML.</li>
+<li>Se muestra el nuevo HTML en pantalla.</li>
+<li>Y repetimos.</li>
 </ol>
-<p>Esta es la esencia de la Arquitectura Elm. Todos los ejemplos que veamos a partir de aquí serán sólo leves variaciones de este patrón fundamental.</p>
+<p>Esta es la esencia de la Arquitectura Elm. Todos los ejemplos que veamos de aquí en adelante serán sólo leves variaciones de este patrón fundamental.</p>
 <blockquote>
 <p><strong>Ejercicio:</strong> Añade un botón que reinicie el contador en cero:</p>
 <ol>
 <li>Añade una variante <code>Reset</code> en el tipo <code>Msg</code>.</li>
-<li>Añade una rama <code>Reset</code> en la función <code>update</code>.</li>
+<li>Añade una rama de ejecución <code>Reset</code> en la función <code>update</code>.</li>
 <li>Añade un botón en la función <code>view</code>.</li>
 </ol>
 <p>Puedes editar el ejemplo en el editor online <a href="https://elm-lang.org/examples/buttons" target="_blank">aquí</a>.</p>
@@ -899,7 +902,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Botones","level":"1.3.1","depth":2,"next":{"title":"Campos de texto","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},"previous":{"title":"Arquitectura Elm","level":"1.3","depth":1,"path":"architecture/README.md","ref":"architecture/README.md","articles":[{"title":"Botones","level":"1.3.1","depth":2,"path":"architecture/buttons.md","ref":"architecture/buttons.md","articles":[]},{"title":"Campos de texto","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},{"title":"Formularios","level":"1.3.3","depth":2,"path":"architecture/forms.md","ref":"architecture/forms.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"architecture/buttons.md","mtime":"2025-01-16T02:33:11.312Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Botones","level":"1.3.1","depth":2,"next":{"title":"Campos de texto","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},"previous":{"title":"Arquitectura Elm","level":"1.3","depth":1,"path":"architecture/README.md","ref":"architecture/README.md","articles":[{"title":"Botones","level":"1.3.1","depth":2,"path":"architecture/buttons.md","ref":"architecture/buttons.md","articles":[]},{"title":"Campos de texto","level":"1.3.2","depth":2,"path":"architecture/text_fields.md","ref":"architecture/text_fields.md","articles":[]},{"title":"Formularios","level":"1.3.3","depth":2,"path":"architecture/forms.md","ref":"architecture/forms.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"architecture/buttons.md","mtime":"2025-06-15T16:06:38.559Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

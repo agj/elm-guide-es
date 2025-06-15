@@ -95,7 +95,7 @@
                 <a href="../">
             
                     
-                    Introducción
+                    Introducción a Elm
             
                 </a>
             
@@ -108,7 +108,7 @@
                 <a href="../core_language.html">
             
                     
-                    Lo esencial del lenguaje
+                    Fundamentos del lenguaje
             
                 </a>
             
@@ -723,7 +723,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="alias-de-tipo">Alias de tipo</h1>
-<p>Las anotaciones de tipo pueden quedar un poco extensas. Esto se vuelve particularmente problemático si tienes registros con muchos campos. Esa es la razón por la que existen los alias de tipo. Un <strong>alias de tipo</strong> es un nombre corto para un tipo. Por ejemplo, puedes creas un alias <code>User</code> de esta forma:</p>
+<p>Las anotaciones de tipo pueden quedar un poco grandes. Esto se vuelve particularmente problemático si tienes registros con muchos campos. Esa es la razón por la que existen los alias de tipo. Un <strong>alias de tipo</strong> es un nombre corto para un tipo. Por ejemplo, puedes creas un alias <code>User</code> de esta forma:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">User</span> =
     { name : <span class="hljs-type">String</span>
     , age : <span class="hljs-type">Int</span>
@@ -748,13 +748,13 @@
 </code></pre>
 <p>Estas dos definiciones son equivalentes, pero la que lleva el alias de tipo es más corta y fácil de leer. Todo lo que hicimos fue crear un <strong>alias</strong> para un tipo más grande.</p>
 <h2 id="modelos">Modelos</h2>
-<p>Es súper común usar alias de tipo al diseñar el modelo. Cuando aprendimos sobre la Arquitectura Elm, usamos este modelo:</p>
+<p>Es súper común usar un alias de tipo al diseñar el modelo. Cuando aprendimos sobre la Arquitectura Elm, usamos este modelo:</p>
 <pre><code>type alias Model =
   { name : String
   , password : String
   , passwordAgain : String
   }
-</code></pre><p>El principal beneficio de usar un alias de tipo es para cuando escribamos las anotaciones para las funciones <code>update</code> y <code>view</code>. Es mucho más sensato escribir <code>Msg -&gt; Model -&gt; Model</code> que la versión larga. Además tiene el beneficio de que podemos añadir campos a nuestro modelo sin necesitar cambiar anotaciones de tipo.</p>
+</code></pre><p>El principal beneficio de escribir el modelo usando un alias de tipo es para la anotación de tipo de las funciones <code>update</code> y <code>view</code>. Es mucho más sensato escribir <code>Msg -&gt; Model -&gt; Model</code> que la versión larga. Además tiene el beneficio de que podemos añadir campos a nuestro modelo sin necesitar cambiar anotaciones de funciones.</p>
 <h2 id="constructores-de-registro">Constructores de registro</h2>
 <p>Cuando creas un alias de tipo para un registro específicamente, también se genera un <strong>constructor de registro</strong>. Así que si definimos un alias de tipo <code>User</code>, podemos crear registros de esta forma:</p>
 <!-- prettier-ignore-start -->
@@ -783,8 +783,8 @@
 </div>
 <!-- prettier-ignore-end --><p></p>
 <p>Prueba crear un usuario o un alias de tipo nuevo ⬆️</p>
-<p>Fíjate en que el orden de los argumentos que recibe el constructor es el mismo que el orden de los campos en el alias de tipo.</p>
-<p>Y repito, <strong>esto sólo vale para registros</strong>. Cuando crees alias de tipo para otros tipos no se generará un constructor.</p>
+<p>Como puedes apreciar, un constructor de registro no es ni más ni menos que una función para generar un valor de ese tipo en forma abreviada. Esta función recibe la misma cantidad de argumentos y en el mismo orden que los campos definidos en el alias de tipo.</p>
+<p>Y repito, <strong>esto sólo vale para registros</strong>. Si creamos un alias para otros tipos, no se generará un constructor.</p>
 
                                 
                                 </section>
@@ -828,7 +828,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Alias de tipo","level":"1.4.2","depth":2,"next":{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},"previous":{"title":"Leyendo tipos","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/type_aliases.md","mtime":"2025-01-16T02:33:11.317Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-01-16T02:33:57.062Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Alias de tipo","level":"1.4.2","depth":2,"next":{"title":"Tipos personalizados","level":"1.4.3","depth":2,"path":"types/custom_types.md","ref":"types/custom_types.md","articles":[]},"previous":{"title":"Leyendo tipos","level":"1.4.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"types/type_aliases.md","mtime":"2025-06-15T16:06:38.564Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
