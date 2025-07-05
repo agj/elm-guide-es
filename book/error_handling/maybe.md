@@ -135,7 +135,7 @@ type alias Info =
     }
 ```
 
-Este nuevo modelo captura mucho mejor la realidad de la aplicación. Sólo tenemos dos posibles situaciones: O sólo tienes el nombre, o tienes el nombre y un montón de información extra. En el código de nuestra vista sólo necesitamos pensar en si acaso vamos a visualizar una versión `Less` o `More` del amigo. No hace falta responder preguntas como “¿Qué pasa si tengo `age` pero no tengo `weight`?”. Simplemente no es algo posible con nuestro tipo más preciso.
+Este nuevo modelo captura mucho mejor la realidad de la aplicación. Sólo tenemos dos posibles situaciones: O sólo tienes el nombre, o tienes el nombre y un montón de información extra. En el código de nuestra vista sólo necesitamos pensar en si acaso vamos a visualizar una versión `Less` o `More` del amigo. No hace falta responder preguntas como “¿Qué pasa si tengo `age` pero no tengo `weight`?”. Esa situación es simplemente imposible con nuestro tipo más preciso.
 
 El punto es que si te hallas usando `Maybe` en todas partes, vale la pena revisar tus definiciones `type` y `type alias` y preguntarte si puedes acaso usar una representación más exacta. Esto comunmente conllevará refactorizaciones que simplifican tu código de actualización y de vista.
 
@@ -143,8 +143,8 @@ El punto es que si te hallas usando `Maybe` en todas partes, vale la pena revisa
 >
 > El inventor del concepto de `null`, Tony Hoare, dijo lo siguiente:
 >
-> > Lo llamo mi “error de los mil millones”. Me refiero a la invención de la referencia nula en 1965. En ese entonces estaba diseñando el primer sistema completo de tipado de referencias en un lenguaje orientado a objetos (ALGOL W). Mi objetivo era asegurarme de que el uso de cualquier referencia sea absolutamente seguro, con chequeos realizados en forma automática por el compilador. Pero no pude resistir la tentación de añadir referencias nulas, sólo porque eran tan fáciles de implementar. Esto conllevó a un sinfín de errores, vulnerabilidades y caídas de sistema, los que seguramente han causado miles de millones de dólares en estrés y daños durante los últimos cuarenta años.
+> > Lo llamo mi “error de los mil millones”. Me refiero a la invención de la referencia nula en 1965. En ese entonces estaba diseñando el primer sistema de tipado completo de referencias en un lenguaje orientado a objetos (ALGOL W). Mi objetivo era asegurarme de que el uso de cualquier referencia sea absolutamente seguro, con chequeos realizados en forma automática por el compilador. Pero no pude resistir la tentación de añadir referencias nulas, sólo porque eran tan fáciles de implementar. Esto conllevó a un sinfín de errores, vulnerabilidades y caídas de sistema, los que seguramente han causado miles de millones de dólares en estrés y daños durante los últimos cuarenta años.
 >
-> Es un diseño que hace que un error sea **implícito**. Cuando sea que creamos que tenemos un `String`, podríamos en realidad tener `null`. ¿Tenemos que revisar, o el código que nos pasó el valor ya hizo el chequeo? Tal vez no haga falta, pero por otro lado, tal vez cause que se caiga el servidor. Supongo que nos enteraremos eventualmente.
+> Es un diseño que hace que un error sea **implícito**. Cuando sea que creamos que tenemos un `String`, podríamos en realidad tener `null`. ¿Tenemos que revisar nosotros, o el código que nos pasó el valor ya hizo el chequeo? Tal vez no haga falta, pero por otro lado, tal vez cause que se caiga el servidor. Supongo que nos enteraremos eventualmente.
 >
 > Elm evita estos problemas al simplemente no tener referencias `null`. En cambio, tenemos tipos personalizados como `Maybe` para que los errores sean **explícitos**. Así no nos topamos con sorpresas. Un `String` siempre será un `String`, y cuando veas `Maybe String`, el compilador nos asegura que ambas variantes están siendo consideradas en el código. Así obtenemos la misma flexibilidad, pero ninguno de los bugs.

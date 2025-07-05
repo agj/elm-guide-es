@@ -47,7 +47,7 @@ No sólo podemos revisar la edad, sino que además podemos mostrar mensajes dist
 
 ## Recuperación de errores
 
-El tipo `Result` también te puede ayudar a recuperarte después de un error. Una situación donde encontrarás esto es al hacer solicitudes HTTP. Digamos que queremos mostrar el texto completo de _Anna Karenina_ de León Tolstói. Nuestra solicitud retorna un valor `Result Error String` para capturar el hecho de que la solicitud puede ser exitosa y contener el texto completo, o tal vez falle en una de varias maneras:
+El tipo `Result` también nos puede ayudar a recuperarnos después de un error. Una situación donde esto se hace necesario es al hacer solicitudes HTTP. Digamos que queremos mostrar el texto completo de _Anna Karenina_ de León Tolstói. Nuestra solicitud retorna un valor `Result Error String` para capturar el hecho de que la solicitud puede ser exitosa y contener el texto completo, o tal vez falle en una de varias maneras:
 
 ```elm
 type Error
