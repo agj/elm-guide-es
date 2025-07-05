@@ -2,7 +2,7 @@
 
 Ahora vamos a crear un reloj digital. (La versión análoga viene como un ejercicio al final).
 
-Hasta ahora nos hemos enfocado en los comandos. Con los ejemplos de HTTP y aleatoriedad, comandamos a Elm que haga cierto trabajo inmediatamente, pero eso no tiene sentido para un reloj. _Siempre_ queremos saber cuál es el tiempo actual. Y para eso sirven las **suscripciones**.
+Hasta ahora nos hemos enfocado en los comandos. Con los ejemplos de HTTP y de aleatoriedad, comandamos a Elm que haga cierto trabajo inmediatamente, pero eso no tiene sentido para un reloj. _Siempre_ queremos saber cuál es la hora actual. Y para eso sirven las **suscripciones**.
 
 Empieza apretando el botón azul “Editar” y revisa el código en el editor online.
 
@@ -104,13 +104,13 @@ Todo lo nuevo aquí proviene del paquete [`elm/time`][time]. Vamos parte por par
 
 Para trabajar correctamente con el tiempo al programar, necesitamos tres conceptos distintos:
 
-- **Tiempo humano** — Esto es lo que ves en los relojes (8 am) o en los calendarios (3 de mayo). Bien, pero, si tengo una llamada a las 8 am en Boston, ¿a qué hora sería para mi amigo en Vancouver? Si es a las 8 am en Tokio, ¿sería siquiera el mismo día en Nueva York? (¡No!). Ya que las [zonas horarias][tz] están basadas en fronteras políticas en flujo constante, y dado el uso inconsistente del [horario de verano][dst], básicamente nunca debiera almacenarse en tu `Model` o en tu base de datos. Es sólo para ser mostrado.
+- **Tiempo humano** — Esto es lo que ves en los relojes (8 am) o en los calendarios (3 de mayo). Bien, pero, si tengo una llamada a las 8 am en Boston, ¿a qué hora sería para mi amigo en Vancouver? Si es a las 8 am en Tokio, ¿sería siquiera el mismo día en Nueva York? (¡No!). Ya que las [zonas horarias][tz] están basadas en fronteras políticas en flujo constante, y dado el uso inconsistente del [horario de verano][dst], el “tiempo humano” es un dato que nunca debiéramos almacenar en el `Model` o en base de datos. Es sólo para ser mostrado al usuario.
 
-- **Tiempo POSIX** — Con el tiempo POSIX, no importa dónde vivas o qué fecha en el año sea. Es simplemente el número de segundos transcurridos desde un punto arbitrario en el tiempo (en 1970). Vayas donde vayas en la Tierra, el tiempo POSIX es siempre el mismo.
+- **Tiempo POSIX** — Con el tiempo POSIX, no importa dónde vivas o qué fecha del año sea. Es simplemente el número de segundos transcurridos desde un punto arbitrario en el tiempo (en 1970). Vayas donde vayas en la Tierra, el tiempo POSIX es siempre el mismo.
 
-- **Zonas horarias** — Una “zona horaria” es un montón de datos que te permiten convertir el tiempo POSIX en tiempo humano. Esto _no_ es sólo `UTC-7` o `UTC+3`. Las zonas horarias son mucho más complicadas que sólo un ajuste numérico. Cada vez que [Florida cambia permanentemente a tiempo DST][florida] o que [Samoa cambia de UTC-11 a UTC+13][samoa], un pobre individuo hace una anotación en la [base de datos de zonas horarias de IANA][iana]. Esa base de datos es cargada en cada computador, y combinando el tiempo POSIX y todos los casos borde incluídos en la base de datos, podemos calcular el tiempo humano.
+- **Zonas horarias** — Una “zona horaria” es un montón de datos que te permiten convertir el tiempo POSIX en tiempo humano. Esto _no_ es sólo `UTC-7` o `UTC+3`. Las zonas horarias son mucho más complicadas que sólo un ajuste numérico. Cada vez que [Florida cambia permanentemente a tiempo DST][florida], o que [Samoa cambia de UTC-11 a UTC+13][samoa], un pobre individuo hace una anotación en la [base de datos de zonas horarias de IANA][iana]. Esa base de datos es cargada en cada computador, y combinando el tiempo POSIX y todos los casos borde incluídos en la base de datos, podemos calcular el tiempo humano.
 
-Para mostrarle a una persona el tiempo, siempre necesitamos tener un `Time.Posix` y un `Time.Zone`. Eso es todo. Recuerda que todo eso del “tiempo humano” es algo de lo que la función `view` se debe preocupar, y nunca el modelo. De hecho, puedes observarlo en nuestra vista:
+Para mostrarle a una persona el tiempo, siempre necesitamos tener un `Time.Posix` y un `Time.Zone`. Eso es todo. Recuerda que el “tiempo humano” es algo de lo que la función `view` se debe preocupar, y nunca el modelo. De hecho, puedes observarlo en nuestra vista:
 
 ```elm
 view : Model -> Html Msg
@@ -130,7 +130,7 @@ view model =
 
 La función [`Time.toHour`][toHour] recibe un `Time.Zone` y un `Time.Posix`, y nos devuelve un `Int` entre `0` y `23` indicando qué hora es en _tu_ zona horaria.
 
-Hay mucha más información relacionada con el manejo del tiempo en el README de [`elm/time`][time]. Dale una leída antes de hacer otras cosas que usen tiempo, especialmente si necesitas trabajar con planificación de horarios, calendarios, etc.
+Hay mucha más información relacionada con el manejo del tiempo en la documentación de [`elm/time`][time]. Dale una leída antes de hacer otras cosas que usen el tiempo, especialmente si necesitas trabajar con calendarios, agendas, etc.
 
 [tz]: https://es.wikipedia.org/wiki/Huso_horario
 [dst]: https://es.wikipedia.org/wiki/Horario_de_verano
@@ -160,7 +160,7 @@ every : Float -> (Time.Posix -> msg) -> Sub msg
 Ésta recibe dos argumentos:
 
 1. Un intervalo de tiempo en milisegundos. Pusimos `1000`, lo que significa una vez por segundo. Pero también podríamos decir `60 * 1000` para una vez por minuto, o `5 * 60 * 1000` para cada cinco minutos.
-2. Una función que convierte el tiempo actual en un `Msg`. Es decir que cada segundo, el tiempo actual se convertirá en un mensaje `Tick <time>` que recibirá la función `update`.
+2. Una función que convierte el tiempo actual en un `Msg`. Es decir que cada segundo, el tiempo actual se convertirá en un mensaje `Tick <tiempo>` que recibirá la función `update`.
 
 Ese es el patrón básico de cualquier suscripción. Le pasas un poco de configuración, y luego describes cómo producir un valor `Msg`. No es tan difícil, ¿o sí?
 
