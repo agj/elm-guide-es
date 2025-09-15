@@ -1,23 +1,22 @@
 # Elementos personalizados
 
-En las últimas páginas hemos visto (1) cómo inicializar programas Elm desde JavaScript, (2) cómo pasar datos en forma de flags, y (3) cómo mandar mensajes entre Elm y JS usando puertos. Pero, adivina qué: ¡hay otra manera más de interoperar!
+En las últimas páginas hemos visto (1) cómo inicializar programas Elm desde JavaScript, (2) cómo pasar datos en forma de flags, y (3) cómo mandar mensajes entre Elm y JS usando puertos. Pero hay otra manera de interoperar que nos queda por revisar.
 
-Los navegadores populares ya todos soportan [elementos personalizados](https://developer.mozilla.org/es/docs/Web/API/Web_components/Using_custom_elements), y ésta resulta ser una forma muy práctica de incluir JS en programas Elm.
+Hay una funcionalidad relativamente reciente en navegadores web, llamada [elementos personalizados](https://developer.mozilla.org/es/docs/Web/API/Web_components/Using_custom_elements) (también conocidos como “componentes web”). Resulta que son una forma muy práctica de incluir JS en programas Elm.
 
-Aquí tienes un [ejemplo mínimo](https://github.com/elm-community/js-integration-examples/tree/master/internationalization) de cómo usar elementos personalizados para hacer localización e internacionalización.
+Aquí tienes un [ejemplo mínimo pero completo](https://github.com/elm-community/js-integration-examples/tree/master/internationalization) (en inglés) de cómo usar elementos personalizados para hacer localización e internacionalización. A continuación, un poco de explicación de todo esto.
 
 <!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
 
 ## Crear elementos personalizados
 
-Supongamos que queremos localizar fechas, pero esto no es aún posible directo desde los paquetes básicos de Elm. Tal vez quieres escribir una función que localiza una fecha:
+Supongamos que queremos localizar fechas. Esto aún no es posible usando sólo Elm. Tal vez queremos escribir una función así, que presenta una fecha con formato localizado:
 
 ```javascript
-//
 //   localizeDate('sr-RS', 12, 5) === "петак, 1. јун 2012."
 //   localizeDate('en-GB', 12, 5) === "Friday, 1 June 2012"
 //   localizeDate('en-US', 12, 5) === "Friday, June 1, 2012"
-//
+
 function localizeDate(lang, year, month) {
   const dateTimeFormat = new Intl.DateTimeFormat(lang, {
     weekday: "long",
@@ -30,18 +29,17 @@ function localizeDate(lang, year, month) {
 }
 ```
 
-Pero, ¿cómo diantres la usamos en Elm? Las últimas versiones de los navegadores te permiten crear nuevos tipos de nodos DOM de esta forma:
+Pero, ¿cómo diantres la usamos desde Elm? Pues una forma es creando un nuevo tipo de nodo del DOM, de esta manera:
 
 ```javascript
-//
 //   <intl-date lang="sr-RS" year="2012" month="5">
 //   <intl-date lang="en-GB" year="2012" month="5">
 //   <intl-date lang="en-US" year="2012" month="5">
-//
+
 customElements.define(
   "intl-date",
   class extends HTMLElement {
-    // things required by Custom Elements
+    // Cosas requeridas para crear un elemento personalizado.
     constructor() {
       super();
     }
@@ -55,7 +53,7 @@ customElements.define(
       return ["lang", "year", "month"];
     }
 
-    // Our function to set the textContent based on attributes.
+    // Nuestra función que cambia el texto del nodo en base a sus atributos.
     setTextContent() {
       const lang = this.getAttribute("lang");
       const year = this.getAttribute("year");
@@ -66,9 +64,9 @@ customElements.define(
 );
 ```
 
-La partes más importantes son `attributeChangedCallback` y `observedAttributes`. Necesitas lógica como seta para detectar cambios en los atributos que te interesan.
+La partes más importantes son `attributeChangedCallback` (método gatillado cuando cambia un atributo) y `observedAttributes` (método con el que explicitamos cuáles son los atributos que nos interesan). Estas dos piezas son necesarias para detectar cambios en los atributos de nuestro elemento personalizado.
 
-Carga eso antes de inicializar tu programa Elm, y podrás escribir código Elm como el siguiente:
+Si cargamos el código de arriba antes de inicializar nuestro programa Elm, podremos escribir código como el siguiente:
 
 ```elm
 import Html exposing (Html, node)
@@ -85,7 +83,7 @@ viewDate lang year month =
         []
 ```
 
-Y así ya tienes acceso a `viewDate` para cuando necesites información localizada en tu vista.
+Y listo, tendremos esta función `viewDate` disponible para usar en algún lugar dentro de la vista, para mostrar fechas con formato localizado.
 
 Revisa el ejemplo completo [aquí](https://github.com/elm-community/js-integration-examples/tree/master/internationalization).
 
@@ -93,8 +91,8 @@ Revisa el ejemplo completo [aquí](https://github.com/elm-community/js-integrati
 
 ## Más información
 
-Luke tiene mucha más experiencia usando elementos personalizados, y creo que [su charla de Elm Europe](https://www.youtube.com/watch?v=tyFe9Pw6TVE) (en inglés) es una excelente introducción.
+Luke tiene mucha más experiencia usando elementos personalizados, y creo que [su charla en Elm Europe](https://www.youtube.com/watch?v=tyFe9Pw6TVE) (en inglés) es un muy buen punto de partida.
 
 <!-- TODO: 👆 ¿Proveer subtítulos? ¿Usar otra referencia? 🤔 -->
 
-La documentación de los elementos personalizados puede ser un poco confusa, pero espero que esta introducción sea suficiente para que puedas empezar a incluir lógica simple que use `Intl`, incrustar widgets hechos en React, o cualquier cosa así según las necesidades de tu proyecto.
+La documentación de los elementos personalizados puede ser un poco confusa, pero espero que este breve tutorial sea suficiente para que puedas empezar, por ejemplo, a usar APIs como `Intl`, incrustar cosas hechas en React, o cualquier otra cosa que necesite tu proyecto.
