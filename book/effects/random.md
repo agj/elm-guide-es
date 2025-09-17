@@ -1,6 +1,6 @@
 # Valores aleatorios
 
-Hasta ahora sólo hemos visto comandos que realizan solicitudes HTTP, pero también existen otros comandos, como aquellos que general valores aleatorios. Vamos a crear una aplicación que tira un dado y produce un valor entre 1 y 6.
+Hasta ahora sólo hemos visto comandos que realizan solicitudes HTTP, pero también existen otros comandos, como aquellos que generan valores aleatorios. Vamos a crear una aplicación que tira un dado y produce un valor entre 1 y 6.
 
 Apreta el botón azul “Editar” para ver este ejemplo en acción. Genera algunos números aleatorios y revisa el código para tratar de interpretar cómo funciona. **Apreta el botón azul.**
 
@@ -124,7 +124,7 @@ usuallyTrue =
 
 Aquí tenemos tres generadores de valores aleatorios. El generador `roll` dice que producirá un `Int`, y más específicamente, uno entre `1` y `6`, inclusivos. Similarmente, el generador `usuallyTrue` dice que producirá un `Bool`, y más específicamente, que éste será `True` el 80% de las veces.
 
-El punto es que no estamos aún generando los valores. Estamos sólo describiendo _cómo_ generarlos. Después podemos usar [`Random.generate`][gen] para convertirlo en un comando:
+Lo importante es que no estamos aún generando los valores. Estamos sólo describiendo _cómo_ generarlos. Después podemos usar [`Random.generate`][gen] para convertirlos en un comando:
 
 ```elm
 generate : (a -> msg) -> Generator a -> Cmd msg
@@ -170,9 +170,9 @@ Primero creamos `Symbol` para describir los símbolos que aparecen en la máquin
 
 Después usamos `map3` para combinarlos en un nuevo generador `spin`. Lo que hace es generar tres símbolos y después unirlos en un valor `Spin`.
 
-El punto es que a partir de estas piezas básicas podemos crear un `Generator` que describe comportamientos bastante complejos. Y desde nuestra aplicación, sólo necesitamos decir algo como `Random.generate NewSpin spin` para obtener el siguiente valor aleatorio.
+El punto es que a partir de estas piezas básicas podemos crear un `Generator` que describe comportamientos bastante complejos. Y en nuestra aplicación sólo necesitamos escribir algo como `Random.generate NewSpin spin` para obtener un nuevo valor aleatorio.
 
-> **Ejercicios:** Estas son algunas ideas para hacer más interesante el código que vimos en esta página.
+> **Ejercicios:** Estas son algunas ideas para hacer más interesante el código que vimos en esta página:
 >
 > - En vez de mostrar un número, muestra la cara del dado como imagen.
 > - En vez de mostrar una imagen de un dado, usa [`elm/svg`][svg] para dibujarla por tu cuenta.

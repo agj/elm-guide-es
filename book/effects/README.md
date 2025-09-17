@@ -1,18 +1,18 @@
 # Comandos y suscripciones
 
-Hemos visto cómo manejar interacciones de mouse y teclado usando la Arquitectura Elm, pero ¿qué tal si queremos comunicarnos con un servidor? ¿O generar un número al azar?
+Hemos visto cómo manejar interacciones con mouse y teclado usando la Arquitectura Elm, pero ¿qué tal si queremos comunicarnos con un servidor? ¿O generar un número al azar?
 
 Para responder estas preguntas, nos va a servir saber más sobre cómo funciona la Arquitectura Elm detrás de bambalinas. Vamos a ver por qué las cosas funcionan un poco diferente en comparación con otros lenguajes como JavaScript, Python, etc.
 
 ## `sandbox`
 
-No me he referido directamente al hecho, pero hasta ahora todos nuestros programas han sido creados con [`Browser.sandbox`][sandbox]. Le suplimos un `Model` inicial, y describimos cómo actualizarlo (`update`) y cómo visualizarlo (`view`).
+No me he referido directamente al hecho, pero hasta ahora todos nuestros programas han usado [`Browser.sandbox`][sandbox]. Le suplimos un `Model` inicial, y describimos cómo actualizarlo (`update`) y visualizarlo (`view`).
 
-Puedes considerar que lo que `Browser.sandbox` hace es configurar un sistema así:
+Podemos considerar que lo que `Browser.sandbox` hace es configurar un sistema así:
 
 ![](diagrams/sandbox.svg)
 
-Tenemos la ventaja de vivir dentro del mundo de Elm, escribiendo funciones y transformando datos. Éste se vincula con el **sistema de ejecución** de Elm. El sistema de ejecución decide cómo dibujar el `Html` eficientemente. ¿Hubo algún cambio? ¿Cuál es la más mínima modificación que necesitamos hacerle al DOM? También escucha cuando alguien hace clic en un botón o escribe en un campo de texto. Convierte estas acciones en mensajes `Msg`, y los provee a nuestro código Elm.
+Nosotros operamos dentro del contexto Elm, escribiendo funciones y transformando datos. Éste se vincula con el **sistema de ejecución** de Elm. El sistema de ejecución decide cómo eficientemente dibujar el `Html`, revisando si hubo cambios y realizando la más mínima posible modificación al DOM. También escucha cuando alguien hace clic en un botón o escribe en un campo de texto. Estas acciones las convierte en mensajes `Msg`, y las provee a nuestro código Elm.
 
 Al separar limpiamente toda modificación al DOM, se vuelve posible hacer optimizaciones muy contundentes. Es gran parte de por qué Elm es [una de las opciones más rápidas disponibles][benchmark].
 
@@ -23,13 +23,13 @@ Al separar limpiamente toda modificación al DOM, se vuelve posible hacer optimi
 
 En los próximos ejemplos vamos a usar [`Browser.element`][element] para crear programas. Éste introduce los conceptos **comando** y **suscripción**, que nos permiten interactuar con el mundo exterior.
 
-Puedes considerar que `Browser.element` configura un sistema así:
+Podemos considerar que `Browser.element` configura un sistema así:
 
 ![](diagrams/element.svg)
 
-Además de producir valores `Html`, nuestros programas también enviarán valores `Cmd` y `Sub` al sistema de ejecución. En este mundo, nuestros programas pueden dar **comandos** al sistema de ejecución para que realice una solicitud HTTP, o que genere un número al azar. También pueden **suscribirse** al tiempo actual.
+Además de producir valores `Html`, nuestros programas también entregarán valores `Cmd` y `Sub` al sistema de ejecución. Bajo esta configuración, nuestros programas pueden dar **comandos** al sistema de ejecución para que realice solicitudes HTTP, o que genere un número al azar. También pueden **suscribirse** a actualizaciones del reloj.
 
-Creo que los comandos y las suscripciones hacen más sentido cuando ves ejemplos, así que hagamos justamente eso.
+Creo que los comandos y las suscripciones hacen más sentido cuando vemos ejemplos, así que hagamos justamente eso.
 
 [element]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#element
 
