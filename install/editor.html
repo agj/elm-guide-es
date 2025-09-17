@@ -722,10 +722,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="instala-un-editor-de-código">Instala un editor de código</h1>
+                                <h1 id="instalar-un-editor-de-código">Instalar un editor de código</h1>
 <p>El primer paso es configurar un editor de código para que pueda interpretar archivos Elm.</p>
 <p><img src="images/editor.png" alt="editor"></img></p>
-<p>Hay extensiones para varios editores, mantenidas por miembros de la comunidad. <a href="https://github.com/elm/editor-plugins" target="_blank">Revisa aquí una lista.</a></p>
+<p>Hay extensiones para varios editores, mantenidas por miembros de la comunidad. Aquí una lista incompleta:</p>
+<ul>
+<li><a href="https://github.com/elm-tooling/elm-language-client-vscode" target="_blank">VS Code</a></li>
+<li><a href="https://github.com/intellij-elm/intellij-elm" target="_blank">IntelliJ</a></li>
+<li><a href="https://zed.dev/docs/languages/elm" target="_blank">Zed</a></li>
+<li><a href="https://github.com/evancz/elm-syntax-highlighting/" target="_blank">Sublime Text</a></li>
+<li><a href="https://github.com/elm-tooling/elm-vim" target="_blank">Vim</a></li>
+<li><a href="https://github.com/jcollard/elm-mode" target="_blank">Emacs</a></li>
+<li><a href="https://github.com/elm-tooling/elm-language-server" target="_blank">Cualquier editor que soporte el protocolo LSP</a></li>
+</ul>
 <p>Puede ser un poco complicado configurar un editor, así que para propósitos de esta guía te voy a explicar cómo configurar Sublime Text en particular. Idealmente será de ayuda para gente que recién empieza a programar, o como segunda opción para gente que ya tenga un editor de su preferencia.</p>
 <h2 id="sublime-text">Sublime Text</h2>
 <p><strong>Paso 1:</strong> Descarga Sublime Text desde <a href="https://www.sublimetext.com/" target="_blank">aquí</a>.</p>
@@ -736,9 +745,9 @@
 <li><a href="https://github.com/evancz/elm-syntax-highlighting/blob/master/install/windows.md" target="_blank">Windows</a></li>
 </ul>
 <!-- TODO: Añadir una traducción abreviada de las guías del plugin de Sublime Text. -->
-<p>Después de completar esos pasos, al abrir archivos Elm los vas a ver con coloreado de sintaxis. Vas a ver palabras claves como <code>import</code> y <code>type</code> en colores, lo que hace que el código sea más fácil de leer.</p>
+<p>Después de completar esos pasos, al abrir archivos Elm los verás con coloreado de sintaxis, es decir, verás palabras claves como <code>import</code> y <code>type</code> en un color distinto, lo que hace que el código sea más fácil de leer.</p>
 <blockquote>
-<p><strong>Nota:</strong> ¡Recuerda que hay otras alternativas! Hay miembros de la comunidad que han creado extensiones para Atom, Emacs, IntelliJ, Vim, VS Code, y muchos más. Tratamos de mantener <a href="https://github.com/elm/editor-plugins" target="_blank">esta página</a> al día con las distintas opciones.</p>
+<p><strong>Nota:</strong> ¡Recuerda que hay otras alternativas! Revisa la lista más arriba y busca la que se ajuste mejor a tu configuración personal. Y si acaso no la encontraste en la lista, haz una búsqueda para tu editor preferido; puede que encuentres algo a tu medida.</p>
 </blockquote>
 
                                 
@@ -783,7 +792,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Editor de código","level":"1.7.1","depth":2,"next":{"title":"Elm","level":"1.7.2","depth":2,"path":"install/elm.md","ref":"install/elm.md","articles":[]},"previous":{"title":"Instalación","level":"1.7","depth":1,"path":"install/README.md","ref":"install/README.md","articles":[{"title":"Editor de código","level":"1.7.1","depth":2,"path":"install/editor.md","ref":"install/editor.md","articles":[]},{"title":"Elm","level":"1.7.2","depth":2,"path":"install/elm.md","ref":"install/elm.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"install/editor.md","mtime":"2025-06-15T16:06:38.562Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Editor de código","level":"1.7.1","depth":2,"next":{"title":"Elm","level":"1.7.2","depth":2,"path":"install/elm.md","ref":"install/elm.md","articles":[]},"previous":{"title":"Instalación","level":"1.7","depth":1,"path":"install/README.md","ref":"install/README.md","articles":[{"title":"Editor de código","level":"1.7.1","depth":2,"path":"install/editor.md","ref":"install/editor.md","articles":[]},{"title":"Elm","level":"1.7.2","depth":2,"path":"install/elm.md","ref":"install/elm.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"install/editor.md","mtime":"2025-09-17T18:39:36.815Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -723,17 +723,16 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="elementos-personalizados">Elementos personalizados</h1>
-<p>En las últimas páginas hemos visto (1) cómo inicializar programas Elm desde JavaScript, (2) cómo pasar datos en forma de flags, y (3) cómo mandar mensajes entre Elm y JS usando puertos. Pero, adivina qué: ¡hay otra manera más de interoperar!</p>
-<p>Los navegadores populares ya todos soportan <a href="https://developer.mozilla.org/es/docs/Web/API/Web_components/Using_custom_elements" target="_blank">elementos personalizados</a>, y ésta resulta ser una forma muy práctica de incluir JS en programas Elm.</p>
-<p>Aquí tienes un <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">ejemplo mínimo</a> de cómo usar elementos personalizados para hacer localización e internacionalización.</p>
+<p>En las últimas páginas hemos visto (1) cómo inicializar programas Elm desde JavaScript, (2) cómo pasar datos en forma de flags, y (3) cómo mandar mensajes entre Elm y JS usando puertos. Pero hay otra manera de interoperar que nos queda por revisar.</p>
+<p>Hay una funcionalidad relativamente reciente en navegadores web, llamada <a href="https://developer.mozilla.org/es/docs/Web/API/Web_components/Using_custom_elements" target="_blank">elementos personalizados</a> (también conocidos como “componentes web”). Resulta que son una forma muy práctica de incluir JS en programas Elm.</p>
+<p>Aquí tienes un <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">ejemplo mínimo pero completo</a> (en inglés) de cómo usar elementos personalizados para hacer localización e internacionalización. A continuación, un poco de explicación de todo esto.</p>
 <!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
 <h2 id="crear-elementos-personalizados">Crear elementos personalizados</h2>
-<p>Supongamos que queremos localizar fechas, pero esto no es aún posible directo desde los paquetes básicos de Elm. Tal vez quieres escribir una función que localiza una fecha:</p>
-<pre><code class="lang-javascript"><span class="hljs-comment">//</span>
-<span class="hljs-comment">//   localizeDate('sr-RS', 12, 5) === "петак, 1. јун 2012."</span>
+<p>Supongamos que queremos localizar fechas. Esto aún no es posible usando sólo Elm. Tal vez queremos escribir una función así, que presenta una fecha con formato localizado:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">//   localizeDate('sr-RS', 12, 5) === "петак, 1. јун 2012."</span>
 <span class="hljs-comment">//   localizeDate('en-GB', 12, 5) === "Friday, 1 June 2012"</span>
 <span class="hljs-comment">//   localizeDate('en-US', 12, 5) === "Friday, June 1, 2012"</span>
-<span class="hljs-comment">//</span>
+
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">localizeDate</span>(<span class="hljs-params">lang, year, month</span>) {
   <span class="hljs-keyword">const</span> dateTimeFormat = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intl</span>.<span class="hljs-title class_">DateTimeFormat</span>(lang, {
     <span class="hljs-attr">weekday</span>: <span class="hljs-string">"long"</span>,
@@ -745,16 +744,15 @@
   <span class="hljs-keyword">return</span> dateTimeFormat.<span class="hljs-title function_">format</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(year, month));
 }
 </code></pre>
-<p>Pero, ¿cómo diantres la usamos en Elm? Las últimas versiones de los navegadores te permiten crear nuevos tipos de nodos DOM de esta forma:</p>
-<pre><code class="lang-javascript"><span class="hljs-comment">//</span>
-<span class="hljs-comment">//   &lt;intl-date lang="sr-RS" year="2012" month="5"&gt;</span>
+<p>Pero, ¿cómo diantres la usamos desde Elm? Pues una forma es creando un nuevo tipo de nodo del DOM, de esta manera:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">//   &lt;intl-date lang="sr-RS" year="2012" month="5"&gt;</span>
 <span class="hljs-comment">//   &lt;intl-date lang="en-GB" year="2012" month="5"&gt;</span>
 <span class="hljs-comment">//   &lt;intl-date lang="en-US" year="2012" month="5"&gt;</span>
-<span class="hljs-comment">//</span>
+
 customElements.<span class="hljs-title function_">define</span>(
   <span class="hljs-string">"intl-date"</span>,
   <span class="hljs-keyword">class</span> <span class="hljs-title class_">extends</span> <span class="hljs-title class_">HTMLElement</span> {
-    <span class="hljs-comment">// things required by Custom Elements</span>
+    <span class="hljs-comment">// Cosas requeridas para crear un elemento personalizado.</span>
     <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
       <span class="hljs-variable language_">super</span>();
     }
@@ -768,7 +766,7 @@ customElements.<span class="hljs-title function_">define</span>(
       <span class="hljs-keyword">return</span> [<span class="hljs-string">"lang"</span>, <span class="hljs-string">"year"</span>, <span class="hljs-string">"month"</span>];
     }
 
-    <span class="hljs-comment">// Our function to set the textContent based on attributes.</span>
+    <span class="hljs-comment">// Nuestra función que cambia el texto del nodo en base a sus atributos.</span>
     <span class="hljs-title function_">setTextContent</span>(<span class="hljs-params"></span>) {
       <span class="hljs-keyword">const</span> lang = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">"lang"</span>);
       <span class="hljs-keyword">const</span> year = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">"year"</span>);
@@ -778,8 +776,8 @@ customElements.<span class="hljs-title function_">define</span>(
   },
 );
 </code></pre>
-<p>La partes más importantes son <code>attributeChangedCallback</code> y <code>observedAttributes</code>. Necesitas lógica como seta para detectar cambios en los atributos que te interesan.</p>
-<p>Carga eso antes de inicializar tu programa Elm, y podrás escribir código Elm como el siguiente:</p>
+<p>La partes más importantes son <code>attributeChangedCallback</code> (método gatillado cuando cambia un atributo) y <code>observedAttributes</code> (método con el que explicitamos cuáles son los atributos que nos interesan). Estas dos piezas son necesarias para detectar cambios en los atributos de nuestro elemento personalizado.</p>
+<p>Si cargamos el código de arriba antes de inicializar nuestro programa Elm, podremos escribir código como el siguiente:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, node)
 <span class="hljs-keyword">import</span> Html.Attributes <span class="hljs-keyword">exposing</span> (attribute)
 
@@ -793,13 +791,13 @@ customElements.<span class="hljs-title function_">define</span>(
         ]
         []
 </code></pre>
-<p>Y así ya tienes acceso a <code>viewDate</code> para cuando necesites información localizada en tu vista.</p>
+<p>Y listo, tendremos esta función <code>viewDate</code> disponible para usar en algún lugar dentro de la vista, para mostrar fechas con formato localizado.</p>
 <p>Revisa el ejemplo completo <a href="https://github.com/elm-community/js-integration-examples/tree/master/internationalization" target="_blank">aquí</a>.</p>
 <!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
 <h2 id="más-información">Más información</h2>
-<p>Luke tiene mucha más experiencia usando elementos personalizados, y creo que <a href="https://www.youtube.com/watch?v=tyFe9Pw6TVE" target="_blank">su charla de Elm Europe</a> (en inglés) es una excelente introducción.</p>
+<p>Luke tiene mucha más experiencia usando elementos personalizados, y creo que <a href="https://www.youtube.com/watch?v=tyFe9Pw6TVE" target="_blank">su charla en Elm Europe</a> (en inglés) es un muy buen punto de partida.</p>
 <!-- TODO: 👆 ¿Proveer subtítulos? ¿Usar otra referencia? 🤔 -->
-<p>La documentación de los elementos personalizados puede ser un poco confusa, pero espero que esta introducción sea suficiente para que puedas empezar a incluir lógica simple que use <code>Intl</code>, incrustar widgets hechos en React, o cualquier cosa así según las necesidades de tu proyecto.</p>
+<p>La documentación de los elementos personalizados puede ser un poco confusa, pero espero que este breve tutorial sea suficiente para que puedas empezar, por ejemplo, a usar APIs como <code>Intl</code>, incrustar cosas hechas en React, o cualquier otra cosa que necesite tu proyecto.</p>
 
                                 
                                 </section>
@@ -843,7 +841,7 @@ customElements.<span class="hljs-title function_">define</span>(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Elementos personalizados","level":"1.8.3","depth":2,"next":{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"previous":{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/custom_elements.md","mtime":"2025-06-15T16:06:38.563Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Elementos personalizados","level":"1.8.3","depth":2,"next":{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]},"previous":{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/custom_elements.md","mtime":"2025-09-17T18:39:36.816Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

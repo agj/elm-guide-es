@@ -723,8 +723,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="json">JSON</h1>
-<p>Recién vimos un ejemplo que usa HTTP para obtener el contenido de un libro. Muy útil, pero muchos servidores retornan datos en un formato especial llamado JSON.</p>
-<p>Nuestro siguiente ejemplo demuestra cómo recuperar datos JSON, permitiéndonos apretar un botón para ver citas al azar desde una selección variada de libros. Apreta el botón azul “Editar” para echarle una mirada al programa. ¿Tal vez ya leíste algunos de esos libros? <strong>Apreta el botón azul.</strong></p>
+<p>Recién vimos un ejemplo que usa HTTP para obtener el contenido de un libro como texto. Muy útil, pero muchos servidores retornan datos en un formato especial llamado JSON.</p>
+<p>Nuestro siguiente ejemplo demuestra cómo recuperar datos JSON, permitiéndonos apretar un botón para ver citas al azar desde una selección variada de libros. Apreta el botón azul “Editar” para echarle una mirada al programa. ¿Tal vez ya leíste algunos de esos libros? <strong>Apreta el botón azul y prueba.</strong></p>
 <div class="edit-link"><a href="https://elm-lang.org/examples/quotes" target="_blank">Editar</a></div>
 
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Browser
@@ -863,12 +863,12 @@
 <p>Este ejemplo se parece mucho al anterior:</p>
 <ul>
 <li><code>init</code> inicializa con el estado <code>Loading</code>, junto con un comando que recupera una cita al azar.</li>
-<li><code>update</code> maneja el mensaje <code>GotQuote</code> recibido cuando una nueva cita está disponible. Sea lo que sea que ocurra, no tenemos nuevos comandos. También maneja el mensaje <code>MorePlease</code> cuando alguien apreta el botón, y la respuesta es enviar un comando para obtener más citas.</li>
+<li><code>update</code> maneja el mensaje <code>GotQuote</code> recibido con la respuesta de una cita. Cualquiera sea esa respuesta, no necesitamos nuevos comandos. La función también maneja el mensaje <code>MorePlease</code> cuando alguien apreta el botón, y aquí sí enviamos un comando para obtener más citas.</li>
 <li><code>view</code> muestra las citas.</li>
 </ul>
 <p>La principal diferencia está en la definición de <code>getRandomQuote</code>. En vez de usar <code>Http.expectString</code>, lo hemos cambiado a <code>Http.expectJson</code>. ¿Qué significa esto?</p>
 <h2 id="json">JSON</h2>
-<p>Si le pides a <a href="https://elm-lang.org/api/random-quotes" target="_blank"><code>/api/random-quotes</code></a> una cita aleatoria, el servidor produce un poco de JSON que se parece a esto:</p>
+<p>Si le pides a <a href="https://elm-lang.org/api/random-quotes" target="_blank"><code>/api/random-quotes</code></a> una cita aleatoria, el servidor produce un poco de JSON con esta estructura:</p>
 <pre><code class="lang-json">{
   <span class="hljs-string">"quote"</span>: <span class="hljs-string">"December used to be a month but it is now a year"</span>,
   <span class="hljs-string">"source"</span>: <span class="hljs-string">"Letters from a Stoic"</span>,
@@ -876,9 +876,9 @@
   <span class="hljs-string">"year"</span>: <span class="hljs-number">54</span>
 }
 </code></pre>
-<p>No tenemos garantías sobre ninguna de esta información. El servidor podría cambiar el nombre de los campos, y los campos podrían tener datos de distinto tipo en distintas situaciones. El mundo es así, caótico.</p>
+<p>No tenemos garantías sobre ninguna parte de esta información. El servidor podría cambiar el nombre de los campos, y los campos podrían tener datos de distinto tipo en distintas situaciones. El mundo es así, caótico.</p>
 <p>En JavaScript, lo normal es convertir ese JSON en objetos nativos de JavaScript, y cruzar los dedos para que todo salga bien. Pero si tecleaste mal el nombre de un campo, o vienen datos inesperados, tu código va a lanzar una excepción. ¿El código estaba mal, o tal vez los datos estaban mal…? No podemos saberlo sin empezar a investigar.</p>
-<p>En Elm, validamos el JSON antes de que entre a nuestro programa. Si los datos vienen con una estructura que no era la que esperábamos, inmediatamente los abemos. No hay ninguna forma de que datos incorrectos se cuelen entre las rendijas y causen una excepción en tiempo de ejecución tres archivos más allá. Este es el propósito de los decodificadores de JSON.</p>
+<p>En Elm, validamos el JSON antes de que entre a nuestro programa. Si los datos vienen con una estructura que no era la que esperábamos, inmediatamente lo sabremos. No hay ninguna forma de que datos incorrectos se cuelen entre las rendijas y causen excepciones en tiempo de ejecución tres archivos más allá. Ese es el propósito de los decodificadores de JSON.</p>
 <h2 id="decodificadores-de-json">Decodificadores de JSON</h2>
 <p>Digamos que tenemos este JSON:</p>
 <pre><code class="lang-json">{
@@ -886,14 +886,14 @@
   <span class="hljs-string">"age"</span>: <span class="hljs-number">42</span>
 }
 </code></pre>
-<p>Tendremos que pasarlo por un <code>Decoder</code> para acceder información específica contenida ahí. Si queremos obtener el campo <code>"age"</code>, pasamos el JSON por un <code>Decoder Int</code> que describe exactamente cómo acceder a esa información.</p>
+<p>Tendremos que pasarlo por un <code>Decoder</code> para acceder a información específica contenida ahí. Si queremos obtener el campo <code>"age"</code>, pasamos el JSON por un <code>Decoder Int</code> que describe exactamente cómo acceder a esa información.</p>
 <p><img src="diagrams/int.svg" alt=""></img></p>
 <p>Si todo sale bien, del otro lado obtendremos un valor <code>Int</code>. Y si quisiéramos el campo <code>"name"</code>, tendríamos que pasar el JSON por un decodificador <code>Decoder String</code> que describe exactamente cómo recuperarlo:</p>
 <p><img src="diagrams/string.svg" alt=""></img></p>
 <p>Y nuevamente, si todo sale bien, del otro lado obtendremos un valor <code>String</code>.</p>
 <p>¿Cómo creamos decodificadores como estos?</p>
 <h2 id="elementos-básicos">Elementos básicos</h2>
-<p>El paquete <a href="https://package.elm-lang.org/packages/elm/json/latest/" target="_blank"><code>elm/json</code></a> nos ofrece el módulo <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode" target="_blank"><code>Json.Decode</code></a>. Está lleno de pequeños decodificadores diseñados para usarse en conjunto.</p>
+<p>El paquete <a href="https://package.elm-lang.org/packages/elm/json/latest/" target="_blank"><code>elm/json</code></a> ofrece el módulo <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode" target="_blank"><code>Json.Decode</code></a>. Está lleno de pequeños decodificadores diseñados para combinarse.</p>
 <p>Para obtener el campo <code>"age"</code> de <code>{ "name": "Tom", "age": 42 }</code>, necesitamos crear un decodificador como este:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Json.Decode <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Decoder</span>, field, int)
 
@@ -909,8 +909,8 @@
 </code></pre>
 <p>La función <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#field" target="_blank"><code>field</code></a> recibe dos argumentos:</p>
 <ol>
-<li><code>String</code> — nombre de un campo. Aquí, requerimos un objeto con un campo <code>"age"</code>.</li>
-<li><code>Decoder a</code> — un decodificador para el valor. Si el campo <code>"age"</code> existe, tratamos de pasar su valor por este decodificador.</li>
+<li><code>String</code>: Nombre de un campo. Aquí requerimos un objeto con un campo <code>"age"</code>.</li>
+<li><code>Decoder a</code>: Un decodificador para el valor. Si el campo <code>"age"</code> existe, tratamos de pasar su valor por este decodificador.</li>
 </ol>
 <p>Juntándolo todo, <code>field "age" int</code> dice que necesitamos un campo <code>"age"</code>, y si existe, lo pasamos por el decodificador <code>Decoder Int</code> para recuperar un número entero.</p>
 <p>Hacemos casi lo mismo para extraer el campo <code>"name"</code>:</p>
@@ -945,7 +945,7 @@
       (field <span class="hljs-string">"age"</span> int)
 </code></pre>
 <p>Si usáramos <code>personDecoder</code> en <code>{ "name": "Tom", "age": 42 }</code>, recuperaríamos un valor Elm como <code>Person "Tom" 42</code>.</p>
-<p>Y para entrar en el espíritu de los decodificadores como piezas combinables, definiríamos <code>personDecoder</code> como <code>map2 Person nameDecoder ageDecoder</code> usando nuestros decodificadores definidos anteriormente. O sea, la gracia está en armar decodificadores más grandes a partir de otros más pequeños.</p>
+<p>Y para entrar en el espíritu de los decodificadores como piezas combinables, podemos definir <code>personDecoder</code> como <code>map2 Person nameDecoder ageDecoder</code>, usando nuestros decodificadores definidos anteriormente. O sea, la gracia está en armar decodificadores más grandes a partir de otros más pequeños.</p>
 <h2 id="anidar-decodificadores">Anidar decodificadores</h2>
 <p>Muchos datos JSON no son tan planos. Imagina si existiera <code>/api/random-quotes/v2</code>, que trae información más completa sobre los autores:</p>
 <pre><code class="lang-json">{
@@ -1001,7 +1001,7 @@
 <li><a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#dict" target="_blank"><code>dict</code></a> : <code>Decoder a -&gt; Decoder (Dict String a)</code></li>
 <li><a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#oneOf" target="_blank"><code>oneOf</code></a> : <code>List (Decoder a) -&gt; Decoder a</code></li>
 </ul>
-<p>Existen formas de extraer todo tipo de estructuras de datos. La función <code>oneOf</code> es particularmente útil cuando tenemos datos JSON poco normalizados. Por ejemplo, si a veces trae un <code>Int</code> y otras veces trae dígitos en formato <code>String</code>… Puede llegar a ser muy molesto.</p>
+<p>Existen formas de extraer todo tipo de estructuras de datos. La función <code>oneOf</code> es particularmente útil cuando tenemos datos JSON poco normalizados. Hay casos molestos en que, por ejemplo, a veces viene un <code>Int</code> y otras veces vienen dígitos en formato <code>String</code>…</p>
 <p>Vimos cómo se usan <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2" target="_blank"><code>map2</code></a> y <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map4" target="_blank"><code>map4</code></a> para lidiar con objetos con muchos campos. Pero cuando empieces a trabajar con objetos JSON más y más grandes, vale la pena revisar <a href="https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest" target="_blank"><code>NoRedInk/elm-json-decode-pipeline</code></a>. Sus tipos son un poco más complicados, pero mucha gente encuentra sus funciones más fáciles de leer y de usar.</p>
 <blockquote>
 <p><strong>Dato curioso:</strong> He oído varias historias de gente que encuentra bugs en su código de <em>servidor</em> después de migrar de JS a Elm, porque los decodificadores que escriben acaban siendo una etapa de validación que identifica errores extraños en los valores JSON. Por ejemplo, cuando NoRedInk migró de usar React a usar Elm, salieron a la luz algunos bugs en su código Ruby.</p>
@@ -1049,7 +1049,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JSON","level":"1.6.2","depth":2,"next":{"title":"Valores aleatorios","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},"previous":{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/json.md","mtime":"2025-06-15T16:06:38.561Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JSON","level":"1.6.2","depth":2,"next":{"title":"Valores aleatorios","level":"1.6.3","depth":2,"path":"effects/random.md","ref":"effects/random.md","articles":[]},"previous":{"title":"HTTP","level":"1.6.1","depth":2,"path":"effects/http.md","ref":"effects/http.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"effects/json.md","mtime":"2025-09-17T18:39:36.814Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

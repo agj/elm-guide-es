@@ -735,10 +735,10 @@
 <span class="hljs-comment">-- Just True : Maybe Bool</span>
 <span class="hljs-comment">-- Nothing   : Maybe a</span>
 </code></pre>
-<p>Es un tipo con dos variantes. O bien tienes nada (<code>Nothing</code>), o tienes un valor (<code>Just</code>). La variable de tipo te permite tener <code>Maybe Float</code> o tal vez <code>Maybe String</code>, dependiendo del valor específico.</p>
+<p>Es un tipo con dos variantes: O bien no tenemos nada (<code>Nothing</code>), o tenemos un valor (<code>Just</code>). La variable de tipo (<code>a</code>) te permite tener <code>Maybe Float</code> o tal vez <code>Maybe String</code>, dependiendo del valor específico que contenga.</p>
 <p>Este tipo es útil en dos situaciones principalmente: funciones parciales y campos opcionales.</p>
 <h2 id="funciones-parciales">Funciones parciales</h2>
-<p>A veces necesitamos una función que da una respuesta a ciertos argumentos, pero no a otros. Muchos se encuentran con este tipo usando <a href="https://package.elm-lang.org/packages/elm-lang/core/latest/String#toFloat" target="_blank"><code>String.toFloat</code></a>, al tratar de convertir texto introducido por el usuario a un número. Veamos cómo se usa:</p>
+<p>A veces necesitamos una función que responde a ciertos argumentos, pero no a otros. Es común toparse con este tipo usando <a href="https://package.elm-lang.org/packages/elm-lang/core/latest/String#toFloat" target="_blank"><code>String.toFloat</code></a>, al tratar de convertir un texto introducido por el usuario a un número. Veamos cómo se usa:</p>
 <!-- prettier-ignore-start -->
 <p></p><div class="elm-repl show-types">
 [
@@ -760,32 +760,32 @@
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Prueba llamar <code>String.toFloat</code> con un otros textos y observa lo que te devuelve ⬆️</p>
-<p>No cualquier texto tiene sentido como un número, por lo que esta función modela esa situación en forma explícita. ¿Puede un <code>String</code> ser convertido a un <code>Float</code>? ¡Tal vez (“maybe”)! Así podemos después usar búsqueda de patrones sobre el valor resultante y continuar según sea apropiado.</p>
+<p>Prueba llamar <code>String.toFloat</code> con otros textos y observa lo que te retorna ⬆️</p>
+<p>No cualquier texto hace sentido al interpretarlo como un número, por lo que esta función modela esa situación en forma explícita. ¿Puede un <code>String</code> ser convertido a un <code>Float</code>? Tal vez (“maybe”). Así podemos después usar búsqueda de patrones sobre el valor resultante, y proceder según sea apropiado.</p>
 <blockquote>
 <p><strong>Ejercicio:</strong> Escribí un pequeño programa que convierte grados Celcius a Fahrenheit, <a href="https://ellie-app.com/bJSMQz9tydqa1" target="_blank">aquí</a>. Intenta refactorizar el código <code>view</code> de distintas maneras. ¿Le puedes poner un borde rojo al campo de texto cuando el valor es inválido? ¿Puedes añadir más conversiones, como Fahrenheit a Celcius, o pulgadas a metros?</p>
 </blockquote>
 <!-- TODO: 👆 Traducir este ejemplo. -->
 <h2 id="campos-opcionales">Campos opcionales</h2>
 <p>Otro lugar donde aparecen valores <code>Maybe</code> es en registros con campos opcionales.</p>
-<p>Por ejemplo, digamos que administramos una red social. O sea, conectar gente, amistades, etc. Nuestro objetivo lo puso mejor el noticiero-parodia The Onion en 2011: <a href="https://youtu.be/juQcZO_WnsI" target="_blank">“recolecta toda la información posible para la CIA”</a>. Y si queremos <em>toda</em> la información de los usuarios, tenemos que persuadirlos de a poquito. Hay que poner funcionalidades que los impulse a ir compartiendo más y más información mientras más usan nuestra red.</p>
-<p>Empecemos con un modelo simple del usuario. Deben tener un nombre, pero vamos a dejar la edad como opcional.</p>
+<p>Por ejemplo, digamos que administramos una red social. De la boca hacia afuera, nuestro objetivo es conectar gente, facilitar amistades, etc. Nuestro verdadero objetivo, por supuesto, será tal como lo pone el noticiero-parodia The Onion en 2011: <a href="https://youtu.be/juQcZO_WnsI" target="_blank">“minar todos los datos que se pueda para la CIA”</a>. Y si queremos toda esa jugosa información de nuestros usuarios, tenemos que persuadirlos poco a poco. Hay que poner funcionalidades que los impulse a ir compartiendo cada vez más información mientras más usen nuestra red.</p>
+<p>Empecemos con un modelo simple del usuario. Necesita tener un nombre, pero vamos a dejar que la edad sea opcional.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">User</span> =
     { name : <span class="hljs-type">String</span>
     , age : <span class="hljs-type">Maybe</span> <span class="hljs-type">Int</span>
     }
 </code></pre>
-<p>Ahora imaginemos que Sue creó una cuenta, pero decide no compartir su fecha de nacimiento.</p>
-<pre><code class="lang-elm"><span class="hljs-title">sue</span> : <span class="hljs-type">User</span>
-<span class="hljs-title">sue</span> =
-    { name = <span class="hljs-string">"Sue"</span>, age = <span class="hljs-type">Nothing</span> }
+<p>Ahora imaginemos que Susana creó una cuenta, pero decide no compartir su fecha de nacimiento.</p>
+<pre><code class="lang-elm"><span class="hljs-title">susana</span> : <span class="hljs-type">User</span>
+<span class="hljs-title">susana</span> =
+    { name = <span class="hljs-string">"Susana"</span>, age = <span class="hljs-type">Nothing</span> }
 </code></pre>
-<p>Los amigos de Sue no le pueden desear un feliz cumpleaños. ¿Que acaso son amigos realmente? Tom, después, crea una cuenta y <em>sí</em> comparte su edad:</p>
-<pre><code class="lang-elm"><span class="hljs-title">tom</span> : <span class="hljs-type">User</span>
-<span class="hljs-title">tom</span> =
-    { name = <span class="hljs-string">"Tom"</span>, age = <span class="hljs-type">Just</span> <span class="hljs-number">24</span> }
+<p>Los amigos de Susana no le pueden desear un feliz cumpleaños; ¿qué clase de amigos son esos? Tomás, después, crea una cuenta y <em>sí</em> comparte su edad:</p>
+<pre><code class="lang-elm"><span class="hljs-title">tomas</span> : <span class="hljs-type">User</span>
+<span class="hljs-title">tomas</span> =
+    { name = <span class="hljs-string">"Tomás"</span>, age = <span class="hljs-type">Just</span> <span class="hljs-number">24</span> }
 </code></pre>
-<p>Genial, seguro que para su cumpleaños va a recibir muchas felicidades. Pero más importantemente, Tom es parte de un valioso grupo etario. Los anunciantes van a estar contentos.</p>
+<p>Genial, seguro que para su cumpleaños va a recibir muchos saludos. Pero más importantemente, ahora sabemos que Tomás es parte de un lucrativo grupo etario. Los anunciantes van a estar contentos.</p>
 <p>Muy bien, ya tenemos algunos usuarios, pero ¿cómo les vendemos alcohol sin romper la ley? Seguro se enojan con nosotros si les tratamos de vender a jóvenes menores de 21, así que hagamos el chequeo:</p>
 <pre><code class="lang-elm"><span class="hljs-title">canBuyAlcohol</span> : <span class="hljs-type">User</span> -&gt; <span class="hljs-type">Bool</span>
 <span class="hljs-title">canBuyAlcohol</span> user =
@@ -796,10 +796,10 @@
         <span class="hljs-type">Just</span> age -&gt;
             age &gt;= <span class="hljs-number">21</span>
 </code></pre>
-<p>Fíjate en que el tipo <code>Maybe</code> nos obliga a hacer búsqueda de patrones sobre la edad del usuario. Es, en realidad, imposible escribir código donde nos olvidemos de que un usuario podría no tener una edad. Elm se cerciora de esto. Ahora podemos venderle alcohol a nuestros usuarios sabiendo que no estamos haciéndolo a menores de edad sin querer, sino sólo a los mayores. Éxito.</p>
+<p>Fíjate en que el tipo <code>Maybe</code> nos obliga a hacer búsqueda de patrones sobre la edad del usuario. Es efectivamente imposible escribir código donde nos olvidemos de que un usuario puede no tener una edad registrada. Elm se cerciora de esto. Ahora podremos venderle alcohol a nuestros usuarios sabiendo que no estamos haciéndolo directamente a menores de edad, sino sólo a los mayores. Buen trabajo.</p>
 <h2 id="evitando-el-sobreuso">Evitando el sobreuso</h2>
-<p>Este tipo <code>Maybe</code> es muy útil, pero hay límites. Los principiantes tienen una particular tendencia a entusiasmarse con <code>Maybe</code> y ponerse a usarlo en todas partes, incluso cuando un tipo personalizado sería más apropiado.</p>
-<p>Por ejemplo, imaginemos que tenemos una aplicación de ejercicio donde competimos con nuestros amigos. Partimos con una lista con sólo los nombres de nuestros amigos, pero podemos cargar más información sobre ellos después. Podría tentarte modelarlo de esta manera:</p>
+<p>Este tipo <code>Maybe</code> es muy útil, pero hay límites. Los principiantes tienden a entusiasmarse con <code>Maybe</code> y a usarlo en todas partes, incluso cuando un tipo personalizado sería más apropiado.</p>
+<p>Por ejemplo, imaginemos que tenemos una aplicación de ejercicio donde competimos con nuestros amigos. Partimos con una lista con sólo los nombres de nuestros amigos, y cuando lo decidamos podemos cargar sus datos físicos y tal. Podría tentarnos modelarlo de esta manera:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Friend</span> =
     { name : <span class="hljs-type">String</span>
     , age : <span class="hljs-type">Maybe</span> <span class="hljs-type">Int</span>
@@ -807,7 +807,7 @@
     , weight : <span class="hljs-type">Maybe</span> <span class="hljs-type">Float</span>
     }
 </code></pre>
-<p>Toda la información está ahí, pero no estás realmente modelando la forma en que funciona esta aplicación. Sería mucho más preciso modelarlo así:</p>
+<p>Toda la información está ahí, pero no estamos realmente modelando la forma en que funciona esta aplicación. Sería mucho más preciso modelarla así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Friend</span>
     = <span class="hljs-type">Less</span> <span class="hljs-type">String</span>
     | <span class="hljs-type">More</span> <span class="hljs-type">String</span> <span class="hljs-type">Info</span>
@@ -819,16 +819,16 @@
     , weight : <span class="hljs-type">Float</span>
     }
 </code></pre>
-<p>Este nuevo modelo captura mucho mejor la realidad de la aplicación. Sólo tenemos dos posibles situaciones: O sólo tienes el nombre, o tienes el nombre y un montón de información extra. En el código de nuestra vista sólo necesitamos pensar en si acaso vamos a mostrar una vista <code>Less</code> o <code>More</code> del amigo. No hace falta responder preguntas como “¿Qué pasa si tengo <code>age</code> pero no tengo <code>weight</code>?”. Simplemente no es algo posible con nuestro tipo más preciso.</p>
+<p>Este nuevo modelo captura mucho mejor la realidad de la aplicación. Sólo tenemos dos posibles situaciones: O sólo tienes el nombre, o tienes el nombre y un montón de información extra. En el código de nuestra vista sólo necesitamos pensar en si acaso vamos a visualizar una versión <code>Less</code> o <code>More</code> del amigo. No hace falta responder preguntas como “¿Qué pasa si tengo <code>age</code> pero no tengo <code>weight</code>?”. Esa situación es simplemente imposible con nuestro tipo más preciso.</p>
 <p>El punto es que si te hallas usando <code>Maybe</code> en todas partes, vale la pena revisar tus definiciones <code>type</code> y <code>type alias</code> y preguntarte si puedes acaso usar una representación más exacta. Esto comunmente conllevará refactorizaciones que simplifican tu código de actualización y de vista.</p>
 <blockquote>
-<h2 id="paréntesis-relación-a-referencias-nulas-null">Paréntesis: Relación a referencias nulas (<code>null</code>)</h2>
-<p>El inventor de las referencias <code>null</code>, Tony Hoare, dijo lo siguiente:</p>
+<h2 id="paréntesis-relación-con-referencias-nulas-null">Paréntesis: Relación con referencias nulas (<code>null</code>)</h2>
+<p>El inventor del concepto de <code>null</code>, Tony Hoare, dijo lo siguiente:</p>
 <blockquote>
-<p>Lo llamo mi “error de los mil millones”. Hablo de la invención de la referencia nula en 1965. En ese entonces estaba diseñando el primer sistema exhaustivo de tipos para referencias en un lenguaje orientado a objetos (ALGOL W). Mi objetivo era asegurarme de que el uso de cualquier referencia sea absolutamente seguro, con chequeos realizados en forma automática por el compilador. Pero no pude resistir la tentación de añadir referencias nulas, sólo porque eran tan fáciles de implementar. Esto conllevó a un sinfín de errores, vulnerabilidades y caídas de sistema, los que probablemente han causado miles de millones de dólares en sufrimiento y daños durante estos cuarenta años.</p>
+<p>Lo llamo mi “error de los mil millones”. Me refiero a la invención de la referencia nula en 1965. En ese entonces estaba diseñando el primer sistema de tipado completo de referencias en un lenguaje orientado a objetos (ALGOL W). Mi objetivo era asegurarme de que el uso de cualquier referencia sea absolutamente seguro, con chequeos realizados en forma automática por el compilador. Pero no pude resistir la tentación de añadir referencias nulas, sólo porque eran tan fáciles de implementar. Esto conllevó a un sinfín de errores, vulnerabilidades y caídas de sistema, los que seguramente han causado miles de millones de dólares en estrés y daños durante los últimos cuarenta años.</p>
 </blockquote>
-<p>Es un diseño que hace que un error sea <strong>implícito</strong>. En cualquier momento que creas que tienes un <code>String</code>, podrías en realidad tener <code>null</code>. ¿Tenemos que revisarlo? ¿El código que te pasó el valor hizo el chequeo? Tal vez no haya problema; tal vez haga que se caiga tu servidor. Supongo que nos enteraremos después.</p>
-<p>Elm evita estos problemas al simplemente no tener referencias <code>null</code>. En cambio, tenemos tipos personalizados como <code>Maybe</code> para que los errores sean <strong>explícitos</strong>. Así no nos topamos con sorpresas. Un <code>String</code> siempre será un <code>String</code>, y cuando veas <code>Maybe String</code>, el compilador te asegura que ambas variantes están siendo consideradas en el código. Así obtenemos la misma flexibilidad, pero ninguno de los bugs.</p>
+<p>Es un diseño que hace que un error sea <strong>implícito</strong>. Cuando sea que creamos que tenemos un <code>String</code>, podríamos en realidad tener <code>null</code>. ¿Tenemos que revisar nosotros, o el código que nos pasó el valor ya hizo el chequeo? Tal vez no haga falta, pero por otro lado, tal vez cause que se caiga el servidor. Supongo que nos enteraremos eventualmente.</p>
+<p>Elm evita estos problemas al simplemente no tener referencias <code>null</code>. En cambio, tenemos tipos personalizados como <code>Maybe</code> para que los errores sean <strong>explícitos</strong>. Así no nos topamos con sorpresas. Un <code>String</code> siempre será un <code>String</code>, y cuando veas <code>Maybe String</code>, el compilador nos asegura que ambas variantes están siendo consideradas en el código. Así obtenemos la misma flexibilidad, pero ninguno de los bugs.</p>
 </blockquote>
 
                                 
@@ -873,7 +873,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Maybe","level":"1.5.1","depth":2,"next":{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]},"previous":{"title":"Manejo de errores","level":"1.5","depth":1,"path":"error_handling/README.md","ref":"error_handling/README.md","articles":[{"title":"Maybe","level":"1.5.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"error_handling/maybe.md","mtime":"2025-06-15T16:06:38.562Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Maybe","level":"1.5.1","depth":2,"next":{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]},"previous":{"title":"Manejo de errores","level":"1.5","depth":1,"path":"error_handling/README.md","ref":"error_handling/README.md","articles":[{"title":"Maybe","level":"1.5.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},{"title":"Result","level":"1.5.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"error_handling/maybe.md","mtime":"2025-09-17T18:39:36.815Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -723,11 +723,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="flags">Flags</h1>
-<p>Las “flags” son una forma de pasarle valores a Elm al inicializar.</p>
-<p>Algunos usos comunes incluye pasarle llaves de API, variables de entorno y datos de usuario. Esto puede ser útil si generaste el HTML dinámicamente. También nos pueden ayudar a cargar información en caché, como en <a href="https://github.com/elm-community/js-integration-examples/tree/master/localStorage" target="_blank">este ejemplo de <code>localStorage</code></a>.</p>
+<p>Las “flags” son una forma de pasarle valores a nuestro programa Elm al inicializarlo.</p>
+<p>Algunos usos comunes incluyen pasarle credenciales de una API, variables de entorno o datos de usuario. Puede ser bastante útil si generamos el HTML en forma dinámica. También nos pueden ayudar a cargar información en caché, como en <a href="https://github.com/elm-community/js-integration-examples/tree/master/localStorage" target="_blank">este ejemplo de <code>localStorage</code></a>.</p>
 <!-- TODO: 👆 Agregar este ejemplo al repositorio y traducirlo. -->
 <h2 id="flags-en-html">Flags en HTML</h2>
-<p>El HTML es prácticamente igual a como lo vimos antes, pero con un argumento <code>flags</code> adicional que le pasamos a la función <code>Elm.Main.init()</code>.</p>
+<p>El siguiente HTML es prácticamente igual a como lo vimos en la página anterior, pero con un argumento <code>flags</code> adicional que le pasamos a la función <code>Elm.Main.init()</code>.</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span>
@@ -736,22 +736,22 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myapp"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"mi-app"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
       <span class="hljs-keyword">var</span> app = <span class="hljs-title class_">Elm</span>.<span class="hljs-property">Main</span>.<span class="hljs-title function_">init</span>({
-        <span class="hljs-attr">node</span>: <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"myapp"</span>),
+        <span class="hljs-attr">node</span>: <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"mi-app"</span>),
         <span class="hljs-attr">flags</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(),
       });
     </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
-<p>En este ejemplo le pasamos el tiempo actual en milisegundos, pero cualquier valor JS que pueda ser convertido en JSON puede ser usado como flag.</p>
+<p>En este ejemplo le pasamos la hora actual en milisegundos, pero cualquier valor JS que pueda ser convertido a JSON puede ser usado como flag.</p>
 <blockquote>
-<p><strong>Nota:</strong> Estos datos adicionales se llaman “flags” porque es el término que se usa para referirse a las opciones suministradas a un programa de línea de comandos. Cuando llamas <code>elm make src/Main.elm</code> también le puedes pasar algunas “flags” como <code>--optimize</code> o <code>--output=main.js</code> para cambiar lo que hará. En este caso es lo mismo.</p>
+<p><strong>Nota:</strong> Estos datos adicionales se llaman “flags” porque es el término que se usa para referirse a las opciones suministradas a un programa de línea de comandos. Cuando llamamos <code>elm make src/Main.elm</code> también le podemos pasar algunas “flags” como <code>--optimize</code> o <code>--output=main.js</code> para cambiar lo que hará. En este caso es algo muy similar.</p>
 </blockquote>
 <h2 id="flags-en-elm">Flags en Elm</h2>
-<p>Para recibir las flags en el lado de Elm tendrás que modificar un poco la función <code>init</code>:</p>
+<p>Para recibir las flags en el lado de Elm tendremos que modificar un poco la función <code>init</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">module</span> Main <span class="hljs-keyword">exposing</span> (..)
 
 <span class="hljs-keyword">import</span> Browser
@@ -817,11 +817,11 @@
 <span class="hljs-title">subscriptions</span> _ =
     <span class="hljs-type">Sub</span>.none
 </code></pre>
-<p>Lo único importante aquí es que la función <code>init</code> dice que recibe un argumento <code>Int</code>. Esta es la manera en que Elm puede acceder inmediatamente a las flags que le pases desde JavaScript. Después de eso puedes poner los datos en el modelo o ejecutar algún comando, lo que sea que necesites hacer.</p>
-<p>Te recomiendo que revises <a href="https://github.com/elm-community/js-integration-examples/tree/master/localStorage" target="_blank">este ejemplo que usa <code>localStorage</code></a> para ver un caso más interesante que usa flags.</p>
+<p>Lo único importante aquí es que la función <code>init</code> dice que recibe un argumento <code>Int</code>. Esta es la manera en que nuestro código Elm puede acceder directamente a las flags que le pasemos desde JavaScript. Después de eso podemos poner esos datos en el modelo o ejecutar algún comando con ellos, lo que sea que necesitemos hacer.</p>
+<p>Te recomiendo que revises <a href="https://github.com/elm-community/js-integration-examples/tree/master/localStorage" target="_blank">este ejemplo que usa <code>localStorage</code></a> para ver un caso más interesante usando flags.</p>
 <!-- TODO: 👆 Agregar este ejemplo al repositorio y traducirlo. -->
 <h2 id="verificando-las-flags">Verificando las flags</h2>
-<p>Pero, ¿qué pasa si <code>init</code> dice que recibe una flag <code>Int</code>, y alguien trata de inicializar con <code>Elm.Main.init({ flags: "ja, ¿qué vas a hacer?" })</code>?</p>
+<p>Pero, ¿qué pasa si <code>init</code> dice que recibe una flag <code>Int</code>, y alguien trata de hacer la inicialización de esta manera?: <code>Elm.Main.init({ flags: "Ja, ¿qué vas a hacer?" })</code></p>
 <p>Elm revisa esos casos, asegurando que las flags son exactamente lo que esperas. Sin este chequeo, le podrías pasar cualquier cosa, y terminarías viendo errores en tiempo de ejecución en Elm.</p>
 <p>Hay muchos tipos que pueden usarse en flags:</p>
 <ul>
@@ -832,45 +832,45 @@
 <li><code>Maybe</code></li>
 <li><code>List</code></li>
 <li><code>Array</code></li>
-<li>tuples</li>
-<li>records</li>
+<li>tuplas</li>
+<li>registros</li>
 <li><a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#Value" target="_blank"><code>Json.Decode.Value</code></a></li>
 </ul>
-<p>Mucha gente usa <code>Json.Decode.Value</code> porque les da un control más preciso. Pueden escribir un decodificador para lidiar con cualquier situación específica usando código Elm, y recuperándose sin problemas si llegan datos extraños.</p>
-<p>Los otros tipos que Elm soporta son un rezago de antes de que tuviéramos una forma de escribir decodificadores JSON. Si decides usarlos, hay ciertos detalles a tener en cuenta. Los siguientes ejemplos muestran el tipo deseado de la flag, y sus subpuntos ilustran la manera en que se interpretarían distintos valores JS:</p>
+<p>Mucha gente prefiere usar <code>Json.Decode.Value</code> porque les otorga un control más preciso. Podemos escribir un decodificador para lidiar con cualquier situación específica usando código Elm, y si se reciben datos inesperados, podemos recuperarnos sin problemas.</p>
+<p>Los otros tipos que Elm soporta son un rezago de la época antes de que existieran los decodificadores JSON. Si decides usar estos otros tipos, hay ciertos detalles a tener en cuenta. Los siguientes ejemplos muestran el tipo deseado de la flag, y en forma anidada se ilustra cómo se interpretan distintos valores JS:</p>
 <ul>
 <li><p><code>init : Int -&gt; ...</code></p>
 <ul>
-<li><code>0</code> =&gt; <code>0</code></li>
-<li><code>7</code> =&gt; <code>7</code></li>
-<li><code>3.14</code> =&gt; error</li>
-<li><code>6.12</code> =&gt; error</li>
+<li><code>0</code> → <code>0</code></li>
+<li><code>7</code> → <code>7</code></li>
+<li><code>3.14</code> → error</li>
+<li><code>6.12</code> → error</li>
 </ul>
 </li>
 <li><p><code>init : Maybe Int -&gt; ...</code></p>
 <ul>
-<li><code>null</code> =&gt; <code>Nothing</code></li>
-<li><code>42</code> =&gt; <code>Just 42</code></li>
-<li><code>"hi"</code> =&gt; error</li>
+<li><code>null</code> → <code>Nothing</code></li>
+<li><code>42</code> → <code>Just 42</code></li>
+<li><code>"hi"</code> → error</li>
 </ul>
 </li>
 <li><p><code>init : { x : Float, y : Float } -&gt; ...</code></p>
 <ul>
-<li><code>{ x: 3, y: 4, z: 50 }</code> =&gt; <code>{ x = 3, y = 4 }</code></li>
-<li><code>{ x: 3, name: "Tom" }</code> =&gt; error</li>
-<li><code>{ x: 360, y: "why?" }</code> =&gt; error</li>
+<li><code>{ x: 3, y: 4, z: 50 }</code> → <code>{ x = 3, y = 4 }</code></li>
+<li><code>{ x: 3, name: "Tom" }</code> → error</li>
+<li><code>{ x: 360, y: "why?" }</code> → error</li>
 </ul>
 </li>
 <li><p><code>init : (String, Int) -&gt; ...</code></p>
 <ul>
-<li><code>["Tom", 42]</code> =&gt; <code>("Tom", 42)</code></li>
-<li><code>["Sue", 33]</code> =&gt; <code>("Sue", 33)</code></li>
-<li><code>["Bob", "4"]</code> =&gt; error</li>
-<li><code>["Joe", 9, 9]</code> =&gt; error</li>
+<li><code>["Tom", 42]</code> → <code>("Tom", 42)</code></li>
+<li><code>["Sue", 33]</code> → <code>("Sue", 33)</code></li>
+<li><code>["Bob", "4"]</code> → error</li>
+<li><code>["Joe", 9, 9]</code> → error</li>
 </ul>
 </li>
 </ul>
-<p>Nótese que si la conversión no sale bien, <strong>vas a obtener un error de JS</strong>. Estamos tomando la política de “fallar rápido”. En vez de permitir que el error permee tu código Elm, lo reportamos lo antes posible. Esta es otra razón por la que hay gente a la que le gusta usar <code>Json.Decode.Value</code> en sus flags. En vez de obtener un error de JS, el valor extraño pasa por un decodificador, garantizando que puedas implementar un comportamiento de contingencia.</p>
+<p>Nótese que si la conversión no sale bien, <strong>vas a obtener un error de JS</strong>. Estamos adoptando la política de “fallar rápido”: En vez de permitir que el valor problemático permee nuestro código Elm, lo reportamos lo antes posible. Esta es otra razón por la que hay gente a la que le gusta usar <code>Json.Decode.Value</code> en sus flags: En vez de obtener un error de JS, el valor incorrecto pasa por un decodificador, garantizando que podamos implementar un comportamiento de contingencia.</p>
 
                                 
                                 </section>
@@ -914,7 +914,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Flags","level":"1.8.1","depth":2,"next":{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"previous":{"title":"Interoperabilidad con JS","level":"1.8","depth":1,"path":"interop/README.md","ref":"interop/README.md","articles":[{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/flags.md","mtime":"2025-06-15T16:06:38.563Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Flags","level":"1.8.1","depth":2,"next":{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},"previous":{"title":"Interoperabilidad con JS","level":"1.8","depth":1,"path":"interop/README.md","ref":"interop/README.md","articles":[{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/flags.md","mtime":"2025-09-17T18:39:36.816Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

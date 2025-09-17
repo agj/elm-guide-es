@@ -723,26 +723,26 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="interoperabilidad-con-javascript">Interoperabilidad con JavaScript</h1>
-<p>Hasta este punto hemos visto la <strong>Arquitectura Elm</strong>, <strong>tipos</strong>, <strong>comandos</strong>, <strong>suscripciones</strong>, y hasta instalamos Elm localmente.</p>
-<p>Pero ¿y si necesitamos integrar con JavaScript? Tal vez hay alguna API del navegador que aún no tiene un equivalente en un paquete de Elm. O tal vez quieres incrustar un <em>widget</em> de Javascript en tu app Elm. Etc. En este capítulo vamos a revisar las tres formas con las que podemos interoperar con JavaScript.</p>
+<p>Hasta este punto hemos visto la <strong>Arquitectura Elm, tipos, comandos, suscripciones,</strong> y hasta instalamos Elm localmente.</p>
+<p>Pero ¿y si necesitamos integrar con JavaScript? Tal vez hay alguna API del navegador que aún no tiene su equivalente en código Elm. O tal vez queremos incrustar una pequeña herramienta hecha en Javascript en medio de tu aplicación Elm. Etc. En este capítulo vamos a revisar las tres formas con las que podemos interoperar con JavaScript.</p>
 <ul>
 <li><a href="flags.html">Flags</a></li>
-<li><a href="ports.html">Ports</a></li>
-<li><a href="custom_elements.html">Custom Elements</a></li>
+<li><a href="ports.html">Puertos</a></li>
+<li><a href="custom_elements.html">Elementos personalizados</a></li>
 </ul>
-<p>Antes de entrar en materia, aprendamos a compilar nuestros programas Elm a JavaScript.</p>
+<p>Pero antes de entrar en materia, aprendamos a compilar nuestros programas Elm a JavaScript.</p>
 <blockquote>
-<p><strong>Nota:</strong> Si estás evaluando el usar Elm en tu trabajo, te sugiero que te asegures de que estos tres mecanismos sean capaces de cubrir todas tus necesidades. Puedes ver <a href="https://github.com/elm-community/js-integration-examples/" target="_blank">estos ejemplos</a> como un resumen breve de este capítulo. <a href="https://elm-lang.org/community" target="_blank">Pregunta aquí</a> si hay algo que te haga dudar, y si decides que aún no es el momento, ojalá vuelvas a darte una vuelta a revisar Elm en el futuro.</p>
+<p><strong>Nota:</strong> Si estás evaluando el usar Elm en tu trabajo, te sugiero que te asegures de que estos tres mecanismos sean capaces de cubrir todas tus necesidades. Puedes ver <a href="https://github.com/elm-community/js-integration-examples/" target="_blank">estos ejemplos</a> como un resumen breve de este capítulo. <a href="https://elm-lang.org/community" target="_blank">Pregunta aquí</a> si hay algo que te haga dudar, y si decides que aún no es el momento, ojalá vuelvas a darte una vuelta y revisar el estado de Elm más adelante.</p>
 </blockquote>
 <!-- TODO: 👆 Agregar este ejemplo al repositorio y traducirlo. -->
 <h2 id="compilar-a-javascript">Compilar a JavaScript</h2>
-<p>Si corres <code>elm make</code> producirás archivos HTML por defecto. Es decir que si pones:</p>
+<p>Correr el comando <code>elm make</code> genera archivos HTML por defecto. Es decir, algo así:</p>
 <pre><code class="lang-bash">elm make src/Main.elm
 </code></pre>
-<p>Esto producirá un archivo <code>index.html</code> que puedes abrir directamente para interactuar con tu programa. Pero si necesitas interoperabilidad con JavaScript, vas a necesitar producir archivos JavaScript.</p>
+<p>Esto producirá un archivo <code>index.html</code> que podemos abrir directamente para interactuar con nuestro programa. Pero si necesitamos interoperabilidad con JavaScript, vamos a necesitar generar un archivo JavaScript, así:</p>
 <pre><code class="lang-bash">elm make src/Main.elm --output=main.js
 </code></pre>
-<p>Este comando produce un archivo JavaScript que expone una función <code>Elm.Main.init()</code>. Teniendo este archivo <code>main.js</code>, puedes escribir tu propio archivo HTML que haga lo que necesites.</p>
+<p>Este comando produce un archivo JavaScript que expone una función <code>Elm.Main.init()</code>. Teniendo este archivo <code>main.js</code> podemos escribir nuestro propio archivo HTML que haga lo que necesitamos.</p>
 <h2 id="incrustar-en-html">Incrustar en HTML</h2>
 <p>Este es el HTML mínimo necesario para que <code>main.js</code> funcione en un navegador:</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
@@ -753,10 +753,10 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myapp"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"mi-app"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
       <span class="hljs-keyword">var</span> app = <span class="hljs-title class_">Elm</span>.<span class="hljs-property">Main</span>.<span class="hljs-title function_">init</span>({
-        <span class="hljs-attr">node</span>: <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"myapp"</span>),
+        <span class="hljs-attr">node</span>: <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">"mi-app"</span>),
       });
     </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
@@ -764,14 +764,14 @@
 </code></pre>
 <p>Revisemos las líneas más importantes aquí:</p>
 <ul>
-<li><p><code>&lt;head&gt;</code> - Tenemos una línea que carga nuestro archivo compilado <code>main.js</code>. ¡Esto es necesario! Si compilas un módulo llamado <code>Main</code>, vas a obtener una función <code>Elm.Main.init()</code> disponible en JavaScript. Si compilas un módulo llamado <code>Home</code>, vas a obtener una función <code>Elm.Home.init()</code> en JavaScript. Etc.</p>
+<li><p><code>&lt;head&gt;</code> — Tenemos una línea que carga nuestro archivo compilado <code>main.js</code>. <em>Esto es necesario.</em> Haciendo esto obtendremos una función <code>Elm.Main.init()</code> en JavaScript si compilamos un módulo llamado <code>Main</code>; o una función <code>Elm.Home.init()</code> si nuestro módulo se llama <code>Home</code>, etc.</p>
 </li>
-<li><p><code>&lt;body&gt;</code> - Hay dos cosas que tenemos que hacer aquí. Primero, creamos un <code>&lt;div&gt;</code> del que Elm tomará cargo. Tal vez es sólo una parte dentro de una aplicación más grande, y no habría problema. Segundo, tenemos un <code>&lt;script&gt;</code> para inicializar nuestro programa Elm. Aquí llamamos la función <code>Elm.Main.init()</code> para inicializar el programa, pasándole el nodo HTML (<code>node</code>) del que se hará cargo.</p>
+<li><p><code>&lt;body&gt;</code> — Hay dos cosas que tenemos que hacer aquí. Primero, creamos un <code>&lt;div&gt;</code> del que Elm tomará control. Tal vez es sólo una parte dentro de una aplicación más grande, y no habría problema. Segundo, tenemos un nodo <code>&lt;script&gt;</code> para inicializar nuestro programa Elm. Aquí llamamos la función <code>Elm.Main.init()</code> para inicializar el programa, pasándole el nodo HTML (<code>node</code>) que controlará.</p>
 </li>
 </ul>
-<p>Ya aprendimos a incrustar programas Elm dentro de un documento HTML, así que podemos empezar a explorar las tres opciones de interoperabilidad: flags, puertos, y elementos personalizados.</p>
+<p>Con esto hemos aprendido a incrustar programas Elm dentro de un documento HTML, así que podemos empezar a explorar las tres opciones de interoperabilidad: flags, puertos, y elementos personalizados.</p>
 <blockquote>
-<p><strong>Nota:</strong> Este es un archivo HTML normal, lo que signiffica que puedes ponerle cualquier cosa que necesites. Mucha gente carga más archivos JS y CSS en <code>&lt;head&gt;</code>. Eso significa que es válido escribir tu CSS a mano, o generarlo con alguna herramienta. Puedes añadir algo como <code>&lt;link rel="stylesheet" href="whatever-you-want.css"&gt;</code> en tu <code>&lt;head&gt;</code>, y ya tendrás acceso. También hay buenas opciones para manejar tu CSS <em>dentro</em> de Elm, pero ese es un tema para otra ocasión.</p>
+<p><strong>Nota:</strong> Este es un archivo HTML común y corriente, lo que significa que podemos ponerle cualquier cosa que necesitemos. Mucha gente carga más archivos JS y CSS en <code>&lt;head&gt;</code>. Eso significa que es válido escribir CSS a mano, o generarlo con alguna herramienta. Podemos añadir algo como <code>&lt;link rel="stylesheet" href="lo-que-sea.css"&gt;</code> en <code>&lt;head&gt;</code>, y ya tendremos sus estilos cargados en la página. También hay buenas opciones para manejar el CSS <em>dentro</em> de Elm, pero ese es un tema para otra ocasión.</p>
 </blockquote>
 
                                 
@@ -816,7 +816,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Interoperabilidad con JS","level":"1.8","depth":1,"next":{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},"previous":{"title":"Elm","level":"1.7.2","depth":2,"path":"install/elm.md","ref":"install/elm.md","articles":[]},"articles":[{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/README.md","mtime":"2025-06-15T16:06:38.563Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Interoperabilidad con JS","level":"1.8","depth":1,"next":{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},"previous":{"title":"Elm","level":"1.7.2","depth":2,"path":"install/elm.md","ref":"install/elm.md","articles":[]},"articles":[{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},{"title":"Puertos","level":"1.8.2","depth":2,"path":"interop/ports.md","ref":"interop/ports.md","articles":[]},{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},{"title":"Límites","level":"1.8.4","depth":2,"path":"interop/limits.md","ref":"interop/limits.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/README.md","mtime":"2025-09-17T18:39:36.816Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

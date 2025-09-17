@@ -724,10 +724,10 @@
                                 
                                 <h1 id="puertos">Puertos</h1>
 <p>Los puertos permiten la comunicación entre Elm y JavaScript.</p>
-<p>Son más frecuentemente usados con <a href="https://github.com/elm-community/js-integration-examples/tree/master/websockets" target="_blank"><code>WebSockets</code></a> y con <a href="https://github.com/elm-community/js-integration-examples/tree/master/localStorage" target="_blank"><code>localStorage</code></a>. Enfoquémonos en el ejemplo de <code>WebSockets</code>.</p>
+<p>Son más frecuentemente usados con <a href="https://github.com/elm-community/js-integration-examples/tree/master/websockets" target="_blank"><code>WebSockets</code></a> y con <a href="https://github.com/elm-community/js-integration-examples/tree/master/localStorage" target="_blank"><code>localStorage</code></a>. Enfoquémonos en el caso de <code>WebSockets</code>.</p>
 <!-- TODO: 👆 Agregar estos ejemplos al repositorio y traducirlos. -->
 <h2 id="puertos-en-javascript">Puertos en JavaScript</h2>
-<p>Aquí tenemos prácticamente el mismo HTML que hemos usado en las últimas dos páginas, pero con un poco de JavaScript añadido. Creamos una conexión con <code>wss://echo.websocket.org</code> que repite lo que sea que le envíes. Puedes comprobar viendo <a href="https://ellie-app.com/8yYgw7y7sM2a1" target="_blank">este ejemplo</a> que nos permite crear el esqueleto de un chat:</p>
+<p>Aquí tenemos prácticamente el mismo HTML que hemos usado en las últimas dos páginas, pero con un poco de JavaScript añadido. Creamos una conexión con <code>wss://echo.websocket.org</code>, que responde con lo que sea que le enviemos. Puedes comprobarlo viendo <a href="https://ellie-app.com/8yYgw7y7sM2a1" target="_blank">este ejemplo</a> que es como el “esqueleto” de un chat:</p>
 <!-- TODO: 👆 Traducir el ejemplo en el Ellie, y actualizar el link y el código abajo. -->
 <pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype <span class="hljs-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
@@ -767,10 +767,10 @@
   </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
-<p>Llamamos <code>Elm.Main.init()</code> igual que en otros ejemplos de interoperabilidad, pero esta vez sí usamos el objeto <code>app</code> que devuelve. Nos suscribimos al puerto <code>sendMessage</code> y estamos enviando datos al puerto <code>messageReceiver</code>.</p>
+<p>Llamamos <code>Elm.Main.init()</code>, igual que en otros ejemplos de interoperabilidad, pero esta vez sí usamos el objeto <code>app</code> que devuelve. Nos suscribimos al puerto <code>sendMessage</code>, y enviamos datos al puerto <code>messageReceiver</code>.</p>
 <p>Estos tienen una correspondencia en el lado Elm.</p>
 <h2 id="puertos-en-elm">Puertos en Elm</h2>
-<p>Revisa las líneas en que usamos la palabra clave <code>port</code> en el archivo Elm correspondiente. Así es como definimos los puertos que acabamos de ver en el lado JavaScript.</p>
+<p>Revisa las líneas en que usamos la palabra clave <code>port</code> en el archivo Elm correspondiente. Así es como definimos en Elm los puertos que acabamos de ver en el lado JavaScript.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">port</span> <span class="hljs-keyword">module</span> Main <span class="hljs-keyword">exposing</span> (..)
 
 <span class="hljs-keyword">import</span> Browser
@@ -795,7 +795,7 @@
 
 
 
-<span class="hljs-comment">-- PORTS</span>
+<span class="hljs-comment">-- PUERTOS</span>
 
 
 <span class="hljs-keyword">port</span> sendMessage : String -&gt; Cmd msg
@@ -805,7 +805,7 @@
 
 
 
-<span class="hljs-comment">-- MODEL</span>
+<span class="hljs-comment">-- MODELO</span>
 
 
 type alias Model =
@@ -832,9 +832,9 @@ type Msg
 
 
 
-<span class="hljs-comment">-- Use the `sendMessage` port when someone presses ENTER or clicks</span>
-<span class="hljs-comment">-- the "Send" button. Check out index.html to see the corresponding</span>
-<span class="hljs-comment">-- JS where this is piped into a WebSocket.</span>
+<span class="hljs-comment">-- Usamos el puerto `sendMessage` cuando el usuario apreta la tecla “Enter” o el</span>
+<span class="hljs-comment">-- botón “Send”. Revisa index.html para ver el código JS donde esto se redirige</span>
+<span class="hljs-comment">-- a un WebSocket.</span>
 
 
 update : Msg -&gt; Model -&gt; ( <span class="hljs-type">Model</span>, <span class="hljs-type">Cmd</span> <span class="hljs-type">Msg</span> )
@@ -857,11 +857,11 @@ update msg model =
 
 
 
-<span class="hljs-comment">-- SUBSCRIPTIONS</span>
+<span class="hljs-comment">-- SUSCRIPCIONES</span>
 <span class="hljs-comment">--</span>
-<span class="hljs-comment">-- Subscribe to the `messageReceiver` port to hear about messages coming in</span>
-<span class="hljs-comment">-- from JS. Check out the index.html file to see how this is hooked up to a</span>
-<span class="hljs-comment">-- WebSocket.</span>
+<span class="hljs-comment">-- Nos suscribimos al puerto `messageReceiver` para escuchar los mensajes de</span>
+<span class="hljs-comment">-- entrada desde JS. Revisa el archivo index.html para ver cómo se conecta esto</span>
+<span class="hljs-comment">-- con un WebSocket.</span>
 
 
 subscriptions : Model -&gt; Sub Msg
@@ -870,7 +870,7 @@ subscriptions _ =
 
 
 
-<span class="hljs-comment">-- VIEW</span>
+<span class="hljs-comment">-- VISTA</span>
 
 
 view : Model -&gt; Html Msg
@@ -892,7 +892,7 @@ view model =
 
 
 
-<span class="hljs-comment">-- DETECT ENTER</span>
+<span class="hljs-comment">-- DETECTAR ENTER</span>
 
 
 ifIsEnter : msg -&gt; D.Decoder msg
@@ -907,47 +907,47 @@ ifIsEnter msg =
                     <span class="hljs-type">D</span>.fail "some other key"
             )
 </code></pre>
-<p>Fíjate en que la primera línea dice <code>port module</code> en vez de sólo <code>module</code>. Esto es lo que hace posible definir puertos dentro del módulo. El compilador te va a dar ayuda si acaso te equivocas en esto, así que espero que no llegue a ser un problema muy grande.</p>
-<p>Bueno, pero ¿qué significan las declaraciones <code>port</code> para <code>sendMessage</code> y <code>messageReceiver</code>?</p>
+<p>Fíjate en que la primera línea dice <code>port module</code> en vez de sólo <code>module</code>. Esto es lo que hace posible definir puertos dentro del módulo. El compilador te va a dar ayuda si acaso te equivocas en esto, así que espero que no llegue a ser inconveniente.</p>
+<p>Bueno, pero ¿qué significan las declaraciones <code>port</code> para definir <code>sendMessage</code> y <code>messageReceiver</code>?</p>
 <h2 id="mensajes-de-salida-cmd">Mensajes de salida (<code>Cmd</code>)</h2>
 <p>La declaración de <code>sendMessage</code> nos permite enviar mensajes de salida desde Elm.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">port</span> sendMessage : String -&gt; Cmd msg
 </code></pre>
-<p>Aquí declaramos que queremos enviar valores <code>String</code>, pero podríamos poner cualquiera de los otros tipos que funcionan con flags. Hablamos sobre esos tipos en la página anterior, y puedes revisar este <a href="https://ellie-app.com/8yYddD6HRYJa1" target="_blank">ejemplo que usa <code>localStorage</code></a> para ver cómo enviamos un valor <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value" target="_blank"><code>Json.Encode.Value</code></a> hacia JavaScript.</p>
+<p>Aquí declaramos que queremos enviar valores <code>String</code>, pero podríamos poner cualquiera de los otros tipos que funcionan con flags. Hablamos sobre esos tipos en la página anterior. También puedes revisar este <a href="https://ellie-app.com/8yYddD6HRYJa1" target="_blank">ejemplo que usa <code>localStorage</code></a> para ver cómo enviamos un valor <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value" target="_blank"><code>Json.Encode.Value</code></a> hacia JavaScript.</p>
 <!-- TODO: 👆 Traducir este ejemplo en el Ellie. -->
 <p>Ahora podemos usar <code>sendMessage</code> igual que cualquier función. Si tu función <code>update</code> genera un comando <code>sendMessage "hello"</code>, lo vas a recibir en el lado de JavaScript:</p>
 <pre><code class="lang-javascript">app.<span class="hljs-property">ports</span>.<span class="hljs-property">sendMessage</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">message</span>) {
   socket.<span class="hljs-title function_">send</span>(message);
 });
 </code></pre>
-<p>Este código JavaScript está suscrito a todos los mensajes de salida. Puedes llamar suscribir múltiples funciones con <code>subscribe</code>, y después desuscribirlas por referencia usando <code>unsubscribe</code>, pero en general sugerimos mantener esto estático.</p>
-<p>También recomendamos enviar mensajes más completos en vez de crear muchos puertos individuales. Tal vez eso significaría tener un tipo personalizado en Elm que representa todo lo que necesites decirle a JS, y después usar <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Encode" target="_blank"><code>Json.Encode</code></a> para enviarlo a una única suscripción de JS. Mucha gente cree que esto contribuye a tener una mejor separación de intereses. El código Elm es claramente dueño de cierto estado, y el lado JS es claramente dueño de cierto otro estado.</p>
+<p>Este código JavaScript está suscrito a todos los mensajes de salida. Es posible suscribir múltiples funciones usando <code>subscribe</code>, y después desuscribirlas por referencia usando <code>unsubscribe</code>, pero en general sugerimos mantener esto estático.</p>
+<p>También recomendamos enviar mensajes más completos en vez de crear muchos puertos individuales. Tal vez eso significaría tener un tipo personalizado en Elm que representa todo lo que necesitemos decirle a JS, y después usar <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Encode" target="_blank"><code>Json.Encode</code></a> para enviarlo a una única suscripción de JS. Mucha gente opina que esto contribuye a tener una mejor separación de intereses. El código Elm es claramente dueño de cierto estado, y el lado JS es claramente dueño de cierto otro estado.</p>
 <h2 id="mensajes-de-entrada-sub">Mensajes de entrada (<code>Sub</code>)</h2>
-<p>La declaración de <code>messageReceiver</code> nos permite escuchar mensajes que entran a Elm.</p>
+<p>La declaración de <code>messageReceiver</code> nos permite escuchar mensajes que entran al lado Elm.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">port</span> messageReceiver : (<span class="hljs-type">String</span> -&gt; msg) -&gt; Sub msg
 </code></pre>
-<p>Aquí decimos que vamos a recibir valores <code>String</code>, pero nuevamente, podemos escuchar cualquier tipo que sea compatible con flags o con puertos de salida. Simplemente cambia el tipo <code>String</code> por el de uno de los tipos que puede cruzar la frontera.</p>
+<p>Aquí decimos que vamos a recibir valores <code>String</code>, pero nuevamente, podemos escuchar cualquier tipo que sea compatible con flags o con puertos de salida. Simplemente cambia el tipo <code>String</code> por otro de los tipos que pueden cruzar la frontera.</p>
 <p>Podemos usar <code>messageReceiver</code> igual que otras funciones. En nuestro caso, llamamos <code>messageReceiver Recv</code> cuando definimos nuestras suscripciones, porque queremos escuchar cualquier mensaje de entrada desde JavaScript. Esto nos permitirá recibir mensajes como <code>Recv "¿cómo estás?"</code> en nuestra función <code>update</code>.</p>
-<p>En el lado JavaScript, podemos enviar cosas a un puerto cuando queramos:</p>
+<p>En el lado JavaScript podemos enviar cosas a un puerto en cualquier momento:</p>
 <pre><code class="lang-javascript">socket.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">"message"</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) {
   app.<span class="hljs-property">ports</span>.<span class="hljs-property">messageReceiver</span>.<span class="hljs-title function_">send</span>(event.<span class="hljs-property">data</span>);
 });
 </code></pre>
-<p>En este caso lo estamos haciendo cuando recibimos un mensaje vía un websocket, pero podrías enviarlo en cualquier otro momento también. Tal vez hay otra fuente más desde la cual recibimos mensajes. No hay problema, Elm no necesita saber los detalles. Sólo mándale el string por el puerto que corresponda.</p>
+<p>En este caso lo hacemos al recibir un mensaje vía websocket, pero podríamos enviarlo en cualquier otro momento también. Tal vez hay otra fuente más desde la cual recibimos mensajes, y no hay problema, porque Elm no necesita saber los detalles: sólo mándale el string por el puerto que corresponda.</p>
 <h2 id="notas">Notas</h2>
-<p><strong>Los puertos están diseñados para crear fronteras.</strong> Definitivamente no intentes crear un puerto por cada función JS que necesites. Tal vez te gusta mucho Elm y quieras hacer todo en Elm sin importar el costo, pero los puertos no están diseñados para eso. En vez de esto, enfócate en preguntas como “¿quién es el dueño de este estado?”, y usa uno o dos puertos para enviar mensajes de ida y vuelta. Si estás en un escenario complejo, puedes incluso simular valores <code>Msg</code> enviando objetos JS como <code>{ tag: "active-users-changed", list: ... }</code>, donde tienes una etiqueta para cada variante de la información que necesites transmitir.</p>
-<p>Aquí tienes algunas reglas generales y problemas frecuentes:</p>
+<p><strong>Los puertos están diseñados para crear fronteras.</strong> Definitivamente no busques crear un puerto para cada función JS que necesites invocar. Tal vez te gusta mucho Elm y quieras hacer todo en Elm sin importar el costo, pero los puertos no están diseñados para eso. Mejor enfócate en preguntas como “¿quién es el dueño de este estado?”, y usa uno o dos puertos para enviar mensajes de ida y vuelta. Si estás en un escenario complejo, puedes incluso simular valores <code>Msg</code> enviando objetos JS como <code>{ tag: "active-users-changed", list: ... }</code>, donde tienes una etiqueta para cada variante de la información que necesites transmitir.</p>
+<p>Aquí tienes algunas sugerencias y soluciones a problemas frecuentes:</p>
 <ul>
-<li><p><strong>Es recomendado enviar <code>Json.Encode.Value</code> en tus puertos.</strong> Igual que con flags, hay ciertos tipos básicos que pueden transmitirse vía puertos. Esto viene del tiempo antes de que existieran decodificadores de JSON, y puedes leer más al respecto <a href="flags.html#verifying-flags">aquí</a>.</p>
+<li><p><strong>Es recomendado enviar <code>Json.Encode.Value</code> en tus puertos.</strong> Igual que con flags, hay ciertos tipos básicos que pueden transmitirse vía puertos. Esto viene del tiempo antes de que existieran los decodificadores de JSON, y puedes leer más al respecto <a href="flags.html#verifying-flags">aquí</a>.</p>
 </li>
 <li><p><strong>Todas las declaraciones <code>port</code> deben aparecer en un <code>port module</code>.</strong> Probablemente lo mejor es organizar tus puertos en un sólo <code>port module</code> para que sea más fácil visualizar la interfaz, toda en un sólo lugar.</p>
 </li>
 <li><p><strong>Los puertos son para aplicaciones.</strong> Los <code>port module</code> están disponibles para aplicaciones, pero no para paquetes. Esto asegura que los autores de una aplicación tengan la flexibilidad que necesitan, pero el ecosistema de paquetes está escrito en Elm al cien porciento. Creemos que esto creará un ecosistema y una comunidad más fuertes a la larga, y nos referimos a los sacrificios involucrados más en detalle en la sección siguiente sobre los <a href="limits.html">límites</a> de la interoperabilidad Elm/JS.</p>
 </li>
-<li><p><strong>Los puertos pueden ser eliminados como código muerto.</strong> Elm tiene un agresivo sistema de <a href="limits.html">eliminación de código muerto</a>, y borrará puertos que no son usados dentro de Elm, ya que el compilador no tiene idea de lo que ocurre en el lado JavaScript. Por lo tanto, intenta cablear tus puertos en el lado Elm antes que nada.</p>
+<li><p><strong>Los puertos pueden ser eliminados como código muerto.</strong> Elm tiene un agresivo sistema de <a href="limits.html">eliminación de código muerto</a>, y borrará puertos que no son usados dentro de Elm, ya que el compilador no tiene idea de lo que ocurre en el lado JavaScript. Por lo tanto, asegúrate de cablear tus puertos en el lado Elm antes que nada.</p>
 </li>
 </ul>
-<p>Espero que esta información te ayude a encontrar maneras de incluir Elm junto a tu JavaScript preexistente. No es tan excitante como hacer una reescritura completa en Elm, pero históricamente hemos visto que es una estrategia mucho más efectiva.</p>
+<p>Espero que esta información te ayude a encontrar maneras de incorporar Elm junto a tu JavaScript preexistente. Tal vez no es tan motivante como reescribir un proyecto completo en Elm, pero históricamente hemos visto que es una estrategia mucho más efectiva.</p>
 
                                 
                                 </section>
@@ -991,7 +991,7 @@ ifIsEnter msg =
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Puertos","level":"1.8.2","depth":2,"next":{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},"previous":{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/ports.md","mtime":"2025-06-15T16:06:38.563Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-06-15T16:07:40.783Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Puertos","level":"1.8.2","depth":2,"next":{"title":"Elementos personalizados","level":"1.8.3","depth":2,"path":"interop/custom_elements.md","ref":"interop/custom_elements.md","articles":[]},"previous":{"title":"Flags","level":"1.8.1","depth":2,"path":"interop/flags.md","ref":"interop/flags.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"interop/ports.md","mtime":"2025-09-17T18:39:36.816Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
