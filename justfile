@@ -4,7 +4,10 @@
 
 # Levanta un servidor con una previsualización del libro.
 preview: install build-repl
-    pnpm exec honkit serve
+    # Nota: Este puerto fue elegido porque está en lista blanca en el servicio
+    # usado por el REPL:
+    # https://github.com/elm/compiler/blob/cce7a8bbd8fe690fc83fa795f8d7e02505d1f25f/worker/src/Endpoint/Repl.hs#L52
+    pnpm exec honkit serve --port 8007
 
 # Genera el libro.
 build: install build-repl
