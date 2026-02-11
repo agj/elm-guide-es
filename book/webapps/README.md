@@ -62,7 +62,7 @@ Esto producirá un archivo `main.js` que podemos cargar desde nuestro HTML perso
 </html>
 ```
 
-Este HTML es bastante simple. Cargamos lo necesario en `<head>`, e inicializamos el programa Elm en `<body>`. El programa se encargará del resto y renderizará nuestra vista.
+Este HTML es bastante simple. Cargamos lo necesario en `<head>`, e inicializamos el programa Elm en `<body>`. El programa se encargará del resto y pintará nuestra vista.
 
 Sea lo que sea que hagamos, ya tendremos HTML que podemos pasarle a un navegador. Podemos publicar el HTML vía servicios gratuitos como [GitHub Pages](https://pages.github.com/) o [Netlify](https://www.netlify.com/), o tal vez podemos configurar un servidor propio, como un VPS (servidor privado virtual) a través de un servicio como [Digital Ocean](https://m.do.co/c/c47faa1916d2). Haz lo que mejor te acomode; sólo necesitas una forma de proveer tu HTML en la web para que se pueda acceder desde un navegador.
 
