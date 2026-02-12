@@ -16,7 +16,7 @@ Aunque no tengas completa seguridad de que Elm es para ti, te garantizo que si l
 
 Antes de empezar, un poquito de contexto. Estás leyendo la traducción no oficial al español hispanoamericano del libro de Evan Czaplicki, autor de Elm. [Aquí está el libro original en inglés.](https://guide.elm-lang.org/)
 
-**Nota:** ¡Esta traducción aún está en desarrollo! Hay cosas que aún no están traducidas, posibles errores, y funcionalidades incompletas. Aún así, le hemos puesto mucho cariño y esperamos que te sea útil. ❤️
+**Nota:** ¡Esta traducción aún está en desarrollo! Hay cosas que aún no están traducidas, posibles errores, y funcionalidades incompletas. Aún así, es una _traducción humana_ a la que le hemos puesto mucho cariño, y esperamos que te sea útil. ❤️
 
 ¿Quieres escribirnos un **comentario**, mandar una **corrección**, o **aportar** con la traducción o sus aspectos técnicos? [El repositorio en Github](https://github.com/agj/elm-guide-es) es el lugar indicado.
 
