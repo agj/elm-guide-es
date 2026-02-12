@@ -567,7 +567,7 @@
                 <a href="lazy.html">
             
                     
-                    Html.lazy
+                    Html.Lazy
             
                 </a>
             
@@ -580,7 +580,7 @@
                 <a href="keyed.html">
             
                     
-                    Html.keyed
+                    Html.Keyed
             
                 </a>
             
@@ -723,12 +723,12 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="minificación">Minificación</h1>
-<p>Lo único más lento que modificar el DOM es comunicarse con un servidor, especialmente para gente en teléfonos celulares y con conexión lenta a internet. Podrías optimizar tu código con <code>Html.Lazy</code> y <code>Html.Keyed</code> todo lo que quieras, pero tu aplicación se seguiría sintiendo lenta si carga lento.</p>
-<p>Una gran manera de mejorar esto es enviando menos bits. Por ejemplo, si podemos convertir un archivo de 122 kb a uno de 9 kb, va a cargar más rápido. Este tipo de resultados se pueden lograr con estas técnicas:</p>
+<p>Lo único más lento que modificar el DOM es comunicarse con un servidor, especialmente para gente navegando en su teléfono celular o con conexión lenta a internet. Podrías optimizar tu código con <code>Html.Lazy</code> y <code>Html.Keyed</code> todo lo que quieras, pero tu aplicación se seguiría sintiendo lenta si carga lento.</p>
+<p>Una gran manera de mejorar esto es enviando menos bits. Por ejemplo, si podemos convertir un archivo de 122 kb a uno de 9 kb, va a cargar más rápido. Este tipo de resultados se pueden lograr con las siguientes técnicas:</p>
 <ul>
 <li><strong>Compilación.</strong> El compilador de Elm puede realizar optimizaciones como eliminación de código muerto y renombramiento de campos en registros. Es decir, puede quitar código sin uso y hacer que nombres como <code>userStatus</code> sean más cortos dentro del código generado.</li>
-<li><strong>Minificación.</strong> En el mundo de JavaScript hay herramientas llamadas “minificadores”, que realizan varias transformaciones. Acortan variables, mueven código de funciones al lugar en donde son llamadas, convierten <code>if</code>s en ternarios <code>?:</code>, y transforman <code>'\u0041'</code> en <code>'A'</code>. Cualquier cosa que reduzca un poquito el peso.</li>
-<li><strong>Compresión.</strong> Una vez que el código haya quedado tan pequeño como es posible, puedes usar un algoritmo de compresión como gzip para apachurrarlo aún más. Funciona particularmente bien con palabras clave como <code>function</code> y <code>return</code>, que no se pueden quitar del código mismo.</li>
+<li><strong>Minificación.</strong> En el mundo de JavaScript hay herramientas llamadas “minificadores”, que realizan varias transformaciones. Acortan variables, mueven código de funciones directo al lugar en donde son llamadas, convierten <code>if</code>s en ternarios <code>?:</code>, y transforman <code>'\u0041'</code> en <code>'A'</code>. Cualquier cosa que reduzca un poquito el peso.</li>
+<li><strong>Compresión.</strong> Una vez que el código haya quedado tan pequeño como es posible, puedes usar un algoritmo de compresión como gzip para apachurrarlo aún más. Funciona particularmente bien contra palabras clave como <code>function</code> y <code>return</code>, que no se pueden quitar del código mismo.</li>
 </ul>
 <p>Elm facilita hacer todo esto en tu proyecto. No hace falta un sistema complicado de compilación. Basta con dos comandos de terminal.</p>
 <h2 id="instrucciones">Instrucciones</h2>
@@ -746,7 +746,7 @@ uglifyjs elm.js --compress <span class="hljs-string">'pure_funcs=[F2,F3,F4,F5,F6
 <h2 id="scripts">Scripts</h2>
 <p>Como es difícil recordar todas esas opciones de <code>uglifyjs</code>, tal vez es más fácil escribir un script para esto.</p>
 <p>Podemos escribir un script Bash que genera los archivos <code>elm.js</code> y <code>elm.min.js</code>. En Mac y Linux podemos definir <code>optimize.sh</code> así:</p>
-<pre><code class="lang-bash"><span class="hljs-meta">#!/bin/bash</span>
+<pre><code class="lang-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
 
 <span class="hljs-built_in">set</span> -e
 
@@ -766,9 +766,9 @@ uglifyjs <span class="hljs-variable">$js</span> --compress <span class="hljs-str
 Tamaño minificado:  24123 bytes  (elm.min.js)
 Tamaño comprimido:  9148 bytes
 </code></pre><p>Buen resultado, ¿no? Ahora sólo necesitamos transferir aproximadamente 9 kb a nuestros usuarios.</p>
-<p>Los comandos importantes son <code>elm</code> y <code>uglifyjs</code>, que funcionan en cualquier plataforma, así que no sería muy difícil hacer algo parecido en Windows.</p>
+<p>Los comandos importantes son <code>elm</code> y <code>uglifyjs</code>, que funcionan en cualquier plataforma, así que no sería muy difícil hacer un script parecido para Windows.</p>
 <h2 id="consejos">Consejos</h2>
-<p>Recomiendo escribir código usando <code>Browser.application</code> y compilarlo en un sólo archivo JavaScript, como hemos visto aquí. En la primera visita el archivo será descargado, y quedará guardado en caché. Elm genera archivos bien pequeños comparado con otros competidores populares <a href="https://elm-lang.org/blog/small-assets-without-the-headache" target="_blank">como puedes ver aquí</a>, así que esta estrategia te puede servir bastante bien.</p>
+<p>Recomiendo escribir código usando <code>Browser.application</code> y compilarlo en un sólo archivo JavaScript, como hemos visto aquí. En la primera visita el archivo será descargado, y quedará guardado en caché. Elm genera archivos bien pequeños en comparación con otras alternativas populares, <a href="https://elm-lang.org/blog/small-assets-without-the-headache" target="_blank">como puedes ver aquí</a>, así que esta estrategia te puede servir bastante bien.</p>
 <blockquote>
 <p><strong>Nota:</strong> En teoría, es posible reducir aún más los tamaños de archivos generados por Elm. Actualmente no es posible, pero si estás trabajando en un proyecto de 50 mil líneas de Elm o más, nos gustaría conocer tu situación como parte de un estudio de usuarios. <a href="https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7" target="_blank">Más detalles aquí (en inglés).</a></p>
 </blockquote>
@@ -799,7 +799,7 @@ Tamaño comprimido:  9148 bytes
 
             
                 
-                <a href="keyed.html" class="navigation navigation-prev " aria-label="Previous page: Html.keyed">
+                <a href="keyed.html" class="navigation navigation-prev " aria-label="Previous page: Html.Keyed">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -815,7 +815,7 @@ Tamaño comprimido:  9148 bytes
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Minificación","level":"1.10.3","depth":2,"next":{"title":"Próximos pasos","level":"1.11","depth":1,"path":"next_steps.md","ref":"next_steps.md","articles":[]},"previous":{"title":"Html.keyed","level":"1.10.2","depth":2,"path":"optimization/keyed.md","ref":"optimization/keyed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/asset_size.md","mtime":"2025-09-17T18:39:36.816Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Minificación","level":"1.10.3","depth":2,"next":{"title":"Próximos pasos","level":"1.11","depth":1,"path":"next_steps.md","ref":"next_steps.md","articles":[]},"previous":{"title":"Html.Keyed","level":"1.10.2","depth":2,"path":"optimization/keyed.md","ref":"optimization/keyed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/asset_size.md","mtime":"2026-02-12T14:22:19.274Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2026-02-12T14:22:56.515Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

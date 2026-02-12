@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Html.keyed · Introducción a Elm</title>
+        <title>Html.Keyed · Introducción a Elm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 5.1.4">
@@ -567,7 +567,7 @@
                 <a href="lazy.html">
             
                     
-                    Html.lazy
+                    Html.Lazy
             
                 </a>
             
@@ -580,7 +580,7 @@
                 <a href="keyed.html">
             
                     
-                    Html.keyed
+                    Html.Keyed
             
                 </a>
             
@@ -707,7 +707,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Html.keyed</a>
+        <a href=".." >Html.Keyed</a>
     </h1>
 </div>
 
@@ -726,17 +726,17 @@
 <p>En la página anterior aprendimos cómo funciona el DOM virtual y cómo podemos usar <code>Html.Lazy</code> para evitar computar de más. Ahora vamos a conocer <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed/" target="_blank"><code>Html.Keyed</code></a> para ahorrarnos aún más cómputo.</p>
 <p>Esta optimización es particularmente útil para interfaces con listas de datos que requieren <strong>añadir</strong>, <strong>quitar</strong> y <strong>reordenar</strong> ítems.</p>
 <h2 id="el-problema">El problema</h2>
-<p>Digamos que tenemos una lista de todos los presidentes de los Estados Unidos. Tal vez nos deja ordenar por nombre, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_education" target="_blank">por educación</a>, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_net_worth" target="_blank">por patrimonio neto</a> y <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_home_state" target="_blank">por lugar de nacimiento</a>.</p>
+<p>Digamos que tenemos una lista de todos los presidentes de los Estados Unidos. Tal vez se pueden ordenar por nombre, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_education" target="_blank">por educación</a>, <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_net_worth" target="_blank">por patrimonio neto</a> o <a href="https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_home_state" target="_blank">por lugar de nacimiento</a>.</p>
 <p>Cuando el algoritmo de comparación de nodos (descrito en la página anterior) se topa con una larga lista de ítems, simplemente la revisa de a pares:</p>
 <ul>
-<li>Compara el actual primer elemento con el nuevo primer elemento.</li>
-<li>Compara el actual segundo elemento con el nuevo segundo elemento.</li>
+<li>Compara el actual elemento 1 contra el nuevo elemento 1.</li>
+<li>Compara el actual elemento 2 contra el nuevo elemento 2.</li>
 <li>…</li>
 </ul>
-<p>Pero si cambias el orden de los ítems, ¡todos van a resultar diferentes! Entonces terminas haciendo más trabajo en el DOM cuando podrías haber sólo intercambiado algunos nodos de lugar.</p>
-<p>El problema también ocurre al insertar y quitar ítems. Si quitamos el primero de una lista de cien, todo quedará desplazado por una posición, y verse distinto para el algoritmo. Terminamos haciendo 99 comparaciones y una eliminación al final. No es muy bueno.</p>
+<p>Pero si cambiamos el orden de los ítems, ¡todos van a resultar diferentes! Entonces terminamos causando mucho trabajo en el DOM cuando lo único que hacía falta era intercambiar algunos nodos de lugar.</p>
+<p>El problema también ocurre al insertar y quitar ítems. Si quitamos el primero de una lista de cien, todo quedará desplazado por una posición, y por lo tanto se verá distinto para el algoritmo. Terminamos haciendo 99 comparaciones y una eliminación al final. No es muy óptimo.</p>
 <h2 id="la-solución">La solución</h2>
-<p>La manera de arreglar este problema es con <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed#node" target="_blank"><code>Html.Keyed.node</code></a>, que permite emparejar cada ítem con una “llave” que lo distingue fácilmente de todos los demás.</p>
+<p>La manera de arreglar este problema es con <a href="https://package.elm-lang.org/packages/elm/html/latest/Html-Keyed#node" target="_blank"><code>Html.Keyed.node</code></a>, que permite asignarle una “llave” a cada ítem para distinguirlo fácilmente de todos los demás.</p>
 <p>En nuestro ejemplo de los presidentes, podríamos escribir código así:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (..)
 <span class="hljs-keyword">import</span> Html.Keyed <span class="hljs-keyword">as</span> Keyed
@@ -754,11 +754,11 @@
 <span class="hljs-title">viewPresident</span> president =
   li [] [ ... ]
 </code></pre>
-<p>Cada nodo hijo tiene una llave asociada. En vez de hacer una comparación de a pares, comparamos en base a igualdad de llaves.</p>
-<p>Ahora el algoritmo del DOM virtual puede reconocer cuando una lista fue reordenada. Primero busca cada nodo de presidente por su llave, y compara el actual y el nuevo. Como usamos <code>lazy</code> para cada ítem, no necesita siquiera generar los nodos virtuales. Después determina cómo reordenar los nodos del DOM para mostrar las cosas en el orden que queremos. En suma, la versión con llaves acaba haciendo mucho menos trabajo.</p>
-<p>Este ejemplo de reordenamiento ayuda para entender cómo funciona, pero no es el caso más común que necesita esta optimización. <strong>Los nodos con llave son extremadamente importantes cuando añadimos o quitamos ítems.</strong> Si quitamos el primero en cien elementos, al usar nodos con llave permitimos que el DOM virtual entienda la situación inmediatamente. Y al final sólo necesitamos hacer una eliminación, y no las 99 comparaciones.</p>
+<p>Cada nodo hijo tiene una llave asociada (un <code>String</code> con el nombre del presidente). En vez de hacer una comparación de a pares, comparamos en base a igualdad de llaves.</p>
+<p>Ahora el algoritmo del DOM virtual es capaz de reconocer si una lista fue reordenada. Primero busca cada nodo de presidente por su llave, y compara el actual con el nuevo. Como usamos <code>lazy</code> para cada ítem, ni siquiera necesitará generar los nodos virtuales. Después determina cómo reordenar los nodos del DOM para mostrar las cosas en el orden que queremos. En suma, la versión con llaves acaba haciendo mucho menos trabajo.</p>
+<p>Este ejemplo de reordenamiento ayuda para entender cómo funciona, pero no es el caso más común que necesita esta optimización. <strong>Los nodos con llave son fundamentalmente necesarios cuando añadimos o quitamos ítems.</strong> Si quitamos el primero de una lista con cien elementos, al usar nodos con llave permitimos que el DOM virtual entienda la situación inmediatamente. Y al final sólo necesitamos hacer una eliminación, y no 99 comparaciones.</p>
 <h2 id="en-resumen">En resumen</h2>
-<p>Manipular el DOM es extraordinariamente lento en comparación con el cómputo que ocurre típicamente durante una aplicación normal. <strong>Siempre prueba usar <code>Html.Lazy</code> y <code>Html.Keyed</code> primero.</strong> Recomiendo en lo posible verificar las optimizaciones usando perfilamiento. Algunos navegadores proveen una vista en forma de línea de tiempo de tu programa, <a href="https://developer.chrome.com/docs/devtools/performance?hl=es-419" target="_blank">como este</a>. Te da un resumen de cuánto tiempo se gasta en descarga, ejecución de código, pintado, etc. Si ves que el 10% del tiempo se gasta en ejecución de código, podrías hacer que tu código Elm ande el doble de rápido y aún así no notarías la diferencia. Mientras que usar nodos <code>Lazy</code> y <code>Keyed</code> nos permite darle un gran mordisco a ese otro 90%, al manipular menos el DOM.</p>
+<p>Manipular el DOM es extraordinariamente lento en comparación con cualquier otro tipo de cómputo que una aplicación normal típicamente hace. <strong>Cuanto tengas problemas de rendimiento, siempre parte aplicando <code>Html.Lazy</code> y <code>Html.Keyed</code>.</strong> Recomiendo en lo posible verificar las optimizaciones usando perfilamiento. Las herramientas de desarrollo de algunos navegadores proveen una vista en forma de línea de tiempo de tu programa, <a href="https://developer.chrome.com/docs/devtools/performance?hl=es-419" target="_blank">así</a>. Te da un resumen de cuánto tiempo se gasta en descarga, ejecución de código, pintado, etc. Si observas que sólo el 10% del tiempo se gasta en ejecución de código, podrías hacer que tu código Elm ande el doble de rápido y aún así no notarías la diferencia. Mientras que usar nodos <code>Lazy</code> y <code>Keyed</code> nos permite darle un gran mordisco a ese otro 90%, al manipular menos el DOM.</p>
 
                                 
                                 </section>
@@ -786,7 +786,7 @@
 
             
                 
-                <a href="lazy.html" class="navigation navigation-prev " aria-label="Previous page: Html.lazy">
+                <a href="lazy.html" class="navigation navigation-prev " aria-label="Previous page: Html.Lazy">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -802,7 +802,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Html.keyed","level":"1.10.2","depth":2,"next":{"title":"Minificación","level":"1.10.3","depth":2,"path":"optimization/asset_size.md","ref":"optimization/asset_size.md","articles":[]},"previous":{"title":"Html.lazy","level":"1.10.1","depth":2,"path":"optimization/lazy.md","ref":"optimization/lazy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/keyed.md","mtime":"2025-09-17T18:39:36.817Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2025-09-17T18:40:17.472Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Html.Keyed","level":"1.10.2","depth":2,"next":{"title":"Minificación","level":"1.10.3","depth":2,"path":"optimization/asset_size.md","ref":"optimization/asset_size.md","articles":[]},"previous":{"title":"Html.Lazy","level":"1.10.1","depth":2,"path":"optimization/lazy.md","ref":"optimization/lazy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"optimization/keyed.md","mtime":"2026-02-12T14:22:19.275Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2026-02-12T14:22:56.515Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
