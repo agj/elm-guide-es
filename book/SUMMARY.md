@@ -33,8 +33,8 @@
   - [Módulos](webapps/modules.md)
   - [Estructurando aplicaciones web](webapps/structure.md)
 - [Optimización](optimization/README.md)
-  - [Html.lazy](optimization/lazy.md)
-  - [Html.keyed](optimization/keyed.md)
+  - [Html.Lazy](optimization/lazy.md)
+  - [Html.Keyed](optimization/keyed.md)
   - [Minificación](optimization/asset_size.md)
 - [Próximos pasos](next_steps.md)
 - Apéndice

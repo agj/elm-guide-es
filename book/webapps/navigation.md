@@ -1,18 +1,18 @@
 # Navegación
 
-Ya vimos cómo servir una página, pero imaginemos que estamos creando un sitio web como `package.elm-lang.org`, que tiene varias páginas como [la búsqueda](https://package.elm-lang.org/), [el readme](https://package.elm-lang.org/packages/elm/core/latest/) de cada paquete y [la documentación](https://package.elm-lang.org/packages/elm/core/latest/Maybe), todas las cuales funcionan distinto. ¿Cómo podemos hacer eso?
+Ya vimos cómo servir una página, pero imaginemos que estamos creando un sitio web que tiene varias páginas, como `package.elm-lang.org`. Tiene [un buscador](https://package.elm-lang.org/), [el “readme” o “léeme”](https://package.elm-lang.org/packages/elm/core/latest/) de cada paquete, y [la documentación](https://package.elm-lang.org/packages/elm/core/latest/Maybe), todas las cuales funcionan de manera distinta. ¿Cómo podemos lograr esto?
 
 ## Múltiples páginas
 
-La forma más simple sería servir múltiples archivos HTML. Si vas a la página principal, cargas un nuevo HTML. Si vas a la documentación de `elm/core`, cargas otro HTML. Si vas a la documentación de `elm/json`, cargas otro HTML.
+La forma más simple sería servir múltiples archivos HTML. Si visitamos la búsqueda, cargamos un nuevo HTML. Si vamos a la documentación de `elm/core`, cargamos otro HTML. Si vamos a la documentación de `elm/json`, cargamos otro HTML.
 
-Hasta Elm 0.19, eso era lo que este sitio web hacía. Funciona, y es simple. Pero tiene sus debilidades:
+Hasta antes de Elm 0.19, eso era lo que este sitio web hacía. Es una solución funcional y simple. Pero tiene sus puntos en contra:
 
-1. **Páginas en blanco.** La página se pone blanca cada vez que cargas nuevo HTML. ¿Podemos lograr una mejor transición?
-2. **Solicitudes redundantes.** Cada paquete tiene un sólo archivo `docs.json`, pero éste tiene que cargar cada vez que visitas la página de un módulo, como [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) o [`Maybe`](https://package.elm-lang.org/packages/elm/core/latest/Maybe). ¿Podemos compartir datos entre páginas?
-3. **Código redundante.** La página principal y la documentación comparten muchas funciones, como `Html.text` y `Html.div`. ¿Podemos hacer que el mismo código sea compartido entre páginas?
+1. **Páginas en blanco.** La página se pone blanca cada vez que cargamos nuevo HTML. ¿Podemos lograr una mejor transición?
+2. **Solicitudes redundantes.** Cada paquete tiene un sólo archivo `docs.json` que define toda su documentación, pero éste se tiene que cargar cada vez que visitamos la página de un módulo distinto, como [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) o [`Maybe`](https://package.elm-lang.org/packages/elm/core/latest/Maybe). ¿Podemos compartir datos entre páginas?
+3. **Código redundante.** La búsqueda y la documentación comparten muchas funciones, como `Html.text` y `Html.div`. ¿Podemos hacer que el mismo código sea compartido entre páginas?
 
-Podemos mejorar los tres casos anteriores. La idea es sólo cargar el HTML una vez, y después manejar por nuestra cuenta los cambios de URL.
+Podemos optimizar estos tres casos. La idea es sólo cargar el HTML una vez, y después manejar por nuestra cuenta los cambios de URL.
 
 ## Página única
 
@@ -30,15 +30,15 @@ application :
     -> Program flags model msg
 ```
 
-Extiende la funcionalidad de `Browser.document` en tres situaciones importantes.
+Esto extiende la funcionalidad de `Browser.document` en tres situaciones importantes.
 
-**Cuando la aplicación inicia**, la función `init` recibe la [`Url`][u] actual de la barra de navegación. Esto te permite mostrar distintas cosas dependiendo de la `Url`.
+**Cuando la aplicación inicia**, la función `init` recibe la [`Url`][u] actual de la barra de navegación. Esto nos permite mostrar distintas cosas dependiendo de cuál sea la URL.
 
-**Cuando alguien apreta un link**, como `<a href="/home">Inicio</a>`, es interceptado por [`UrlRequest`][ur]. Entonces en vez de cargar nuevo HTML y todo lo que eso conlleva, `onUrlRequest` crea un mensaje para tu función `update` donde puedes decidir qué quieres hacer. Puedes guardar la posición de desplazamiento en la página, persistir datos, cambiar la URL manualmente, etc.
+**Cuando alguien apreta un link**, como `<a href="/home">Inicio</a>`, es interceptado por [`UrlRequest`][ur]. Entonces en vez de cargar nuevo HTML y todo lo que eso conlleva, `onUrlRequest` crea un mensaje para la función `update`, donde podemos decidir qué queremos hacer. Podemos guardar la posición de desplazamiento en la página, persistir datos, cambiar la URL manualmente, etc.
 
-**Cuando la URL cambia**, la nueva `Url` es enviada a `onUrlChange`. El mensaje resultante llegará a `update`, donde puedes decidir cómo mostrar la nueva página.
+**Cuando la URL cambia**, la nueva `Url` es enviada a `onUrlChange`. El mensaje resultante llegará a `update`, donde podemos decidir cómo mostrar la nueva página.
 
-En vez de cargar nuevo HTML, estas tres adiciones te dan control completo de los cambios de URL. Veámoslo en acción
+En vez de cargar nuevo HTML, estas tres adiciones nos dan control completo sobre los cambios de URL. Veámoslo en acción
 
 [u]: https://package.elm-lang.org/packages/elm/url/latest/Url#Url
 [ur]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#UrlRequest
@@ -48,7 +48,7 @@ En vez de cargar nuevo HTML, estas tres adiciones te dan control completo de los
 
 ## Ejemplo
 
-Partamos con el más básico programa que usa `Browser.application`. Sólo guarda la URL actual en el modelo. Revisa el código y observa que lo nuevo e interesante ocurre casi todo dentro de la función `update`. Nos adentraremos en esos detalles más abajo.
+Partamos con el programa más básico que usa `Browser.application`. Éste sólo guarda la URL actual en el modelo. Revisa el código y observa que lo nuevo e interesante ocurre casi todo dentro de la función `update`. Nos adentraremos en esos detalles más abajo.
 
 ```elm
 import Browser
@@ -150,7 +150,7 @@ viewLink path =
     li [] [ a [ href path ] [ text path ] ]
 ```
 
-La función `update` puede manejar mensajes `LinkClicked` y `UrlChanged`. Hay harto nuevo en la rama que corresponde a `LinkClicked`, así que revisemos eso primero.
+La función `update` puede manejar mensajes `LinkClicked` y `UrlChanged`. Hay harto nuevo en la rama de ejecución que corresponde a `LinkClicked`, así que revisemos eso primero.
 
 ## `UrlRequest`
 
@@ -162,9 +162,9 @@ type UrlRequest
     | External String
 ```
 
-La variante `Internal` es para un link que tiene el mismo dominio actual. O sea que si estás dentro de `https://example.com`, todos estos son links `Internal`: `settings#privacy`, `/home`, `https://example.com/home`, `//example.com/home`.
+La variante `Internal` es para un link que apunta al mismo dominio de la página actual. O sea que si estamos dentro de `https://example.com`, los siguientes son todos links `Internal`: `settings#privacy`, `/home`, `https://example.com/home`, `//example.com/home`.
 
-La variante `External` es para links que apuntan a un dominio distinto. Links como `https://elm-lang.org/examples`, `https://static.example.com`, y `http://example.com/home` todos apuntan a dominios distintos. Nótese que al cambiar el protocolo de `https` a `http`, ya se considera un dominio diferente.
+La variante `External` es para links que apuntan a un dominio distinto. Links como `https://elm-lang.org/examples`, `https://static.example.com`, y `http://example.com/home` todos apuntan a dominios distintos. Nótese que al cambiar el protocolo de `https` a `http`, ya se considera como un dominio diferente.
 
 Cualquiera sea el link que se aprete, nuestro programa generará un mensaje `LinkClicked` y lo enviará a la función `update`. Y es ahí donde veremos el código más interesante para esta ocasión.
 
@@ -190,29 +190,29 @@ update msg model =
             )
 ```
 
-Las funciones más interesantes son `Nav.load` y `Nav.pushUrl`. Ambas provienen del módulo [`Browser.Navigation`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation), que nos ayuda a cambiar la URL en diversas maneras. Estamos usando las dos funciones más comunes del módulo:
+Las funciones más interesantes son `Nav.load` y `Nav.pushUrl`. Ambas provienen del módulo [`Browser.Navigation`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation), que nos ayuda a cambiar la URL en diversas maneras. Estamos haciendo uso de las dos funciones más comunes del módulo:
 
 - [`load`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#load) carga un nuevo HTML. Es equivalente a escribir la URL en la barra de dirección y apretar enter. Sin importar lo que que tenga el modelo, éste se descartará y una nueva página será cargada desde cero.
-- [`pushUrl`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#pushUrl) cambia la URL, pero no carga nuevo HTML. En vez, se gatilla un mensaje `UrlChanged` que podemos manejar manualmente. También añade una entrada en la historia de navegación para permitir que los botones “atrás” y “adelante” del navegador funcionen normalmente.
+- [`pushUrl`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#pushUrl) cambia la URL, pero no carga nuevo HTML. En vez, se gatilla un mensaje `UrlChanged` que podemos manejar manualmente. También añade una entrada en la historia de navegación, lo que permite que los botones “atrás” y “adelante” del navegador cumplan su función.
 
 Si examinamos la función `update` nuevamente, ya podremos entender un poco mejor cómo funciona todo en conjunto. Cuando el usuario apreta un link `https://elm-lang.org`, recibimos un mensaje `External` y usamos `load` para cargar nuevo HTML desde esos servidores. Pero cuando el usuario apreta un link `/home`, recibimos un mensaje `Internal` y usamos `pushUrl` para cambiar la URL _sin_ cargar nuevo HTML.
 
-> **Nota 1:** Tanto los links `Internal` como `External` producen comandos inmediatamente en este ejemplo, pero eso no es necesario. Si alguien apreta un link `External`, tal vez quieres primero guardar contenido ingresado en un campo de texto, o tal vez quieres usar [`getViewport`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Dom#getViewport) para guardar la posición de desplazamiento vertical, en caso de que el usuario navegue de vuelta usando el botón “atrás”. Todo esto es posible ya que no es más que la misma función `update` que conocemos, y puedes retrasar la navegación efectivamente todo lo que quieras.
+> **Nota 1:** En este ejemplo, tanto los links `Internal` como `External` inmediatamente producen comandos, pero esto no es necesario. Si alguien apreta un link `External`, tal vez queremos primero guardar contenido ingresado en un campo de texto, o tal vez queremos usar [`getViewport`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Dom#getViewport) para guardar la posición de desplazamiento vertical, en caso de que el usuario navegue de vuelta usando el botón “atrás”. Todo esto es posible ya que no es más que la misma función `update` a la que ya estamos acostumbrados. Podemos postergar la navegación todo lo que sea necesario.
 >
-> **Nota 2:** Si quieres restaurar “lo que se ve” al momento de navegar una vez que el usuario aprete el botón “atrás”, la posición de desplazamiento no es información perfecta. Si el usuario ajusta el tamaño de la ventana, o gira su dispositivo y lo pone apaisado, puede que la posición sea bastante incorrecta. Por eso, es mejor guardar justamente “lo que se ve”. Tal vez eso signifique usar [`getViewportOf`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Dom#getViewportOf) para determinar exactamente qué hay en pantalla en ese momento. Los detalles dependen de cómo funciona tu aplicación, así que no puedo darte consejos más específicos.
+> **Nota 2:** Si queremos restaurar “lo que se ve” al momento de navegar una vez que el usuario aprete el botón “atrás”, la posición de desplazamiento no es información perfecta. Si el usuario ajusta el tamaño de la ventana, o gira su dispositivo y lo pone apaisado, puede que la posición sea bastante incorrecta. Por eso, es mejor guardar justamente “lo que se ve”. Tal vez eso signifique usar [`getViewportOf`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Dom#getViewportOf) para determinar exactamente qué hay en pantalla en ese momento. Los detalles dependen de cómo funciona la aplicación, así que no puedo darte consejos más específicos.
 
 ## `UrlChanged`
 
-Hay más de una manera de que se generen mensajes `UrlChanged`. Acabamos de ver que `pushUrl` los produce, pero apretar los botones “atrás” y “adelante” es otra manera. Y como mencioné en las notas más arriba, cuando obtienes un mensaje `LinkClicked` no hace falta emitir el comando `pushUrl` inmediatamente.
+Hay más de una manera de que se generen mensajes `UrlChanged`. Acabamos de ver que `pushUrl` los produce, pero cuando apretamos los botones “atrás” y “adelante” también se producen estos mensajes. Y como mencioné en las notas más arriba, cuando obtenemos un mensaje `LinkClicked` no hace falta emitir el comando `pushUrl` inmediatamente.
 
-Lo bueno de tener un mensaje `UrlChanged` específico es que no importa cómo ni cuándo cambió la URL. Todo lo que necesitas saber es que cambió.
+Lo bueno de tener un mensaje `UrlChanged` específico es que no importa cómo ni cuándo cambió la URL. Todo lo que necesitamos saber es que cambió.
 
-En nuestro ejemplo solamente estamos guardando la URL, pero en una aplicación web real necesitarías analizar la URL para determinar el contenido a mostrar. En la próxima página vamos a hablar de esto.
+En nuestro ejemplo solamente estamos guardando la URL, pero en una aplicación web real necesitaríamos analizar la URL para determinar el contenido a mostrar. En la próxima página vamos a hablar de esto.
 
 > **Nota:** No expliqué nada sobre [`Nav.Key`](https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#Key), para enfocarme en los conceptos más importantes. Pero para los interesados, aquí está la explicación.
 >
-> Un valor `Key` es una “llave de navegación”; es necesaria para crear comandos que cambian la URL, como `pushUrl`. Sólo tienes acceso a un valor `Key` cuando creas un programa usando `Browser.application`, garantizando que tu programa tiene lo necesario para detectar estos cambios de URL. Si los valores `Key` estuvieran disponibles para otros tipos de programa, un programador despistado podría toparse con [molestos bugs][bugs] y aprender ciertas técnicas a tropezones.
+> Un valor `Key` es una “llave de navegación”; es necesaria para crear comandos que cambian la URL, como `pushUrl`. Sólo tenemos acceso a un valor `Key` cuando creamos un programa usando `Browser.application`, garantizando que nuestro programa tiene lo necesario para detectar estos cambios de URL. Si los valores `Key` estuvieran disponibles para otros tipos de programa, un programador despistado podría toparse con [molestos bugs][bugs] y aprender ciertas técnicas a tropezones.
 >
-> Por eso es que tenemos una línea en nuestro `Modelo` dedicada a almacenar la `Key`. Es un bajo precio a pagar para que todos eviten una muy sutil categoría de problemas.
+> Por eso es que tenemos un campo en nuestro `Model` dedicado a almacenar la `Key`. Es un bajo precio a pagar para evitar una muy sutil categoría de problemas.
 
 [bugs]: https://github.com/elm/browser/blob/1.0.0/notes/navigation-in-elements.md
