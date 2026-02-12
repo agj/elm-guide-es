@@ -1,12 +1,12 @@
 # Minificación
 
-Lo único más lento que modificar el DOM es comunicarse con un servidor, especialmente para gente en teléfonos celulares y con conexión lenta a internet. Podrías optimizar tu código con `Html.Lazy` y `Html.Keyed` todo lo que quieras, pero tu aplicación se seguiría sintiendo lenta si carga lento.
+Lo único más lento que modificar el DOM es comunicarse con un servidor, especialmente para gente navegando en su teléfono celular o con conexión lenta a internet. Podrías optimizar tu código con `Html.Lazy` y `Html.Keyed` todo lo que quieras, pero tu aplicación se seguiría sintiendo lenta si carga lento.
 
-Una gran manera de mejorar esto es enviando menos bits. Por ejemplo, si podemos convertir un archivo de 122 kb a uno de 9 kb, va a cargar más rápido. Este tipo de resultados se pueden lograr con estas técnicas:
+Una gran manera de mejorar esto es enviando menos bits. Por ejemplo, si podemos convertir un archivo de 122 kb a uno de 9 kb, va a cargar más rápido. Este tipo de resultados se pueden lograr con las siguientes técnicas:
 
 - **Compilación.** El compilador de Elm puede realizar optimizaciones como eliminación de código muerto y renombramiento de campos en registros. Es decir, puede quitar código sin uso y hacer que nombres como `userStatus` sean más cortos dentro del código generado.
-- **Minificación.** En el mundo de JavaScript hay herramientas llamadas “minificadores”, que realizan varias transformaciones. Acortan variables, mueven código de funciones al lugar en donde son llamadas, convierten `if`s en ternarios `?:`, y transforman `'\u0041'` en `'A'`. Cualquier cosa que reduzca un poquito el peso.
-- **Compresión.** Una vez que el código haya quedado tan pequeño como es posible, puedes usar un algoritmo de compresión como gzip para apachurrarlo aún más. Funciona particularmente bien con palabras clave como `function` y `return`, que no se pueden quitar del código mismo.
+- **Minificación.** En el mundo de JavaScript hay herramientas llamadas “minificadores”, que realizan varias transformaciones. Acortan variables, mueven código de funciones directo al lugar en donde son llamadas, convierten `if`s en ternarios `?:`, y transforman `'\u0041'` en `'A'`. Cualquier cosa que reduzca un poquito el peso.
+- **Compresión.** Una vez que el código haya quedado tan pequeño como es posible, puedes usar un algoritmo de compresión como gzip para apachurrarlo aún más. Funciona particularmente bien contra palabras clave como `function` y `return`, que no se pueden quitar del código mismo.
 
 Elm facilita hacer todo esto en tu proyecto. No hace falta un sistema complicado de compilación. Basta con dos comandos de terminal.
 
@@ -36,7 +36,7 @@ Como es difícil recordar todas esas opciones de `uglifyjs`, tal vez es más fá
 Podemos escribir un script Bash que genera los archivos `elm.js` y `elm.min.js`. En Mac y Linux podemos definir `optimize.sh` así:
 
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -62,10 +62,10 @@ Tamaño comprimido:  9148 bytes
 
 Buen resultado, ¿no? Ahora sólo necesitamos transferir aproximadamente 9 kb a nuestros usuarios.
 
-Los comandos importantes son `elm` y `uglifyjs`, que funcionan en cualquier plataforma, así que no sería muy difícil hacer algo parecido en Windows.
+Los comandos importantes son `elm` y `uglifyjs`, que funcionan en cualquier plataforma, así que no sería muy difícil hacer un script parecido para Windows.
 
 ## Consejos
 
-Recomiendo escribir código usando `Browser.application` y compilarlo en un sólo archivo JavaScript, como hemos visto aquí. En la primera visita el archivo será descargado, y quedará guardado en caché. Elm genera archivos bien pequeños comparado con otros competidores populares [como puedes ver aquí](https://elm-lang.org/blog/small-assets-without-the-headache), así que esta estrategia te puede servir bastante bien.
+Recomiendo escribir código usando `Browser.application` y compilarlo en un sólo archivo JavaScript, como hemos visto aquí. En la primera visita el archivo será descargado, y quedará guardado en caché. Elm genera archivos bien pequeños en comparación con otras alternativas populares, [como puedes ver aquí](https://elm-lang.org/blog/small-assets-without-the-headache), así que esta estrategia te puede servir bastante bien.
 
 > **Nota:** En teoría, es posible reducir aún más los tamaños de archivos generados por Elm. Actualmente no es posible, pero si estás trabajando en un proyecto de 50 mil líneas de Elm o más, nos gustaría conocer tu situación como parte de un estudio de usuarios. [Más detalles aquí (en inglés).](https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7)
