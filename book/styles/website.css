@@ -140,3 +140,9 @@
 .book-summary > nav {
   padding-bottom: 3em;
 }
+
+/* ADJUST PAGE CONTENT PADDING */
+
+.page-inner {
+  padding-bottom: 150px;
+}
