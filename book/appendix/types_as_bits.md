@@ -45,7 +45,7 @@ La respuesta es sólo añadir más bits. Por largo tiempo, la gente usó 32 bits
 
 El string `"abc"` es la secuencia de caracteres `a` `b` `c`, así que empecemos intentando representar caracteres como bits.
 
-Una de las formas originales de codificación de caracteres es la llamada [ASCII](https://en.wikipedia.org/wiki/ASCII). Igual que con los números enteros, decidieron listar secuencias de bits y a asignarles valores en forma arbitraria:
+Una de las formas originales de codificación de caracteres es la llamada [ASCII](https://es.wikipedia.org/wiki/ASCII). Igual que con los números enteros, decidieron listar secuencias de bits y asignarles valores en forma arbitraria:
 
 ```
 00000000
@@ -55,13 +55,13 @@ Una de las formas originales de codificación de caracteres es la llamada [ASCII
 ...
 ```
 
-Cada carácter debía caber en ocho bits, lo que significa que sólo 256 caracteres pueden ser representados. Pero ya que es un estándar estadounidense y les interesaba codificar textos en inglés, es un número más que suficiente. Necesitas 26 letras minúsculas, 26 mayúsculas y 10 números. Llevamos 62. Queda mucho espacio para símbolos y algunas cosas raras. Puedes mirar [aquí](https://ascii.cl/) la lista con la que acabaron.
+Cada carácter debía caber en ocho bits, lo que significa que sólo 256 caracteres pueden ser representados. Pero ya que es un estándar estadounidense y les interesaba codificar textos en inglés, es un número más que suficiente. Necesitamos 26 letras minúsculas, 26 mayúsculas y 10 números. Llevamos 62. Queda mucho espacio para símbolos y algunas cosas raras. Puedes mirar [aquí](https://ascii.cl/es/) la lista con la que acabaron.
 
-Ya tenemos una idea de qué pasa con cada carácter, pero ¿cómo sabe el computador dónde termina el `String` y empieza el dato siguiente? Al fin y al cabo todo es bits; cada carácter es indistinguible un valor `Int`. Necesitamos una forma de especificar dónde termina un string.
+Ya tenemos una idea de qué pasa con cada carácter, pero ¿cómo sabe el computador dónde termina el `String` y empieza el dato siguiente? Al fin y al cabo todo es bits; cada carácter es indistinguible de un valor `Int`. Necesitamos una forma de especificar dónde termina un string.
 
 Hoy en día, los lenguajes suelen hacer esto almacenando la **longitud** del string. O sea que un string como `"hello"` se vería en memoria algo como `5` `h` `e` `l` `l` `o`. Añadimos la presuposición de que un `String` siempre empieza con 32 bits representando su longitud. Y así, sea el string de 0 o de 9000 caracteres de largo, siempre sabremos exáctamente dónde termina en memoria.
 
-> **Nota:** Naturalmente, incluso los angloparlantes querían también poder representar textos en lenguajes que no son inglés. Eventualmente se ideó la codificación [UTF-8](https://es.wikipedia.org/wiki/UTF-8). Es una solución bastante brillante, y te sugiero que la investigues, si te interesa el tema. Resulta que obtener el “quinto carácter” es una tarea más difícil de lo que parece…
+> **Nota:** Naturalmente, incluso los angloparlantes quisieron también poder representar textos en lenguajes que no son inglés. Eventualmente se ideó la codificación [UTF-8](https://es.wikipedia.org/wiki/UTF-8). Es una solución bastante brillante, y te recomiendo que la investigues si te interesa el tema. Resulta que obtener el “quinto carácter” es una tarea más difícil de lo que parece…
 
 ## `( Int, Int )`
 
