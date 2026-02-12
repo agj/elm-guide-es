@@ -6,7 +6,7 @@ En una aplicación real nos interesa mostrar distinto contenido para distintas U
 - `/search?q=seiza`
 - `/settings`
 
-¿Cómo lo logramos? Usando el paquete [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) para interpretar strings como estructuras de datos Elm. Este paquete se entiende mejor al mirar ejemplos, así que entremos directamente a ello.
+¿Cómo lo logramos? Usando el paquete [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) para interpretar strings como estructuras de datos Elm. Este paquete se entiende mejor viendo ejemplos, así que entremos directamente a ello.
 
 ## Ejemplo 1
 
@@ -23,7 +23,7 @@ Digamos que tenemos un sitio web sobre arte donde las siguientes direcciones deb
 - `/user/sue/comment/11`
 - `/user/sue/comment/51`
 
-Tenemos páginas de temas específicos, artículos del blog, información de usuarios y una forma de ver comentarios escritos por usuarios específicos. Vamos a usar el módulo [`Url.Parser`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser) para escribir un interpretador de URLs como el siguiente:
+Tenemos páginas para ciertas temáticas (`/topic/*`), artículos de un blog (`/blog/*`), información de usuarios (`/user/*`), y una forma de ver comentarios escritos por usuarios específicos (`/user/*/comment/*`). Vamos a usar el módulo [`Url.Parser`](https://package.elm-lang.org/packages/elm/url/latest/Url-Parser) para escribir un interpretador de URLs como el siguiente:
 
 ```elm
 import Url.Parser exposing ((</>), Parser, int, map, oneOf, s, string)
@@ -140,7 +140,7 @@ docsParser =
 -- /           ==>  Nothing
 ```
 
-Y así ya podemos interpretar “fragmentos” de URL también.
+Y así ya podemos interpretar “fragmentos” de URL (lo que va después del `#`) también.
 
 ## Síntesis
 
@@ -150,11 +150,11 @@ Ya vimos varios interpretadores, así que ahora nos toca ver cómo se conjugan e
 TODO
 ```
 
-Lo nuevo más importante es:
+Lo más importante de lo nuevo que hemos visto es:
 
 1. Nuestra función `update` interpreta la URL cuando recibe un mensaje `UrlChanged`.
 2. Nuestra función `view` muestra distinto contenido para direcciones distintas.
 
 No es nada muy complicado, ¿no?
 
-Pero ¿qué pasa si tengo 10, o 20, o 100 distintas páginas? ¿Tiene todo que ir dentro de esta función `view`? Seguro que no puede ir todo en el mismo archivo. ¿En cuántos archivos se separa? ¿Cómo debe ser la estructura de directorios? Bueno, eso mismo es lo que vamos a discutir en el próximo capítulo.
+Pero ¿qué pasa si tengo 10, o 20, o 100 distintas páginas? ¿Tiene todo que ir dentro de esta función `view`? Seguro que no puede ir todo en el mismo archivo. ¿En cuántos archivos se separa? ¿Cómo debe ser la estructura de directorios? Bueno, eso mismo es lo que vamos a discutir a continuación.
