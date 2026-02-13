@@ -37,7 +37,7 @@
   - [Html.Keyed](optimization/keyed.md)
   - [Minificación](optimization/asset_size.md)
 - [Próximos pasos](next_steps.md)
-- Apéndice
+- Apéndices
   - [Tipos como conjuntos](appendix/types_as_sets.md)
   - [Tipos como bits](appendix/types_as_bits.md)
   - [Tipos de función](appendix/function_types.md)
