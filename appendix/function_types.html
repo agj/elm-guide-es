@@ -622,7 +622,7 @@
                 <span>
             
                     
-                    Apéndice
+                    Apéndices
             
                 </span>
             
@@ -760,47 +760,47 @@
         "type_": "List String -&gt; String"
     },
     {
-        "input": "String.join \"|\" [\"red\", \"yellow\", \"green\"]",
+        "input": "String.join \"|\" [ \"red\", \"yellow\", \"green\" ]",
         "value": "\u001b[93m\"red|yellow|green\"\u001b[0m",
         "type_": "String"
     }
 ]
 </div>
 <!-- prettier-ignore-end --><p></p>
-<p>Es decir que, conceptualmente, <strong>todas las funciones aceptan un sólo argumento.</strong> Puede retornar otra función que también acepta un argumento, y así sucesivamente. Eventualmente dejará de retornar funciones.</p>
-<p><em>Podríamos</em> siempre escribir los paréntesis para indicar que es esto lo que ocurre, pero empieza a volverse bastante redundante si tenemos muchos argumentos. Es la misma lógica que cuando escribimos <code>4 * 2 + 5 * 3</code> en vez de <code>(4 * 2) + (5 * 3)</code>. Implica que hay algo más que aprender de antemano, pero es tan común que vale la pena.</p>
+<p>Es decir que, conceptualmente, <strong>todas las funciones aceptan un sólo argumento.</strong> Pueden retornar otra función que acepta otro argumento, y así sucesivamente. Eventualmente dejará de retornar funciones.</p>
+<p><em>Podríamos</em> siempre escribir los paréntesis para indicar que es esto lo que ocurre, pero empieza a volverse bastante redundante si tenemos muchos argumentos. Es la misma lógica que cuando escribimos <code>4 * 2 + 5 * 3</code> en vez de <code>(4 * 2) + (5 * 3)</code>. Esto implica que hay una regla más que aprender de antemano, pero es algo tan común que vale la pena.</p>
 <p>Bien hasta aquí, pero ¿y esta funcionalidad de qué nos sirve? ¿Por qué no hacer que sea <code>(Int, String) -&gt; String</code>, y pasar todos los argumentos simultáneamente?</p>
 <h2 id="aplicación-parcial">Aplicación parcial</h2>
 <p><code>List.map</code> es una función de uso muy frecuentemente en programas Elm:</p>
 <pre><code class="lang-elm"><span class="hljs-type">List</span>.map : (a -&gt; b) -&gt; <span class="hljs-type">List</span> a -&gt; <span class="hljs-type">List</span> b
 </code></pre>
-<p>Recibe dos argumentos: una función y una lista. Después usa esa función para transformar todos los ítems en la lista. Unos ejemplos:</p>
+<p>Recibe dos argumentos: una función y una lista. La función suplida es usada para transformar todos los ítems en la lista. Unos ejemplos:</p>
 <ul>
-<li><code>List.map String.reverse ["part", "are"] == ["trap", "era"]</code></li>
-<li><code>List.map String.length ["part", "are"] == [4, 3]</code></li>
+<li><code>List.map String.reverse [ "part", "are" ] == [ "trap", "era" ]</code></li>
+<li><code>List.map String.length [ "part", "are" ] == [ 4, 3 ]</code></li>
 </ul>
-<p>¿Recuerdas que la expresión <code>String.repeat 4</code> recibe el tipo <code>String -&gt; String</code> al ejecutarse por sí sola? Bueno, eso significa que podemos hacer esto:</p>
+<p>¿Recuerdas que la expresión <code>String.repeat 4</code> resulta en el tipo <code>String -&gt; String</code> al ejecutarse por sí sola? Bueno, eso significa que podemos hacer esto:</p>
 <ul>
-<li><code>List.map (String.repeat 2) ["ha","choo"] == ["haha","choochoo"]</code></li>
+<li><code>List.map (String.repeat 2) [ "ha", "choo" ] == [ "haha", "choochoo" ]</code></li>
 </ul>
 <p>La expresión <code>(String.repeat 2)</code> es una función <code>String -&gt; String</code>, o sea que podemos usarla directamente. Ni siquiera necesitamos escribir <code>(\str -&gt; String.repeat 2 str)</code>.</p>
 <p>Elm también usa la convención de que <strong>los datos siempre vienen al final</strong> a través de todo su ecosistema. Esto significa que las funciones están diseñadas para hacer que esta técnica sea posible, y efectivamente es una manera muy común de escribir código Elm.</p>
-<p>Es importante recordar que <strong>es fácil caer en su sobreutilización.</strong> La aplicación parcial es a menudo conveniente y muy legible, pero yo encuentro que es mejor usarla en moderación. Por eso, recomiendo separar el código en funciones auxiliares apenas se pongan <em>un poquito</em> complicadas las cosas. Así, le podemos poner un nombre explicativo, los argumentos también llevan nombre, y además queda fácil de testear. En nuestro ejemplo, eso significaría crear esto:</p>
-<pre><code class="lang-elm"><span class="hljs-comment">-- List.map reduplicate ["ha","choo"]</span>
+<p>Es importante recordar que <strong>es fácil caer en su sobreutilización.</strong> La aplicación parcial es a menudo conveniente y muy legible, pero yo encuentro que es mejor usarla en moderación. Por eso, recomiendo separar el código en funciones auxiliares apenas se pongan <em>un poquito</em> complicadas las cosas. Así, le podemos poner un nombre explicativo a la función, los argumentos también llevan nombre, y además queda fácil de testear. En nuestro ejemplo, significaría crear esto:</p>
+<pre><code class="lang-elm"><span class="hljs-comment">-- List.map reduplicate [ "ha", "choo" ]</span>
 
 
 <span class="hljs-title">reduplicate</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">String</span>
 <span class="hljs-title">reduplicate</span> string =
     <span class="hljs-type">String</span>.repeat <span class="hljs-number">2</span> string
 </code></pre>
-<p>Este es un caso muy simple, pero (1) queda más claro que el foco es el fenómeno lingüístico de la <a href="https://es.wikipedia.org/wiki/Reduplicaci%C3%B3n_%28ling%C3%BC%C3%ADstica%29" target="_blank">reduplicación</a>, y (2) sería bastante fácil añadir nueva lógica a <code>reduplicate</code> a medida que evolucione nuestro programa. Tal vez querramos llegar a soportar <a href="https://academia-lab.com/enciclopedia/reduplicacion-shm/" target="_blank">reduplicación “shm”</a> también, por decir algo.</p>
+<p>Este es un caso muy simple, pero (1) queda más claro que el foco es el fenómeno lingüístico de la <a href="https://es.wikipedia.org/wiki/Reduplicaci%C3%B3n_%28ling%C3%BC%C3%ADstica%29" target="_blank">reduplicación</a>, y (2) sería bastante fácil añadir nueva lógica a <code>reduplicate</code> a medida que evolucione nuestro programa. Tal vez querramos llegar a soportar la llamada <a href="https://academia-lab.com/enciclopedia/reduplicacion-shm/" target="_blank">reduplicación “shm”</a> también, por decir algo.</p>
 <p>En otras palabras, <strong>si nuestro uso de aplicación parcial se hace muy largo, creemos una función auxiliar.</strong> Y si ocupa múltiples líneas, <em>definitivamente</em> debiera ser convertida en una función auxiliar. Mi consejo aplica (ejem) para las funciones anónimas también.</p>
 <blockquote>
 <p><strong>Nota:</strong> Si terminamos creando “demasiadas” funciones después de seguir este consejo, recomiendo la antigua técnica de usar comentarios del tipo <code>-- REDUPLICACIÓN</code> justo delante de las cinco o diez funciones que corresponden a este grupo. Ya lo he demostrado con mis comentarios <code>-- UPDATE</code> y <code>-- VIEW</code> en ejemplos anteriores, pero es una técnica general que uso a través de todo mi código. Y si te preocupa que tus archivos se vuelvan muy largos, te recomiendo ver mi charla <a href="https://youtu.be/XpDsk374LDE" target="_blank">“The life of a file”</a> (en inglés).</p>
 </blockquote>
 <h2 id="tuberías">Tuberías</h2>
-<p>Elm también tiene un <a href="https://package.elm-lang.org/packages/elm/core/latest/Basics#|" target="_blank">operador “tubo” <code>|&gt;</code></a> (también coloquialmente llamado “pizza”) cuyo funcionamiento requiere el uso de aplicación parcial. Por ejemplo, si tenemos una función <code>sanitize</code> que convierte un texto ingresado por el usuario en un número entero:</p>
-<pre><code class="lang-elm"><span class="hljs-comment">-- BEFORE</span>
+<p>Elm también tiene un <a href="https://package.elm-lang.org/packages/elm/core/latest/Basics#|" target="_blank">operador “tubo” <code>|&gt;</code></a> (“pipe”, también coloquialmente llamado “pizza”) cuyo funcionamiento requiere el uso de aplicación parcial. Por ejemplo, si tenemos una función <code>sanitize</code> que convierte un texto ingresado por el usuario en un número entero:</p>
+<pre><code class="lang-elm"><span class="hljs-comment">-- ANTES</span>
 
 
 <span class="hljs-title">sanitize</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Int</span>
@@ -808,7 +808,7 @@
     <span class="hljs-type">String</span>.toInt (<span class="hljs-type">String</span>.trim input)
 </code></pre>
 <p>Podemos reescribirla para que quede así:</p>
-<pre><code class="lang-elm"><span class="hljs-comment">-- AFTER</span>
+<pre><code class="lang-elm"><span class="hljs-comment">-- DESPUÉS</span>
 
 
 <span class="hljs-title">sanitize</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Int</span>
@@ -817,8 +817,8 @@
         |&gt; <span class="hljs-type">String</span>.trim
         |&gt; <span class="hljs-type">String</span>.toInt
 </code></pre>
-<p>A través de esta “tubería” (¿pizzería?) pasamos un argumento <code>input</code>, primero por <code>String.trim</code>, y su salida se convierte en el argumento pasado por <code>String.toInt</code>.</p>
-<p>Esto es interesante porque nos permite hacer que el código se lea de izquierda a derecha, lo que mucha gente encuentra cómodo, pero <strong>las tuberías pueden sobreutilizarse.</strong> Si llegamos a tener tres o cuatro pasos, el código puede quedar más claro si lo separamos en una función auxiliar, ya que la transformación adquiere un nombre, los argumentos también, y además le podemos escribir su tipo. Queda autodocumentada, así que seguro que nuestros colegas, y nosotros mismos en el futuro, sabremos apreciar la claridad que aporta. Testear esta lógica también se hace más fácil.</p>
+<p>Esta es una “tubería” (¿pizzería?) por la que pasamos un argumento <code>input</code>, que primero pasa por <code>String.trim</code>, y cuya salida se convierte en el argumento suplido a <code>String.toInt</code>.</p>
+<p>Esto es interesante porque nos permite hacer que el código se lea de izquierda a derecha, lo que mucha gente encuentra cómodo, pero <strong>las tuberías pueden ser sobreutilizadas.</strong> Si llegamos a tener tres o cuatro pasos, el código puede quedar más claro si lo separamos en una función auxiliar, ya que la transformación adquiere un nombre, los argumentos también, y además le podemos escribir su tipo. La función quedaría autodocumentada, por lo que tanto nuestros colegas como nosotros mismos en el futuro podremos apreciar la claridad que aporta. Testear esta lógica también se hace más fácil.</p>
 <blockquote>
 <p><strong>Nota:</strong> Yo, personalmente, prefiero cómo queda en el “antes” del ejemplo, pero tal vez es porque aprendí programación funcional en lenguajes que no permiten tuberías.</p>
 </blockquote>
@@ -861,7 +861,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Tipos de función","level":"1.12.3","depth":2,"previous":{"title":"Tipos como bits","level":"1.12.2","depth":2,"path":"appendix/types_as_bits.md","ref":"appendix/types_as_bits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"appendix/function_types.md","mtime":"2026-02-12T14:22:19.270Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2026-02-12T14:22:56.515Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Tipos de función","level":"1.12.3","depth":2,"previous":{"title":"Tipos como bits","level":"1.12.2","depth":2,"path":"appendix/types_as_bits.md","ref":"appendix/types_as_bits.md","articles":[]},"dir":"ltr"},"config":{"plugins":["elm-repl","bulk-redirect","-sharing"],"root":"book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"elm-repl":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Evan Czaplicki","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Introducción a Elm","gitbook":"*","description":"Aprende Elm. Construye aplicaciones. Aprende programación funcional."},"file":{"path":"appendix/function_types.md","mtime":"2026-02-13T03:18:06.790Z","type":"markdown"},"gitbook":{"version":"5.1.4","time":"2026-02-13T03:18:39.692Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
