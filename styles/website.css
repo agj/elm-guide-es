@@ -24,6 +24,10 @@
   margin: 2em;
 }
 
+.markdown-section blockquote > :first-child {
+  margin-top: 0;
+}
+
 /* EDIT LINK */
 
 .edit-link {
@@ -135,4 +139,10 @@
 
 .book-summary > nav {
   padding-bottom: 3em;
+}
+
+/* ADJUST PAGE CONTENT PADDING */
+
+.page-inner {
+  padding-bottom: 150px;
 }
