@@ -205,9 +205,7 @@ La declaración de `sendMessage` nos permite enviar mensajes de salida desde Elm
 port sendMessage : String -> Cmd msg
 ```
 
-Aquí declaramos que queremos enviar valores `String`, pero podríamos poner cualquiera de los otros tipos que funcionan con flags. Hablamos sobre esos tipos en la página anterior. También puedes revisar este [ejemplo que usa `localStorage`](https://ellie-app.com/8yYddD6HRYJa1) para ver cómo enviamos un valor [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) hacia JavaScript.
-
-<!-- TODO: 👆 Traducir este ejemplo en el Ellie. -->
+Aquí declaramos que queremos enviar valores `String`, pero podríamos poner cualquiera de los otros tipos que funcionan con flags. Hablamos sobre esos tipos en la página anterior. También puedes revisar este [ejemplo que usa `localStorage`](https://ellie-app.com/xWNwRWcJYm9a1) para ver cómo enviamos un valor [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) hacia JavaScript.
 
 Ahora podemos usar `sendMessage` igual que cualquier función. Si tu función `update` genera un comando `sendMessage "hello"`, lo vas a recibir en el lado de JavaScript:
 
