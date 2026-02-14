@@ -51,9 +51,7 @@ Prueba llamar `String.toFloat` con otros textos y observa lo que te retorna ⬆�
 
 No cualquier texto hace sentido al interpretarlo como un número, por lo que esta función modela esa situación en forma explícita. ¿Puede un `String` ser convertido a un `Float`? Tal vez (“maybe”). Así podemos después usar búsqueda de patrones sobre el valor resultante, y proceder según sea apropiado.
 
-> **Ejercicio:** Escribí un pequeño programa que convierte grados Celcius a Fahrenheit, [aquí](https://ellie-app.com/bJSMQz9tydqa1). Intenta refactorizar el código `view` de distintas maneras. ¿Le puedes poner un borde rojo al campo de texto cuando el valor es inválido? ¿Puedes añadir más conversiones, como Fahrenheit a Celcius, o pulgadas a metros?
-
-<!-- TODO: 👆 Traducir este ejemplo. -->
+> **Ejercicio:** Escribí un pequeño [programa que convierte grados Celcius a Fahrenheit](https://ellie-app.com/bJSMQz9tydqa1). Intenta refactorizar el código `view` de distintas maneras. ¿Le puedes poner un borde rojo al campo de texto cuando el valor es inválido? ¿Puedes añadir más conversiones, como Fahrenheit a Celcius, o pulgadas a metros?
 
 [toFloat]: https://package.elm-lang.org/packages/elm-lang/core/latest/String#toFloat
 
