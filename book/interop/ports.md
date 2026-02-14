@@ -8,16 +8,15 @@ Son más frecuentemente usados con [`WebSockets`](https://github.com/elm-communi
 
 ## Puertos en JavaScript
 
-Aquí tenemos prácticamente el mismo HTML que hemos usado en las últimas dos páginas, pero con un poco de JavaScript añadido. Creamos una conexión con `wss://echo.websocket.org`, que responde con lo que sea que le enviemos. Puedes comprobarlo viendo [este ejemplo](https://ellie-app.com/8yYgw7y7sM2a1) que es como el “esqueleto” de un chat:
-
-<!-- TODO: 👆 Traducir el ejemplo en el Ellie, y actualizar el link y el código abajo. -->
+Aquí tenemos prácticamente el mismo HTML que hemos usado en las últimas dos páginas, pero con un poco de JavaScript añadido. Creamos una conexión con `wss://echo.websocket.org`, que responde con lo que sea que le enviemos. Puedes comprobarlo viendo [este ejemplo](https://ellie-app.com/xWNj3FJ5tWQa1) que es como el “esqueleto” de un chat:
 
 ```html
 <!doctype html>
+
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Elm + Websockets</title>
+    <title>Elm + websockets</title>
     <script type="text/javascript" src="elm.js"></script>
   </head>
 
@@ -26,28 +25,28 @@ Aquí tenemos prácticamente el mismo HTML que hemos usado en las últimas dos p
   </body>
 
   <script type="text/javascript">
-    // Start the Elm application.
+    // Inicializa la aplicación Elm.
     var app = Elm.Main.init({
       node: document.getElementById("myapp"),
     });
 
-    // Create your WebSocket.
+    // Crea el websocket.
     var socket = new WebSocket("wss://echo.websocket.org");
 
-    // When a command goes to the `sendMessage` port, we pass the message
-    // along to the WebSocket.
-    app.ports.sendMessage.subscribe(function (message) {
-      socket.send(message);
+    // Cuando algo llega al puerto `enviarMensaje`, lo redirigimos
+    // al websocket.
+    app.ports.enviarMensaje.subscribe(function (mensaje) {
+      socket.send(mensaje);
     });
 
-    // When a message comes into our WebSocket, we pass the message along
-    // to the `messageReceiver` port.
-    socket.addEventListener("message", function (event) {
-      app.ports.messageReceiver.send(event.data);
+    // Cuando algo llega por el websocket, lo redirigimos al puerto
+    // `mensajeEntrante`.
+    socket.addEventListener("message", function (evento) {
+      app.ports.mensajeEntrante.send(evento.data);
     });
 
-    // If you want to use a JavaScript library to manage your WebSocket
-    // connection, replace the code in JS with the alternate implementation.
+    // Puedes reemplazar este código de arriba con una implementación
+    // que use tu librería preferida de manejo de websockets.
   </script>
 </html>
 ```
@@ -70,10 +69,6 @@ import Html.Events exposing (..)
 import Json.Decode as D
 
 
-
--- MAIN
-
-
 main : Program () Model Msg
 main =
     Browser.element
@@ -88,10 +83,10 @@ main =
 -- PUERTOS
 
 
-port sendMessage : String -> Cmd msg
+port enviarMensaje : String -> Cmd msg
 
 
-port messageReceiver : (String -> msg) -> Sub msg
+port mensajeEntrante : (String -> msg) -> Sub msg
 
 
 
@@ -99,49 +94,49 @@ port messageReceiver : (String -> msg) -> Sub msg
 
 
 type alias Model =
-    { draft : String
-    , messages : List String
+    { borrador : String
+    , mensajes : List String
     }
 
 
 init : () -> ( Model, Cmd Msg )
 init flags =
-    ( { draft = "", messages = [] }
+    ( { borrador = "", mensajes = [] }
     , Cmd.none
     )
 
 
 
--- UPDATE
+-- ACTUALIZACIÓN
 
 
 type Msg
-    = DraftChanged String
-    | Send
-    | Recv String
+    = BorradorCambiado String
+    | EnviarSolicitado
+    | MensajeRecibido String
 
 
 
--- Usamos el puerto `sendMessage` cuando el usuario apreta la tecla “Enter” o el
--- botón “Send”. Revisa index.html para ver el código JS donde esto se redirige
--- a un WebSocket.
+-- Usamos el puerto `enviarMensaje` cuando el usuario apreta
+-- la tecla “enter” o el botón “Enviar”. Revisa `index.html`
+-- para ver el código JS donde esto se redirige a un WebSocket.
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        DraftChanged draft ->
-            ( { model | draft = draft }
+        BorradorCambiado borrador ->
+            ( { model | borrador = borrador }
             , Cmd.none
             )
 
-        Send ->
-            ( { model | draft = "" }
-            , sendMessage model.draft
+        EnviarSolicitado ->
+            ( { model | borrador = "" }
+            , enviarMensaje model.borrador
             )
 
-        Recv message ->
-            ( { model | messages = model.messages ++ [ message ] }
+        MensajeRecibido mensaje ->
+            ( { model | mensajes = model.mensajes ++ [ mensaje ] }
             , Cmd.none
             )
 
@@ -149,14 +144,14 @@ update msg model =
 
 -- SUSCRIPCIONES
 --
--- Nos suscribimos al puerto `messageReceiver` para escuchar los mensajes de
--- entrada desde JS. Revisa el archivo index.html para ver cómo se conecta esto
--- con un WebSocket.
+-- Nos suscribimos al puerto `mensajeEntrante` para escuchar
+-- los mensajes de entrada desde JS. Revisa el archivo
+-- `index.html` para ver cómo se conecta esto con un websocket.
 
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    messageReceiver Recv
+    mensajeEntrante MensajeRecibido
 
 
 
@@ -166,18 +161,18 @@ subscriptions _ =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Echo Chat" ]
+        [ h1 [] [ text "Mensajería eco" ]
         , ul []
-            (List.map (\msg -> li [] [ text msg ]) model.messages)
+            (List.map (\msg -> li [] [ text msg ]) model.mensajes)
         , input
             [ type_ "text"
-            , placeholder "Draft"
-            , onInput DraftChanged
-            , on "keydown" (ifIsEnter Send)
-            , value model.draft
+            , placeholder "Borrador"
+            , onInput BorradorCambiado
+            , on "keydown" (siEsEnter EnviarSolicitado)
+            , value model.borrador
             ]
             []
-        , button [ onClick Send ] [ text "Send" ]
+        , button [ onClick EnviarSolicitado ] [ text "Enviar" ]
         ]
 
 
@@ -185,8 +180,8 @@ view model =
 -- DETECTAR ENTER
 
 
-ifIsEnter : msg -> D.Decoder msg
-ifIsEnter msg =
+siEsEnter : msg -> D.Decoder msg
+siEsEnter msg =
     D.field "key" D.string
         |> D.andThen
             (\key ->
@@ -194,7 +189,7 @@ ifIsEnter msg =
                     D.succeed msg
 
                 else
-                    D.fail "some other key"
+                    D.fail "otra tecla"
             )
 ```
 
