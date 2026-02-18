@@ -10,21 +10,23 @@ Esta guía va a:
 
 Al terminar, espero que no sólo seas capaz de crear excelentes aplicaciones web con Elm, sino que también entiendas las ideas y patrones centrales que forman la experiencia de usar Elm.
 
-Aunque no tengas completa seguridad de que Elm es para ti, te garantizo que si le das una oportunidad e intentas construir un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Es muy fácil aplicar las mismas ideas en otros contextos.
+Aunque no tengas completa seguridad de que Elm es para ti, te garantizo que si le das una oportunidad e intentas construir un proyecto usándolo, vas a poder escribir mejor JavaScript que antes. Son ideas que se pueden aplicar en cualquier lado.
 
 ## Sobre la traducción
 
 Antes de empezar, un poquito de contexto. Estás leyendo la traducción no oficial al español latinoamericano del libro de Evan Czaplicki, autor de Elm. [Aquí está el libro original en inglés.](https://guide.elm-lang.org/)
 
-**Nota:** ¡Esta traducción aún está en desarrollo! Hay cosas que aún no están traducidas, posibles errores, y funcionalidades incompletas. Aún así, es una _traducción humana_ a la que le hemos puesto mucho cariño, y esperamos que te sea útil. ❤️
+**Nota:** El texto principal está completamente traducido, pero hay algunas cosas que están pendientes, por ejemplo los comentarios en cierto código de ejemplo, o links a contenido en inglés. También vas a encontrar funcionalidades incompletas, y seguramente uno que otro error. Aún así, es una _traducción humana_ a la que le hemos puesto mucho cariño, y esperamos que te sea útil. 🩵
 
 ¿Quieres escribirnos un **comentario**, mandar una **corrección**, o **aportar** con la traducción o sus aspectos técnicos? [El repositorio en Github](https://github.com/agj/elm-guide-es) es el lugar indicado.
 
 **¿Está al día la traducción?** Puedes [revisar aquí si hay nuevos cambios en el libro original](https://github.com/evancz/guide.elm-lang.org/compare/a6030f9968724629c374b936c552d2b8d2b30f31...master).
 
+Ahora sí, entremos en materia.
+
 ## Un ejemplo sencillo
 
-Ahora sí, entremos en materia. Este es un pequeño programa que te permite incrementar y decrementar un número:
+Este es un pequeño programa que te permite incrementar y decrementar un número:
 
 ```elm
 import Browser
