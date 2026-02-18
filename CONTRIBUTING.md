@@ -39,7 +39,7 @@ Las tareas ejecutables están gestionadas con el comando `just`. Corriendo ese c
 
 ## Traduciendo
 
-El objetivo central de esta traducción es **contribuir a diseminar el uso de Elm y sus ideas en la comunidad hispanohablante de programadores**, particularmente de Hispanoamérica. Por supuesto, más allá de este grupo principal, todos son bienvenidos a hacer uso de esta traducción.
+El objetivo central de esta traducción es **contribuir a diseminar el uso de Elm y sus ideas en la comunidad hispanohablante de programadores**, particularmente de Latinoamérica. Por supuesto, más allá de este grupo principal, todos son bienvenidos a hacer uso de esta traducción.
 
 Los siguientes son otros ideales y directrices para este proyecto.
 
