@@ -105,6 +105,10 @@
   color: inherit;
 }
 
+.book.color-theme-2 .book-body img {
+  background-color: currentColor;
+}
+
 /* CORRECT SEARCH BAR FORMAT */
 
 #book-search-input {
