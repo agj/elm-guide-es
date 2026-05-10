@@ -31,8 +31,9 @@ jobs:
 
       - name: Información del entorno
         run: |
-          echo $HOME
           nix develop .#ci --command pnpm store path
+          echo "HOME=$HOME"
+          echo "ELM_HOME=$ELM_HOME"
 
       - name: Verifica
         run: nix develop .#ci --command just check
