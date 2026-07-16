@@ -16,9 +16,10 @@
           pkgs.alejandra
           pkgs.elmPackages.elm
           pkgs.just
-          pkgs.nodePackages.pnpm
-          pkgs.nodePackages.prettier
-          pkgs.nodePackages.uglify-js
+          pkgs.markdownlint-cli
+          pkgs.pnpm
+          pkgs.prettier
+          pkgs.uglify-js
           pkgs.nodejs-slim_22
         ];
       in {

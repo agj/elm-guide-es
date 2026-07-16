@@ -1,0 +1,12 @@
+{
+  "default": false,
+  "heading-increment": false,
+  "link-fragments": true,
+  "link-image-reference-definitions": true,
+  "links": true,
+  "no-duplicate-heading": true,
+  "no-empty-links": true,
+  "reference-links-images": true,
+  "single-title": true,
+  "table-column-count": true
+}
