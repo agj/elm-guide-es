@@ -42,9 +42,6 @@ En vez de cargar nuevo HTML, estas tres adiciones nos dan control completo sobre
 
 [u]: https://package.elm-lang.org/packages/elm/url/latest/Url#Url
 [ur]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#UrlRequest
-[bn]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation
-[bnp]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#pushUrl
-[bnl]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#load
 
 ## Ejemplo
 
