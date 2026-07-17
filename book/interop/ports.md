@@ -254,7 +254,7 @@ En este caso lo hacemos al recibir un mensaje vía websocket, pero podríamos en
 
 Aquí tienes algunas sugerencias y soluciones a problemas frecuentes:
 
-- **Es recomendado enviar `Json.Encode.Value` en tus puertos.** Igual que con flags, hay ciertos tipos básicos que pueden transmitirse vía puertos. Esto viene del tiempo antes de que existieran los decodificadores de JSON, y puedes leer más al respecto [aquí](/interop/flags.html#verifying-flags).
+- **Es recomendado enviar `Json.Encode.Value` en tus puertos.** Igual que con flags, hay ciertos tipos básicos que pueden transmitirse vía puertos. Esto viene del tiempo antes de que existieran los decodificadores de JSON, y puedes leer más al respecto [aquí](/interop/flags.html#verificando-las-flags).
 
 - **Todas las declaraciones `port` deben aparecer en un `port module`.** Probablemente lo mejor es organizar tus puertos en un sólo `port module` para que sea más fácil visualizar la interfaz, toda en un sólo lugar.
 

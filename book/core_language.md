@@ -49,7 +49,7 @@ Prueba juntar varios strings con el operador `(++)` ⬆️
 
 Estos valores primitivos que hemos visto se vuelven más interesantes a medida que escribamos funciones para transformarlos.
 
-> **Nota:** Puedes leer más sobre distintos operadores, como [`(+)`](op-plus), [`(/)`](op-div) y [`(++)`](op-concat) en la documentación del módulo [`Basics`](core-basics). Lamentablemente, esta documentación está en inglés, pero está escrita en un lenguaje muy poco técnico, y aunque sea con traducción automática, creo que vale la pena darle una leída una vez que te parezca apropiado.
+> **Nota:** Puedes leer más sobre distintos operadores, como [`(+)`][op-plus], [`(/)`][op-div] y [`(++)`][op-concat] en la documentación del módulo [`Basics`][core-basics]. Lamentablemente, esta documentación está en inglés, pero está escrita en un lenguaje muy poco técnico, y aunque sea con traducción automática, creo que vale la pena darle una leída una vez que te parezca apropiado.
 
 [op-plus]: https://package.elm-lang.org/packages/elm/core/latest/Basics#+
 [op-div]: https://package.elm-lang.org/packages/elm/core/latest/Basics#/

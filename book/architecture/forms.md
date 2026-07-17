@@ -90,7 +90,7 @@ viewValidation model =
 
 Es bastante similar a nuestro [ejemplo de campos de texto](text_fields.md), pero con más campos.
 
-# Modelo
+## Modelo
 
 Yo siempre empiezo pensando en el `Modelo`. Sabemos que vamos a necesitar tres campos de texto, así que partamos con eso.
 

@@ -135,20 +135,17 @@ Mucha gente prefiere usar `Json.Decode.Value` porque les otorga un control más 
 Los otros tipos que Elm soporta son un rezago de la época antes de que existieran los decodificadores JSON. Si decides usar estos otros tipos, hay ciertos detalles a tener en cuenta. Los siguientes ejemplos muestran el tipo deseado de la flag, y en forma anidada se ilustra cómo se interpretan distintos valores JS:
 
 - `init : Int -> ...`
-
   - `0` → `0`
   - `7` → `7`
   - `3.14` → error
   - `6.12` → error
 
 - `init : Maybe Int -> ...`
-
   - `null` → `Nothing`
   - `42` → `Just 42`
   - `"hi"` → error
 
 - `init : { x : Float, y : Float } -> ...`
-
   - `{ x: 3, y: 4, z: 50 }` → `{ x = 3, y = 4 }`
   - `{ x: 3, name: "Tom" }` → error
   - `{ x: 360, y: "why?" }` → error

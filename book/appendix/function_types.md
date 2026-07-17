@@ -135,4 +135,4 @@ Esto es interesante porque nos permite hacer que el código se lea de izquierda 
 
 > **Nota:** Yo, personalmente, prefiero cómo queda en el “antes” del ejemplo, pero tal vez es porque aprendí programación funcional en lenguajes que no permiten tuberías.
 
-[pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|>
+[pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|%3E

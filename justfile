@@ -21,7 +21,8 @@ format:
 
 # Verifica que todo funcione y que los archivos estén formateados.
 check: build
-    prettier '**/*.{md,json,yml}' --check
+    markdownlint book/
+    prettier '**/*.{md,json,yml,css}' --check
     alejandra *.nix --check
 
 # Publica en Github Pages.

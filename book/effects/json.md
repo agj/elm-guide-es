@@ -149,7 +149,7 @@ Este ejemplo se parece mucho al anterior:
 
 La principal diferencia está en la definición de `getRandomQuote`. En vez de usar `Http.expectString`, lo hemos cambiado a `Http.expectJson`. ¿Qué significa esto?
 
-## JSON
+## Datos JSON
 
 Si le pides a [`/api/random-quotes`](https://elm-lang.org/api/random-quotes) una cita aleatoria, el servidor produce un poco de JSON con esta estructura:
 
