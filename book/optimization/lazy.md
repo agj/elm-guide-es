@@ -75,7 +75,7 @@ Este proceso de comparación hace posible minimizar la manipulación del DOM. Si
 
 Dicho esto, ¿podemos reducir aún más el trabajo necesario?
 
-## `Html.Lazy`
+## Módulo `Html.Lazy`
 
 El módulo [`Html.Lazy`](https://package.elm-lang.org/packages/elm/html/latest/Html-Lazy/) nos permite incluso ahorrarnos la construcción de los nodos virtuales. La pieza central es la función `lazy`:
 

@@ -176,7 +176,6 @@ Leer la documentación de [`Task`][task] es la mejor manera de entender esa lín
 
 <!-- TODO: Añadir explicación breve de Task, para no depender de la documentación en inglés. -->
 
-[utc]: https://package.elm-lang.org/packages/elm/time/latest/Time#utc
 [task]: https://package.elm-lang.org/packages/elm/core/latest/Task
 
 > **Ejercicios:**
